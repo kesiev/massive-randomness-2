@@ -740,7 +740,7 @@ ModManager.modules.push(function(){
                                                             "i", "Generali", "Stendardi del Sangue", "che indeboliscono i soldati alleati che combattono nelle citt&agrave;", "lo Stendardo"
                                                         ],
                                                         EN:[
-                                                            "A thousand-year-old dynasty of dark and bloodthirsty generals plots in the shadows so that this war will never end, relentlessly sending their armies into our cities to bend us to their will.",
+                                                            "A thousand-year-old dynasty of dark and bloodthirsty generals plots in the shadows to ensure this war never ends, relentlessly sending their armies into our cities to bend us to their will.",
                                                             "the", "Generals", "Blood Banners", "which weaken allied soldiers fighting in the cities", "the Banner"
                                                         ],
                                                     },{
