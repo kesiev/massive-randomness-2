@@ -1,0 +1,62 @@
+<html><head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>MR2 data checking tool</title>
+	<link rel="stylesheet" href="../style/style.css">
+	<link rel="stylesheet" href="../style/Ferrum/stylesheet.css">
+	<link rel="stylesheet" href="../style/Seshat/stylesheet.css">
+
+	<script src="../js/tools.js"></script>
+	<script src="../js/generator.js"></script>
+	<script src="../js/modmanager.js"></script>
+	<script src="../js/mapgenerator.js"></script>
+	<script src="../js/maprenderer.js"></script>
+	<script src="../js/questgenerator.js"></script>
+	<script src="../js/questrenderer.js"></script>
+    <script src="../modules/md2-crystallava.js"></script>
+    <script src="../modules/md2-hellscape.js"></script>
+    <script src="../modules/maps-default.js"></script>
+    <script src="../modules/quests-default.js"></script>
+    <script src="../modules/quests-hellscape.js"></script>
+    <script src="../modules/quests-hellscapewq.js"></script>
+    <script src="../modules/quests-upgradepack.js"></script>
+    <script src="../modules/challenges-default.js"></script>
+
+</head><body onload="onl()">
+	<input type="button" value="Tiles" onclick="doTestTiles()">
+	<input type="button" value="Quests" onclick="doCheckQuests()">
+	<input type="button" value="Test Quests" onclick="doTestQuests()">
+	<input type="button" value="Map Configs" onclick="doTestMapConfigs()">
+	<hr>
+	<span id="nodeBody"></span>
+</body><script>
+
+function getNodeBody(title) {
+	let
+		node = document.getElementById('nodeBody');
+	node.innerHTML = "<h2>"+title+"</h2>";
+	return node;
+}
+
+function doTestTiles() {
+	Tools.checkTiles(getNodeBody("Tiles"));
+}
+
+function doCheckQuests() {
+	Tools.checkQuests(getNodeBody("Quests"));
+}
+
+function doTestQuests() {
+	Tools.testQuests(getNodeBody("Test Quests"));
+}
+
+function doTestMapConfigs() {
+	Tools.testMapConfigs(getNodeBody("Map Configs"));
+}
+
+function onl() {
+	doTestQuests();
+}
+
+</script></html>

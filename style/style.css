@@ -1,0 +1,1020 @@
+BODY {
+    background-color: #ccc;
+    font-family: Seshat;
+    font-size: 16px;
+    line-height: 27px;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+/* Interface */
+
+.header {
+    overflow-x: hidden;
+    background-color: #333;
+    padding:20px 10px;
+    color: #fff;
+    user-select: none;
+}
+
+.footer {
+    font-size: 12px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding:10px;
+    margin-top:20px;
+    line-height: 14px;
+}
+
+.footer A {
+    color:#fff;
+}
+
+.footer .notice {
+    color:#ccc;
+}
+
+.header .content {
+    width:80%;
+    margin: auto;
+}
+
+.header .settings {
+    margin-bottom:20px;
+    padding-bottom:20px;
+    border-bottom:1px solid #fff;
+}
+
+.header .settings.closed {
+    display: none;
+}
+
+.header .settings .panel .section {
+    margin-bottom: 3px;
+}
+
+.header .settings .panel {
+    margin-bottom:10px;
+}
+
+.header .settings .items {
+    background-color: #fff;
+    border-radius: 10px;
+    color:#333;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.header .settings .selector, .header .settings .label {
+    display: inline-block;
+}
+
+.header .settings .selector {
+    margin-right:5px;
+}
+
+.header .settings .items {
+    background-color: #fff;
+    border-radius: 10px;
+    color:#333;
+}
+
+.header .settings .item {
+    padding:5px;
+}
+
+.header .settings .item .name {
+    font-weight: bold;
+}
+
+.header .toolbar {
+    white-space: nowrap;
+}
+
+.header .leftTools {
+    float:left;
+    vertical-align: middle;
+}
+
+.header .rightTools {
+    float:right;
+    vertical-align: middle;
+}
+
+.header .logo, .header .button, .header .language {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 10px;
+}
+
+.header .logo .title {
+    white-space: nowrap;
+    font-size: 26px;
+    font-family: Ferrum;
+}
+
+.header .logo .subtitle {
+    white-space: nowrap;
+    margin-top:5px;
+    font-size: 14px;
+    line-height: 12px;
+}
+
+.header .button {
+    cursor: pointer;
+    width:50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.header .newQuest {
+    background-image: url(../images/iconDice.png);
+}
+
+.header .settingsButton {
+    background-image: url(../images/iconSettings.png);
+}
+
+.header SELECT {
+    border:1px solid #fff;
+    border-radius: 3px;
+    padding:5px;
+}
+
+/* Generating message */
+
+.generating {
+    text-align: center;
+    margin:20px;
+    font-weight: bold;
+    text-shadow: 0px 1px 0px #fff;
+}
+
+/* Quest */
+
+.quest {
+    padding:30px 0;
+    width:70%;
+    margin:auto;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px #333;
+}
+
+.quest .questHead {
+    margin:0 20px;
+}
+
+.quest .title {
+    font-family: Ferrum;
+    font-size: 40px;
+    line-height: 44px;
+    text-align: center;
+    margin:0px 20px 0px 20px;
+    text-transform: uppercase;
+}
+
+.quest .author {
+    line-height: 14px;
+    font-size: 12px;
+    text-align: center;
+    margin:5px 20px 20px 20px;
+}
+
+.quest .story {
+    font-family: Seshat;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    margin:20px 0;
+}
+
+.quest .objectivesTitle, .quest .specialRulesTitle, .quest .challengesTitle {
+    font-family: Ferrum;
+    border-bottom: 1px solid #000;
+    font-size: 20px;
+    padding:10px 0;
+    margin:20px 0;
+    text-transform: uppercase;
+}
+
+.quest .objectives, .quest .specialRules, .quest .tiles, .quest .story, .quest .challenges {
+    margin: 20px 0;
+}
+
+.quest .objectives LI, .quest .specialRules LI {
+    margin:10px 0;
+}
+
+.quest .objectives LI > * > LI, .quest .specialRules LI > * > LI  {
+    margin:5px 0;
+}
+
+.quest .tokensList {
+    background-color: #ccc;
+    padding:10px;
+    margin:20px;
+    text-align: center;
+}
+
+.quest .tokenElement {
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+    width:20%;
+}
+
+.quest .tokenDescription {
+    line-height: 20px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.quest .tokenElement .token {
+    position: relative;
+    display: block;
+    margin: 0 auto 10px auto;
+}
+
+.quest .token.door {
+    width:30px;
+    height:30px;
+    border:2px solid #000;
+    background-color: #fff;
+}
+
+.quest .miniMap {
+    text-align: center;
+    padding:10px 0;
+    margin:20px;
+    overflow-x: auto;
+}
+
+.quest .minimapImage {
+    display: inline-block;
+    position: relative;
+    white-space: nowrap;
+}
+
+.quest .minimapNodeContent {
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    text-align: center;
+    background-color: #ccc;
+    border:1px solid #fff;
+    color:#000;
+    font-family: Ferrum;
+    font-size: 20px;
+}
+
+.quest .lootRatio {
+    line-height: 20px;
+    background-color: #ccc;
+    padding:10px;
+    margin:20px;
+}
+
+.quest .lootRatioContent {
+    margin:20px 0;
+    text-align: center;
+}
+
+.quest .lootRatioRow {
+    display: inline-block;
+    margin:5px 20px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.quest .lootRatioRow .perPlayer {
+    display: inline-block;
+    vertical-align: middle;
+    width:30px;
+    height:30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-image: url(../images/perPlayer.png);
+}
+
+.quest .lootRatioRow .token {
+    display: inline-block;
+    margin-right: -7px;
+}
+
+.quest .symbol, .quest .intensity {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 3px;
+    background-position: left center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    white-space: nowrap;
+    font-size: 10px;
+    margin:0 2px;
+}
+
+.quest .symbol.icon {
+    height: 24px;
+    width: 24px;
+}
+
+.quest .intensity {
+    height: 20px;
+    width: 17px;
+    margin-left:-5px;
+    background-image: url(../images/intensity.png);
+}
+
+.quest .symbol.icon.sword {
+    background-image: url(../images/sword.png);
+}
+
+.quest .symbol.icon.shield {
+    background-image: url(../images/shield.png);
+}
+
+.quest .symbol.icon.scratch {
+    background-image: url(../images/scratch.png);
+}
+
+.quest .symbol.icon.fang {
+    background-image: url(../images/fang.png);
+}
+
+.quest .symbol.icon.rangeRanged {
+    background-image: url(../images/rangeRanged.png);
+}
+
+.quest .symbol.icon.rangeMagic {
+    background-image: url(../images/rangeMagic.png);
+}
+
+.quest .symbol.icon.rangeMelee {
+    background-image: url(../images/rangeMelee.png);
+}
+
+.quest .symbol.icon.mana {
+    background-image: url(../images/mana.png);
+}
+
+.quest .symbol.icon.face {
+    background-image: url(../images/face.png);
+}
+
+.quest .symbol.token {
+    height: 20px;
+    width: 20px;
+    border:2px solid #000;
+    border-radius: 20px;
+}
+
+.quest .symbol.token.corruption {
+    background-image: url(../images/tokenCorruption.png);
+}
+
+.quest .symbol.token.time {
+    background-image: url(../images/tokenTime.png);
+}
+
+.quest .symbol.token.mob {
+    background-image: url(../images/tokenMob.png);
+}
+
+.quest .symbol.token.frost {
+    background-image: url(../images/tokenFrost.png);
+}
+
+.quest .symbol.token.fire {
+    background-image: url(../images/tokenFire.png);
+}
+
+.quest .symbol.dice {
+    height:20px;
+    line-height: 20px;
+    padding-left:20px;
+    padding-right: 3px;
+    border:2px solid transparent;
+    background-image: url(../images/dice.png);
+}
+
+.quest .symbol.dice.yellow {
+    background-color: #f8c701;
+    border-color:#f8c701;
+}
+
+.quest .symbol.dice.orange {
+    background-color: #ee8245;
+    border-color:#ee8245;
+}
+
+.quest .symbol.dice.blue {
+    background-color: #41b6df;
+    border-color:#41b6df;
+}
+
+.quest .symbol.dice.black {
+    color:#fff;
+    background-color: #413736;
+    border-color:#413736;
+}
+
+.quest .symbol.dice.purple {
+    color:#fff;
+    background-color: #3d2978;
+    border-color:#3d2978;
+}
+
+.quest .phase {
+    font:serif;
+    font-weight: bold;
+    font-variant: small-caps;
+    text-decoration: underline;
+}
+
+/* Map */
+
+.map {
+    text-align: center;
+    padding:10px 0;
+    margin:20px;
+    overflow-x: auto;
+}
+
+.mapImage {
+    display: inline-block;
+    position: relative;
+    white-space: nowrap;
+}
+
+.tile {
+    background-color: #fff;
+}
+
+.tile .cell {
+    position: relative;
+    display:inline-block;
+    width:120px;
+    height:120px;
+    font-size:10px;
+}
+
+.tile .container {
+    border:3px solid #333;
+}
+
+.tile .cell .inner {
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom: 0;
+}
+
+.tile .cell.topborder .inner {
+    border-top:3px solid #999;
+}
+
+.tile .cell.rightborder .inner {
+    border-right:3px solid #999;
+}
+
+.tile .cell.bottomborder .inner {
+    border-bottom:3px solid #999;
+}
+
+.tile .cell.leftborder .inner {
+    border-left:3px solid #999;
+}
+
+.tile .cell.dark .background {
+    background-color: #333;
+}
+
+.tile .cell.lava .background {
+    border: 2px solid #f33;
+}
+
+.tile .cell.crystal .background {
+    border: 2px solid #33f;
+}
+
+.tile .cell.light .background, .tile .cell.crystal .background {
+    background-color: #fff;
+}
+
+.tile .cell.blocking .inner {
+    background-color: #000;
+}
+
+.tile .cell.blocking .background {
+    display: none;
+}
+
+.tile .cell.corridor.light .background {
+    border: 2px solid #333;
+}
+
+.tile .cell.room .inner {
+    background-color: #ccc;
+}
+
+.tile .cell .content {
+    white-space:wrap;
+    text-align: center;
+    position: absolute;
+    left:20px;
+    right:20px;
+    top:20px;
+    bottom:20px;
+    z-index: 100;
+}
+
+.tile .cell .background {
+    opacity: 0.15;
+    position: absolute;
+    border-radius: 10px;
+    left:10px;
+    right:10px;
+    top:10px;
+    bottom: 10px;
+}
+
+.token {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+.cell .content .token {
+    display: inline-block;
+    margin-right: -7px;
+    margin-bottom: -7px;
+}
+
+.token.smallRound {
+    width:25px;
+    height:25px;
+    border-radius:30px;
+    border:2px solid #000;
+    background-color: #fff;
+    border-bottom-width: 4px;
+}
+
+.token.largeRound {
+    width:40px;
+    height:40px;
+    border-radius:30px;
+    border:2px solid #000;
+    border-bottom-width: 4px;
+    background-color: #fff;
+}
+
+.token.outlined {
+    width:40px;
+    height:40px;
+    border-radius:5px;
+    background-color: #fff;
+}
+
+.token.tall {
+    width:30px;
+    height:30px;
+    border-radius:5px;
+    border:2px solid #fff;
+    background-color: #fff;
+}
+
+.token.largeSquared {
+    width:40px;
+    height:40px;
+    border:2px solid #000;
+    border-bottom-width: 4px;
+    background-color: #fff;
+}
+
+.token.largeOutlined {
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    background-color: #fff;
+}
+
+.token.regularChest {
+    width:40px;
+    height:30px;
+    border-radius: 5px;
+    border:2px solid #fff;
+    background-color: #fff;
+}
+
+.token.greaterChest {
+    border-radius: 5px;
+    width:45px;
+    height:35px;
+    border:2px solid #fff;
+    background-color: #fff;
+}
+
+.token.portal3, .token.portal5, .token.greenPortal {
+    background-color: #090;
+}
+
+.token.regularPortal {
+    background-color: #00f;
+}
+
+.token.startPoint, .token.startMob, .token.startRoaming {
+    background-color: #f00;
+}
+
+.token.loot {
+    background-image: url('../images/tokenLoot.png');
+}
+
+.token.mob {
+    background-image: url('../images/tokenMob.png');
+}
+
+.token.objective {
+    background-image: url('../images/tokenObjective.png');
+}
+
+.token.objective.flipped {
+    background-image: url('../images/tokenFlippedObjective.png');
+}
+
+.token.forge {
+    background-image: url('../images/tokenForge.png');
+}
+
+.token.regularChest {
+    background-image: url('../images/tokenRegularChest.png');
+}
+
+.token.greaterChest {
+    background-image: url('../images/tokenGreaterChest.png');
+}
+
+.token.pillar {
+    background-image: url('../images/tokenPillar.png');
+}
+
+.token.spikeTrap {
+    background-image: url('../images/tokenSpikeTrap.png');
+}
+
+.token.startPoint {
+    background-image: url('../images/tokenStartPoint.png');
+}
+
+.token.regularPortal, .token.greenPortal {
+    background-image: url('../images/tokenRegularPortal.png');
+}
+
+.token.portal3 {
+    background-image: url('../images/tokenPortal3.png');
+}
+
+.token.portal5 {
+    background-image: url('../images/tokenPortal5.png');
+}
+
+.token.bearTrap {
+    background-image: url('../images/tokenBearTrap.png');
+}
+
+.token.fountain {
+    background-image: url('../images/tokenFountain.png');
+}
+
+.token.startMob {
+    background-image: url('../images/tokenStartMob.png');
+}
+
+.token.startRoaming {
+    background-image: url('../images/tokenStartRoaming.png');
+}
+
+.token.time {
+    background-image: url('../images/tokenTime.png');
+}
+
+.token.corruption {
+    background-image: url('../images/tokenCorruption.png');
+}
+
+.token.frost {
+    background-image: url('../images/tokenFrost.png');
+}
+
+.token.fire {
+    background-image: url('../images/tokenFire.png');
+}
+
+.token.bridge {
+    background-image: url('../images/bridge.png');
+}
+
+.token.door {
+    display: block;
+    position: absolute;
+    margin: 0;
+}
+
+.token.marked.red {
+    border-color: #f00;
+    background-color: #fdd;
+}
+
+.token.door {
+    background-image: url('../images/tokenDoor.png');
+}
+
+.cell .door {
+    z-index: 50;
+    width:30px;
+    height:30px;
+    border:2px solid #000;
+    background-color: #fff;
+}
+
+.token.door.side-0 {
+    border-bottom-width: 4px;
+    left:47px;
+    top:-15px;
+}
+
+.token.door.marked.side-0 {
+    border-left-style: dotted;
+    border-right-style: dotted;
+    border-top-style: dotted;
+}
+
+.token.door.side-1 {
+    border-right-width: 4px;
+    transform: rotate(90deg);
+    right:-16px;
+    top:45px;
+}
+
+.token.door.marked.side-1 {
+    border-left-style: dotted;
+    border-bottom-style: dotted;
+    border-top-style: dotted;
+}
+
+.token.door.side-2 {
+    border-bottom-width: 4px;
+    left:47px;
+    bottom:-19px;
+}
+
+.token.door.marked.side-2 {
+    border-left-style: dotted;
+    border-right-style: dotted;
+    border-top-style: dotted;
+}
+
+.token.door.side-3 {
+    border-right-width: 4px;
+    transform: rotate(90deg);
+    left:-17px;
+    top:45px;
+}
+
+.token.door.marked.side-3 {
+    border-left-style: dotted;
+    border-bottom-style: dotted;
+    border-top-style: dotted;
+}
+
+/* Printing */
+
+@media print {
+
+    BODY {
+        background-color: transparent;
+        line-height: 18px;
+        font-size:14px;
+    }
+
+    .header, .footer {
+        display: none;
+    }
+
+    .quest {
+        margin:0;
+        padding:0;
+        width:auto;
+        box-shadow: none;
+    }
+
+    .quest .questHead {
+        margin:10px 0px 20px 0px;
+        columns:2;
+    }    
+
+    .quest .symbol.token {
+        height: 12px;
+        width: 12px;
+    }
+
+    .quest .symbol.icon {
+        height: 14px;
+        width: 14px;
+    }
+
+    .quest .symbol.dice {
+        height: 14px;
+        padding-left: 14px;
+        padding-right: 2px;
+        line-height: 14px;
+        color:#000 !important;
+        background-color: transparent !important;
+        border-color: #ccc !important;
+    }
+
+    .quest .title {
+        font-size: 26px;
+        line-height: 30px;
+        padding-top: 0;
+    }
+
+    .quest .author {
+        margin:0px 0px 10px 0;
+    }
+        
+    .quest .story {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .quest .tokenElement {
+        width:10%;
+    }
+
+    .quest .tokenElement .token {
+        margin-bottom: 5px;
+    }
+
+    .quest .tokenDescription {
+        font-size: 12px;
+        line-height: 12px;
+    }
+
+    .quest .objectivesTitle, .quest .specialRulesTitle, .quest .challengesTitle {
+        margin:10px 0;
+        padding-top:5px;
+        padding-bottom: 5px;
+    }
+
+    .quest .objectives, .quest .specialRules, .quest .tiles, .quest .story, .quest .challenges, .quest .lootRatio {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+
+    .quest .tokensList, .quest .lootRatio {
+        padding:5px;
+        background-color: transparent;
+        border: 2px solid #ccc;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .quest OL, .quest UL, .quest LI {
+        margin:10px 0 10px 0;
+    }
+    
+    .quest OL, .quest UL {
+        padding-left:20px;
+    }
+
+    .quest .objectives LI, .quest .specialRules LI, .quest .objectives LI > * > LI, .quest .specialRules LI > * > LI {
+        margin:5px 0;
+    }    
+
+    .quest .map {
+        overflow: hidden;
+    }
+
+    .quest .mapImage {
+        transform-origin: 0 0;
+        transform:scale(0.5);
+    }
+
+    .tile .cell.room .inner {
+        background-color: transparent;
+    }
+
+    .tile .cell.room .background {
+        border: 2px solid #333;
+    }
+
+    .tile .cell.dark .background {
+        border: 2px solid #333;
+        background-color: transparent;
+    }
+
+    .tile .cell.room.light .background, .tile .cell.corridor.light .background {
+        border-style: dashed;
+        border-color: #333;
+    }
+    .tile .cell.room.crystal .background, .tile .cell.corridor.lava .background {
+        border-style: dotted;
+        border-color: #333;
+    }
+
+    .token.greenPortal, .token.portal3, .token.portal5, .token.startPoint, .token.startRoaming {
+        background-color: transparent;
+    }
+
+    .token.regularPortal {
+        background-color: #ccc;
+    }
+
+    .token.startMob {
+        background-color: #333;
+    }
+
+    .quest .minimapNodeContent {
+        background-color: transparent;
+        border-color: #000;
+    }
+
+    .quest .lootRatioContent {
+        margin:5px 0;
+    }
+
+    .quest .lootRatioRow .perPlayer {
+        width: 20px;
+        height: 20px;
+    }
+
+    .quest .lootRatioRow .token {
+        width: 14px;
+        height: 14px;
+        margin-right:-3px;
+    }
+
+    .tile .cell.corridor.light .background, .tile .cell.blocking .inner {
+        background-color: transparent;
+    }
+
+}
+
+@media screen and (max-width: 800px) {
+
+    .header .button {
+        width:40px;
+        height:40px;
+    }
+
+    .header .logo .title {
+        font-size:20px;
+    }
+
+    .header {
+        padding:10px;
+    }
+
+    .quest {
+        margin:0;
+        width: auto;
+        padding-top: 20px;
+    }
+
+    .header .content {
+        width: auto;
+    }
+
+    .quest .questHead, .quest .tokensList, .quest .miniMap, .quest .map, .quest .lootRatio {
+        margin-left:10px;
+        margin-right:10px;   
+    }
+
+}
+
+@media screen and (max-width: 540px) {
+
+    .header .logo {
+        display: none;
+    }
+}
