@@ -33,8 +33,8 @@ ModManager.modules.push(function(){
                                                         IT:[ "Dopo aver distrutto la maggior parte dei villaggi circostanti," ],
                                                         EN:[ "After destroying most of the surrounding villages," ]
                                                     },{
-                                                        IT:[ "La sua sete di distruzione sembra implacabile e" ],
-                                                        EN:[ "His thirst for destruction seems relentless and" ]
+                                                        IT:[ "La sua sete di distruzione &egrave; implacabile e" ],
+                                                        EN:[ "His thirst for destruction is relentless and" ]
                                                     }
                                                 ],
                                                 problem:[

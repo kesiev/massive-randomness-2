@@ -280,10 +280,10 @@ ModManager.modules.push(function(){
                                                 gate:[
                                                     {
                                                         IT:[ "i", "cancelli", "che portano",  "sono sbarrati da", "il", "cancello", "Zona del Cancello" ],
-                                                        EN:[ "the", "gates", "that lead", "are barred by", "the", "gate", "Zone of the Gate" ]
+                                                        EN:[ "the", "gates", "leading", "are barred by", "the", "gate", "Zone of the Gate" ]
                                                     },{
                                                         IT:[ "i", "portali", "che conducono", "sono tenuti ben saldi da", "il", "portale", "Zona del Portale" ],
-                                                        EN:[ "the", "portals", "that lead", "are held firmly by", "the", "portal", "Zone of the Portal" ]
+                                                        EN:[ "the", "portals", "leading", "are held firmly by", "the", "portal", "Zone of the Portal" ]
                                                     },{
                                                         IT:[ "il", "ponte", "che ci permetterebbe di proseguire", "&egrave; bloccato da", "il", "ponte", "Zona del Ponte" ],
                                                         EN:[ "the", "bridge", "that would allow us to continue", "is blocked by", "the", "bridge", "Zone of the Bridge" ]
@@ -986,7 +986,7 @@ ModManager.modules.push(function(){
                                                         EN:[ "According to legends,"]
                                                     },{
                                                         IT:[ "Si narra che" ],
-                                                        EN:[ "It is said that,"]
+                                                        EN:[ "It is said that"]
                                                     },{
                                                         IT:[ "Nei testi sacri si dice che" ],
                                                         EN:[ "In the sacred texts it is said that"]
