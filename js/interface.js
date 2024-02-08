@@ -4,44 +4,12 @@ Interface=(function() {
         DEBUG_RENDER = false,
         DEBUG_QUEST = false,
         VERSION = "0.1b",
-        LOCALSTORAGE_PREFIX="MARA2_",
-        LOCALSTORAGE_LANGUAGE=LOCALSTORAGE_PREFIX+"LANG",
-        SOURCES_AT={
+        SOURCES_AT = {
             short:"github.com/kesiev/massive-randomness-2",
             full:"https://github.com/kesiev/massive-randomness-2"
         },
-        SUPPORTED_LANGUAGES={
-            EN:"English",
-            IT:"Italiano"
-        },
-        TOOL_NAME={
-            IT:"Massive Randomness 2",
-            EN:"Massive Randomness 2"
-        },
-        TOOL_DESCRIPTION={
-            IT:"Un generatore casuale di avventure one-shot per Massive Darkness 2",
-            EN:"A Massive Darkness 2 one-shot quest random generator"
-        },
-        FOOTER={
-            IT:"Meglio su Firefox/Chrome - "+TOOL_NAME.IT+" - "+VERSION+" - &copy; 2024 by KesieV - Sorgenti su <a target=_blank href='"+SOURCES_AT.full+"'>"+SOURCES_AT.short+"</a>",
-            EN:"Best on Firefox/Chrome - "+TOOL_NAME.EN+" - "+VERSION+" - &copy; 2024 by KesieV - Sources at <a target=_blank href='"+SOURCES_AT.full+"'>"+SOURCES_AT.short+"</a>"
-        },
-        NOTICE={
-            EN:"Massive Darkness 2 and all related properties are owned by CMON Global Limited",
-            IT:"Massive Darkness 2 e tutte le relative propriet&agrave; sono marchi registrati CMON Global Limited"
-        },
-        MESSAGE_WAIT={
-            IT:"Sto preparando l'avventura...",
-            EN:"Please wait..."
-        },
-        TOOLTIP_NEWQUEST={
-            IT:"Genera una nuova avventura",
-            EN:"Generate a new quest"
-        },
-        TOOLTIP_SETTINGS={
-            IT:"Impostazioni",
-            EN:"Settings"
-        },
+        LOCALSTORAGE_PREFIX="MARA2_",
+        LOCALSTORAGE_LANGUAGE=LOCALSTORAGE_PREFIX+"LANG",
         SETTINGS_SOURCES={
             MEMORY:0,
             DEFAULT:1,
@@ -51,125 +19,10 @@ Interface=(function() {
         SETTINGS_DEFAULT={
             needs:[ "quests", "maps-default" ],
             excludes:[ ]
-        },
-        SETTINGS_INTERFACE=[
-            {
-                type:"includeExclude",
-                isMandatory:true,
-                title:{
-                    IT:"Materiali disponibili",
-                    EN:"Available components"
-                },
-                entries:[
-                    {
-                        code:"A",
-                        isMandatory:true,
-                        isDefault:true,
-                        label:{
-                            IT:"Massive Darkness 2 - Hellscape",
-                            EN:"Massive Darkness 2 - Hellscape"
-                        },
-                        description:{
-                            IT:"La scatola base del gioco",
-                            EN:"The game core box"
-                        },
-                        tags:[ "md2-hellscape" ]
-                    },{
-                        code:"B",
-                        label:{
-                            IT:"Massive Darkness: Una Missione di Lava &amp; Cristalli",
-                            EN:"Massive Darkness: A Quest of Crystal & Lava"
-                        },
-                        description:{
-                            IT:"Una nuova campagna e 15 tessere",
-                            EN:"A new campaign and 15 tiles"
-                        },
-                        tags:[ "md2-crystallava" ]
-                    }
-                ]
-            },{
-                type:"includeSelected",
-                isSingleOption:true,
-                isMandatory:true,
-                title:{
-                    IT:"Grandezza delle mappa",
-                    EN:"Map size"
-                },
-                entries:[
-                    {
-                        code:"0",
-                        label:{
-                            IT:"Piccola",
-                            EN:"Small"
-                        },
-                        description:{
-                            IT:"Se possibile, la mappa dell'avventura ha 1 tessera in meno rispetto a quelle suggerite.",
-                            EN:"If possible, the quest map has 1 fewer tile than suggested."
-                        },
-                        tags:[ "maps-size-small" ]
-                    },{
-                        code:"1",
-                        isDefault:true,
-                        label:{
-                            IT:"Normale",
-                            EN:"Normal"
-                        },
-                        description:{
-                            IT:"La mappa dell'avventura ha il numero suggerito di tessere.",
-                            EN:"The adventure map has the suggested number of tiles."
-                        },
-                        tags:[ "maps-size-normal" ]
-                    },{
-                        code:"2",
-                        label:{
-                            IT:"Grande",
-                            EN:"Large"
-                        },
-                        description:{
-                            IT:"Se possibile, la mappa dell'avventura ha 1 tessera in pi&ugrave; rispetto a quelle suggerite.",
-                            EN:"If possible, the quest map has 1 more tile than suggested."
-                        },
-                        tags:[ "maps-size-large" ]
-                    }
-                ]
-            },{
-                type:"includeSelected",
-                isSingleOption:true,
-                isMandatory:true,
-                title:{
-                    IT:"Stile della mappa",
-                    EN:"Map style"
-                },
-                entries:[
-                    {
-                        code:"Z",
-                        isDefault:true,
-                        label:{
-                            IT:"Uniforme",
-                            EN:"Uniform"
-                        },
-                        description:{
-                            IT:"Tutte le tessere della mappa mostrano la stessa ambientazione.",
-                            EN:"All tiles on the map show the same setting.",
-                        },
-                        tags:[ "maps-default-uniform" ]
-                    },{
-                        code:"z",
-                        label:{
-                            IT:"Interdimensionale",
-                            EN:"Interdimensional"
-                        },
-                        description:{
-                            IT:"Le tessere sulla mappa possono mostrare ambientazioni diverse. Aumenta la variet&agrave; di struttura a scapito dell'estetica.",
-                            EN:"The map tiles can show different environments. Increase layout variety to the detriment of aesthetics.",
-                        },
-                        tags:[ "maps-default-notuniform" ]
-                    }
-                ]
-            }
-        ];
+        };
 
     let
+        INTERFACE,
         settingsMode = false,
         seed = 0,
         settings,
@@ -203,11 +56,11 @@ Interface=(function() {
             language="EN",
             userLang = navigator.language || navigator.userLanguage;
         
-        if (SUPPORTED_LANGUAGES[loadedLanguage])
+        if (INTERFACE.supportedLanguages[loadedLanguage])
             language = loadedLanguage;
         else if (userLang) {
             userLang=userLang.split("-")[0].toUpperCase();
-            if (SUPPORTED_LANGUAGES[userLang] !== undefined) language=userLang;
+            if (INTERFACE.supportedLanguages[userLang] !== undefined) language=userLang;
         }
         localStorage[LOCALSTORAGE_LANGUAGE] = language;
         return language;
@@ -215,7 +68,7 @@ Interface=(function() {
 
     function renderLastQuest() {
         let
-            printTitlePrefix = getLabel(language,TOOL_NAME);
+            printTitlePrefix = getLabel(language,INTERFACE.labels.toolName);
         document.title = printTitlePrefix;
         bodyNode.innerHTML = "";
 
@@ -236,7 +89,7 @@ Interface=(function() {
             for (let k in SETTINGS_DEFAULT)
                 requirements[k] = SETTINGS_DEFAULT[k].slice();
 
-            SETTINGS_INTERFACE.forEach((setting,sid)=>{
+            INTERFACE.settings.forEach((setting,sid)=>{
                 let
                     picked = [],
                     notPicked = [],
@@ -273,7 +126,7 @@ Interface=(function() {
             });
 
             generating = true;
-            bodyNode.innerHTML = "<div class='generating'>"+getLabel(language,MESSAGE_WAIT)+"</div>";
+            bodyNode.innerHTML = "<div class='generating'>"+getLabel(language,INTERFACE.labels.wait)+"</div>";
             Generator.generate(requirements,seed,{
                 debugQuest:DEBUG_QUEST
             },(resources,result)=>{
@@ -306,7 +159,7 @@ Interface=(function() {
         let
             id = 0;
         settingsNode.innerHTML = "";
-        SETTINGS_INTERFACE.forEach((setting,sid)=>{
+        INTERFACE.settings.forEach((setting,sid)=>{
             let
                 panelNode = createNode(settingsNode,"div","panel"),
                 sectionNode = createNode(panelNode,"div","section"),
@@ -367,7 +220,7 @@ Interface=(function() {
             hash = getHash().split("-"),
             newSettings = [];
 
-        SETTINGS_INTERFACE.forEach((setting,sid)=>{
+        INTERFACE.settings.forEach((setting,sid)=>{
             let
                 defaults = [],
                 mandatory = [],
@@ -421,7 +274,7 @@ Interface=(function() {
     }
 
     function showSettings() {
-        SETTINGS_INTERFACE.forEach((setting,sid)=>{
+        INTERFACE.settings.forEach((setting,sid)=>{
             let
                 selected = settings[sid];
            
@@ -436,7 +289,7 @@ Interface=(function() {
         let
             hash="#";
 
-        SETTINGS_INTERFACE.forEach((setting,sid)=>{
+        INTERFACE.settings.forEach((setting,sid)=>{
             let
                 selected = settings[sid];
            
@@ -454,14 +307,40 @@ Interface=(function() {
     }
 
     function setLanguage(lang) {
+        let
+            footerText = getLabel(language,INTERFACE.labels.footer);
+
+        footerText = footerText.replace(/\{([^}]+)\}/g,(m,m1)=>{
+            let
+                out;
+            switch (m1) {
+                case "toolName":{
+                    out = getLabel(language,INTERFACE.labels.toolName);
+                    break;
+                }
+                case "toolVersion":{
+                    out = VERSION;
+                    break;
+                }
+                case "sourcesAtFull":{
+                    out = SOURCES_AT.full;
+                    break;
+                }
+                case "sourcesAtShort":{
+                    out = SOURCES_AT.short
+                    break;
+                }
+            }
+            return out || "[???]"
+        });
         localStorage[LOCALSTORAGE_LANGUAGE] = lang;
         languageSelectorCombo.value = lang;
         language = lang;
-        logoTitleNode.innerHTML = getLabel(language,TOOL_NAME);
-        logoSubtitleNode.innerHTML = getLabel(language,TOOL_DESCRIPTION);
-        footerNode.innerHTML = getLabel(language,FOOTER)+"<br><span class='notice'>"+getLabel(language,NOTICE)+"</span>";
-        newQuestNode.title = getLabel(language,TOOLTIP_NEWQUEST);
-        settingsButtonNode.title = getLabel(language,TOOLTIP_SETTINGS);
+        logoTitleNode.innerHTML = getLabel(language,INTERFACE.labels.toolName);
+        logoSubtitleNode.innerHTML = getLabel(language,INTERFACE.labels.toolDescription);
+        footerNode.innerHTML = footerText+"<br><span class='notice'>"+getLabel(language,INTERFACE.labels.notice)+"</span>";
+        newQuestNode.title = getLabel(language,INTERFACE.labels.tooltipNewQuest);
+        settingsButtonNode.title = getLabel(language,INTERFACE.labels.tooltipSettings);
         drawSettings();
         showSettings();
         renderLastQuest();
@@ -472,6 +351,8 @@ Interface=(function() {
 
             let
                 headerContentNode;
+
+            INTERFACE=ModManager.load({ needs:[ "interface" ]}).interface;
 
             headerNode = createNode(root,"div","header");
             headerContentNode = createNode(headerNode,"div","content");
@@ -495,10 +376,10 @@ Interface=(function() {
             newQuestNode = createNode(rightToolsNode,"div","button newQuest");
             languageSelectorCombo = createNode(languageSelector,"select");
 
-            for (let k in SUPPORTED_LANGUAGES) {
+            for (let k in INTERFACE.supportedLanguages) {
                 let option = createNode(languageSelectorCombo,"option");
                 option.value = k;
-                option.innerHTML = SUPPORTED_LANGUAGES[k];
+                option.innerHTML = INTERFACE.supportedLanguages[k];
             }
 
             languageSelectorCombo.onchange=()=>{
