@@ -10,7 +10,7 @@ Tools=(function(){
         ALLOWED_TAGS=[ "p", "/p", "ul", "/ul", "ol", "/ol", "li", "/li", "b", "/b" ],
         ALLOWED_PLACEHOLDER_MODS=[ "capital" ],
         ALLOWED_CELLTYPES=[ "light", "dark", "crystal", "lava", "blocking" ],
-        DEFAULT_TILELABELS=[ "first", "second", "third", "fourth", "center" ],
+        DEFAULT_TILELABELS=[ "first", "second", "third", "fourth", "fifth", "center" ],
         QUEST_CONFIGS=[
             {
                 id:"maps-size-small",
@@ -176,7 +176,7 @@ Tools=(function(){
                             errors.push(errorHeader+" L["+lang+"] O["+aid+"]: invalid entity for "+lang+": &amp;"+m1+";");
                         return "XXX";
                     }),
-                    checkArgument = orgArgument.replace(/([^0-9a-zA-Z() +\-,.:'!?"]+)/g,function(m,m1){
+                    checkArgument = orgArgument.replace(/([^0-9a-zA-Z() +/\-,.:'!?"]+)/g,function(m,m1){
                         return "<span style='background-color:#000;color:#fff'>"+m1+"</span>";
                     });
                 if (orgArgument != checkArgument)
