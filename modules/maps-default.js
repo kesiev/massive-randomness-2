@@ -2043,6 +2043,98 @@ ModManager.modules.push(function(){
                                 mapAsGrid:[ true ],
                                 mapRightmostScore:[ 1 ]
                             }
+                        },{
+                            attribute:"structure",
+                            value:"armorToBoss",
+                            config:{
+                                mapTiles:[
+                                    [
+                                        { 
+                                            tileId:"first", 
+                                            at:{ x:0, y:0 },
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"second", 
+                                            at:{ x:0, y:-3 },
+                                            includeTags:[
+                                                [
+                                                    "roomSize2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"third", 
+                                            at:{ x:3, y:-3 },
+                                            includeTags:[
+                                                [
+                                                    "roomSize2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"fourth", 
+                                            at:{ x:6, y:-3 },
+                                            includeTags:[
+                                                [
+                                                    "roomSize3+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"fifth", 
+                                            at:{ x:6, y:0 },
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        }
+                                    ],[
+                                        { 
+                                            tileId:"first", 
+                                            at:{ x:0, y:0 },
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"second", 
+                                            at:{ x:0, y:3 },
+                                            includeTags:[
+                                                [
+                                                    "roomSize2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"third", 
+                                            at:{ x:3, y:3 },
+                                            includeTags:[
+                                                [
+                                                    "roomSize2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"fourth", 
+                                            at:{ x:6, y:3 },
+                                            includeTags:[
+                                                [
+                                                    "roomSize3+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"fifth", 
+                                            at:{ x:6, y:0 },
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
                         }
                     ]
                 }
@@ -2190,6 +2282,34 @@ ModManager.modules.push(function(){
                                                 { atCell:0, tokens:[ { id:"startPoint" }]},
                                                 { atCell:6, tokens:[ { id:"startMob" } ]},
                                                 { atCell:11, tokens:[ { id:"startMob" } ]},
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        },{
+                            attribute:"corridors",
+                            value:"armorToBoss",
+                            config:{
+                                
+                                corridorsPillarsMinDistance:[ 5 ],
+                                corridorsSpawnPoints:[
+                                    [
+                                        { at:0.5, tokens:[ { id: "regularPortal" } ], allowBridge:false },
+                                        { at:0.055, tokens:[ { id: "portal5" } ], allowBridge:false },
+                                        { at:0.9, tokens:[ { id: "portal3" } ], allowBridge:false },
+                                    ]
+                                ],
+                                corridorsContent:[
+                                    [
+                                        {
+                                            elements:[
+                                                { atCell:0, tokens:[ { id:"startPoint" }]},
+                                                { atCell:6, tokens:[ { id:"startMob" } ]}
+                                            ]
+                                        },{
+                                            elements:[
+                                                { at:1, tokens:[ { id:"objective", flipped:true }]}
                                             ]
                                         }
                                     ]
@@ -3668,6 +3788,126 @@ ModManager.modules.push(function(){
                                                     }
                                                 ]
                                             ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        },{
+                            attribute:"gameMode",
+                            value:"armorToBoss",
+                            config:{
+                                roomsExpectedRatio:[ 3 ],
+                                roomsContent:[
+                                    [
+                                        {
+                                            at:1,
+                                            relevance:1,
+                                            size:1,
+                                            atTileId:"fourth",
+                                            intensity:{ risk:0, reward:0 },
+                                            doors:[ { id:"door", className:"marked red" } ],
+                                            onPathAdd:[
+                                                [
+                                                    { at:0.25, tokens:[ { id:"spikeTrap" } ] },
+                                                    { at:0.25, tokens:[ { id:"bearTrap" } ] }
+                                                ]
+                                            ],
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:1,
+                                                        tokens:[
+                                                            { id:"corruption" },
+                                                            { id:"spikeTrap" }
+                                                        ]
+                                                    },{
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective", flipped:true }
+                                                        ]
+                                                    },{
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"mob" },
+                                                        ]
+                                                    }
+                                                ],[
+                                                    {
+                                                        atExposure:1,
+                                                        tokens:[
+                                                            { id:"corruption" },
+                                                            { id:"bearTrap" }
+                                                        ]
+                                                    },{
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective", flipped:true }
+                                                        ]
+                                                    },{
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"mob" },
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:1,
+                                            relevance:1,
+                                            size:1,
+                                            atTileId:"second",
+                                            intensity:{ risk:1.3, reward:1.3 },
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" },
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:1,
+                                            relevance:1,
+                                            size:1,
+                                            atTileId:"third",
+                                            onPathAdd:[
+                                                [
+                                                    { at:0.5, tokens:[ { id:"spikeTrap" } ] },
+                                                    { at:0.5, tokens:[ { id:"bearTrap" } ] }
+                                                ]
+                                            ],
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"fountain" },
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:1,
+                                            relevance:1,
+                                            atTileId:"fifth",
+                                            isEmpty:true
+                                        },{
+                                            at:1,
+                                            relevance:1,
+                                            atTileId:"fifth",
+                                            isEmpty:true
+                                        },{
+                                            at:1,
+                                            relevance:1,
+                                            atTileId:"fifth",
+                                            isEmpty:true
+                                        },{
+                                            at:1,
+                                            relevance:1,
+                                            atTileId:"fifth",
+                                            isEmpty:true
                                         }
                                     ]
                                 ]
