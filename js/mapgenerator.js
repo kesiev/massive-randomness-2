@@ -942,6 +942,9 @@ MapGenerator=(function() {
                                 pickedRoom.doors.push(door);
                             })
 
+                        if (requirement.isEmpty)
+                            pickedRoom.isEmpty = true;
+
                         if (requirement.onPathAdd)
                             requirement.onPathAdd.forEach(add=>{
                                 pickedRoom.onPathAdd.push(add);
@@ -1166,7 +1169,7 @@ MapGenerator=(function() {
                 if (room.relevance) {
                     relevantRooms++;
 
-                    if (!room.doors.length) {
+                    if (!room.doors.length && !room.isEmpty) {
                         let
                             expectedDoors = getExpectedDoorsCount(room);
                         for (let j=0;j<expectedDoors;j++)
@@ -1177,11 +1180,15 @@ MapGenerator=(function() {
                 } else
                     extraRooms.push(room);
 
-                // Apply intensity
-                fillRoomWithIntensity(room,room.intensity);
+                if (!room.isEmpty) {
 
-                // Place elements
-                finalizeRoom(resources,map,room,limits);
+                    // Apply intensity
+                    fillRoomWithIntensity(room,room.intensity);
+
+                    // Place elements
+                    finalizeRoom(resources,map,room,limits);
+                
+                }
 
             });
 
