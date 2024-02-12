@@ -862,7 +862,7 @@ BODY {
         
     .quest .story {
         font-size: 16px;
-        line-height: 20px;
+        line-height: 18px;
     }
 
     .quest .tokenElement {
@@ -899,8 +899,8 @@ BODY {
         margin-right: 0;
     }
 
-    .quest OL, .quest UL, .quest LI {
-        margin:10px 0 10px 0;
+    .quest OL, .quest UL, .quest LI, .quest P {
+        margin:5px 0;
     }
     
     .quest OL, .quest UL {
