@@ -403,7 +403,7 @@ ModManager.modules.push(function(){
                                                 type:"objective",
                                                 name:[
                                                     {
-                                                        IT:"Sconfiggere i leader",
+                                                        IT:"Sconfiggere i Comandanti",
                                                         EN:"Defeat the Leaders"
                                                     }
                                                 ],
@@ -435,13 +435,13 @@ ModManager.modules.push(function(){
                                                 type:"rule",
                                                 name:[
                                                     {
-                                                        IT:"Leader Spietati",
+                                                        IT:"Comandanti Spietati",
                                                         EN:"Ruthless Leaders"
                                                     }
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"I Generali di questo Dungeon sono pi&ugrave; brutali del solito. Invece del normale ammontare di Salute, i Leader ne hanno il doppio. Inoltre, se possibile, i Generali tirano sempre +1{symbol.blackDie} in difesa e in attacco. Quando un Generale viene ucciso, ogni Eroe guadagna 4 PE, invece dei soliti 2 PE.",
+                                                        IT:"I Comandanti di questo Dungeon sono pi&ugrave; brutali del solito. Invece del normale ammontare di Salute, i Comandanti ne hanno il doppio. Inoltre, se possibile, i Comandanti tirano sempre +1{symbol.blackDie} in difesa e in attacco. Quando un Comandante viene ucciso, ogni Eroe guadagna 4 PE, invece dei soliti 2 PE.",
                                                         EN:"The Leaders of this Dungeon are more brutal than usual. Instead of their regular Health, Leaders have twice the amount of Health. Also, if possible, Leaders always roll +1{symbol.blackDie} to defense and attack. When a Leader is killed, each Hero gains 4 XP, instead of the usual 2 XP."
                                                     }
                                                 ]
