@@ -3,11 +3,16 @@ Generator=(function(){
     const
         SEED_RANGE=1000000;
         
-    function rawGenerate(needs,questSeed,flags,cb,mapSeed) {
+    function rawGenerate(needs,questSeed,flags,cb,mapSeed,attempt) {
 
         let
             resources = ModManager.load(JSON.parse(JSON.stringify(needs))),
             result;
+
+        if (!attempt)
+            attempt = 1;
+        else
+            attempt++;
 
         if (!questSeed) {
             questSeed = Math.floor(Math.random()*SEED_RANGE);
@@ -18,6 +23,7 @@ Generator=(function(){
             mapSeed = questSeed;
 
         result = {
+            attempt:attempt,
             questSeed: questSeed,
             mapSeed: mapSeed
         };
@@ -31,7 +37,7 @@ Generator=(function(){
             cb(resources,result);
         else {
             setTimeout(()=>{
-                rawGenerate(needs,questSeed,flags,cb,mapSeed);
+                rawGenerate(needs,questSeed,flags,cb,mapSeed,attempt);
             },10);
         }
 
