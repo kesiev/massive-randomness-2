@@ -258,6 +258,7 @@ ModManager.modules.push(function(){
                                             difficulty:[ "none" ],
                                             roomLimits:[ "default" ],
                                             skin:[ "default" ],
+                                            bridges:[ "none" ],
                                             lootRatio: [ "same" ],
                                             corridors: [ "cross" ]
                                         }
@@ -440,6 +441,7 @@ ModManager.modules.push(function(){
                                             roomLimits:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
+                                            bridges:[ "default" ],
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ]
                                         }
@@ -736,6 +738,7 @@ ModManager.modules.push(function(){
                                             roomLimits:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
+                                            bridges:[ "default" ],
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ]
                                         }
@@ -961,6 +964,7 @@ ModManager.modules.push(function(){
                                             roomLimits:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
+                                            bridges:[ "default" ],
                                             lootRatio: [ "default" ],
                                             corridors: [ "tyrant" ]
                                         }
@@ -1187,6 +1191,7 @@ ModManager.modules.push(function(){
                                             roomLimits:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "square" ],
+                                            bridges:[ "default" ],
                                             lootRatio: [ "default" ],
                                             corridors: [ "magicMaze" ]
                                         }
@@ -1429,6 +1434,7 @@ ModManager.modules.push(function(){
                                             roomLimits:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
+                                            bridges:[ "default" ],
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ]
                                         }
@@ -1682,6 +1688,7 @@ ModManager.modules.push(function(){
                                             roomLimits:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
+                                            bridges:[ "default" ],
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ]
                                         }
@@ -1907,6 +1914,7 @@ ModManager.modules.push(function(){
                                             roomLimits:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
+                                            bridges:[ "default" ],
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ],
                                         }

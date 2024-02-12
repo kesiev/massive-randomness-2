@@ -231,6 +231,7 @@ ModManager.modules.push(function(){
                                             roomLimits:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
+                                            bridges:[ "default" ],
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ]
                                         }
@@ -487,6 +488,7 @@ ModManager.modules.push(function(){
                                             roomLimits:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
+                                            bridges:[ "none" ],
                                             lootRatio: [ "default" ],
                                             corridors: [ "fallingDungeon" ],
                                         }

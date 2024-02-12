@@ -185,12 +185,12 @@ Tools=(function(){
         }
     }
 
-    function questTesterAddToken(testResult,iteration,token) {
+    function questTesterAddToken(testResult,iteration,token,amount) {
         let
             id = token.id+(token.flipped ? "-flipped":"");
         if (!testResult.tokens[iteration]) testResult.tokens[iteration]={};
         if (!testResult.tokens[iteration][id]) testResult.tokens[iteration][id]=0;
-        testResult.tokens[iteration][id]++;
+        testResult.tokens[iteration][id]= amount === undefined ? 1 : amount;
         if (testResult.tokensIndex.indexOf(id) == -1) testResult.tokensIndex.push(id);
     }
 
@@ -231,6 +231,7 @@ Tools=(function(){
                 testResult = {
                     test:test,
                     questSeeds:[],
+                    bridgeSeeds:[],
                     counters:{},
                     tokensIndex:[],
                     tokens:[]
@@ -247,6 +248,11 @@ Tools=(function(){
                     quest:test.quest
                 },(resources,result)=>{
                     questTesterAddCounter(testResult,iteration,result.map.placedTiles > result.quest.suggestedTilesCount ? "map-large" : result.map.placedTiles < result.quest.suggestedTilesCount ? "map-small" : "map-normal" )
+                    if (result.map.hasBridge) {
+                        testResult.bridgeSeeds.push(result.questSeed);
+                        questTesterAddCounter(testResult,iteration,"hasBridge");
+                    }
+                    if (result.map.bridgeRemoved) questTesterAddCounter(testResult,iteration,"bridgeRemoved");
                     testResult.label = result.quest.by.EN;
                     testResult.roomsDefaults = result.mapConfig.roomsDefaults;
                     testResult.questSeeds.push(result.questSeed);
@@ -269,7 +275,8 @@ Tools=(function(){
                             })
                         });
                         questTesterAddToken(testResult,iteration,{ id:"ROOM-mobs-"+mobs });
-                    })
+                    });
+                    questTesterAddToken(testResult,iteration,{ id:"ATTEMPTS" },result.attempt);
                     setTimeout(()=>{
                         runQuestTester(screen,tests,cb,results,test,testResult,iteration+1);
                     },1);
@@ -298,6 +305,7 @@ Tools=(function(){
                         label:"["+result.test.config.id+"] "+result.label,
                         stats:"Sug.Tiles: "+result.test.quest.suggestedTilesCount+" | Risk:"+result.roomsDefaults.risk+" | Reward:"+result.roomsDefaults.reward,
                         counters:result.counters,
+                        bridgeSeeds:result.bridgeSeeds,
                         tokensResult:[]
                     };
 
@@ -379,7 +387,8 @@ Tools=(function(){
             resultsData.forEach(resultRow=>{
                 let
                     html="",
-                    countersNode;
+                    countersNode,
+                    seedSelectorNode;
                 
                 createNode(resultsNode,"h3").innerHTML = resultRow.label;
                 createNode(resultsNode,"span").innerHTML = resultRow.stats;
@@ -388,8 +397,22 @@ Tools=(function(){
                 countersNode.style.fontWeight = "bold";
 
                 for (let k in resultRow.counters)
-                    html+=k+":"+resultRow.counters[k]+" ";
-                countersNode.innerHTML = html;
+                    html+=k+":"+resultRow.counters[k]+" ("+formatPercentage(resultRow.counters[k]/TESTQUESTS_ITERATIONS)+") ";
+                countersNode.innerHTML = html+" - ";
+
+                seedSelectorNode =  createNode(countersNode,"select");
+                createNode(seedSelectorNode,"option").innerHTML="---";
+
+                resultRow.bridgeSeeds.forEach(seed=>{
+                    let
+                        option = createNode(seedSelectorNode,"option");
+                    option.value = seed;
+                    option.innerHTML = "BRIDGE: "+seed
+                });
+
+                seedSelectorNode.onchange=()=>{
+                    questTesterPreview(resultRow.tokensResult[0].test,seedSelectorNode.value,previewNode,seedSelectorNode);
+                }
 
                 resultRow.tokensResult.forEach(tokenResult=>{
                     let

@@ -1,8 +1,10 @@
 MapGenerator=(function() {
 
     const
+        BRIDGE_ATTEMPTS = 5,
         MAPCENTER_X=3*50,
         MAPCENTER_Y=3*50,
+        BRIDGE_TILESTRATEGY = { isBridge:true },
         DEFAULT_ROOMSDOORSTYPE={ id:"door" },
         DEFAULT_ROOMLIMITS={ tokensPerRoomLimit:{}, tokensPerRoomCellLimit:{} },
         DEFAULT_ROOMSEXPECTEDRATIO=1.1;
@@ -164,6 +166,16 @@ MapGenerator=(function() {
         return map.grid[y] && map.grid[y][x] ? map.grid[y][x] : false;
     }
 
+    function addWall(map,x,y,by) {
+        if (!map.walls[y]) map.walls[y] = [];
+        map.walls[y][x] = by;
+        removeExit(map,x,y);
+    }
+
+    function isCoordWall(map,x,y) {
+        return map.walls[y] && map.walls[y][x] ? map.walls[y][x] : false;
+    }
+
     function isCoordCorridor(map,x,y) {
         return isCoordInMap(map,x,y) && isCellCorridor(map.grid[y][x]) ? map.grid[y][x] : false;
     }
@@ -176,6 +188,68 @@ MapGenerator=(function() {
             return true;
         } else
             return false;
+    }
+
+    function removeBridge(map,bridge) {
+
+        let
+            pos = map.index.indexOf(bridge);
+
+
+        if (pos != -1) {
+
+            let
+                side = bridge.tile.sides[bridge.side];
+        
+            side.angles[bridge.angle].forEach((row,y)=>{
+                row.forEach((col,x)=>{
+                    delete map.grid[y+bridge.at.y][x+bridge.at.x];
+                })
+            });
+
+            map.walls.forEach((row,y)=>{
+                row.forEach((cell,x)=>{
+                    if (cell === side)
+                        map.walls[y][x] = false;
+                })
+            });
+
+            map.index.splice(pos,1);
+
+        }
+    }
+
+    function analyzeBridge(map,x,y) {
+
+        let
+            cell,
+            joinedSides = 0,
+            limitX = x,
+            limitY = y;
+        
+        if (cell=isCoordInMap(map,x-1,y)) {
+            limitX+=3;
+            if (isCellCorridor(cell)) joinedSides++;
+        }
+        if (cell=isCoordInMap(map,x+1,y)) {
+            limitX-=3;
+            if (isCellCorridor(cell)) joinedSides++;
+        }
+        if (cell=isCoordInMap(map,x,y-1)) {
+            limitY+=3;
+            if (isCellCorridor(cell)) joinedSides++;
+        }
+        if (cell=isCoordInMap(map,x,y+1)) {
+            limitY-=3;
+            if (isCellCorridor(cell)) joinedSides++;
+        }
+
+        return {
+            joinedSides:joinedSides,
+            limitX:limitX,
+            limitY:limitY
+        }
+
     }
 
     // --- Map generation
@@ -238,14 +312,20 @@ MapGenerator=(function() {
                 cell.id=x+","+y;
                 grid[y][x]=cell;
 
-                map.exits=map.exits.filter(exit=>{
-                    return !(
-                        (( exit.to.x == x ) && (exit.to.y == y))
-                    );
-                });
-
+                removeExit(map,x,y);
+                
             })
         });
+
+        if (tileSide.isBridge) {
+            if (isCoordCorridor(map,px-1,py) || isCoordCorridor(map,px+1,py)) {
+                addWall(map,px,py-1,tileSide);
+                addWall(map,px,py+1,tileSide);
+            } else {
+                addWall(map,px-1,py,tileSide);
+                addWall(map,px+1,py,tileSide);
+            }
+        }
 
         let
             exits=map.exits;
@@ -253,14 +333,14 @@ MapGenerator=(function() {
             for (let y=py;y<=ey;y++) {
                 let
                     cell=grid[y][x];
-                if (!cell.walls[0] && !(grid[y-1] && grid[y-1][x]))
-                    exits.push({ from:{ x:x, y:y, direction:0 }, to:{ x:x, y:y-1, direction:2 }});
-                if (!cell.walls[1] && !(grid[y] && grid[y][x+1]))
-                    exits.push({ from:{ x:x, y:y, direction:1 }, to:{ x:x+1, y:y, direction:3 }});
-                if (!cell.walls[2] && !(grid[y+1] && grid[y+1][x]))
-                    exits.push({ from:{ x:x, y:y, direction:2 }, to:{ x:x, y:y+1, direction:0 }});
-                if (!cell.walls[3] && !(grid[y] && grid[y][x-1]))
-                    exits.push({ from:{ x:x, y:y, direction:3 }, to:{ x:x-1, y:y, direction:1 }});
+                if (!cell.walls[0] && !isCoordInMap(map,x,y-1) && !isCoordWall(map,x,y-1))
+                    exits.push({ side:tileSide, from:{ x:x, y:y, direction:0 }, to:{ x:x, y:y-1, direction:2 }});
+                if (!cell.walls[1] && !isCoordInMap(map,x+1,y) && !isCoordWall(map,x+1,y))
+                    exits.push({ side:tileSide, from:{ x:x, y:y, direction:1 }, to:{ x:x+1, y:y, direction:3 }});
+                if (!cell.walls[2] && !isCoordInMap(map,x,y+1) && !isCoordWall(map,x,y+1))
+                    exits.push({ side:tileSide, from:{ x:x, y:y, direction:2 }, to:{ x:x, y:y+1, direction:0 }});
+                if (!cell.walls[3] && !isCoordInMap(map,x-1,y) && !isCoordWall(map,x-1,y))
+                    exits.push({ side:tileSide, from:{ x:x, y:y, direction:3 }, to:{ x:x-1, y:y, direction:1 }});
             }
 
         return tileData;
@@ -270,8 +350,11 @@ MapGenerator=(function() {
         return map.exits.filter(exit=>(exit.to.x==x) && (exit.to.y == y));
     }
 
-    function findFittingTiles(map,sides) {
+    function removeExit(map,x,y) {
+        map.exits=map.exits.filter(exit=>!(( exit.to.x == x ) && (exit.to.y == y)));
+    }
 
+    function findFittingTiles(map,sides) {
         let
             fits=[];
         map.exits.forEach(exit=>{
@@ -293,12 +376,11 @@ MapGenerator=(function() {
                         let
                             isFitting=true;
                         for (let tx=0;tx<width;tx++)
-                            for (let ty=0;ty<height;ty++) {
-                                if (isCoordInMap(map,x+tx,y+ty)) {
+                            for (let ty=0;ty<height;ty++)
+                                if (isCoordInMap(map,x+tx,y+ty) || isCoordWall(map,x+tx,y+ty)) {
                                     isFitting=false;
                                     break;
                                 }
-                            }
                         
                         if (isFitting) {
                             side.tile.sides[side.side].angles.forEach((angle,angleId)=>{
@@ -317,10 +399,11 @@ MapGenerator=(function() {
                                         for (let ty=0;ty<height;ty++) {
                                             let
                                                 cell=angle[ty][tx],
+                                                cellIsBlocking=!isCellCorridor(cell),
                                                 exits=findExitsToPosition(map,x+tx,y+ty);
                                             exits.forEach(exit=>{
                                                 // TODO: It counts the corners twice, making corner-closing tiles less probable. Anyway, it may be OK.
-                                                if (!isCellCorridor(cell) || cell.walls[exit.to.direction])
+                                                if (cellIsBlocking || cell.walls[exit.to.direction])
                                                     exitsClosed++;
                                                 else
                                                     exitsContinued++;
@@ -376,15 +459,43 @@ MapGenerator=(function() {
                 newMapWidth = map.width,
                 newMapHeight = map.height;
 
-            if (fit.at.y<map.oy)
-                newMapHeight+=map.oy-fit.at.y;
-            if (fit.at.y+tileHeight>map.oy+map.height)
-                newMapHeight=fit.at.y+tileHeight-map.oy;
+            if (tileStrategy.isBridge) {
 
-            if (fit.at.x<map.ox)
-                newMapWidth+=map.ox-fit.at.x;
-            if (fit.at.x+tileWidth>map.ox+map.width)
-                newMapWidth=fit.at.x+tileWidth-map.ox;
+                let
+                    bridgeData = analyzeBridge(map,fit.at.x,fit.at.y);
+
+                if (bridgeData.limitY<map.oy)
+                    newMapHeight+=map.oy-bridgeData.limitY;
+                if (bridgeData.limitY+tileHeight>map.oy+map.height)
+                    newMapHeight=bridgeData.limitY+tileHeight-map.oy;
+
+                if (bridgeData.limitX<map.ox)
+                    newMapWidth+=map.ox-bridgeData.limitX;
+                if (bridgeData.limitX+tileWidth>map.ox+map.width)
+                    newMapWidth=bridgeData.limitX+tileWidth-map.ox;
+
+                if (mapMaxWidth)
+                    score += newMapWidth - mapMaxWidth;
+
+                if (mapMaxHeight)
+                    score += newMapHeight - mapMaxHeight;
+
+                if (bridgeData.joinedSides > 1)
+                    isOk = false;
+
+            } else {
+
+                if (fit.at.y<map.oy)
+                    newMapHeight+=map.oy-fit.at.y;
+                if (fit.at.y+tileHeight>map.oy+map.height)
+                    newMapHeight=fit.at.y+tileHeight-map.oy;
+
+                if (fit.at.x<map.ox)
+                    newMapWidth+=map.ox-fit.at.x;
+                if (fit.at.x+tileWidth>map.ox+map.width)
+                    newMapWidth=fit.at.x+tileWidth-map.ox;
+                
+            }
 
             if (mapMaxWidth && (newMapWidth > mapMaxWidth))
                 isOk = false;
@@ -392,7 +503,7 @@ MapGenerator=(function() {
             if (mapMaxHeight && (newMapHeight > mapMaxHeight))
                 isOk = false;
 
-            if (mapAsGrid && ((fit.at.x%3)||(fit.at.y%3)))
+            if (mapAsGrid && !tileStrategy.isBridge && ((fit.at.x%3)||(fit.at.y%3)))
                 isOk = false;
             
             if (noSquares && (fit.exitsContinued != 1))
@@ -457,10 +568,12 @@ MapGenerator=(function() {
         return fittingSides;
     }
 
-    function generateMap(resources,map,skins,mapConfig) {
+    function generateMap(resources,map,attempt,skins,mapConfig) {
 
         // --- Plan usable sides for each step
         let
+            // Bridges makes grid maps irregular so bridges are disabled.
+            attemptBridgeAt = !mapConfig.mapAsGrid && (attempt < BRIDGE_ATTEMPTS) ? mapConfig.mapBridgesAt === undefined ? -1 : Math.floor((mapConfig.mapTiles.length-1)*mapConfig.mapBridgesAt) : -1,
             tilesPerRequirement=[],
             tilesPerRequirementBySkin = [];
 
@@ -619,9 +732,46 @@ MapGenerator=(function() {
 
                 }
 
-            })
-    
+                // Add a bridge, if needed
+                
+                if ((attemptBridgeAt != -1) && (id >= attemptBridgeAt) && (mapConfig.mapMaxHeight || mapConfig.mapMaxWidth)) {
 
+                    let
+                        fits=findFittingTiles(map,[
+                            {
+                                side:0,
+                                tile:clone(resources.bridge)
+                            }
+                        ]),
+                        fit=getBestFittingTile(map,fits,mapConfig,BRIDGE_TILESTRATEGY);
+                        
+                        if (fit) {
+                            attemptBridgeAt = -1;
+                            map.hasBridge = pasteTile(fit.side.tile,fit.side.side,fit.angle,fit.at.x,fit.at.y,map);
+                        }
+
+                }
+
+
+            });
+    
+        // Remove orphaned bridge
+        if (map.hasBridge) {
+
+            let
+                bridgeData = analyzeBridge(map,map.hasBridge.at.x,map.hasBridge.at.y);
+
+            if (bridgeData.joinedSides < 2) {
+                removeBridge(map,map.hasBridge);
+                map.hasBridge = 0;
+                map.bridgeRemoved = true;
+            }
+
+        }
+
+        if (map.hasBridge)
+            getToken(resources,{ id:"bridge" },map);
+                            
         map.isValid = map.placedTiles == map.requiredTiles;
     }
 
@@ -664,6 +814,7 @@ MapGenerator=(function() {
     function analyzeMap(resources,map) {
 
         if (map.index.length) {
+
             map.exits.length=0;
 
             let
@@ -703,6 +854,8 @@ MapGenerator=(function() {
                             rooms[roomId]={
                                 id:roomId,
                                 distance:0,
+                                hasBridge:false,
+                                bridgeRemoved:false,
                                 doors:[],
                                 intensity:{ risk:0, reward:0 },
                                 onPathAdd:[],
@@ -827,16 +980,16 @@ MapGenerator=(function() {
 
         if (allowBridge && !spawnPoint.isDeadEnd && resources.tokensAvailable.bridge) {
 
-            if (!isCoordInMap(map,spawnPoint.x,spawnPoint.y-1))
+            if (!isCoordInMap(map,spawnPoint.x,spawnPoint.y-1) && !isCoordWall(map,spawnPoint.x,spawnPoint.y-1))
                 spawnPoints.push({ x:spawnPoint.x, y:spawnPoint.y-1 });
 
-            if (!isCoordInMap(map,spawnPoint.x+1,spawnPoint.y))
+            if (!isCoordInMap(map,spawnPoint.x+1,spawnPoint.y) && !isCoordWall(map,spawnPoint.x+1,spawnPoint.y))
                 spawnPoints.push({ x:spawnPoint.x+1, y:spawnPoint.y });
 
-            if (!isCoordInMap(map,spawnPoint.x,spawnPoint.y+1))
+            if (!isCoordInMap(map,spawnPoint.x,spawnPoint.y+1) && !isCoordWall(map,spawnPoint.x,spawnPoint.y+1))
                 spawnPoints.push({  x:spawnPoint.x, y:spawnPoint.y+1 });
 
-            if (!isCoordInMap(map,spawnPoint.x-1,spawnPoint.y))
+            if (!isCoordInMap(map,spawnPoint.x-1,spawnPoint.y) && !isCoordWall(map,spawnPoint.x-1,spawnPoint.y))
                 spawnPoints.push({ x:spawnPoint.x-1, y:spawnPoint.y });
 
             if (spawnPoints.length) {
@@ -1504,6 +1657,7 @@ MapGenerator=(function() {
                 width:0,
                 height:0,
                 index:[],
+                walls:[],
                 exits:[],
                 grid:[]
             };
@@ -1521,7 +1675,7 @@ MapGenerator=(function() {
                 })
             });
 
-            generateMap(resources,map,skins,result.mapConfig);
+            generateMap(resources,map,result.attempt,skins,result.mapConfig);
 
             if (map.isValid) {
                     
@@ -1567,7 +1721,7 @@ MapGenerator=(function() {
             result.map = map;
 
         }
-        
+
         return result;
     
     }

@@ -348,6 +348,7 @@ ModManager.modules.push(function(){
                         sides:[
                             {
                                 id:"Bridge",
+                                isBridge:true,
                                 angles:[
                                     [
                                         [ { type:[ "dark" ], walls:[ false, false, false, false ] } ]

@@ -2236,6 +2236,14 @@ ModManager.modules.push(function(){
                                 ]
                             }
                         },
+                        // --- Bridges
+                        {
+                            attribute:"bridges",
+                            value:"default",
+                            config:{
+                                mapBridgesAt:[ 0, 0.25, 0.5 ]
+                            }
+                        },
                         // --- Corridors
                         {
                             attribute:"corridors",

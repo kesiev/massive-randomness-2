@@ -311,6 +311,7 @@ ModManager.modules.push(function(){
                                             roomLimits:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
+                                            bridges:[ "none" ],
                                             lootRatio: [ "default" ],
                                             corridors: [ "armorToBoss" ],
                                         }
