@@ -5,6 +5,8 @@ MapGenerator=(function() {
         MAPCENTER_X=3*50,
         MAPCENTER_Y=3*50,
         BRIDGE_TILESTRATEGY = { isBridge:true },
+        GETLABEL_LANGUAGE = "EN",
+        GETLABEL_FLAGS = {},
         DEFAULT_ROOMSDOORSTYPE={ id:"door" },
         DEFAULT_ROOMLIMITS={ tokensPerRoomLimit:{}, tokensPerRoomCellLimit:{} },
         DEFAULT_ROOMSEXPECTEDRATIO=1.1;
@@ -122,10 +124,14 @@ MapGenerator=(function() {
 
     // --- Tokens
 
-    function getToken(resources,token,map) {
+    function getToken(resources,result,token,map) {
+        
+        token.id = Labels.getLabel(GETLABEL_FLAGS,resources,result,GETLABEL_LANGUAGE,token.id);
+
         if (resources.tokensAvailable[token.id]) {
             let
                 usedTokenId = token.id;
+
             if (resources.tokensMetadata[usedTokenId]) {
                 if (resources.tokensMetadata[usedTokenId].aggregateTo)
                     usedTokenId = resources.tokensMetadata[usedTokenId].aggregateTo;
@@ -136,20 +142,23 @@ MapGenerator=(function() {
                 map.usedTokens[usedTokenId]=0;
             map.usedTokens[usedTokenId]++;
             resources.tokensAvailable[token.id]--;
-            return true;
+            return token;
         }
     }
 
-    function addToken(resources,token,map,pos) {
+    function addToken(resources,result,token,map,pos) {
 
         let
             cell = isCoordInMap(map,pos.x,pos.y);
 
         if (cell) {
-            if (getToken(resources,token,map)) {
-                if (!cell.tokensIndex[token.id]) cell.tokensIndex[token.id]=1;
-                else cell.tokensIndex[token.id]++;
-                cell.tokens.push(token);
+            let
+                pickedToken = getToken(resources,result,token,map);
+
+            if (pickedToken) {
+                if (!cell.tokensIndex[pickedToken.id]) cell.tokensIndex[pickedToken.id]=1;
+                else cell.tokensIndex[pickedToken.id]++;
+                cell.tokens.push(pickedToken);
                 cell.tileData.tokensCount++;
                 return true;
             }
@@ -568,7 +577,7 @@ MapGenerator=(function() {
         return fittingSides;
     }
 
-    function generateMap(resources,map,attempt,skins,mapConfig) {
+    function generateMap(resources,result,map,attempt,skins,mapConfig) {
 
         // --- Plan usable sides for each step
         let
@@ -770,7 +779,7 @@ MapGenerator=(function() {
         }
 
         if (map.hasBridge)
-            getToken(resources,{ id:"bridge" },map);
+            getToken(resources,result,{ id:"bridge" },map);
                             
         map.isValid = map.placedTiles == map.requiredTiles;
     }
@@ -971,7 +980,7 @@ MapGenerator=(function() {
 
     // --- Spawn points management
 
-    function addSpawnPoint(resources,map,tokens,point,allowBridge) {
+    function addSpawnPoint(resources,result,map,tokens,point,allowBridge) {
         
         // Add mobs spawn points
         let
@@ -993,7 +1002,7 @@ MapGenerator=(function() {
                 spawnPoints.push({ x:spawnPoint.x-1, y:spawnPoint.y });
 
             if (spawnPoints.length) {
-                getToken(resources,{ id:"bridge" },map);
+                getToken(resources,result,{ id:"bridge" },map);
                 spawnPoint = pickRandomElementValue(spawnPoints);
                 pasteTile(clone(resources.bridge),0,0,spawnPoint.x,spawnPoint.y,map);
             }
@@ -1001,7 +1010,7 @@ MapGenerator=(function() {
         }
 
         tokens.forEach(token=>{
-            addToken(resources,token,map,spawnPoint);
+            addToken(resources,result,token,map,spawnPoint);
         });
         
     }
@@ -1158,7 +1167,7 @@ MapGenerator=(function() {
         }
     }
 
-    function addPillars(resources,map,minCorridorLength) {
+    function addPillars(resources,result,map,minCorridorLength) {
 
         let
             corridorMap=[],
@@ -1183,7 +1192,7 @@ MapGenerator=(function() {
                 half = getItemValueAtPercentage(corridor.availableCells,pillarPosition);
                 if (!half.noPillars) {
                     half.noPillars = true;
-                    addToken(resources,{ id:"pillar" },map,half);
+                    addToken(resources,result,{ id:"pillar" },map,half);
                     if (testingCell = isCoordInMap(map,half.x,half.y-1)) testingCell.noPillars=true;
                     if (testingCell = isCoordInMap(map,half.x+1,half.y)) testingCell.noPillars=true;
                     if (testingCell = isCoordInMap(map,half.x,half.y+1)) testingCell.noPillars=true;
@@ -1234,7 +1243,7 @@ MapGenerator=(function() {
         return room.cells.length == 1 ? 1 : 2
     }
 
-    function finalizeRoom(resources, map, room, limits) {
+    function finalizeRoom(resources, result, map, room, limits) {
 
         let
             roomIndex = {};
@@ -1295,7 +1304,7 @@ MapGenerator=(function() {
                         token.atExposure = item.atExposure;
                         if (!roomIndex[token.id]) roomIndex[token.id]=1;
                         else roomIndex[token.id]++;
-                        addToken(resources,token,map,cell);
+                        addToken(resources,result,token,map,cell);
                     }
                 });
 
@@ -1306,7 +1315,7 @@ MapGenerator=(function() {
 
     }
 
-    function fillRooms(resources,map,defaults,limits,defaultDoorType,expectedRoomsRatio) {
+    function fillRooms(resources,result,map,defaults,limits,defaultDoorType,expectedRoomsRatio) {
 
         if (map.rooms && map.rooms.length) {
 
@@ -1339,7 +1348,7 @@ MapGenerator=(function() {
                     fillRoomWithIntensity(room,room.intensity);
 
                     // Place elements
-                    finalizeRoom(resources,map,room,limits);
+                    finalizeRoom(resources,result,map,room,limits);
                 
                 }
 
@@ -1380,7 +1389,7 @@ MapGenerator=(function() {
                                 room.doors.push(defaultDoorType);
                             relevantDoors+=expectedDoors;
                             fillRoomWithIntensity(room,defaults);
-                            finalizeRoom(resources,map,room,limits);
+                            finalizeRoom(resources,result,map,room,limits);
                             extraIntensityAt -= 0.5;
                             if (extraIntensityAt < 0) extraIntensityAt = 1;
 
@@ -1449,7 +1458,7 @@ MapGenerator=(function() {
                 
     }
 
-    function addDoors(resources,map) {
+    function addDoors(resources,result,map) {
 
         if (map.rooms && map.rooms.length) {
 
@@ -1501,7 +1510,7 @@ MapGenerator=(function() {
 
                         sidesDone[exit.direction]=true;
 
-                        getToken(resources,doorType,map);
+                        getToken(resources,result,doorType,map);
 
                         room.exits.push(exit.to);
 
@@ -1515,7 +1524,7 @@ MapGenerator=(function() {
 
     }
 
-    function addOnPaths(resources,map) {
+    function addOnPaths(resources,result,map) {
 
         if (map.rooms && map.rooms.length) {
                 
@@ -1549,7 +1558,7 @@ MapGenerator=(function() {
                                     routesBag.delete(route);
 
                                 add.tokens.forEach(token=>{
-                                    addToken(resources,token,map,cell);
+                                    addToken(resources,result,token,map,cell);
                                 })
 
                             }
@@ -1563,7 +1572,7 @@ MapGenerator=(function() {
 
     // --- Corridors content
     
-    function addCorridorsContent(resources,map,content) {
+    function addCorridorsContent(resources,result,map,content) {
 
         if (map.startPoint) {
 
@@ -1607,7 +1616,7 @@ MapGenerator=(function() {
                             cell = pickRandomElement(cellsByDistance[position]);
 
                         element.tokens.forEach(token=>{
-                            addToken(resources,token,map,cell);
+                            addToken(resources,result,token,map,cell);
                         })
 
                         if (cellsByDistance[position].length == 0)
@@ -1675,7 +1684,7 @@ MapGenerator=(function() {
                 })
             });
 
-            generateMap(resources,map,result.attempt,skins,result.mapConfig);
+            generateMap(resources,result,map,result.attempt,skins,result.mapConfig);
 
             if (map.isValid) {
                     
@@ -1686,22 +1695,22 @@ MapGenerator=(function() {
 
                 assignRooms(resources,map,result.mapConfig.roomsContent,result.mapConfig.roomsDefaults);
                 fillRooms(
-                    resources,map,result.mapConfig.roomsDefaults,
+                    resources,result,map,result.mapConfig.roomsDefaults,
                     result.mapConfig.roomLimits || DEFAULT_ROOMLIMITS,
                     result.mapConfig.roomsDoorsDefaultType || DEFAULT_ROOMSDOORSTYPE,
                     result.mapConfig.roomsExpectedRatio === undefined ? DEFAULT_ROOMSEXPECTEDRATIO : result.mapConfig.roomsExpectedRatio
                 );
-                addDoors(resources,map);
+                addDoors(resources,result,map);
 
                 if (corridorCells && result.mapConfig.corridorsSpawnPoints)
                     result.mapConfig.corridorsSpawnPoints.forEach(spawnpoint=>{
                         if (corridorCells.length)
-                            addSpawnPoint(resources,map,spawnpoint.tokens,getItemAtPercentage(corridorCells,spawnpoint.at),spawnpoint.allowBridge);
+                            addSpawnPoint(resources,result,map,spawnpoint.tokens,getItemAtPercentage(corridorCells,spawnpoint.at),spawnpoint.allowBridge);
                     });
 
-                addPillars(resources,map,result.mapConfig.corridorsPillarsMinDistance);
-                addOnPaths(resources,map);
-                addCorridorsContent(resources,map,result.mapConfig.corridorsContent);
+                addPillars(resources,result,map,result.mapConfig.corridorsPillarsMinDistance);
+                addOnPaths(resources,result,map);
+                addCorridorsContent(resources,result,map,result.mapConfig.corridorsContent);
 
                 finalizeMap(map);
 
