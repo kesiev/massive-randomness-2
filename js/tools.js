@@ -190,7 +190,7 @@ Tools=(function(){
             id = token.id+(token.flipped ? "-flipped":"");
         if (!testResult.tokens[iteration]) testResult.tokens[iteration]={};
         if (!testResult.tokens[iteration][id]) testResult.tokens[iteration][id]=0;
-        testResult.tokens[iteration][id]= amount === undefined ? 1 : amount;
+        testResult.tokens[iteration][id] += amount === undefined ? 1 : amount;
         if (testResult.tokensIndex.indexOf(id) == -1) testResult.tokensIndex.push(id);
     }
 
@@ -211,6 +211,7 @@ Tools=(function(){
         backButton.onclick=()=>{
             from.scrollIntoView();
         }
+        createNode(into,"span").innerHTML = " - Seed: "+seed;
         Generator.generate(test.config,seed,{
             quest:test.quest
         },(resources,result)=>{
@@ -347,10 +348,10 @@ Tools=(function(){
                         count+=amount;
                     });
 
-                    if (notFound)
-                        critical = 10;
-                    else if (((token == "objective") || (token == "objective-flipped") || (token == "corruption") || (token == "time")) && (max != min))
+                    if (((token == "objective") || (token == "objective-flipped") || (token == "corruption") || (token == "time")) && (max != min))
                         critical = 20;
+                    else if (notFound)
+                        critical = 10;
                     else if (max - min > 3)
                         critical = 5;
                     else if (max == min)
@@ -466,7 +467,6 @@ Tools=(function(){
             cb();
         })
     }
-
 
     return {
 
