@@ -1665,7 +1665,7 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"I segnalini Obiettivo sul lato colorato rappresentano {label.shard@9}, che sono le parti pi&egrave; grandi {label.artifact@3}. Qualsiasi Eroe che si trova in una Zona con un segnalino Obiettivo sul lato colorato pu&ograve; spendere 1 azione per scartare il segnalino Obiettivo e raccogliere {label.shard@2}.",
+                                                        IT:"I segnalini Obiettivo sul lato colorato rappresentano {label.shard@9}, che sono le parti pi&ugrave; grandi {label.artifact@3}. Qualsiasi Eroe che si trova in una Zona con un segnalino Obiettivo sul lato colorato pu&ograve; spendere 1 azione per scartare il segnalino Obiettivo e raccogliere {label.shard@2}.",
                                                         EN:"Color-side-up Objective tokens represent {label.shard@9}, which are the biggest parts {label.artifact@3}. Any Hero standing on a color-side-up Objective token Zone may spend 1 action to discard the Objective token and collect {label.shard@2}."
                                                     }
                                                 ]
