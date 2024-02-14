@@ -2530,6 +2530,40 @@ ModManager.modules.push(function(){
                                     ]
                                 ]
                             }
+                        },{
+                            attribute:"corridors",
+                            value:"elementalTrapExit",
+                            config:{
+                                
+                                corridorsPillarsMinDistance:[ 5 ],
+                                corridorsSpawnPoints:[
+                                    [
+                                        { at:0.5, tokens:[ { id: "portal3" } ], allowBridge:true },
+                                        { at:0.055, tokens:[ { id: "portal5" } ], allowBridge:true },
+                                        { at:0.95, tokens:[ { id: "regularPortal" } ], allowBridge:true },
+                                    ]
+                                ],
+                                corridorsContent:[
+                                    [
+                                        {
+                                            elements:[
+                                                { atCell:0, tokens:[ { id:"startPoint" }]},
+                                                { atCell:6, tokens:[ { id:"startMob" } ]},
+                                                { atCell:11, tokens:[ { id:"startMob" } ]},
+                                            ]
+                                        },
+                                        {
+                                            elements:[
+                                                { at:0.5, tokens:[ { id:"spikeTrap" }, { id:"{label.hazard@0}" }, { id:"objective", flipped:true } ]},
+                                                { at:0.5, tokens:[ { id:"spikeTrap" }, { id:"{label.hazard@0}" } ]},
+                                                { at:0.75, tokens:[ { id:"spikeTrap" }, { id:"{label.hazard@0}" } ]},
+                                                { at:0.75, tokens:[ { id:"spikeTrap" }, { id:"{label.hazard@0}" } ]},
+                                                { at:0.25, tokens:[ { id:"spikeTrap" }, { id:"{label.hazard@0}" } ]}
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
                         },
                         // --- Room limits
                         {
@@ -3927,6 +3961,102 @@ ModManager.modules.push(function(){
                                 roomsExpectedRatio:[ 3 ],
                                 roomsDoorsDefaultType:[
                                     { id:"door", doNotCrossTile:true }
+                                ]
+                            }
+                        },{
+                            attribute:"gameMode",
+                            value:"adventureAndBoss",
+                            config:{
+                                roomsContent:[
+                                    [
+                                        {
+                                            at:1,
+                                            size:1,
+                                            relevance:1,
+                                            doors:[ { id:"door", className:"marked red" }, { id:"door", className:"marked red" } ],
+                                            intensity:{ risk:0, reward:1.3 },
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"corruption" }
+                                                        ]
+                                                    },{
+                                                        tokens:[
+                                                            { id:"fountain" }
+                                                        ]
+                                                    },{
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    },{
+                                                        tokens:[
+                                                            { id:"mob" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0,
+                                            size:1,
+                                            relevance:1,
+                                            intensity:{ risk:1.3, reward:1.3 },
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:1,
+                                            size:1,
+                                            relevance:1,
+                                            intensity:{ risk:1.3, reward:1.3 },
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:1,
+                                            relevance:1,
+                                            intensity:{ risk:1.3, reward:1.3 },
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0,
+                                            relevance:1,
+                                            intensity:{ risk:0, reward:1 },
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"forge" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
                                 ]
                             }
                         }

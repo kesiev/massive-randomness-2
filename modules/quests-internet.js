@@ -20,7 +20,6 @@ ModManager.modules.push(function(){
                                 EN:"Inspired by hugolink10/Zoju quest on BGG \"The Warrior of Light\""
                             },
                             suggestedTilesCount:5,
-                            _debug:true,
                             versions:[
                                 {
                                     labels:[

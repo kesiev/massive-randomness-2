@@ -1181,6 +1181,280 @@ ModManager.modules.push(function(){
                                     ]
                                 }
                             ]
+                        },
+                        {
+                            type:"defuse",
+                            by:{
+                                IT:"Ispirato alla Web Quest \"Glacial Inferno\"",
+                                EN:"Inspired by the Web Quest \"Glacial Inferno\""
+                            },
+                            suggestedTilesCount:4,
+                            versions:[
+                                {
+                                    labels:[
+                                        [
+                                            {
+                                                hazard:[
+                                                    {
+                                                        IT:[ "frost", "{symbol.frostToken}", "di ghiaccio...", "ghiacciato", "glaciale", "Trappole di Ghiaccio", "incubo ghiacciato", "Corruzione del Gelo", "scongelare", "ghiacciati", "rompere il ghiaccio", "ghiacciate", "glaciali" ],
+                                                        EN:[ "frost", "{symbol.frostToken}", "of ice...", "frozen", "glacial", "Ice Traps", "frost nightmare", "Ice Corruption", "unfreeze", "frozen", "break the ice", "frozen", "glacial" ]
+                                                    },{
+                                                        IT:[ "fire", "{symbol.fireToken}", "di fuoco...", "ardente", "fiammeggiante", "Trappole di Fuoco" , "incubo fiammeggiante", "Corruzione del Fuoco", "estinguere", "ardenti", "estinguere il fuoco", "ardenti", "fiammeggianti" ],
+                                                        EN:[ "fire", "{symbol.fireToken}", "of fire...", "burning", "flaming", "Fire Traps" , "burning nightmare", "Fire Corruption", "extinguish", "burning", "extinguish the fire", "burning", "flaming" ]
+                                                    }
+                                                ],
+                                                time:[
+                                                    {
+                                                        IT:[ "Ora che l'Oscurit&agrave; &egrave; stata contenuta e sconfitta,"],
+                                                        EN:[ "With Darkness contained and defeated," ]
+                                                    },{
+                                                        IT:[ "La missione &egrave; compiuta e"],
+                                                        EN:[ "The mission is accomplished and" ]
+                                                    },{
+                                                        IT:[ "Tutto &egrave; andato a rotoli e"],
+                                                        EN:[ "Everything is gone to pieces and" ]
+                                                    }
+                                                ],
+                                                placeLeave:[
+                                                    {
+                                                        IT:[ "gli Eroi devono abbandonare l'Inferno", "Inferno", "Inferno", "dall'Inferno" ],
+                                                        EN:[ "the Heroes now must leave Hell", "Hell", "Inferno", "the Hell" ]
+                                                    },{
+                                                        IT:[ "gli Eroi devono fuggire dal Labirinto", "Labirinto", "Dedalo", "dal Labirinto" ],
+                                                        EN:[ "the Heroes must escape from the Maze", "Maze", "Labyrinth", "the Labyrinth" ]
+                                                    },{
+                                                        IT:[ "gli Eroi devono svignarsela dal Tempio", "Tempio", "Cattetrale", "dal Tempio" ],
+                                                        EN:[ "the Heroes must escape from the Temple", "Temple", "Cathedral", "the Temple" ]
+                                                    }
+                                                ],
+                                                placeThrough:[
+                                                    {
+                                                        IT:[ "attraverso un angolo dimenticato e {label.hazard@4} di questo posto." ],
+                                                        EN:[ "through a forgotten and {label.hazard@3} corner of this place." ]
+                                                    },{
+                                                        IT:[ "attraversando i suoi corridoi, ora {label.hazard@9}." ],
+                                                        EN:[ "crossing its corridors, now {label.hazard@9}." ]
+                                                    },{
+                                                        IT:[ "superando le sue {label.hazard@5}." ],
+                                                        EN:[ "surpassing its {label.hazard@5}." ]
+                                                    }
+                                                ],
+                                                exitPlace:[
+                                                    {
+                                                        IT:[ "L'uscita si nasconde dietro" ],
+                                                        EN:[ "The exit lies behind" ]
+                                                    },{
+                                                        IT:[ "Tra gli Eroi e la libert&agrave; si ergono" ],
+                                                        EN:[ "Between the Heroes and freedom stands" ]
+                                                    },{
+                                                        IT:[ "Ad attenderli ci sono" ],
+                                                        EN:[ "Waiting for them, there are" ]
+                                                    }
+                                                ],
+                                                exitAppearance:[
+                                                    {
+                                                        IT:[ "decine e decine di strati" ],
+                                                        EN:[ "dozen of layers" ]
+                                                    },{
+                                                        IT:[ "muri invalicabili" ],
+                                                        EN:[ "impassable walls" ]
+                                                    },{
+                                                        IT:[ "imponenti colonne" ],
+                                                        EN:[ "imposing columns" ]
+                                                    }
+                                                ],
+                                                holes:[
+                                                    {
+                                                        IT:[ "i Geyser", "geyser", "il Geyser", "un Geyser", "i", "{label.hazard@9}", "riattivato" ],
+                                                        EN:[ "the Geysers", "geysers", "the Geyser", "a Geyser" ]
+                                                    },{
+                                                        IT:[ "gli Interruttori", "interruttori", "l'Interruttore", "un Interruttore", "i", "{label.hazard@9}", "riattivato" ],
+                                                        EN:[ "the Switches", "switches", "the Switch", "a Switch" ]
+                                                    },{
+                                                        IT:[ "le Leve", "leve", "la Leva", "una Leva", "le", "{label.hazard@11}", "riattivata" ],
+                                                        EN:[ "the Lever", "levers", "the Lever", "a Lever" ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    title:[
+                                        {
+                                            IT:"{label.placeLeave@2} {label.hazard@4}",
+                                            EN:"{label.hazard@4} {label.placeLeave@2}"
+                                        },{
+                                            IT:"{label.holes:capital@0} {label.holes:capital@5}",
+                                            EN:"{label.hazard@9} {label.holes:capital@1}"
+                                        },{
+                                            IT:"Fuga {label.placeLeave:capital@3}",
+                                            EN:"Escape From {label.placeLeave:capital@3}"
+                                        }
+                                    ],
+                                    story:[
+                                        {
+                                            EN:"{label.time@0} {label.placeLeave@0} {label.placeThrough@0} {label.exitPlace@0} {label.exitAppearance@0} {label.hazard@2}"
+                                        }
+                                    ],
+                                    challenges:[
+                                        { intensity:1, tag:"default" },
+                                        { intensity:2, tag:"default" },
+                                        { intensity:3, tag:"default" },
+                                    ],
+                                    objectivesHeader:[
+                                        {
+                                            IT:"Completate gli obiettivi nell'ordine indicato:",
+                                            EN:"Complete the objectives in order:"
+                                        }
+                                    ],
+                                    rules:[
+                                        [
+                                            {
+                                                type:"objective",
+                                                name:[
+                                                    {
+                                                        EN:"{label.hazard:capital@8} {label.holes@0}"
+                                                    }
+                                                ],
+                                                summary:[
+                                                    {
+                                                        IT:"Riattivare {label.holes@4} {tokensCount.objective} {label.holes:capital@1} {label.holes:capital@5}",
+                                                        EN:"Activate the {tokensCount.objective} {label.hazard:capital@9} {label.holes:capital@1}"
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"objective",
+                                                name:[
+                                                    {
+                                                        IT:"Fuggire {label.placeLeave@3} {label.hazard:capital@3}",
+                                                        EN:"Escape the {label.hazard:capital@3} {label.placeLeave@1}"
+                                                    }
+                                                ],
+                                                summary:[
+                                                    {
+                                                        IT:"Fuggire con tutti gli Eroi",
+                                                        EN:"Escape with all Heroes"
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        EN:"{label.hazard@5}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Durante la preparazione, posiziona 1 segnalino {label.hazard@1} su ciascuna Trappola con Spuntoni nel Dungeon. Oltre all'effetto della Trappola con Spuntoni, l'Eroe che l'ha attivata prende il segnalino {label.hazard@1} (anche non ha subito alcuna ferita).",
+                                                        EN:"During Setup, place 1{label.hazard@1} token on each Spike Trap in the Dungeon. In addition to the Spike Trap effect, the Hero who activated it takes the {label.hazard@1} token (even if they took no Wounds)."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        IT:"{label.holes:capital@1} {label.holes:capital@5}",
+                                                        EN:"{label.hazard:capital@11} {label.holes:capital@1}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"I segnalini Obiettivo con il lato colorato verso l'alto rappresentano {label.holes@3} {label.hazard:capital@3}. Qualsiasi Eroe che si trova in una Zona con questi segnalini Obiettivo pu&ograve; spendere 1 azione per {label.hazard@10} e riattivare {label.holes@2}. Quando {label.holes@3} viene {label.holes@6}, rimuovi il segnalino dal Dungeon e ogni Eroe guadagna 5 XP.",
+                                                        EN:"The color-side-up Objective tokens represent {label.hazard:capital@3} {label.holes:capital@1}. Any Hero standing in a Zone with these Objective tokens may spend 1 action to {label.hazard@10} and awake {label.holes@2}. When {label.holes@3} is awakened, remove the token from the Dungeon and each Hero gains 5 XP."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        IT:"Porte {label.hazard:capital@11}",
+                                                        EN:"{label.hazard:capital@11} Doors"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Le porte con il bordo rosso non possono essere aperte finch&eacute; non rimane solo 1 segnalino Obiettivo con il lato colorato rivolto verso l'alto nel Dungeon. Non appena nel Dungeon rimane solo 1 segnalino Obiettivo con il lato colorato rivolto verso l'alto, le porte possono essere aperte normalmente.",
+                                                        EN:"The doors with a red border can't be opened until there is just 1 color-side-up Objective token left on the Dungeon. As soon as there is just 1 color-side-up Objective token left on the Dungeon the doors can be opened as usual."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        IT:"Mostri {label.hazard:capital@12}",
+                                                        EN:"{label.hazard:capital@12} Monsters"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"I mostri sembrano essersi adattati a questo {label.hazard@6}. Durante questa missione, segui queste regole speciali per i nemici:<ul>"+
+                                                        "<li>I nemici non possono prendere segnalini {label.hazard@1}.</li>"+
+                                                        "<li>Quando generi un Nemico, posiziona 1 segnalino {label.hazard@1} sulla sua arma o sulla sua statistica dei dadi di Attacco. La prima volta che un Nemico infligge 1 o pi&ugrave; Ferite a un Eroe, quell'Eroe prende il segnalino {label.hazard@1} di quel Nemico.</li>"+
+                                                        "</ul>",
+                                                        EN:"Monsters seem to have adapted themselves to this {label.hazard@6}. During this Quest, follow these special rules for Enemies:<ul>"+
+                                                        "<li>Enemies can't take {label.hazard@1} tokens.</li>"+
+                                                        "<li>When spawning an Enemy, place 1{label.hazard@1} token on its weapon or Attack dice stat. The first time an Enemy deals 1 or more Wounds to a Hero, that Hero takes this Enemy's {label.hazard@1} token.</li>"+
+                                                        "</ul>"
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        EN:"{label.hazard@7}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Quando la Camera con il token {symbol.corruptionToken} viene rivelata, genera un Mostro Errante nella Zona del segnalino {symbol.corruptionToken}, quindi rimuovi il segnalino dal Dungeon. Non pescare una carta Porta per questa Camera, ma genera le Orde come di solito.",
+                                                        EN:"When the Chamber with the {symbol.corruptionToken} token is revealed, spawn a Roaming Monster in the {symbol.corruptionToken} token Zone, then remove the token from the Dungeon. Do not draw a Door card for this Chamber, but spawn Mobs as usual."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        IT:"Fuga",
+                                                        EN:"Escape"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Qualsiasi Eroe nella Zona del segnalino Obiettivo grigio pu&ograve; spendere 1 PM per uscire dal Dungeon. Una volta che tutti gli Eroi sono usciti, la Missione termina con la vittoria.",
+                                                        EN:"Any Hero on the gray Objective token Zone may spend 1 MP to exit the Dungeon. Once all Heroes have exited, the Quest ends in victory."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    map:[
+                                        {
+                                            structure:[ "roamingToRoom" ],
+                                            gameMode: [ "adventureAndBoss" ],
+                                            difficulty:[ "default" ],
+                                            roomLimits:[ "default" ],
+                                            skin:[ "default" ],
+                                            size: [ "default" ],
+                                            bridges:[ "default" ],
+                                            lootRatio: [ "default" ],
+                                            corridors: [ "elementalTrapExit" ],
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 }
