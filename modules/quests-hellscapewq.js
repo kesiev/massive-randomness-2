@@ -1455,7 +1455,254 @@ ModManager.modules.push(function(){
                                     ]
                                 }
                             ]
-                        }
+                        },
+                        {
+                            type:"shards",
+                            by:{
+                                IT:"Ispirato alla Web Quest \"Heaven's Secret Door\"",
+                                EN:"Inspired by the Web Quest \"Heaven's Secret Door\""
+                            },
+                            suggestedTilesCount:4,
+                            versions:[
+                                {
+                                    labels:[
+                                        [
+                                            {
+                                                purpose:[
+                                                    {
+                                                        IT:[ "Gli eroi stavano cercando un modo per tornare in superficie quando" ],
+                                                        EN:[ "As the heroes try to find their way to the surface," ]
+                                                    },{
+                                                        IT:[ "Gli eroi erano caduti in trappola e non avevamo via di scampo, ma ad un tratto" ],
+                                                        EN:[ "The heroes had fallen into a trap and they had no escape, but suddenly" ]
+                                                    },{
+                                                        IT:[ "Il ponte che dava verso l'uscita era crollato e per gli eroi non c'era via di scampo. Ma, d'improvviso," ],
+                                                        EN:[ "The bridge leading to the exit had collapsed and there was no escape for the heroes. But, suddenly," ]
+                                                    }
+                                                ],
+                                                gate:[
+                                                    {
+                                                        IT:[ "un portale apparve di fronte a loro."],
+                                                        EN:[ "a portal appeared in front of them." ]
+                                                    },{
+                                                        IT:[ "un'ombra apparve dietro una grata."],
+                                                        EN:[ "a portal appeared in front of them." ]
+                                                    },{
+                                                        IT:[ "videro qualcosa muoversi dietro le macerie di un passaggio crollato."],
+                                                        EN:[ "they saw something move behind the rubble of a collapsed passage." ]
+                                                    }
+                                                ],
+                                                missionVoiceEvent:[
+                                                    {
+                                                        IT:[ "Presto! Non c'&egrave; tempo da perdere!"],
+                                                        EN:[ "Quickly! There is no time!" ]
+                                                    },{
+                                                        IT:[ "Hey, voi! Ascoltatemi!"],
+                                                        EN:[ "Hey, you! Listen to me!" ]
+                                                    },{
+                                                        IT:[ "Vi ho trovato, finalmente! Ascoltate!"],
+                                                        EN:[ "I found you, finally! Listen!" ]
+                                                    }
+                                                ],
+                                                missionVoicePassage:[
+                                                    {
+                                                        IT:[ "Sto cercando di aprire questo passaggio perch&egrave; voi possiate raggiungerci!" ],
+                                                        EN:[ "I'm trying to open this passage so you can reach us!" ]
+                                                    },{
+                                                        IT:[ "Prover&ograve; ad aprire questo passaggio e farvi uscire da qui!" ],
+                                                        EN:[ "I'll try to open this passage and get you out of here!" ]
+                                                    },{
+                                                        IT:[ "Cercher&ograve; di aprire questo passaggio per voi..." ],
+                                                        EN:[ "I'll try to open this passage for you..." ]
+                                                    }
+                                                ],
+                                                missionVoicePlot:[
+                                                    {
+                                                        IT:[ "Ma ho bisogno del vostro aiuto per ricomporre {label.artifact@1}, ora in frantumi." ],
+                                                        EN:[ "But I will need your help to reforge {label.artifact@1} that has had {label.shard@6} and pieces scattered." ]
+                                                    },{
+                                                        IT:[ "Ma non lo far&ograve; senza nulla in cambio. Portatemi {label.artifact@1}... dovrete ricostruirlo riunendo {label.shard@6}!" ],
+                                                        EN:[ "But I won't do it with nothing in return. Bring me {label.artifact@1}... you'll have to rebuild it from {label.shard@6}!" ]
+                                                    },{
+                                                        IT:[ "Ma ho bisogno che prima voi riuniate {label.shard@1} per ricomporre {label.artifact@1}!" ],
+                                                        EN:[ "But I need you to collect {label.shard@1} to rebuild {label.artifact@1} first!" ]
+                                                    }
+                                                ],
+                                                missionVoice:[
+                                                    {
+                                                        IT:[ "Dall'altra parte sentirono una voce: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoicePlot@0}\""],
+                                                        EN:[ "From the other side, they hear a voice: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoicePlot@0}\"" ]
+                                                    },{
+                                                        IT:[ "Qualcuno dall'altra parte bisbigli&ograve;: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoicePlot@0}\""],
+                                                        EN:[ "Someone on the other end whispered: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoicePlot@0}\"" ]
+                                                    },{
+                                                        IT:[ "Poco dopo, sentirono una voce: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoicePlot@0}\""],
+                                                        EN:[ "Shortly after, they heard a voice: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoicePlot@0}\"" ]
+                                                    }
+                                                ],
+                                                mission:[
+                                                    {
+                                                        EN:[ "{label.missionVoice@0}" ]
+                                                    }
+                                                ],
+                                                artifact:[
+                                                    {
+                                                        IT:[ "l'Artefatto", "l'Artefatto Etereo", "l'artefatto", "dell'artefatto distrutto", "viene forgiato" ],
+                                                        EN:[ "the Artifact", "the Ethereal Artifact", "the Ethereal Artifact", "the artifact", "of the destroyed artifact", "is forged" ]
+                                                    },{
+                                                        IT:[ "il Pendente", "il Pendente di Giada", "il pendente", "del pendente distrutto", "viene forgiato" ],
+                                                        EN:[ "the Pendant", "the Jade Pendant", "the pendant", "of the destroyed pendant", "is forged" ]
+                                                    },{
+                                                        IT:[ "la Gemma", "la Gemma Scarlatta", "la gemma", "della gemma frantumata", "viene forgiata" ],
+                                                        EN:[ "the Gem", "the Scarlet Gem", "the gem", "of the broken gem", "is forged" ]
+                                                    }
+                                                ],
+                                                shard:[
+                                                    {
+                                                        IT:[ "Frammenti Arcani", "i Frammenti Arcani", "1 Frammento", "10 Frammenti", "10 Frammenti Arcani", "i Frammenti", "i suoi frammenti", "possono essere raccolti", "Frammenti Spezzati", "i Frammenti Spezzati" ],
+                                                        EN:[ "Arcane Shards", "the Arcane Shards", "1 Shard", "10 Shards", "10 Sacred Shards", "the Shards", "its shards", "can be collected", "Broken Pieces", "the Broken Pieces" ]
+                                                    },{
+                                                        IT:[ "Schegge Solari", "le Schegge Solari", "1 Scheggia", "10 Schegge", "10 Schegge Solari", "le Schegge", "le sue schegge", "possono essere raccolte", "Schegge Cadute", "le Schegge Cadute" ],
+                                                        EN:[ "Solar Shards", "the Solar Shards", "1 Shard", "10 Shards", "10 Solar Shards", "the Shards", "its shards", "can be collected", "Fallen Shards", "the Fallen Shards" ]
+                                                    },{
+                                                        IT:[ "Scaglia Ambrata", "le Scaglie Ambrate", "1 Scaglia", "10 Scaglie", "10 Scaglie Ambrate", "le Scaglie", "le sue scaglie", "possono essere raccolte", "Scaglie Perdute", "le Scaglie Perdute" ],
+                                                        EN:[ "Amber Scale", "the Amber Scales", "1 Scale", "10 Scales", "10 Amber Scales", "the Scales", "its scales", "can be collected", "Lost Scales", "the Lost Scales" ]
+                                                    }
+                                                ],
+                                                forge:[
+                                                    {
+                                                        IT:[ "Forgia Magica", "la Zona della Forgia Magica", "la Forgia Magica", "Forgia del Fuoco Magico", "sulla Zona della Forgia Magica", "sulla Forgia Magica" ],
+                                                        EN:[ "Magic Forge", "the Magic Forge Zone", "the Magic Forge", "Forge with Magic Fire", "on the Magic Forge Zone", "on the Magic Forge" ]
+                                                    },{
+                                                        IT:[ "Forgia Leggendaria", "la Zona della Forgia Leggendaria", "la Forgia Leggendaria", "Forgia del Fuoco Leggendario", "sulla Zona della Forgia Leggendaria", "sulla Forgia Leggendaria" ],
+                                                        EN:[ "Legendary Forge", "the Legendary Forge Zone", "the Legendary Forge", "Forge with the Fire of the Legends", "on the Legendary Forge Zone", "on the Legendary Forge" ]
+                                                    },{
+                                                        IT:[ "Forgia Dimenticata", "la Zona della Forgia Dimenticata", "la Forgia Dimenticata", "Forgia del Fuoco Dimenticato", "sulla Zona della Forgia Dimenticata", "sulla Forgia Dimenticata" ],
+                                                        EN:[ "Forgotten Forge", "the Forgotten Forge Zone", "the Forgotten Forge", "Forge with the Forgotten Fire", "on the Forgotten Forge Zone", "on the Forgotten Forge" ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    title:[
+                                        {
+                                            EN:"{label.shard:capital@1}"
+                                        },{
+                                            EN:"{label.forge:capital@2}"
+                                        },{
+                                            EN:"{label.artifact:capital@1}"
+                                        }
+                                    ],
+                                    story:[
+                                        {
+                                            EN:"{label.purpose@0} {label.gate@0} {label.mission@0}"
+                                        }
+                                    ],
+                                    challenges:[
+                                        { intensity:1, tag:"default" },
+                                        { intensity:2, tag:"default" },
+                                        { intensity:3, tag:"default" },
+                                    ],
+                                    objectivesHeader:[
+                                        {
+                                            IT:"Completate gli obiettivi nell'ordine indicato:",
+                                            EN:"Complete the objectives in order:"
+                                        }
+                                    ],
+                                    rules:[
+                                        [
+                                            {
+                                                type:"objective",
+                                                name:[
+                                                    {
+                                                        EN:"{label.shard@0}"
+                                                    }
+                                                ],
+                                                summary:[
+                                                    {
+                                                        IT:"Raccogliere almeno {label.shard@4}",
+                                                        EN:"Collect at least {label.shard@4}"
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"objective",
+                                                name:[
+                                                    {
+                                                        EN:"{label.forge@3}"
+                                                    }
+                                                ],
+                                                summary:[
+                                                    {
+                                                        IT:"Usare {label.shard@5} per forgiare {label.artifact@0} tramite {label.forge@2}",
+                                                        EN:"Use {label.shard@5} to forge {label.artifact@0} at the {label.forge@0}"
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        EN:"{label.shard@0}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"{label.shard:capital@1} {label.shard@7} dai nemici. Ogni volta che un Eroe uccide un Mostro Errante o un Generale, lancia 2{symbol.blackDie}. Per ogni {symbol.fang} risultante, gli Eroi guadagnano {label.shard@2}. Posiziona dei segnalini Salute {label.forge@5} per tenere traccia dei frammenti raccolti.",
+                                                        EN:"{label.shard:capital@1} {label.shard@7} from the Enemies. Every time a Hero kills a Roaming Monster or a Leader, they roll 2{symbol.blackDie}. For each {symbol.fang} rolled, the Heroes gain {label.shard@2}. Place Health tokens {label.forge@5} to keep track of the collected Shards."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        EN:"{label.shard@8}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"I segnalini Obiettivo sul lato colorato rappresentano {label.shard@9}, che sono le parti pi&egrave; grandi {label.artifact@3}. Qualsiasi Eroe che si trova in una Zona con un segnalino Obiettivo sul lato colorato pu&ograve; spendere 1 azione per scartare il segnalino Obiettivo e raccogliere {label.shard@2}.",
+                                                        EN:"Color-side-up Objective tokens represent {label.shard@9}, which are the biggest parts {label.artifact@3}. Any Hero standing on a color-side-up Objective token Zone may spend 1 action to discard the Objective token and collect {label.shard@2}."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        EN:"{label.forge:capital@2}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"La Zona con un gettone Obiettivo grigio &egrave; {label.forge@1}. Una volta che gli Eroi hanno raccolto collettivamente almeno {label.shard@3}, qualsiasi Eroe {label.forge@4} pu&ograve; spendere 1 azione per Forgiare {label.artifact@1}. Non appena {label.artifact@2} {label.artifact@4}, la Missione termina con la vittoria.",
+                                                        EN:"The Zone with a gray Objective token is {label.forge@1}. Once the Heroes collectively gathered at least {label.shard@3}, any Hero standing {label.forge@4} may spend 1 action to Forge {label.artifact@1}. As soon as {label.artifact@2} {label.artifact@4}, the Quest ends in victory."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    map:[
+                                        {
+                                            structure:[ "roamingToRoom" ],
+                                            gameMode: [ "collectAndForge" ],
+                                            difficulty:[ "default" ],
+                                            roomLimits:[ "default" ],
+                                            skin:[ "default" ],
+                                            size: [ "default" ],
+                                            bridges:[ "default" ],
+                                            lootRatio: [ "default" ],
+                                            corridors: [ "default" ],
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
                     ]
                 }
             ]

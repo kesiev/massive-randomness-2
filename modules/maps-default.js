@@ -4059,6 +4059,110 @@ ModManager.modules.push(function(){
                                     ]
                                 ]
                             }
+                        },{
+                            attribute:"gameMode",
+                            value:"collectAndForge",
+                            config:{
+                                roomsContent:[
+                                    [
+                                        {
+                                            at:1,
+                                            size:1,
+                                            relevance:1,
+                                            onPathAdd:[
+                                                [
+                                                    { at:0.25, tokens:[ { id:"spikeTrap" } ] },
+                                                    { at:0.25, tokens:[ { id:"bearTrap" } ] },
+                                                ]
+                                            ],
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"forge" },
+                                                            { id:"objective", flipped:true }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:1,
+                                            size:1,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:1,
+                                            relevance:1,
+                                            onPathAdd:[
+                                                [
+                                                    { at:0.25, tokens:[ { id:"spikeTrap" } ] },
+                                                    { at:0.25, tokens:[ { id:"bearTrap" } ] },
+                                                ]
+                                            ],
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:1,
+                                            relevance:1,
+                                            size:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:1,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:1,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"fountain" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
                         }
                     ]
                 }
