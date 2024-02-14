@@ -201,7 +201,7 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"I leader lanciano anche un {symbol.blackDie} quando attaccano o difendono. I Mostri Erranti guadagnano +1{symbol.blackDie} in attacco o in difesa ogni 2 giocatori. (1-2 giocatori: +1{symbol.blackDie} , 3-4 giocatori: +2{symbol.blackDie} , 5-6 giocatori: +3{symbol.blackDie})",
+                                                        IT:"I Comandanti tirano anche un {symbol.blackDie} quando attaccano o difendono. I Mostri Erranti guadagnano +1{symbol.blackDie} in attacco o in difesa ogni 2 giocatori. (1-2 giocatori: +1{symbol.blackDie} , 3-4 giocatori: +2{symbol.blackDie} , 5-6 giocatori: +3{symbol.blackDie})",
                                                         EN:"Leaders also roll a {symbol.blackDie} when attacking or defending. Roaming Monsters gain +1{symbol.blackDie} on attacking or defending for every 2 players. (1-2 Players: +1{symbol.blackDie} , 3-4 players: +2{symbol.blackDie} , 5-6 players: +3{symbol.blackDie})"
                                                     }
                                                 ]
