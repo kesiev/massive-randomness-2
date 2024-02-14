@@ -8,41 +8,6 @@ QuestRenderer=(function(){
             igrave:"i'"
         };
 
-    function wrap(flags,key,text) {
-        if (flags.debugRender)
-            return "<span style='color:#f00; border:1px solid #f00;display:inline-block' title=\""+key+"\">"+text+"</span>";
-        else
-            return text;
-    }
-
-    function getLabel(flags,resources,result,language,label,index) {
-        let
-            out;
-        if (label[language])
-            out=label[language];
-        else if (label.EN)
-            out=label.EN;
-        if (result) {
-            if (index !== undefined)
-                out = out[index];
-            out = String(out);
-            return out.replace(/\{([^}]+)\}/g,(m,m1)=>{
-                let
-                    text = m1.split("@"),
-                    parts = text[0].split(":");
-                if (result.labels[parts[0]] !== undefined) {
-                    let
-                        subOut = getLabel(flags,resources,result,language,result.labels[parts[0]], text[1]);
-                    if (parts[1] == "capital")
-                        return wrap(flags,m1,subOut[0].toUpperCase()+subOut.substr(1,subOut.length));
-                    else
-                        return wrap(flags,m1,subOut);
-                } else
-                    return wrap(flags,m1,"{???}");
-            });
-        } else return wrap(flags,"?","[???]");
-    }
-
     function createNode(into,type,className) {
         let
             node = document.createElement(type);
@@ -97,16 +62,16 @@ QuestRenderer=(function(){
 
                 // Prepare quest outline
 
-                authorNode.innerHTML = getLabel(flags,resources,result,language,quest.by);
-                titleNode.innerHTML = simplifyEntities(getLabel(flags,resources,result,language,quest.title));
-                storyNode.innerHTML = getLabel(flags,resources,result,language,quest.story);
+                authorNode.innerHTML = Labels.getLabel(flags,resources,result,language,quest.by);
+                titleNode.innerHTML = simplifyEntities(Labels.getLabel(flags,resources,result,language,quest.title));
+                storyNode.innerHTML = Labels.getLabel(flags,resources,result,language,quest.story);
                 
-                objectivesTitleNode.innerHTML = getLabel(flags,resources,result,language,resources.globalLabels.objectives);
-                specialRulesTitleNode.innerHTML = getLabel(flags,resources,result,language,resources.globalLabels.specialRules);
+                objectivesTitleNode.innerHTML = Labels.getLabel(flags,resources,result,language,resources.globalLabels.objectives);
+                specialRulesTitleNode.innerHTML = Labels.getLabel(flags,resources,result,language,resources.globalLabels.specialRules);
 
                 // Prepare the tiles list
 
-                tilesList = getLabel(flags,resources,result,language,resources.globalLabels.requiredTiles)+": ";
+                tilesList = Labels.getLabel(flags,resources,result,language,resources.globalLabels.requiredTiles)+": ";
                 result.map.index.forEach(placedTile=>{
                     let
                         tile = placedTile.tile;
@@ -118,7 +83,7 @@ QuestRenderer=(function(){
                 });
 
                 for (let k in tilesGroups)
-                    tilesList+="<i>("+getLabel(flags,resources,result,language,resources.globalLabels[k])+")</i> <b>"+tilesGroups[k].sort().join(", ")+"</b>, ";
+                    tilesList+="<i>("+Labels.getLabel(flags,resources,result,language,resources.globalLabels[k])+")</i> <b>"+tilesGroups[k].sort().join(", ")+"</b>, ";
                 
                 tilesNode.innerHTML = tilesList.substr(0,tilesList.length-2)+".";
 
@@ -134,14 +99,14 @@ QuestRenderer=(function(){
                             tokenNode.innerHTML="<div class=\""+resources.tokensMetadata[k].className.map+"\"></div>";
                         
                         tokenName = createNode(tokenNode,"span","tokenDescription"),
-                        tokenLabel= getLabel(flags,resources,result,language,resources.tokensMetadata[k].label,0);
+                        tokenLabel= Labels.getLabel(flags,resources,result,language,resources.tokensMetadata[k].label,0);
                         switch (resources.tokensMetadata[k].type) {
                             case "variableAmount":{
                                 tokenLabel+="*";
                                 break;
                             }
                             case "upTo":{
-                                tokenLabel+=" ("+getLabel(flags,resources,result,language,resources.globalLabels.upTo)+" x"+result.map.usedTokens[k]+")";
+                                tokenLabel+=" ("+Labels.getLabel(flags,resources,result,language,resources.globalLabels.upTo)+" x"+result.map.usedTokens[k]+")";
                                 break;
                             }
                             default:{
@@ -154,7 +119,7 @@ QuestRenderer=(function(){
                 // Prepare the objective/special rules list
 
                 if (quest.objectivesHeader)
-                    objectivesNode.innerHTML = getLabel(flags,resources,result,language,quest.objectivesHeader);
+                    objectivesNode.innerHTML = Labels.getLabel(flags,resources,result,language,quest.objectivesHeader);
 
                 objectivesList = createNode(objectivesNode,"ol");
                 specialRulesList = createNode(specialRulesNode,"ul");
@@ -170,13 +135,13 @@ QuestRenderer=(function(){
                     if (rule.type == "objective") {
                         let
                             objectiveNode = createNode(objectivesList,"li");
-                        objectiveNode.innerHTML = "<b>"+getLabel(flags,resources,result,language,rule.name)+"</b>: "+getLabel(flags,resources,result,language,rule.summary);
+                        objectiveNode.innerHTML = "<b>"+Labels.getLabel(flags,resources,result,language,rule.name)+"</b>: "+Labels.getLabel(flags,resources,result,language,rule.summary);
                     }
 
                     if (rule.explanation) {
                         let
                             specialRuleNode = createNode(specialRulesList,"li");
-                        specialRuleNode.innerHTML = "<b>"+getLabel(flags,resources,result,language,rule.name)+"</b>: "+getLabel(flags,resources,result,language,rule.explanation);
+                        specialRuleNode.innerHTML = "<b>"+Labels.getLabel(flags,resources,result,language,rule.name)+"</b>: "+Labels.getLabel(flags,resources,result,language,rule.explanation);
                     }
 
                 });
@@ -190,8 +155,8 @@ QuestRenderer=(function(){
                         challengesNode = createNode(questHeadNode,"div","challenges"),
                         challengesList;
 
-                    challengesTitleNode.innerHTML =  getLabel(flags,resources,result,language,resources.globalLabels.challenges);
-                    challengesNode.innerHTML =  getLabel(flags,resources,result,language,resources.globalLabels.challengesExplanation);
+                    challengesTitleNode.innerHTML =  Labels.getLabel(flags,resources,result,language,resources.globalLabels.challenges);
+                    challengesNode.innerHTML =  Labels.getLabel(flags,resources,result,language,resources.globalLabels.challengesExplanation);
 
                     challengesList = createNode(challengesNode,"ul");
 
@@ -204,7 +169,7 @@ QuestRenderer=(function(){
                         for (let i=0;i<challenge.intensity;i++)
                             intensity+="<div class='intensity'></div>";
                         
-                        challengeRuleNode.innerHTML = intensity+"<b>"+getLabel(flags,resources,result,language,challenge.name)+"</b>: "+getLabel(flags,resources,result,language,challenge.explanation);
+                        challengeRuleNode.innerHTML = intensity+"<b>"+Labels.getLabel(flags,resources,result,language,challenge.name)+"</b>: "+Labels.getLabel(flags,resources,result,language,challenge.explanation);
                     
                     });
    
@@ -220,7 +185,7 @@ QuestRenderer=(function(){
                         lootRatioContentNode = createNode(lootRatioNode,"div","lootRatioContent");
                         
 
-                    lootRatioLabel.innerHTML="*"+getLabel(flags,resources,result,language,resources.globalLabels.lootRatio);
+                    lootRatioLabel.innerHTML="*"+Labels.getLabel(flags,resources,result,language,resources.globalLabels.lootRatio);
 
                     result.mapConfig.lootRatio.forEach(ratio=>{
                         let
