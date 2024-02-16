@@ -2465,7 +2465,7 @@ ModManager.modules.push(function(){
                             }
                         },{
                             attribute:"corridors",
-                            value:"flaming",
+                            value:"elemental",
                             config:{
                                 
                                 corridorsPillarsMinDistance:[ 5 ],
@@ -2486,8 +2486,8 @@ ModManager.modules.push(function(){
                                             ]
                                         },{
                                             elements:[
-                                                { at:1, tokens:[ { id:"fire" }]},
-                                                { at:0.8, tokens:[ { id:"fire" } ]}
+                                                { at:1, tokens:[ { id:"{label.hazard@0}" }]},
+                                                { at:0.8, tokens:[ { id:"{label.hazard@0}" } ]}
                                             ]
                                         }
                                     ]
@@ -2571,7 +2571,7 @@ ModManager.modules.push(function(){
                             value:"default",
                             config:{
                                 roomLimits:[
-                                    { tokensPerRoomLimit:{ mob:3, fire:1 }, tokensPerRoomCellLimit:{ mob:1, fire:1 } }
+                                    { tokensPerRoomLimit:{ mob:3, fire:1, frost:1 }, tokensPerRoomCellLimit:{ mob:1, fire:1, frost:1 } }
                                 ]
                             }
                         },
@@ -3663,7 +3663,7 @@ ModManager.modules.push(function(){
                             }
                         },{
                             attribute:"gameMode",
-                            value:"flamesLord",
+                            value:"elementalLord",
                             config:{
                                 roomsContent:[
                                     [
@@ -3674,7 +3674,7 @@ ModManager.modules.push(function(){
                                             intensity:{ risk:1.3, reward:1.3 },
                                             onPathAdd:[
                                                 [
-                                                    { at:0.25, tokens:[ { id:"fire" } ] }
+                                                    { at:0.25, tokens:[ { id:"{label.hazard@0}" } ] }
                                                 ]
                                             ],
                                             add:[
@@ -3691,11 +3691,11 @@ ModManager.modules.push(function(){
                                                         ]
                                                     },{
                                                         tokens:[
-                                                            { id:"fire" }
+                                                            { id:"{label.hazard@0}" }
                                                         ]
                                                     },{
                                                         tokens:[
-                                                            { id:"fire" }
+                                                            { id:"{label.hazard@0}" }
                                                         ]
                                                     }
                                                 ]
@@ -3712,7 +3712,7 @@ ModManager.modules.push(function(){
                                                         ]
                                                     },{
                                                         tokens:[
-                                                            { id:"fire" }
+                                                            { id:"{label.hazard@0}" }
                                                         ]
                                                     }
                                                 ]
@@ -3722,7 +3722,7 @@ ModManager.modules.push(function(){
                                             relevance:1,
                                             onPathAdd:[
                                                 [
-                                                    { at:0.5, tokens:[ { id:"fire" } ] }
+                                                    { at:0.5, tokens:[ { id:"{label.hazard@0}" } ] }
                                                 ]
                                             ],
                                             add:[
@@ -3734,7 +3734,7 @@ ModManager.modules.push(function(){
                                                         ]
                                                     },{
                                                         tokens:[
-                                                            { id:"fire" }
+                                                            { id:"{label.hazard@0}" }
                                                         ]
                                                     }
                                                 ]
@@ -3744,7 +3744,7 @@ ModManager.modules.push(function(){
                                             relevance:1,
                                             onPathAdd:[
                                                 [
-                                                    { at:0.3, tokens:[ { id:"fire" } ] }
+                                                    { at:0.3, tokens:[ { id:"{label.hazard@0}" } ] }
                                                 ]
                                             ],
                                             add:[
@@ -4149,6 +4149,75 @@ ModManager.modules.push(function(){
                                         },{
                                             at:1,
                                             relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"fountain" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        },{
+                            attribute:"gameMode",
+                            value:"targetsSmall",
+                            config:{
+                                roomsContent:[
+                                    [
+                                        {
+                                            at:1,
+                                            relevance:1,
+                                            size:1,
+                                            intensity:{ risk:1.3, reward:1.3 },
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0.2,
+                                            relevance:1,
+                                            doors:[ { id:"door" } ],
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0.8,
+                                            size:1,
+                                            relevance:1,
+                                            doors:[ { id:"door" } ],
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" },
+                                                            { id:"spikeTrap" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0.6,
+                                            relevance:1,
+                                            doors:[ { id:"door" } ],
                                             add:[
                                                 [
                                                     {

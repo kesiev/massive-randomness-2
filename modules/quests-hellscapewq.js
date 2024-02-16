@@ -477,34 +477,89 @@ ModManager.modules.push(function(){
                                     labels:[
                                         [
                                             {
+                                                hazard:[
+                                                    {
+                                                        IT:[
+                                                            "fire", "{symbol.fireToken}"," Gli eroi tirano {symbol.orangeDie} invece di {symbol.yellowDie} durante la risoluzione del {symbol.fireToken}.",
+                                                            "il Signore Ardente", "La stanza del Signore Ardente", "L'influsso del Signore Ardente",
+                                                            "il Dominatore del Fuoco", "La stanza del Dominatore del Fuoco", "Il Dominio del Fuoco",
+                                                            "il Demone Fiammeggiante", "La stanza del Demone Fiammeggiante", "L'influsso Fiammeggiante",
+                                                            "dalle fiamme", "in fiamme", "le fiamme si allarghino su tutta la capitale", "il fuoco",
+                                                            "divorando ogni cosa", "al caldo", "a respirare",
+                                                            "di quelle fiamme", "di Fuoco",
+                                                            "Braceri", "Bracere", "il Fuoco",
+                                                            "va a Fuoco",
+                                                            "Estinguere", "Estinguere"
+                                                        ],
+                                                        EN:[
+                                                            "fire", "{symbol.fireToken}", " Heroes roll {symbol.orangeDie} instead of {symbol.yellowDie} when resolving {symbol.fireToken}.",
+                                                            "the Fiery Lord", "the Fiery Lord's Chamber", "The Fiery Lord's Presence",
+                                                            "the Firebender", "The Firebender's Room", "Firebending",
+                                                            "the Flaming Demon", "The Flaming Demon's Room", "The Flaming Influence",
+                                                            "by flames", "on fire", "the flames from spreading throughout the capital", "the fire",
+                                                            "devouring everything", "to the heat", "breathe",
+                                                            "of those scorching flames", "Fire",
+                                                            "Braziers", "Brazier", "the Fire",
+                                                            "is on Fire",
+                                                            "extinguish", "Quench",
+                                                            "a"
+                                                        ]
+                                                    },{
+                                                        IT:[
+                                                            "frost", "{symbol.frostToken}","",
+                                                            "il Signore del Gelo", "La stanza del Signore del Gelo", "L'influsso del Signore del Gelo",
+                                                            "il Dominatore Gelido", "La stanza del Dominatore Gelido", "Il Dominio del Gelo",
+                                                            "il Demone Gelido", "La stanza del Demone Gelido", "L'influsso Gelido",
+                                                            "dal gelo", "nella morsa del ghiaccio", "il ghiaccio invada la capitale", "il ghiaccio",
+                                                            "immobilizzando ogni cosa", "al gelo", "a muoversi",
+                                                            "di quel gelo", "di Ghiaccio",
+                                                            "Cumuli di Ghiaccio", "Cumulo di Ghiaccio", "il Ghiaccio",
+                                                            "&egrave; Ghiacciato",
+                                                            "frantumare", "Frantumare"
+                                                        ],
+                                                        EN:[
+                                                            "frost", "{symbol.frostToken}","",
+                                                            "the Frost Lord", "the Frost Lord's Chamber", "The Frost Lord's Presence",
+                                                            "the Frostbender", "The Frostbender's room", "Frostbending",
+                                                            "the Frost Demon", "The Frost Demon's Room", "The Frosting Influence",
+                                                            "by frost", "in the grip of the ice", "the ice invades the capital", "the ice",
+                                                            "immobilizing everything", "to the freeze", "to move",
+                                                            "of that frost", "Ice",
+                                                            "Heaps of Ice", "Heap of Ice", "the Ice",
+                                                            "is Frozen",
+                                                            "shatter", "Shatter",
+                                                            "an"
+                                                        ]
+                                                    }
+                                                ],
                                                 place:[
                                                     {
-                                                        IT:[ "Gli angoli pi&ugrave; oscuri dell'Inferno sono consumati dalle fiamme.", "Per continuare la loro incursione all'Inferno," ],
-                                                        EN:[ "The darkest corners of Hell are consumed by flames.", "To continue their incursion on Hell," ]
+                                                        IT:[ "Gli angoli pi&ugrave; oscuri dell'Aldil&agrave; sono consumati {label.hazard@12}.", "Per continuare la loro incursione nell'Aldil&agrave;," ],
+                                                        EN:[ "The darkest corners of Afterlife are consumed {label.hazard@12}.", "To continue their incursion on Afterlife," ]
                                                     },{
-                                                        IT:[ "Il tempio al centro della citt&agrave; &egrave; in fiamme.", "Per evitare che le fiamme si allarghino su tutta la capitale," ],
-                                                        EN:[ "The temple in the center of the city is on fire.", "To prevent the flames from spreading throughout the capital," ]
+                                                        IT:[ "Il tempio al centro della citt&agrave; &egrave; {label.hazard@13}.", "Per evitare che {label.hazard@14}," ],
+                                                        EN:[ "The temple in the center of the city is {label.hazard@13}.", "To prevent {label.hazard@14}," ]
                                                     },{
-                                                        IT:[ "I rintocchi di una campana echeggiano per i corridoi. In un attimo, il dungeon &egrave; invaso dalle fiamme.", "Prima che gli Eroi possano fuggire," ],
-                                                        EN:[ "The tolling of a bell echoes through the corridors. In an instant, the dungeon is engulfed in flames.", "Before the Heroes can escape," ]
+                                                        IT:[ "I rintocchi di una campana echeggiano per i corridoi. In un attimo, il dungeon &egrave; invaso {label.hazard@12}.", "Prima che gli Eroi possano fuggire," ],
+                                                        EN:[ "The tolling of a bell echoes through the corridors. In an instant, the dungeon is engulfed {label.hazard@12}.", "Before the Heroes can escape," ]
                                                     }
                                                 ],
                                                 flames:[
                                                     {
-                                                        IT:[ "Il fuoco corre lungo i corridoi e le pareti." ],
-                                                        EN:[ "The fire runs along the corridors and walls." ]
+                                                        IT:[ "{label.hazard:capital@15} corre lungo i corridoi e le pareti." ],
+                                                        EN:[ "{label.hazard:capital@15} runs along the corridors and walls." ]
                                                     },{
-                                                        IT:[ "Il fuoco sembra serpeggiare ovunque, divorando ogni cosa." ],
-                                                        EN:[ "The fire seems to snake everywhere, devouring everything." ]
+                                                        IT:[ "{label.hazard:capital@15} sembra serpeggiare ovunque, {label.hazard@16}." ],
+                                                        EN:[ "{label.hazard:capital@15} seems to snake everywhere, {label.hazard@16}." ]
                                                     },{
-                                                        IT:[ "Il fuoco sta inghiottendo ogni cosa senza piet&agrave;." ],
-                                                        EN:[ "The fire is consuming everything without mercy." ]
+                                                        IT:[ "{label.hazard:capital@15} sta inghiottendo ogni cosa senza piet&agrave;." ],
+                                                        EN:[ "{label.hazard:capital@15} is consuming everything with no mercy." ]
                                                     }
                                                 ],
                                                 enemies:[
                                                     {
-                                                        IT:[ "Le creature dell'Oscurit&agrave; sono abituate al caldo," ],
-                                                        EN:[ "Creatures from Darkness are used to the heat," ]
+                                                        IT:[ "Le creature dell'Oscurit&agrave; sono abituate {label.hazard@17}," ],
+                                                        EN:[ "Creatures from Darkness are used {label.hazard@17}," ]
                                                     },{
                                                         IT:[ "Un incantesimo di protezione difende i mostri," ],
                                                         EN:[ "A protection spell defends the monsters," ]
@@ -518,8 +573,8 @@ ModManager.modules.push(function(){
                                                         IT:[ "ma gli Eroi resistono a fatica." ],
                                                         EN:[ "but the Heroes barely resist." ]
                                                     },{
-                                                        IT:[ "ma gli Eroi riescono a malapena a respirare." ],
-                                                        EN:[ "but the Heroes can barely breathe." ]
+                                                        IT:[ "ma gli Eroi riescono a malapena {label.hazard@18}." ],
+                                                        EN:[ "but the Heroes can barely {label.hazard@18}." ]
                                                     },{
                                                         IT:[ "ma gli Eroi sono invece in gran difficolt&agrave;." ],
                                                         EN:[ "but the Heroes are instead in great difficulty." ]
@@ -527,8 +582,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 objective:[
                                                     {
-                                                        IT:[ "gli Eroi devono sconfiggere la fonte di quelle fiamme" ],
-                                                        EN:[ "the Heroes must defeat the source of those scorching flames" ]
+                                                        IT:[ "gli Eroi devono sconfiggere la fonte {label.hazard@19}" ],
+                                                        EN:[ "the Heroes must defeat the source {label.hazard@19}" ]
                                                     },{
                                                         IT:[ "gli Eroi devono eliminare il responsabile" ],
                                                         EN:[ "the Heroes must eliminate the person responsible" ]
@@ -539,26 +594,26 @@ ModManager.modules.push(function(){
                                                 ],
                                                 enemy:[
                                                     {
-                                                        IT:[ "il Signore Ardente", "La stanza del Signore Ardente", "L'influsso del Signore Ardente" ],
-                                                        EN:[ "the Fiery Lord", "the Fiery Lord's Chamber", "The Fiery Lord's Presence" ]
+                                                        IT:[ "{label.hazard@3}", "{label.hazard@4}", "{label.hazard@5}" ],
+                                                        EN:[ "{label.hazard@3}", "{label.hazard@4}", "{label.hazard@5}" ]
                                                     },{
-                                                        IT:[ "il Dominatore del Fuoco", "La stanza del Dominatore del Fuoco", "Il Dominio del Fuoco" ],
-                                                        EN:[ "the Firebender", "The Firebender's Room", "Firebending" ]
+                                                        IT:[ "{label.hazard@6}", "{label.hazard@7}", "{label.hazard@8}" ],
+                                                        EN:[ "{label.hazard@6}", "{label.hazard@7}", "{label.hazard@8}" ]
                                                     },{
-                                                        IT:[ "il Demone Fiammeggiante", "La stanza del Demone Fiammeggiante", "L'influsso Fiammeggiante" ],
-                                                        EN:[ "the Flaming Demon", "The Flaming Demon's Room", "The Flaming Influence" ]
+                                                        IT:[ "{label.hazard@9}", "{label.hazard@10}", "{label.hazard@11}" ],
+                                                        EN:[ "{label.hazard@9}", "{label.hazard@10}", "{label.hazard@11}" ]
                                                     }
                                                 ],
                                                 target:[
                                                     {
-                                                        IT:[ "Braceri", "Bracere", "i", "il", "tutti i", "un", "quel" ],
-                                                        EN:[ "Braziers", "Brazier", "the", "the", "all", "a", "that" ]
+                                                        IT:[ "{label.hazard@21}", "{label.hazard@22}", "i", "il", "tutti i", "un", "quel" ],
+                                                        EN:[ "{label.hazard@21}", "{label.hazard@22}", "the", "the", "all", "a", "that" ]
                                                     },{
-                                                        IT:[ "Fontane di Fuoco", "Fontana di Fuoco", "le", "la", "tutte le", "una", "quella" ],
-                                                        EN:[ "Fire Fountains", "Fire Fountain", "the", "the", "all", "a", "that" ]
+                                                        IT:[ "Fontane {label.hazard@20}", "Fontana {label.hazard@20}", "le", "la", "tutte le", "una", "quella" ],
+                                                        EN:[ "{label.hazard@20} Fountains", "{label.hazard@20} Fountain", "the", "the", "all", "{label.hazard@27}", "that" ]
                                                     },{
-                                                        IT:[ "Pozzi di Fuoco", "Pozzo di fuoco", "i", "il", "tutti i", "un", "quell" ],
-                                                        EN:[ "Fire Pits", "Fire Pit", "the", "the", "all", "a", "that" ]
+                                                        IT:[ "Pozzi {label.hazard@20}", "Pozzo {label.hazard@20}", "i", "il", "tutti i", "un", "quel" ],
+                                                        EN:[ "{label.hazard@20} Pits", "{label.hazard@20} Pit", "the", "the", "all", "{label.hazard@27}", "that" ]
                                                     }
                                                 ]
                                             }
@@ -589,14 +644,14 @@ ModManager.modules.push(function(){
                                                 type:"objective",
                                                 name:[
                                                     {
-                                                        IT:"Spegnere {label.target@2} {label.target@0}",
-                                                        EN:"Extinguish {label.target@2} {label.target@0}"
+                                                        IT:"{label.hazard:capital@25} {label.target@2} {label.target@0}",
+                                                        EN:"{label.hazard:capital@25} {label.target@2} {label.target@0}"
                                                     }
                                                 ],
                                                 summary:[
                                                     {
-                                                        IT:"Spegni {label.target@4} {label.target@0} nel Dungeon",
-                                                        EN:"Quench {label.target@4} {label.target@0} in the Dungeon"
+                                                        IT:"{label.hazard@26} {label.target@4} {label.target@0} nel Dungeon",
+                                                        EN:"{label.hazard@26} {label.target@4} {label.target@0} in the Dungeon"
                                                     }
                                                 ]
                                             }
@@ -657,8 +712,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"I nemici non subiscono {symbol.fireToken}. Se un nemico avrebbe dovuto prendere un segnalino {symbol.fireToken}, scartalo. Gli eroi tirano {symbol.orangeDie} invece di {symbol.yellowDie} durante la risoluzione del {symbol.fireToken}.",
-                                                        EN:"Enemies don't take {symbol.fireToken}. If an Enemy would take a {symbol.fireToken} token, discard that token instead. Heroes roll {symbol.orangeDie} instead of {symbol.yellowDie} when resolving {symbol.fireToken}."
+                                                        IT:"I nemici non subiscono {label.hazard@1}. Se un nemico avrebbe dovuto prendere un segnalino {label.hazard@1}, scartalo.{label.hazard@2}",
+                                                        EN:"Enemies don't take {label.hazard@1}. If an Enemy would take a {label.hazard@1} token, discard that token instead.{label.hazard@2}"
                                                     }
                                                 ]
                                             }
@@ -667,14 +722,14 @@ ModManager.modules.push(function(){
                                                 type:"rule",
                                                 name:[
                                                     {
-                                                        IT:"Estinguere il Fuoco",
-                                                        EN:"Extinguish the Fire"
+                                                        IT:"{label.hazard:capital@25} {label.hazard@23}",
+                                                        EN:"{label.hazard:capital@25} {label.hazard@23}"
                                                     }
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"I segnalini Obiettivo rappresentano {label.target@2} {label.target@0}. Qualsiasi Eroe in una Zona con un segnalino Obiettivo pu&ograve; spendere un'azione per spegnere {label.target@6} {label.target@1}, rimuovendo il segnalino dal Dungeon.",
-                                                        EN:"Objective tokens represent {label.target@2} {label.target@0}. Any Hero in a Zone with an Objective token can spend one action to put out {label.target@6} {label.target@1}, removing the token from the Dungeon."
+                                                        IT:"I segnalini Obiettivo rappresentano {label.target@2} {label.target@0}. Qualsiasi Eroe in una Zona con un segnalino Obiettivo pu&ograve; spendere un'azione per {label.hazard@25} {label.target@6} {label.target@1}, rimuovendo il segnalino dal Dungeon.",
+                                                        EN:"Objective tokens represent {label.target@2} {label.target@0}. Any Hero in a Zone with an Objective token can spend one action to {label.hazard@25} {label.target@6} {label.target@1}, removing the token from the Dungeon."
                                                     }
                                                 ]
                                             }
@@ -683,14 +738,14 @@ ModManager.modules.push(function(){
                                                 type:"rule",
                                                 name:[
                                                     {
-                                                        IT:"Questo Dungeon va a Fuoco",
-                                                        EN:"This Dungeon is on Fire"
+                                                        IT:"Questo Dungeon {label.hazard@24}",
+                                                        EN:"This Dungeon {label.hazard@24}"
                                                     }
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Ogni volta che un Eroe entra in una Zona con uno o pi&ugrave; segnalini {symbol.fireToken}, rimuovete quei segnalini. Poi quell'Eroe prende un pari numero di segnalini {symbol.fireToken}. Se un eroe termina il suo turno nel raggio di {symbol.rangeMagic} da {label.target@5} {label.target@1}, prende 1 {symbol.fireToken}.",
-                                                        EN:"Whenever a Hero enters a Zone with one or more {symbol.fireToken} token, remove that tokens. Then that Hero takes the same amount of {symbol.fireToken} tokens. If a Hero ends their turn in {symbol.rangeMagic} range from {label.target@5} {label.target@1}, they take 1 {symbol.fireToken}."
+                                                        IT:"Ogni volta che un Eroe entra in una Zona con uno o pi&ugrave; segnalini {label.hazard@1}, rimuovete quei segnalini. Poi quell'Eroe prende un pari numero di segnalini {label.hazard@1}. Se un eroe termina il suo turno nel raggio di {symbol.rangeMagic} da {label.target@5} {label.target@1}, prende 1 {label.hazard@1}.",
+                                                        EN:"Whenever a Hero enters a Zone with one or more {label.hazard@1} token, remove that tokens. Then that Hero takes the same amount of {label.hazard@1} tokens. If a Hero ends their turn in {symbol.rangeMagic} range from {label.target@5} {label.target@1}, they take 1 {label.hazard@1}."
                                                     }
                                                 ]
                                             }
@@ -699,14 +754,14 @@ ModManager.modules.push(function(){
                                     map:[
                                         {
                                             structure:[ "roamingToRoom-small" ],
-                                            gameMode: [ "flamesLord" ],
+                                            gameMode: [ "elementalLord" ],
                                             difficulty:[ "default" ],
                                             roomLimits:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
                                             bridges:[ "default" ],
                                             lootRatio: [ "default" ],
-                                            corridors: [ "flaming" ],
+                                            corridors: [ "elemental" ],
                                         }
                                     ]
                                 }
@@ -1691,6 +1746,202 @@ ModManager.modules.push(function(){
                                         {
                                             structure:[ "roamingToRoom" ],
                                             gameMode: [ "collectAndForge" ],
+                                            difficulty:[ "default" ],
+                                            roomLimits:[ "default" ],
+                                            skin:[ "default" ],
+                                            size: [ "default" ],
+                                            bridges:[ "default" ],
+                                            lootRatio: [ "default" ],
+                                            corridors: [ "default" ],
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            type:"corruption",
+                            by:{
+                                IT:"Ispirato alla Web Quest \"Hello, Darkness!\"",
+                                EN:"Inspired by the Web Quest \"Hello, Darkness!\""
+                            },
+                            suggestedTilesCount:4,
+                            versions:[
+                                {
+                                    labels:[
+                                        [
+                                            {
+                                                from:[
+                                                    {
+                                                        IT:[ "Gli Eroi hanno trovato un portale in grado di trasportarli", "i portali", "un portale come questo" ],
+                                                        EN:[ "The Heroes have found a portal that leads", "portals", "such portals" ]
+                                                    },{
+                                                        IT:[ "Gli Eroi stringevano in mano la Pergamena Arcana che li avrebbe portati", "le Pergamene Arcane", "una pergamena come questa" ],
+                                                        EN:[ "The Heroes held in their hands the Arcane Scroll that would bring them", "Arcane Scrolls", "such scrolls" ]
+                                                    },{
+                                                        IT:[ "La Mappa Oscura indicava il passaggio li avrebbe portati", "le Mappe Oscure", "una mappa come questa" ],
+                                                        EN:[ "The Dark Map indicated the passage would take them", "Dark Maps", "such maps" ]
+                                                    }
+                                                ],
+                                                to:[
+                                                    {
+                                                        IT:[ "all'interno del castello, direttamente dalle profondit&agrave; della foresta." ],
+                                                        EN:[ "straight to the castle directly from the depths of the woods." ]
+                                                    },{
+                                                        IT:[ "nelle segrete della torre del mago." ],
+                                                        EN:[ "to the dungeon of the wizard's tower." ]
+                                                    },{
+                                                        IT:[ "alla loro ultima battaglia." ],
+                                                        EN:[ "to their last battle." ]
+                                                    }
+                                                ],
+                                                forWho:[
+                                                    {
+                                                        IT:[ "Ma gli uomini normali non potrebbero usare {label.from@2}," ],
+                                                        EN:[ "An ordinary man could not use {label.from@2}," ]
+                                                    },{
+                                                        IT:[ "Ma solo poche creature sono in grado di domare {label.from@2}," ],
+                                                        EN:[ "But only a few creatures can tame {label.from@2}," ]
+                                                    },{
+                                                        IT:[ "Ma nessun essere umano riuscirebbe a resistere a {label.from@2}," ],
+                                                        EN:[ "But no human being could resist {label.from@2}," ]
+                                                    }
+                                                ],
+                                                if:[
+                                                    {
+                                                        IT:[ "perch&eacute; riuscirebbe a corrompere la sua anima fino al midollo."],
+                                                        EN:[ "for it would corrupt their soul to the core." ]
+                                                    },{
+                                                        IT:[ "perch&eacute; ne risucchierebbe la vita in un attimo."],
+                                                        EN:[ "for it would drain the life out of them in an instant." ]
+                                                    },{
+                                                        IT:[ "perch&eacute; ne trasformerebbe il corpo in pietra."],
+                                                        EN:[ "for it would turn his body into stone." ]
+                                                    }
+                                                ],
+                                                luck1:[
+                                                    {
+                                                        IT:[ "Fortunatamente, {label.specialOne@1} fa parte del gruppo," ],
+                                                        EN:[ "Luckily, the party has {label.specialOne@1} amongst them," ]
+                                                    },{
+                                                        IT:[ "Ma {label.specialOne@1} fa parte del gruppo," ],
+                                                        EN:[ "But {label.specialOne@1} is part of the party," ]
+                                                    },{
+                                                        IT:[ "Alla spedizione partecipa anche {label.specialOne@1}," ],
+                                                        EN:[ "{label.specialOne:capital@1} also participates in the expedition," ]
+                                                    }
+                                                ],
+                                                luck2:[
+                                                    {
+                                                        IT:[ "e {label.specialOne@0} sono in grado di manipolare e controllare {label.from@1}." ],
+                                                        EN:[ "and {label.specialOne@0} can manipulate {label.from@1} to do their bidding." ]
+                                                    },{
+                                                        IT:[ "e {label.specialOne@0} sanno molto bene come controllare {label.from@1}." ],
+                                                        EN:[ "and {label.specialOne@0} know very well how to control {label.from@1}." ]
+                                                    },{
+                                                        IT:[ "e {label.specialOne@0} studiano {label.from@1} da secoli." ],
+                                                        EN:[ "and {label.specialOne@0} have been studying {label.from@1} for centuries." ]
+                                                    }
+                                                ],
+                                                specialOne:[
+                                                    {
+                                                        IT:[ "i Mezzi Demoni", "un Mezzo Demone", "l'Eroe Mezzo Demone", "Assorbire l'Oscurit&agrave;", "Portare a 7 il Potere Oscuro", "Potere Oscuro", "il \"Mezzo Demone\"", "dall'oscurit&agrave;", "il suo Potere Oscuro", "le fonti di Energia Oscura", "", "distruggerlo", "Assorbire l'Oscurit&agrave;", "Cumuli di Oscurit&agrave;", "il suo Potere Oscuro arriva a 7", "rappresentate" ],
+                                                        EN:[ "Half-Demons", "a Half-Demon", "the Half-Demon Hero", "Absorb Darkness", "Reach 7 Darkness Power", "Darkness Power", "the \"Half-Demon\"", "from the Darkness", "their Darkness Power", "sources of Dark Energy", "", "destroy it", "Absorbing Darkness", "Beacons of Darkness", "Darkness Power reaches 7", "represented" ]
+                                                    },{
+                                                        IT:[ "i Figli del Bosco", "un Figlio del Bosco", "l'Eroe Figlio del Bosco", "Assorbire lo Spirito", "Portare a 7 lo Spirito Arboreo", "Spirito Arboreo", "il \"Figlio del Bosco\"", "dalle ombre", "il suo Spirito Arboreo", "le radici dello Spirito Arboreo", "", "raccoglierla", "Assorbire lo Spirito", "Radici dello Spirito", "il suo Spirito Arboreo arriva a 7", "rappresentate" ],
+                                                        EN:[ "the Children of the Woods", "a Child of the Woods", "the Child of the Woods Hero", "Absorb the Spirit", "Reach 7 Arboreal Spirit", "Arboreal Spirit", "the \"Child of the Woods \"", "from the shadows", "his Arboreal Spirit", "the roots of the Arboreal Spirit", "", "harvest it", "Absorb the Spirit", "Roots of the Spirit", "his Arboreal Spirit reaches 7", "represented" ]
+                                                    },{
+                                                        IT:[ "gli Adepti del Cielo", "un Adepto del Cielo", "l'Eroe Adepto del Cielo", "Assorbire l'Essenza", "Portare a 7 l'Essenza Notturna", "Essenza Notturna", "l'\"Adepto del Cielo\"", "della notte", "la sua Essenza Notturna", "i globi di Essenza Notturna", "", "frantumarlo", "Assorbire l'Essenza Notturna", "Globi di Essenza Notturna", "la sua Essenza Notturna arriva a 7", "rappresentati" ],
+                                                        EN:[ "the Sky Adepts", "a Sky Adept", "the Sky Adept Hero", "Absorb the Essence", "Reach 7 Night Essence", "Night Essence", "the \"Sky Adept\"", "from the night", "his Night Essence", "the orbs of Night Essence", "", "shatter it", "Absorb the Night Essence", "Orbs of Night Essence", "Night Essence reaches 7", "represented" ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    title:[
+                                        {
+                                            EN:"{label.from:capital@1}"
+                                        },{
+                                            EN:"{label.specialOne:capital@0}"
+                                        },{
+                                            EN:"{label.specialOne:capital@5}"
+                                        }
+                                    ],
+                                    story:[
+                                        {
+                                            EN:"{label.from@0} {label.to@0} {label.forWho@0} {label.if@0} {label.luck1@0} {label.luck2@0}"
+                                        }
+                                    ],
+                                    challenges:[
+                                        { intensity:1, tag:"default" },
+                                        { intensity:2, tag:"default" },
+                                        { intensity:3, tag:"default" },
+                                    ],
+                                    rules:[
+                                        [
+                                            {
+                                                type:"objective",
+                                                name:[
+                                                    {
+                                                        EN:"{label.specialOne@3}"
+                                                    }
+                                                ],
+                                                summary:[
+                                                    {
+                                                        EN:"{label.specialOne@4}"
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        EN:"{label.specialOne@5}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Scegli un Eroe che sia {label.specialOne@6}. Sar&agrave; in grado di assorbire l'energia {label.specialOne@7}. Ogni volta che un Eroe elimina un Generale o un Mostro Errante che si trova in una Zona di Ombra, {label.specialOne@2} subisce 1 ferita e fa avanzare di 1 {label.specialOne@8} (posiziona 1 segnalino {symbol.corruptionToken} sulla sua carta Eroe).",
+                                                        EN:"Choose a Hero to be {label.specialOne@6}. They can absorb the energy {label.specialOne@7}. Every time any Hero kills a Leader or a Roaming Monster that is in a Shadow Zone, {label.specialOne@2} takes 1 Wound and advances {label.specialOne@8} by 1 (place 1{symbol.corruptionToken} token on their Hero Card)."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        EN:"{label.specialOne@13}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"{label.specialOne:capital@9} sono {label.specialOne@15} dai gettoni Obiettivo. Quando si trova in una Zona con un segnalino Obiettivo, {label.specialOne@2} può spendere 1 azione per {label.specialOne@11}. Subisce 1 Ferita e aumenta {label.specialOne@8} di 1 (posiziona 1 segnalino {symbol.corruptionToken} sulla sua Carta Eroe).",
+                                                        EN:"{label.specialOne:capital@9} are {label.specialOne@15} by Objective tokens. When standing in a Zone with an Objective token, {label.specialOne@2} may spend 1 action to {label.specialOne@11}. They take 1 Wound and advance {label.specialOne@8} by 1 (place 1{symbol.corruptionToken} token on their Hero Card)."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        EN:"{label.specialOne@12}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Non appena {label.specialOne@2} ha 7 gettoni Corruzione ({label.specialOne@14}), la Missione termina con la vittoria.",
+                                                        EN:"As soon as {label.specialOne@2} has 7 Corruption tokens ({label.specialOne@14}), the Quest ends in victory."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    map:[
+                                        {
+                                            structure:[ "maze" ],
+                                            gameMode: [ "targetsSmall" ],
                                             difficulty:[ "default" ],
                                             roomLimits:[ "default" ],
                                             skin:[ "default" ],
