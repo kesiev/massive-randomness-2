@@ -677,7 +677,7 @@ ModManager.modules.push(function(){
                                                 name:[
                                                     {
                                                         IT:"Preparazione Speciale",
-                                                        EN:"Special Setup"
+                                                        EN:"Special Preparation"
                                                     }
                                                 ],
                                                 explanation:[

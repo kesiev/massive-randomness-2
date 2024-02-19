@@ -1124,29 +1124,13 @@ ModManager.modules.push(function(){
                                                 type:"rule",
                                                 name:[
                                                     {
-                                                        IT:"Preparazione Speciale",
-                                                        EN:"Special Setup"
-                                                    }
-                                                ],
-                                                explanation:[
-                                                    {
-                                                        IT:"Collocate 1 segnalino Corruzione {symbol.corruptionToken} in ognuna delle {tokensCount.corruption} Zone indicate.",
-                                                        EN:"Place 1 Corruption token {symbol.corruptionToken} in each of the indicated {tokensCount.corruption} Zones.",
-                                                    }
-                                                ]
-                                            }
-                                        ],[
-                                            {
-                                                type:"rule",
-                                                name:[
-                                                    {
                                                         EN:"{label.monsters:capital@0} {label.monsters:capital@1}"
                                                     }
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Ogni volta che una delle Camere con un segnalino Corruzione viene rivelata, in aggiunta ai consueti passi di rivelazione di una Camera, generate anche un Mostro Errante nella Zona indicata dal segnalino Corruzione in quella Camera. Questo Mostro Errante &egrave; 1 {label.monsters@2} {label.monsters@1}. Una volta che tutte e {tokensCount.corruption} {label.monsters@0} {label.monsters@1} sono state uccise, la Missione termina con una vittoria.",
-                                                        EN:"Whenever one of the Chambers with a Corruption token is revealed, in addition to the usual steps of revealing a Chamber, you also spawn a Roaming Monster in the Zone indicated by the Corruption token in that Chamber. This Roaming Monster is 1 {label.monsters@2} {label.monsters@1}. Once all {tokensCount.corruption} {label.monsters@1} have been killed, the Mission ends in victory."
+                                                        IT:"Ogni volta che una delle Camere con un segnalino Corruzione {symbol.corruptionToken} viene rivelata, in aggiunta ai consueti passi di rivelazione di una Camera, generate anche un Mostro Errante nella Zona indicata dal segnalino Corruzione in quella Camera. Questo Mostro Errante &egrave; 1 {label.monsters@2} {label.monsters@1}. Una volta che tutte e {tokensCount.corruption} {label.monsters@0} {label.monsters@1} sono state uccise, la Missione termina con una vittoria.",
+                                                        EN:"Whenever one of the Chambers with a Corruption token {symbol.corruptionToken} is revealed, in addition to the usual steps of revealing a Chamber, you also spawn a Roaming Monster in the Zone indicated by the Corruption token in that Chamber. This Roaming Monster is 1 {label.monsters@2} {label.monsters@1}. Once all {tokensCount.corruption} {label.monsters@1} have been killed, the Mission ends in victory."
                                                     }
                                                 ]
                                             }

@@ -77,7 +77,6 @@ Interface=(function() {
             QuestRenderer.render(lastResources,lastResult,language,bodyNode,{
                 debugRender:DEBUG_RENDER
             });
-            MapRenderer.render(lastResources,lastResult,lastResult.mapNode,lastResult.miniMapNode);
         }
     }
 

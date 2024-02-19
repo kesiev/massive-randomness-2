@@ -452,6 +452,9 @@ BODY {
     text-align: center;
     padding:10px 0;
     margin:20px;
+}
+
+.map.displayonly {
     overflow-x: auto;
 }
 
@@ -552,6 +555,22 @@ BODY {
     right:10px;
     top:10px;
     bottom: 10px;
+}
+
+.tile .hiddenblock {
+    z-index: 100;
+    cursor: pointer;
+    position: absolute;
+    left:0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(255,0,0,0.3);
+    font-size: 70px;
+    text-align: center;
+    color:#fff;
+    line-height:120px;
+    user-select: none;
 }
 
 .token {
@@ -804,6 +823,10 @@ BODY {
     border-top-style: dotted;
 }
 
+.printonly {
+    display: none;
+}
+
 /* Printing */
 
 @media print {
@@ -812,6 +835,14 @@ BODY {
         background-color: transparent;
         line-height: 18px;
         font-size:14px;
+    }
+
+    .printonly {
+        display: inherit;
+    }
+
+    .displayonly {
+        display: none;
     }
 
     .header, .footer {

@@ -27,6 +27,37 @@ QuestRenderer=(function(){
         });
     }
 
+    function renderTokenList(flags,resources,result,language,resources,tokensListNode,list) {
+
+        for (let k in list)
+            if (resources.tokensMetadata[k]) {
+                let
+                    tokenNode = createNode(tokensListNode,"div","tokenElement"),
+                    tokenName,
+                    tokenLabel = "";
+                if (resources.tokensMetadata[k].className)
+                    tokenNode.innerHTML="<div class=\""+resources.tokensMetadata[k].className.map+"\"></div>";
+                
+                tokenName = createNode(tokenNode,"span","tokenDescription"),
+                tokenLabel= Labels.getLabel(flags,resources,result,language,resources.tokensMetadata[k].label,0);
+                switch (resources.tokensMetadata[k].type) {
+                    case "variableAmount":{
+                        tokenLabel+="*";
+                        break;
+                    }
+                    case "upTo":{
+                        tokenLabel+=" ("+Labels.getLabel(flags,resources,result,language,resources.globalLabels.upTo)+" x"+list[k]+")";
+                        break;
+                    }
+                    default:{
+                        tokenLabel+=" x"+list[k];
+                    }
+                }
+                tokenName.innerHTML=tokenLabel;
+            }
+            
+    }
+
     return {
         render:(resources,result,language,into,flags)=>{
 
@@ -46,9 +77,12 @@ QuestRenderer=(function(){
                     objectivesNode = createNode(questHeadNode,"div","objectives"),
                     specialRulesTitleNode = createNode(questHeadNode,"div","specialRulesTitle"),
                     specialRulesNode = createNode(questHeadNode,"div","specialRules"),
-                    tokensListNode = createNode(questNode,"div","tokensList"),
+                    tokensListNode = createNode(questNode,"div","tokensList displayonly"),
+                    printTokensListNode = createNode(questNode,"div","tokensList printonly"),
                     miniMapNode = createNode(questNode,"div","miniMap"),
+                    printMiniMapNode = createNode(questNode,"div","miniMap"),
                     mapNode = createNode(questNode,"div","map"),
+                    printMapNode = createNode(questNode,"div","map"),
                     objectivesList,
                     tilesList,
                     tilesGroups = {};
@@ -89,32 +123,8 @@ QuestRenderer=(function(){
 
                 // Prepare the tokens list
 
-                for (let k in result.map.usedTokens)
-                    if (resources.tokensMetadata[k]) {
-                        let
-                            tokenNode = createNode(tokensListNode,"div","tokenElement"),
-                            tokenName,
-                            tokenLabel = "";
-                        if (resources.tokensMetadata[k].className)
-                            tokenNode.innerHTML="<div class=\""+resources.tokensMetadata[k].className.map+"\"></div>";
-                        
-                        tokenName = createNode(tokenNode,"span","tokenDescription"),
-                        tokenLabel= Labels.getLabel(flags,resources,result,language,resources.tokensMetadata[k].label,0);
-                        switch (resources.tokensMetadata[k].type) {
-                            case "variableAmount":{
-                                tokenLabel+="*";
-                                break;
-                            }
-                            case "upTo":{
-                                tokenLabel+=" ("+Labels.getLabel(flags,resources,result,language,resources.globalLabels.upTo)+" x"+result.map.usedTokens[k]+")";
-                                break;
-                            }
-                            default:{
-                                tokenLabel+=" x"+result.map.usedTokens[k];
-                            }
-                        }
-                        tokenName.innerHTML=tokenLabel;
-                    }
+                renderTokenList(flags,resources,result,language,resources,tokensListNode,result.map.visibleUsedTokens);
+                renderTokenList(flags,resources,result,language,resources,printTokensListNode,result.map.usedTokens);
 
                 // Prepare the objective/special rules list
 
@@ -131,17 +141,25 @@ QuestRenderer=(function(){
                     else return 0;
                 });
                 quest.rules.forEach(rule=>{
-                    
+
                     if (rule.type == "objective") {
                         let
                             objectiveNode = createNode(objectivesList,"li");
                         objectiveNode.innerHTML = "<b>"+Labels.getLabel(flags,resources,result,language,rule.name)+"</b>: "+Labels.getLabel(flags,resources,result,language,rule.summary);
+                        if (rule.classNames)
+                            rule.classNames.forEach(rule=>{
+                                objectiveNode.className+=" "+rule;
+                            });
                     }
 
                     if (rule.explanation) {
                         let
                             specialRuleNode = createNode(specialRulesList,"li");
                         specialRuleNode.innerHTML = "<b>"+Labels.getLabel(flags,resources,result,language,rule.name)+"</b>: "+Labels.getLabel(flags,resources,result,language,rule.explanation);
+                        if (rule.classNames)
+                            rule.classNames.forEach(rule=>{
+                                specialRuleNode.className+=" "+rule;
+                            });
                     }
 
                 });
@@ -202,8 +220,20 @@ QuestRenderer=(function(){
                 }
 
                 result.printTitleSuffix = titleNode.innerText;
-                result.mapNode = mapNode;
-                result.miniMapNode = miniMapNode;
+
+                // Print maps
+
+                MapRenderer.render(resources,result,mapNode,miniMapNode,true);
+                MapRenderer.render(resources,result,printMapNode,printMiniMapNode,false);
+
+                // Apply media classess
+
+                miniMapNode.className += " displayOnly";
+                mapNode.className += " displayOnly";
+
+                printMiniMapNode.className += " printOnly";
+                printMapNode.className += " printOnly";
+
                 
             }
     

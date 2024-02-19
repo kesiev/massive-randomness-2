@@ -52,6 +52,7 @@ QuestGenerator=(function() {
                 mapModel;
 
             // Select a random quest and map model
+
             if (flags.quest)
                 questModel = flags.quest;
             else if (flags.debugQuest)
@@ -138,6 +139,22 @@ QuestGenerator=(function() {
             for (let k in mapModel)
                 mergeMapConfig(resources,k,pickRandomElementValue(mapModel[k]),mapConfig);
         
+            // Apply the game mode (if any)
+            if (resources.gameMode) {
+
+                if (resources.gameMode.specialRules)
+                    resources.gameMode.specialRules.forEach(specialRule=>{
+                        resources.specialRules[specialRule].forEach(rule=>{
+                            quest.rules.push(rule);
+                        })
+                    });
+                
+                if (resources.gameMode.mapConfig)
+                    for (let k in resources.gameMode.mapConfig)
+                        mapConfig[k] = resources.gameMode.mapConfig[k];
+                    
+            }
+
             result.quest = quest;
             result.mapConfig = mapConfig;
             result.labels = labels;

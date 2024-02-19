@@ -444,22 +444,22 @@ ModManager.modules.push(function(){
                             config:{                            
                                 corridorsSpawnPoints:[
                                     [
-                                        { at:0.5, tokens:[ { id: "portal3" } ], allowBridge:true },
-                                        { at:0.055, tokens:[ { id: "portal5" } ], allowBridge:true },
-                                        { at:0.95, tokens:[ { id: "regularPortal" } ], allowBridge:true },
+                                        { at:0.5, tokens:[ { id: "portal3", isVisible:true } ], allowBridge:true },
+                                        { at:0.055, tokens:[ { id: "portal5", isVisible:true } ], allowBridge:true },
+                                        { at:0.95, tokens:[ { id: "regularPortal", isVisible:true } ], allowBridge:true },
                                     ]
                                 ],
                                 corridorsContent:[
                                     [
                                         {
                                             elements:[
-                                                { atCell:0, tokens:[ { id:"startPoint" }]}
+                                                { atCell:0, tokens:[ { id:"startPoint", isVisible:true }]}
                                             ]
                                         },
                                         {
                                             atTileId:"third",
                                             elements:[
-                                                { at:0, tokens:[ { id:"startMob" } ]}
+                                                { at:0, tokens:[ { id:"startMob", isVisible:true } ]}
                                             ]
                                         },{
                                             atTileId:"first",
@@ -1093,22 +1093,22 @@ ModManager.modules.push(function(){
                             config:{                            
                                 corridorsSpawnPoints:[
                                     [
-                                        { at:0.5, tokens:[ { id: "portal3" } ], allowBridge:true },
-                                        { at:0.055, tokens:[ { id: "portal5" } ], allowBridge:true },
-                                        { at:0.95, tokens:[ { id: "regularPortal" } ], allowBridge:true },
+                                        { at:0.5, tokens:[ { id: "portal3", isVisible:true } ], allowBridge:true },
+                                        { at:0.055, tokens:[ { id: "portal5", isVisible:true } ], allowBridge:true },
+                                        { at:0.95, tokens:[ { id: "regularPortal", isVisible:true } ], allowBridge:true },
                                     ]
                                 ],
                                 corridorsContent:[
                                     [
                                         {
                                             elements:[
-                                                { atCell:0, tokens:[ { id:"startPoint" }]}
+                                                { atCell:0, tokens:[ { id:"startPoint", isVisible:true }]}
                                             ]
                                         },
                                         {
                                             atTileId:"third",
                                             elements:[
-                                                { at:0, tokens:[ { id:"startMob" } ]}
+                                                { at:0, tokens:[ { id:"startMob", isVisible:true } ]}
                                             ]
                                         },{
                                             atTileId:"first",
@@ -1526,22 +1526,22 @@ ModManager.modules.push(function(){
                             config:{                            
                                 corridorsSpawnPoints:[
                                     [
-                                        { at:0.5, tokens:[ { id: "portal3" } ], allowBridge:false },
-                                        { at:0.055, tokens:[ { id: "portal5" } ], allowBridge:false },
-                                        { at:0.95, tokens:[ { id: "regularPortal" } ], allowBridge:false },
+                                        { at:0.5, tokens:[ { id: "portal3", isVisible:true } ], allowBridge:false },
+                                        { at:0.055, tokens:[ { id: "portal5", isVisible:true } ], allowBridge:false },
+                                        { at:0.95, tokens:[ { id: "regularPortal", isVisible:true } ], allowBridge:false },
                                     ]
                                 ],
                                 corridorsContent:[
                                     [
                                         {
                                             elements:[
-                                                { atCell:0, tokens:[ { id:"startPoint" }]}
+                                                { atCell:0, tokens:[ { id:"startPoint", isVisible:true }]}
                                             ]
                                         },
                                         {
                                             atTileId:"third",
                                             elements:[
-                                                { at:0, tokens:[ { id:"startMob" } ]}
+                                                { at:0, tokens:[ { id:"startMob", isVisible:true } ]}
                                             ]
                                         },{
                                             atTileId:"first",
@@ -2253,18 +2253,18 @@ ModManager.modules.push(function(){
                                 corridorsPillarsMinDistance:[ 5 ],
                                 corridorsSpawnPoints:[
                                     [
-                                        { at:0.5, tokens:[ { id: "portal3" } ], allowBridge:true },
-                                        { at:0.055, tokens:[ { id: "portal5" } ], allowBridge:true },
-                                        { at:0.95, tokens:[ { id: "regularPortal" } ], allowBridge:true },
+                                        { at:0.5, tokens:[ { id: "portal3", isVisible:true } ], allowBridge:true },
+                                        { at:0.055, tokens:[ { id: "portal5", isVisible:true } ], allowBridge:true },
+                                        { at:0.95, tokens:[ { id: "regularPortal", isVisible:true } ], allowBridge:true },
                                     ]
                                 ],
                                 corridorsContent:[
                                     [
                                         {
                                             elements:[
-                                                { atCell:0, tokens:[ { id:"startPoint" }]},
-                                                { atCell:6, tokens:[ { id:"startMob" } ]},
-                                                { atCell:11, tokens:[ { id:"startMob" } ]},
+                                                { atCell:0, tokens:[ { id:"startPoint", isVisible:true }]},
+                                                { atCell:6, tokens:[ { id:"startMob", isVisible:true } ]},
+                                                { atCell:11, tokens:[ { id:"startMob", isVisible:true } ]},
                                             ]
                                         }
                                     ]
@@ -2278,18 +2278,18 @@ ModManager.modules.push(function(){
                                 corridorsPillarsMinDistance:[ 5 ],
                                 corridorsSpawnPoints:[
                                     [
-                                        { at:0.5, tokens:[ { id: "portal3" } ], allowBridge:false },
-                                        { at:0.055, tokens:[ { id: "portal5" } ], allowBridge:false },
-                                        { at:0.95, tokens:[ { id: "regularPortal" } ], allowBridge:false },
+                                        { at:0.5, tokens:[ { id: "portal3", isVisible:true } ], allowBridge:false },
+                                        { at:0.055, tokens:[ { id: "portal5", isVisible:true } ], allowBridge:false },
+                                        { at:0.95, tokens:[ { id: "regularPortal", isVisible:true } ], allowBridge:false },
                                     ]
                                 ],
                                 corridorsContent:[
                                     [
                                         {
                                             elements:[
-                                                { atCell:0, tokens:[ { id:"startPoint" }]},
-                                                { atCell:6, tokens:[ { id:"startMob" } ]},
-                                                { atCell:11, tokens:[ { id:"startMob" } ]},
+                                                { atCell:0, tokens:[ { id:"startPoint", isVisible:true }]},
+                                                { atCell:6, tokens:[ { id:"startMob", isVisible:true } ]},
+                                                { atCell:11, tokens:[ { id:"startMob", isVisible:true } ]},
                                             ]
                                         }
                                     ]
@@ -2303,17 +2303,17 @@ ModManager.modules.push(function(){
                                 corridorsPillarsMinDistance:[ 5 ],
                                 corridorsSpawnPoints:[
                                     [
-                                        { at:0.5, tokens:[ { id: "regularPortal" } ], allowBridge:false },
-                                        { at:0.055, tokens:[ { id: "portal5" } ], allowBridge:false },
-                                        { at:0.9, tokens:[ { id: "portal3" } ], allowBridge:false },
+                                        { at:0.5, tokens:[ { id: "regularPortal", isVisible:true } ], allowBridge:false },
+                                        { at:0.055, tokens:[ { id: "portal5", isVisible:true } ], allowBridge:false },
+                                        { at:0.9, tokens:[ { id: "portal3", isVisible:true } ], allowBridge:false },
                                     ]
                                 ],
                                 corridorsContent:[
                                     [
                                         {
                                             elements:[
-                                                { atCell:0, tokens:[ { id:"startPoint" }]},
-                                                { atCell:6, tokens:[ { id:"startMob" } ]}
+                                                { atCell:0, tokens:[ { id:"startPoint", isVisible:true }]},
+                                                { atCell:6, tokens:[ { id:"startMob", isVisible:true } ]}
                                             ]
                                         },{
                                             elements:[
@@ -2331,18 +2331,18 @@ ModManager.modules.push(function(){
                                 corridorsPillarsMinDistance:[ 5 ],
                                 corridorsSpawnPoints:[
                                     [
-                                        { at:0.5, tokens:[ { id: "portal3" } ], allowBridge:false },
-                                        { at:0.055, tokens:[ { id: "portal5" } ], allowBridge:false },
-                                        { at:0.95, tokens:[ { id: "regularPortal" } ], allowBridge:false },
+                                        { at:0.5, tokens:[ { id: "portal3", isVisible:true } ], allowBridge:false },
+                                        { at:0.055, tokens:[ { id: "portal5", isVisible:true } ], allowBridge:false },
+                                        { at:0.95, tokens:[ { id: "regularPortal", isVisible:true } ], allowBridge:false },
                                     ]
                                 ],
                                 corridorsContent:[
                                     [
                                         {
                                             elements:[
-                                                { atCell:0, tokens:[ { id:"startPoint" }]},
-                                                { atCell:6, tokens:[ { id:"startMob" } ]},
-                                                { atCell:11, tokens:[ { id:"startMob" } ]},
+                                                { atCell:0, tokens:[ { id:"startPoint", isVisible:true }]},
+                                                { atCell:6, tokens:[ { id:"startMob", isVisible:true } ]},
+                                                { atCell:11, tokens:[ { id:"startMob", isVisible:true } ]},
                                             ]
                                         },{
                                             elements:[
@@ -2364,9 +2364,9 @@ ModManager.modules.push(function(){
                                     ],[
                                         {
                                             elements:[
-                                                { atCell:0, tokens:[ { id:"startPoint" }]},
-                                                { atCell:6, tokens:[ { id:"startMob" } ]},
-                                                { atCell:11, tokens:[ { id:"startMob" } ]},
+                                                { atCell:0, tokens:[ { id:"startPoint", isVisible:true }]},
+                                                { atCell:6, tokens:[ { id:"startMob", isVisible:true } ]},
+                                                { atCell:11, tokens:[ { id:"startMob", isVisible:true } ]},
                                             ]
                                         },{
                                             elements:[
@@ -2396,18 +2396,18 @@ ModManager.modules.push(function(){
                                 corridorsPillarsMinDistance:[ 5 ],
                                 corridorsSpawnPoints:[
                                     [
-                                        { at:0.5, tokens:[ { id: "portal3" } ], allowBridge:true },
-                                        { at:0.055, tokens:[ { id: "portal5" } ], allowBridge:true },
-                                        { at:0.95, tokens:[ { id: "regularPortal" } ], allowBridge:true },
+                                        { at:0.5, tokens:[ { id: "portal3", isVisible:true } ], allowBridge:true },
+                                        { at:0.055, tokens:[ { id: "portal5", isVisible:true } ], allowBridge:true },
+                                        { at:0.95, tokens:[ { id: "regularPortal", isVisible:true } ], allowBridge:true },
                                     ]
                                 ],
                                 corridorsContent:[
                                     [
                                         {
                                             elements:[
-                                                { atCell:0, tokens:[ { id:"startPoint" }]},
-                                                { at:1, tokens:[ { id:"startRoaming" } ]},
-                                                { atCell:6, tokens:[ { id:"startMob" } ]},
+                                                { atCell:0, tokens:[ { id:"startPoint", isVisible:true }]},
+                                                { at:1, tokens:[ { id:"startRoaming", isVisible:true } ]},
+                                                { atCell:6, tokens:[ { id:"startMob", isVisible:true } ]},
                                             ]
                                         }
                                     ]
@@ -2422,7 +2422,7 @@ ModManager.modules.push(function(){
                                         {
                                             atTileId:"first",
                                             elements:[
-                                                { at:1, tokens:[ { id:"startPoint" }, { id: "regularPortal" } ]},
+                                                { at:1, tokens:[ { id:"startPoint", isVisible:true }, { id: "regularPortal", isVisible:true } ]},
                                                 { at:0, tokens:[ { id:"objective", flipped:true } ] },
                                                 { at:0.5, tokens:[ { id:"spikeTrap" } ] }
                                             ]
@@ -2430,7 +2430,7 @@ ModManager.modules.push(function(){
                                         {
                                             atTileId:"second",
                                             elements:[
-                                                { at:1, tokens:[ { id:"startPoint" }, { id: "greenPortal" }]},
+                                                { at:1, tokens:[ { id:"startPoint", isVisible:true }, { id: "greenPortal", isVisible:true }]},
                                                 { at:0, tokens:[ { id:"objective", flipped:true } ] },
                                                 { at:0.5, tokens:[ { id:"spikeTrap" } ] }
                                             ]
@@ -2438,7 +2438,7 @@ ModManager.modules.push(function(){
                                         {
                                             atTileId:"third",
                                             elements:[
-                                                { at:1, tokens:[ { id:"startPoint" }, { id: "greenPortal" }]},
+                                                { at:1, tokens:[ { id:"startPoint", isVisible:true }, { id: "greenPortal", isVisible:true }]},
                                                 { at:0, tokens:[ { id:"objective", flipped:true } ] },
                                                 { at:0.5, tokens:[ { id:"bearTrap" } ] },
                                                 { at:0.5, tokens:[ { id:"fountain" } ] }
@@ -2447,7 +2447,7 @@ ModManager.modules.push(function(){
                                         {
                                             atTileId:"fourth",
                                             elements:[
-                                                { at:1, tokens:[ { id:"startPoint" }, { id: "greenPortal" }]},
+                                                { at:1, tokens:[ { id:"startPoint", isVisible:true }, { id: "greenPortal", isVisible:true }]},
                                                 { at:0, tokens:[ { id:"objective", flipped:true } ] },
                                                 { at:0.5, tokens:[ { id:"bearTrap" } ] },
                                                 { at:0.5, tokens:[ { id:"fountain" } ] }
@@ -2471,18 +2471,18 @@ ModManager.modules.push(function(){
                                 corridorsPillarsMinDistance:[ 5 ],
                                 corridorsSpawnPoints:[
                                     [
-                                        { at:0.5, tokens:[ { id: "portal3" } ], allowBridge:true },
-                                        { at:0.055, tokens:[ { id: "portal5" } ], allowBridge:true },
-                                        { at:0.95, tokens:[ { id: "regularPortal" } ], allowBridge:true },
+                                        { at:0.5, tokens:[ { id: "portal3", isVisible:true } ], allowBridge:true },
+                                        { at:0.055, tokens:[ { id: "portal5", isVisible:true } ], allowBridge:true },
+                                        { at:0.95, tokens:[ { id: "regularPortal", isVisible:true } ], allowBridge:true },
                                     ]
                                 ],
                                 corridorsContent:[
                                     [
                                         {
                                             elements:[
-                                                { atCell:0, tokens:[ { id:"startPoint" }]},
-                                                { atCell:6, tokens:[ { id:"startMob" } ]},
-                                                { atCell:11, tokens:[ { id:"startMob" } ]},
+                                                { atCell:0, tokens:[ { id:"startPoint", isVisible:true }]},
+                                                { atCell:6, tokens:[ { id:"startMob", isVisible:true } ]},
+                                                { atCell:11, tokens:[ { id:"startMob", isVisible:true } ]},
                                             ]
                                         },{
                                             elements:[
@@ -2500,17 +2500,17 @@ ModManager.modules.push(function(){
                                 corridorsPillarsMinDistance:[ 5 ],
                                 corridorsSpawnPoints:[
                                     [
-                                        { at:0.5, tokens:[ { id: "portal3" } ], allowBridge:false },
-                                        { at:0.055, tokens:[ { id: "portal5" } ], allowBridge:false }
+                                        { at:0.5, tokens:[ { id: "portal3", isVisible:true } ], allowBridge:false },
+                                        { at:0.055, tokens:[ { id: "portal5", isVisible:true } ], allowBridge:false }
                                     ]
                                 ],
                                 corridorsContent:[
                                     [
                                         {
                                             elements:[
-                                                { atCell:0, tokens:[ { id:"startPoint" }]},
-                                                { atCell:6, tokens:[ { id:"startMob" } ]},
-                                                { atCell:11, tokens:[ { id:"startMob" } ]},
+                                                { atCell:0, tokens:[ { id:"startPoint", isVisible:true }]},
+                                                { atCell:6, tokens:[ { id:"startMob", isVisible:true } ]},
+                                                { atCell:11, tokens:[ { id:"startMob", isVisible:true } ]},
                                             ]
                                         },
                                         {
@@ -2524,7 +2524,7 @@ ModManager.modules.push(function(){
                                             elements:[
                                                 { at:0, tokens:[ { id:"objective" } ]},
                                                 { at:1, tokens:[ { id:"objective", flipped:true }]},
-                                                { at:0.5, tokens:[ { id: "regularPortal" } ] }
+                                                { at:0.5, tokens:[ { id: "regularPortal", isVisible:true } ] }
                                             ]
                                         }
                                     ]
@@ -2538,18 +2538,18 @@ ModManager.modules.push(function(){
                                 corridorsPillarsMinDistance:[ 5 ],
                                 corridorsSpawnPoints:[
                                     [
-                                        { at:0.5, tokens:[ { id: "portal3" } ], allowBridge:true },
-                                        { at:0.055, tokens:[ { id: "portal5" } ], allowBridge:true },
-                                        { at:0.95, tokens:[ { id: "regularPortal" } ], allowBridge:true },
+                                        { at:0.5, tokens:[ { id: "portal3", isVisible:true } ], allowBridge:true },
+                                        { at:0.055, tokens:[ { id: "portal5", isVisible:true } ], allowBridge:true },
+                                        { at:0.95, tokens:[ { id: "regularPortal", isVisible:true } ], allowBridge:true },
                                     ]
                                 ],
                                 corridorsContent:[
                                     [
                                         {
                                             elements:[
-                                                { atCell:0, tokens:[ { id:"startPoint" }]},
-                                                { atCell:6, tokens:[ { id:"startMob" } ]},
-                                                { atCell:11, tokens:[ { id:"startMob" } ]},
+                                                { atCell:0, tokens:[ { id:"startPoint", isVisible:true }]},
+                                                { atCell:6, tokens:[ { id:"startMob", isVisible:true } ]},
+                                                { atCell:11, tokens:[ { id:"startMob", isVisible:true } ]},
                                             ]
                                         },
                                         {
@@ -2759,6 +2759,66 @@ ModManager.modules.push(function(){
                             }
                         },{
                             attribute:"gameMode",
+                            value:"collectAndDeliver-small",
+                            config:{
+                                roomsContent:[
+                                    [
+                                        {
+                                            at:1,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective", flipped:true }
+                                                        ]
+                                                    },{
+                                                        tokens:[
+                                                            { id:"fountain" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0.8,
+                                            size:1,
+                                            intensity:{ risk:1, reward:0.5 },
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    },{
+                                                        tokens:[
+                                                            {id:"forge"}
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0.2,
+                                            size:1,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        },{
+                            attribute:"gameMode",
                             value:"xpAndDeliver",
                             config:{
                                 roomsExpectedRatio:[ 3 ],
@@ -2939,7 +2999,7 @@ ModManager.modules.push(function(){
                                                     {
                                                         atExposure:-1,
                                                         tokens:[
-                                                            { id:"corruption" }
+                                                            { id:"corruption", isVisible:true }
                                                         ]
                                                     }
                                                 ]   
@@ -3682,7 +3742,7 @@ ModManager.modules.push(function(){
                                                     {
                                                         atExposure:-1,
                                                         tokens:[
-                                                            { id:"corruption" }
+                                                            { id:"corruption", isVisible:true }
                                                         ]
                                                     },{
                                                         atExposure:-1,

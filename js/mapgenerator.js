@@ -124,8 +124,12 @@ MapGenerator=(function() {
 
     // --- Tokens
 
-    function getToken(resources,result,token,map) {
+    function getToken(resources,result,tokenModel,hidden,map) {
         
+        let
+            token = clone(tokenModel);
+        
+        token.isHidden = hidden;
         token.id = Labels.getLabel(GETLABEL_FLAGS,resources,result,GETLABEL_LANGUAGE,token.id);
 
         if (resources.tokensAvailable[token.id]) {
@@ -141,19 +145,24 @@ MapGenerator=(function() {
             if (!map.usedTokens[usedTokenId])
                 map.usedTokens[usedTokenId]=0;
             map.usedTokens[usedTokenId]++;
+            if (!hidden) {
+                if (!map.visibleUsedTokens[usedTokenId])
+                    map.visibleUsedTokens[usedTokenId]=0;
+                map.visibleUsedTokens[usedTokenId]++;
+            }
             resources.tokensAvailable[token.id]--;
             return token;
         }
     }
 
-    function addToken(resources,result,token,map,pos) {
+    function addToken(resources,result,token,hidden,map,pos) {
 
         let
             cell = isCoordInMap(map,pos.x,pos.y);
 
         if (cell) {
             let
-                pickedToken = getToken(resources,result,token,map);
+                pickedToken = getToken(resources,result,token,hidden,map);
 
             if (pickedToken) {
                 if (!cell.tokensIndex[pickedToken.id]) cell.tokensIndex[pickedToken.id]=1;
@@ -779,7 +788,7 @@ MapGenerator=(function() {
         }
 
         if (map.hasBridge)
-            getToken(resources,result,{ id:"bridge" },map);
+            getToken(resources,result,{ id:"bridge" },false,map);
                             
         map.isValid = map.placedTiles == map.requiredTiles;
     }
@@ -1002,7 +1011,7 @@ MapGenerator=(function() {
                 spawnPoints.push({ x:spawnPoint.x-1, y:spawnPoint.y });
 
             if (spawnPoints.length) {
-                getToken(resources,result,{ id:"bridge" },map);
+                getToken(resources,result,{ id:"bridge" },false,map);
                 spawnPoint = pickRandomElementValue(spawnPoints);
                 pasteTile(clone(resources.bridge),0,0,spawnPoint.x,spawnPoint.y,map);
             }
@@ -1010,7 +1019,7 @@ MapGenerator=(function() {
         }
 
         tokens.forEach(token=>{
-            addToken(resources,result,token,map,spawnPoint);
+            addToken(resources,result,token,false,map,spawnPoint);
         });
         
     }
@@ -1192,7 +1201,7 @@ MapGenerator=(function() {
                 half = getItemValueAtPercentage(corridor.availableCells,pillarPosition);
                 if (!half.noPillars) {
                     half.noPillars = true;
-                    addToken(resources,result,{ id:"pillar" },map,half);
+                    addToken(resources,result,{ id:"pillar" },false,map,half);
                     if (testingCell = isCoordInMap(map,half.x,half.y-1)) testingCell.noPillars=true;
                     if (testingCell = isCoordInMap(map,half.x+1,half.y)) testingCell.noPillars=true;
                     if (testingCell = isCoordInMap(map,half.x,half.y+1)) testingCell.noPillars=true;
@@ -1246,6 +1255,7 @@ MapGenerator=(function() {
     function finalizeRoom(resources, result, map, room, limits) {
 
         let
+            isRoomHidden = true,
             roomIndex = {};
 
         room.add.sort((a,b)=>{
@@ -1301,10 +1311,16 @@ MapGenerator=(function() {
 
                 item.tokens.forEach(token=>{
                     if (limits.tokensPerRoomLimit && ((limits.tokensPerRoomLimit[token.id] === undefined) || ((roomIndex[token.id] || 0) < limits.tokensPerRoomLimit[token.id]))) {
+
+                        let
+                            isTokenHidden = result.mapConfig.roomsHideTokens && !token.isVisible;
+
                         token.atExposure = item.atExposure;
                         if (!roomIndex[token.id]) roomIndex[token.id]=1;
                         else roomIndex[token.id]++;
-                        addToken(resources,result,token,map,cell);
+                        addToken(resources,result,token,isTokenHidden,map,cell);
+
+                        isRoomHidden &= isTokenHidden;
                     }
                 });
 
@@ -1312,6 +1328,8 @@ MapGenerator=(function() {
 
         });
 
+        // Rooms are hidden if all tokens are hidden and there is at least one door
+        room.isHidden = isRoomHidden && room.doors.length;
 
     }
 
@@ -1510,7 +1528,7 @@ MapGenerator=(function() {
 
                         sidesDone[exit.direction]=true;
 
-                        getToken(resources,result,doorType,map);
+                        getToken(resources,result,doorType,false,map);
 
                         room.exits.push(exit.to);
 
@@ -1558,7 +1576,7 @@ MapGenerator=(function() {
                                     routesBag.delete(route);
 
                                 add.tokens.forEach(token=>{
-                                    addToken(resources,result,token,map,cell);
+                                    addToken(resources,result,token,false,map,cell);
                                 })
 
                             }
@@ -1616,7 +1634,7 @@ MapGenerator=(function() {
                             cell = pickRandomElement(cellsByDistance[position]);
 
                         element.tokens.forEach(token=>{
-                            addToken(resources,result,token,map,cell);
+                            addToken(resources,result,token,false,map,cell);
                         })
 
                         if (cellsByDistance[position].length == 0)
@@ -1662,6 +1680,7 @@ MapGenerator=(function() {
                 ox:MAPCENTER_X,
                 oy:MAPCENTER_Y,
                 usedTokens:{},
+                visibleUsedTokens:{},
                 specialRules:[],
                 width:0,
                 height:0,

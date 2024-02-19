@@ -52,7 +52,39 @@ MapRenderer=(function(){
             return "";
     }
 
-    function renderTile(resources,into,tile) {
+    function renderCellTokens(resources,cellNode,hideHidden) {
+        cellNode.cellData.tokens.forEach(token=>{
+            if (!hideHidden || !token.isHidden) {
+                let
+                    tokenMetadata=resources.tokensMetadata[token.id],
+                    className = tokenMetadata.className.map;
+                if (token.flipped)
+                    className+=" flipped";
+                cellNode.content.innerHTML+="<span class=\""+className+"\"></span> ";
+            }
+        });
+    }
+
+    function renderHiddenBlock(resources,cellNode,hiddenGroup) {
+        let
+            node = document.createElement("div");
+
+        node.className = "hiddenblock "+hiddenGroup;
+        node.innerHTML = "?";
+        node._cellNode = cellNode;
+        cellNode.cell.appendChild(node);
+
+        node.onclick = ()=>{
+            let
+                elements = Array.from(document.getElementsByClassName(hiddenGroup));
+            elements.forEach(element=>{
+                renderCellTokens(resources,element._cellNode,false);
+                element.parentNode.removeChild(element);
+            });
+        }
+    }
+
+    function renderTile(resources,result,into,tile,hideHidden) {
         let
             tileNode=createTileNode();
         into.appendChild(tileNode.node);
@@ -62,6 +94,7 @@ MapRenderer=(function(){
                     cellNode = createCellNode();
                 tileNode.container.appendChild(cellNode.cell);
                 cell._node = cellNode.cell;
+                cellNode.cellData = cell;
 
                 if (cell.isRoom) {
                     cellNode.cell.className+=
@@ -78,16 +111,20 @@ MapRenderer=(function(){
                         cellNode.cell.className+=" "+type;
                     })
 
-                cell.tokens.forEach(token=>{
+                renderCellTokens(resources,cellNode,hideHidden);
+
+                if (hideHidden && (cell.roomId !== undefined)) {
                     let
-                        tokenMetadata=resources.tokensMetadata[token.id],
-                        className = tokenMetadata.className.map;
-                    if (token.flipped)
-                        className+=" flipped";
-                    cellNode.content.innerHTML+="<span class=\""+className+"\"></span> ";
-                });
+                        roomId = cell.roomId,
+                        room = result.map.rooms[roomId];
+                    
+                    if (room.isHidden)
+                        renderHiddenBlock(resources,cellNode,"hidden-room-"+roomId);
+
+                }
 
                 cell.doors.forEach((door,side)=>{
+
                     if (door) {
                         let
                             doorNode = document.createElement("div");
@@ -110,7 +147,7 @@ MapRenderer=(function(){
 
 
     return {
-        render:(resources,result,mapNode,minimapInto)=>{
+        render:(resources,result,mapNode,minimapInto,isOnScreen)=>{
 
             if (result.map) {
 
@@ -132,7 +169,7 @@ MapRenderer=(function(){
                     let
                         tileSide=tile.tile.sides[tile.side],
                         tileData=tileSide.angles[tile.angle],
-                        tileNode=renderTile(resources,mapImageNode,tileData),
+                        tileNode=renderTile(resources,result,mapImageNode,tileData,isOnScreen),
                         minimapNode=document.createElement("div"),
                         minimapNodeContent=document.createElement("div"),
                         atX=tile.at.x*CELLSIZE_X,
@@ -168,24 +205,25 @@ MapRenderer=(function(){
                     minimapHeight=Math.max(minimapHeight,minimapAtY+minimapNode.offsetHeight);
                 });
         
-                
                 mapImageNode.style.width=mapWidth+"px";
                 mapImageNode.style.height=mapHeight+"px";
 
                 minimapImageNode.style.width=minimapWidth+"px";
                 minimapImageNode.style.height=minimapHeight+"px";
 
-                window.onbeforeprint = () => {
-                    document.title = result.printTitlePrefix+" - "+result.printTitleSuffix;
-                    mapNode.style.height = (mapHeight/2)+"px";
-                    mapNode.scrollLeft=0;
-                    mapNode.scrollTop=0;
-                };
+                if (!isOnScreen) {
 
-                window.onafterprint = () => {
-                    document.title = result.printTitlePrefix;
-                    mapNode.style.height = "auto";
-                };
+                    mapNode.style.height = (mapHeight/2)+"px";
+
+                    window.onbeforeprint = () => {
+                        document.title = result.printTitlePrefix+" - "+result.printTitleSuffix;    
+                    };
+
+                    window.onafterprint = () => {
+                        document.title = result.printTitlePrefix;
+                    };
+
+                }
 
             }
     

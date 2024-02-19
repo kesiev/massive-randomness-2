@@ -216,7 +216,6 @@ Tools=(function(){
             quest:test.quest
         },(resources,result)=>{
             QuestRenderer.render(resources,result,"EN",into);
-            MapRenderer.render(resources,result,result.mapNode,result.miniMapNode);
             into.scrollIntoView();
         });
     }

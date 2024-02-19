@@ -127,6 +127,40 @@ ModManager.modules.push(function(){
                                         tags:[ "maps-default-notuniform" ]
                                     }
                                 ]
+                            },{
+                                type:"includeSelected",
+                                isSingleOption:true,
+                                isMandatory:true,
+                                title:{
+                                    IT:"Modalit&agrave; di gioco",
+                                    EN:"Game mode"
+                                },
+                                entries:[
+                                    {
+                                        code:"Y",
+                                        isDefault:true,
+                                        label:{
+                                            IT:"Modalit&agrave; Normale",
+                                            EN:"Normal Mode"
+                                        },
+                                        description:{
+                                            IT:"La classica esperienza di Massive Darkness 2.",
+                                            EN:"The classic Massive Darkness 2 experience",
+                                        },
+                                        tags:[]
+                                    },{
+                                        code:"y",
+                                        label:{
+                                            IT:"Modalit&agrave; Esplorazione",
+                                            EN:"Dungeon Crawling Mode"
+                                        },
+                                        description:{
+                                            IT:"Il contenuto delle Camere &egrave; nascosto e viene mostrato quando vengono rivelate.",
+                                            EN:"The content of the Chambers is hidden and is shown when they are revealed.",
+                                        },
+                                        tags:[ "gamemode-dungeoncrawling" ]
+                                    }
+                                ]
                             }
                         ],
                         supportedLanguages:{
