@@ -495,7 +495,247 @@ ModManager.modules.push(function(){
                                     ]
                                 }
                             ]
-                        }
+                        },{
+                            type:"collect",
+                            by:{
+                                IT:"Ispirato all'avventura del Pack di Aggiornamento \"La Caverna dei Cristalli\"",
+                                EN:"Inspired by the Upgrade Pack quest \"Crystal Cave\""
+                            },
+                            suggestedTilesCount:3,
+                            versions:[
+                                {
+                                    labels:[
+                                        [
+                                            {
+                                                when:[
+                                                    {
+                                                        IT:[ "Non appena gli eroi si avvicinano alle colline," ],
+                                                        EN:[ "When the heroes approach the hills," ]
+                                                    },{
+                                                        IT:[ "Appena gli eroi escono dalla foresta," ],
+                                                        EN:[ "As soon as the heroes emerge from the forest," ]
+                                                    },{
+                                                        IT:[ "Appena gli eroi scendono dalla nave," ],
+                                                        EN:[ "As soon as the heroes get off the ship," ]
+                                                    }
+                                                ],
+                                                event:[
+                                                    {
+                                                        IT:[ "sentono il vociare dei contadini," ],
+                                                        EN:[ "they hear the voices of the farmers," ]
+                                                    },{
+                                                        IT:[ "sentono il ridere dei bambini," ],
+                                                        EN:[ "they hear the laughter of children," ]
+                                                    },{
+                                                        IT:[ "sentono il chiacchiericcio dei paesani," ],
+                                                        EN:[ "they hear the chatter of the villagers," ]
+                                                    }
+                                                ],
+                                                but:[
+                                                    {
+                                                        IT:[ "che però sembra corrotto e deformato:" ],
+                                                        EN:[ "which however seems corrupted and deformed:" ]
+                                                    },{
+                                                        IT:[ "ma sembra continuare a ripetersi come una cupa cantilena:" ],
+                                                        EN:[ "but it seems to keep repeating itself like a dark chant:" ]
+                                                    },{
+                                                        IT:[ "ma sembra rallentare sempre pi&ugrave;, trasformandosi in un fastidioso stridio:" ],
+                                                        EN:[ "but it seems to slow down more and more, turning into an annoying screech:" ]
+                                                    }
+                                                ],
+                                                exception:[
+                                                    {
+                                                        IT:[ "&egrave; il canto dei servi dell’Oscurità." ],
+                                                        EN:[ "it is the song of the servants of Darkness." ]
+                                                    },{
+                                                        IT:[ "&egrave; il grido dei Mostri Corrotti." ],
+                                                        EN:[ "it is the cry of the Corrupted Monsters." ]
+                                                    },{
+                                                        IT:[ "&egrave; il lamento delle Bestie Sanguinarie." ],
+                                                        EN:[ "it is the lament of the Blood Beasts." ]
+                                                    }
+                                                ],
+                                                what:[
+                                                    {
+                                                        IT:[ "Il loro fetore non tarda a farsi sentire." ],
+                                                        EN:[ "Their stench is not long in making itself felt." ]
+                                                    },{
+                                                        IT:[ "L'odore del sangue e del fango riempie l'aria." ],
+                                                        EN:[ "The smell of blood and mud fills the air." ]
+                                                    },{
+                                                        IT:[ "Un lezzo pungente e nauseante arriva da poco lontano." ],
+                                                        EN:[ "A pungent and nauseating stench comes from not far away." ]
+                                                    }
+                                                ],
+                                                now:[
+                                                    {
+                                                        IT:[ "È giunto il momento che gli eroi si uniscano al coro, con" ],
+                                                        EN:[ "It's time for the heroes to join the chorus, with" ]
+                                                    },{
+                                                        IT:[ "Gli eroi sono pronti a portare la loro musica," ],
+                                                        EN:[ "The heroes are ready to bring their music," ]
+                                                    },{
+                                                        IT:[ "Ma gli eroi conoscono solo una melodia," ],
+                                                        EN:[ "But heroes only know one melody," ]
+                                                    }
+                                                ],
+                                                opposing:[
+                                                    {
+                                                        IT:[ "un canto di lame e di coraggio" ],
+                                                        EN:[ "a song of blades and courage" ]
+                                                    },{
+                                                        IT:[ "l'eterno tamburo della giustizia" ],
+                                                        EN:[ "the eternal drum of justice" ]
+                                                    },{
+                                                        IT:[ "l'incessante tamburo della giustizia" ],
+                                                        EN:[ "the incessant drum of justice" ]
+                                                    }
+                                                ],
+                                                compose:[
+                                                    {
+                                                        IT:[ "parti di un Artefatto Magico", "per collocarlo", "Ricomponiamolo!" ],
+                                                        EN:[ "parts of a Magical Artifact", "to place it", "Let's Build It!" ]
+                                                    },{
+                                                        IT:[ "parti di un Sigillo Arcano", "per collocarlo", "Ricomponiamolo!" ],
+                                                        EN:[ "parts of an Arcane Seal", "to place it", "Let's Build It!" ]
+                                                    },{
+                                                        IT:[ "parti di un Amuleto Puro", "per collocarlo", "Ricomponiamolo!" ],
+                                                        EN:[ "parts of a Pure Amulet", "to place it", "Let's Build It!" ]
+                                                    }
+                                                ],
+                                                enemy:[
+                                                    {
+                                                        IT:[ "il Mostro", "del Mostro", "del mostro" ],
+                                                        EN:[ "the Monster", "of the Monster", "of the monster" ]
+                                                    },{
+                                                        IT:[ "la Creatura", "della Creatura", "della creatura" ],
+                                                        EN:[ "the Creature", "of the Creature", "of the creature" ]
+                                                    },{
+                                                        IT:[ "la Bestia", "della Bestia", "della bestia" ],
+                                                        EN:[ "the Beast", "of the Beast", "of the beast" ]
+                                                    }
+                                                ],
+                                                base:[
+                                                    {
+                                                        IT:[ "la Tana", "la tana contaminata {label.enemy@2}", "della tana", "Tana {label.enemy:capital@1}", "essere purificata", "per purificarla", "in cima alla tana", "La Tana {label.enemy:capital@2}" ],
+                                                        EN:[ "the Burrow", "the contaminated lair {label.enemy@2}", "of the lair", "Lair {label.enemy@1}", "be purified", "to purify it", "at the top of the den", "The Lair {label.enemy@2}"  ]
+                                                    },{
+                                                        IT:[ "il Rifugio", "il rifugio maledetto {label.enemy@2}", "del rifugio", "Rifugio {label.enemy:capital@1}", "essere liberato", "per liberarlo", "in cima al rifugio", "Il Rifugio {label.enemy:capital@2}" ],
+                                                        EN:[ "the Refuge", "the cursed refuge {label.enemy@2}", "of the refuge", "Refuge {label.enemy:capital@1}", "be freed", "to free it", "on top of the refuge", "The Refuge {label.enemy:capital@2}" ],
+                                                    },{
+                                                        IT:[ "il Nascondiglio", "il nascondiglio {label.enemy@2}", "del nascondiglio", "Nascondiglio {label.enemy:capital@1}", "essere distrutto", "per distruggerlo", "in cima al nascondiglio", "Il Nascondiglio {label.enemy:capital@2}" ],
+                                                        EN:[ "the Hideout", "the hideout {label.enemy@2}", "of the hideout", "Hideout {label.enemy:capital@1}", "be destroyed", "to destroy it", "on top of the hideout", "The Hideout {label.enemy:capital@2}" ],
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    title:[
+                                        {
+                                            EN:"{label.base:capital@7}"
+                                        },{
+                                            EN:"{label.enemy:capital@0}"
+                                        },{
+                                            EN:"{label.opposing:capital@0}"
+                                        }
+                                    ],
+                                    story:[
+                                        {
+                                            EN:"{label.when@0} {label.event@0} {label.but@0} {label.exception@0} {label.what@0} {label.now@0} {label.opposing@0}!"
+                                        }
+                                    ],
+                                    challenges:[
+                                        { intensity:1, tag:"default" },
+                                        { intensity:2, tag:"default" },
+                                        { intensity:3, tag:"default" },
+                                    ],
+                                    objectivesHeader:[
+                                        {
+                                            IT:"Completate gli obiettivi in qualsiasi ordine:",
+                                            EN:"Complete the objectives in any order:"
+                                        }
+                                    ],
+                                    rules:[
+                                        [
+                                            {
+                                                type:"objective",
+                                                name:[
+                                                    {
+                                                        IT:"Uccidere {label.enemy@0}",
+                                                        EN:"Kill {label.enemy@0}"
+                                                    }
+                                                ],
+                                                summary:[
+                                                    {
+                                                        IT:"Uccidere il Mostro Errante che viene generato sul segnalino Obiettivo sul lato grigio",
+                                                        EN:"Kill the Roaming Monster that spawns on the Objective token on the gray side"
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"objective",
+                                                name:[
+                                                    {
+                                                        IT:"Purificare {label.base@0}",
+                                                        EN:"Purify {label.base@0}"
+                                                    }
+                                                ],
+                                                summary:[
+                                                    {
+                                                        IT:"Collocare i {tokensCount.objective} segnalini Obiettivo con il lato colorato a faccia in su nella Zona con il segnalino Obiettivo sul lato grigio",
+                                                        EN:"Place the {tokensCount.objective} Objective tokens with the colored side up in the Zone of the Objective token on the gray side"
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        EN:"{label.base@3}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"La Zona con il segnalino Obiettivo sul lato grigio rappresenta {label.base@1} e deve {label.base@4}. Quando questa Camera viene rivelata, dopo avere risolto la carta Porta, generare un Mostro Errante di Livello 5 nella Zona del segnalino Obiettivo sul lato grigio.",
+                                                        EN:"The Zone with the Objective token on the gray side represents {label.base@1} and must {label.base@4}. When this Chamber is revealed, after resolving the Door card, spawn a Level 5 Roaming Monster in the Zone of the Objective token on the gray side."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        EN:"{label.compose@2}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"I segnalini Obiettivo con il lato colorato a faccia in su rappresentano le {tokensCount.objective} {label.compose@0} che devono essere unite all’entrata {label.base@2} {label.base@5}. Un qualsiasi Eroe che si trovi nella Zona di un segnalino Obiettivo con il lato colorato a faccia in su può spendere 1 PM per raccoglierlo. I segnalini Obiettivo con il lato colorato a faccia in su possono essere scambiati come fossero oggetti. Un qualsiasi Eroe che trasporta un segnalino Obiettivo con il lato colorato a faccia in su può spendere 1 azione nella Zona della del segnalino Obiettivo sul lato grigio {label.compose@1} {label.base@6}.",
+                                                        EN:"Objective tokens with the colored side up represent the {tokensCount.objective} {label.compose@0} that must be composed near the entry {label.base@2} {label.base@5}. Any Hero who is in the Zone of an Objective token with the colored side up can spend 1 MP to pick it up. Objective tokens with the colored side up can be exchanged as if they were objects. Any Hero carrying an Objective token with the colored side up can spend 1 action in the Zone of the Objective token on the gray side {label.compose@1} {label.base@6}."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    map:[
+                                        {
+                                            structure:[ "pathToRoom-small" ],
+                                            gameMode: [ "collectAndDeliver-small" ],
+                                            difficulty:[ "default" ],
+                                            roomLimits:[ "default" ],
+                                            skin:[ "default" ],
+                                            size: [ "default" ],
+                                            bridges:[ "default" ],
+                                            lootRatio: [ "default" ],
+                                            corridors: [ "default" ],
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
                     ]
                 }
             ]
