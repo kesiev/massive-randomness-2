@@ -31,7 +31,7 @@ ModManager.modules.push(function(){
                                 type:"rule",
                                 classNames:[ "displayOnly" ],
                                 name:{
-                                    IT:"Modalit&agrave; esplorazione",
+                                    IT:"Modalit&agrave; Esplorazione",
                                     EN:"Dungeon Crawling Mode"
                                 },
                                 explanation:{
