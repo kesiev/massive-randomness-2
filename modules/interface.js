@@ -27,8 +27,8 @@ ModManager.modules.push(function(){
                                         isMandatory:true,
                                         isDefault:true,
                                         label:{
-                                            IT:"Massive Darkness 2 - Hellscape",
-                                            EN:"Massive Darkness 2 - Hellscape"
+                                            IT:"Massive Darkness 2: Hellscape",
+                                            EN:"Massive Darkness 2: Hellscape"
                                         },
                                         description:{
                                             IT:"La scatola base del gioco",
@@ -38,8 +38,8 @@ ModManager.modules.push(function(){
                                     },{
                                         code:"C",
                                         label:{
-                                            IT:"Massive Darkness: Heavenfall",
-                                            EN:"Massive Darkness: Heavenfall"
+                                            IT:"Massive Darkness 2: Heavenfall",
+                                            EN:"Massive Darkness 2: Heavenfall"
                                         },
                                         description:{
                                             IT:"Una modalit&agrave; campagna per MD2",
