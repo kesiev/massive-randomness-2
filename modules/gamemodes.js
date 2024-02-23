@@ -35,8 +35,8 @@ ModManager.modules.push(function(){
                                     EN:"Dungeon Crawling Mode"
                                 },
                                 explanation:{
-                                    IT:"Quando una Camera viene rivelata, prima di pescare e risolvere una carta Porta, verificare sulla mappa a schermo se la Camera &egrave; colorata di rosso. Se si, selezionarla e aggiungere i nuovi componenti che vengono mostrati.",
-                                    EN:"When a Chamber is revealed, before drawing and resolving a Door card, check the on-screen map to see if the Chamber appears colored red. If so, select it and add the new components that are shown."
+                                    IT:"Quando una Camera viene rivelata, prima di pescare e risolvere una carta Porta, verificare sulla mappa a schermo se la Camera &egrave; colorata di verde. Se si, selezionarla e aggiungere i nuovi componenti mostrati.",
+                                    EN:"When a Chamber is revealed, before drawing and resolving a Door card, check the on-screen map to see if the Chamber appears green colored. If so, select it and add the new components shown."
                                 }
                             }
                         ]
