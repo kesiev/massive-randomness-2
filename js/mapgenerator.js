@@ -328,6 +328,7 @@ MapGenerator=(function() {
                 cell.doors=[];
                 cell.tileData=tileData;
                 cell.id=x+","+y;
+                cell.originalWalls=clone(cell.walls);
                 grid[y][x]=cell;
 
                 removeExit(map,x,y);
@@ -994,20 +995,21 @@ MapGenerator=(function() {
         // Add mobs spawn points
         let
             spawnPoint = point.destination,
+            cell = isCoordInMap(map,spawnPoint.x,spawnPoint.y),
             spawnPoints = [];
 
         if (allowBridge && !spawnPoint.isDeadEnd && resources.tokensAvailable.bridge) {
 
-            if (!isCoordInMap(map,spawnPoint.x,spawnPoint.y-1) && !isCoordWall(map,spawnPoint.x,spawnPoint.y-1))
+            if (!isCoordInMap(map,spawnPoint.x,spawnPoint.y-1) && !isCoordWall(map,spawnPoint.x,spawnPoint.y-1) && !cell.originalWalls[0])
                 spawnPoints.push({ x:spawnPoint.x, y:spawnPoint.y-1 });
 
-            if (!isCoordInMap(map,spawnPoint.x+1,spawnPoint.y) && !isCoordWall(map,spawnPoint.x+1,spawnPoint.y))
+            if (!isCoordInMap(map,spawnPoint.x+1,spawnPoint.y) && !isCoordWall(map,spawnPoint.x+1,spawnPoint.y) && !cell.originalWalls[1])
                 spawnPoints.push({ x:spawnPoint.x+1, y:spawnPoint.y });
 
-            if (!isCoordInMap(map,spawnPoint.x,spawnPoint.y+1) && !isCoordWall(map,spawnPoint.x,spawnPoint.y+1))
+            if (!isCoordInMap(map,spawnPoint.x,spawnPoint.y+1) && !isCoordWall(map,spawnPoint.x,spawnPoint.y+1) && !cell.originalWalls[2])
                 spawnPoints.push({  x:spawnPoint.x, y:spawnPoint.y+1 });
 
-            if (!isCoordInMap(map,spawnPoint.x-1,spawnPoint.y) && !isCoordWall(map,spawnPoint.x-1,spawnPoint.y))
+            if (!isCoordInMap(map,spawnPoint.x-1,spawnPoint.y) && !isCoordWall(map,spawnPoint.x-1,spawnPoint.y) && !cell.originalWalls[3])
                 spawnPoints.push({ x:spawnPoint.x-1, y:spawnPoint.y });
 
             if (spawnPoints.length) {
@@ -1060,7 +1062,7 @@ MapGenerator=(function() {
                     });
 
                     if (requirement.atTileId && !roomFound)
-                        console.warn("Can't find tile",requirement.atTileId);
+                        console.warn("For room, can't find tile",requirement.atTileId);
                     
                     if (subrooms.length) {
 
@@ -1619,7 +1621,7 @@ MapGenerator=(function() {
                 }
 
                 if (subcontent.tileId && !maxDistance)
-                    console.warn("Can't find tile",subcontent.atTileId);
+                    console.warn("For corridor, can't find tile",subcontent.atTileId);
 
                 subcontent.elements.forEach(element=>{
                     

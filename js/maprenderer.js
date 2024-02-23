@@ -46,7 +46,7 @@ MapRenderer=(function(){
     }
 
     function renderSideColor(cell,side,className) {
-        if (cell.doors[side] || cell.walls[side])
+        if (cell.doors[side] || cell.originalWalls[side])
             return " "+className;
         else
             return "";
@@ -99,6 +99,13 @@ MapRenderer=(function(){
                 if (cell.isRoom) {
                     cellNode.cell.className+=
                         " room"+
+                        renderSideColor(cell,0,"topBorder")+
+                        renderSideColor(cell,1,"rightBorder")+
+                        renderSideColor(cell,2,"bottomBorder")+
+                        renderSideColor(cell,3,"leftBorder");
+                } else if (cell.isWalled) {
+                    cellNode.cell.className+=
+                        " corridor walled"+
                         renderSideColor(cell,0,"topBorder")+
                         renderSideColor(cell,1,"rightBorder")+
                         renderSideColor(cell,2,"bottomBorder")+
