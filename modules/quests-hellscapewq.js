@@ -936,6 +936,7 @@ ModManager.modules.push(function(){
                                 EN:"Inspired by the Web Quest \"Hardcore Trial\""
                             },
                             suggestedTilesCount:4,
+                            _debug:true,
                             versions:[
                                 {
                                     labels:[
@@ -1916,7 +1917,7 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"{label.specialOne:capital@9} sono {label.specialOne@15} dai gettoni Obiettivo. Quando si trova in una Zona con un segnalino Obiettivo, {label.specialOne@2} può spendere 1 azione per {label.specialOne@11}. Subisce 1 Ferita e aumenta {label.specialOne@8} di 1 (posiziona 1 segnalino {symbol.corruptionToken} sulla sua Carta Eroe).",
+                                                        IT:"{label.specialOne:capital@9} sono {label.specialOne@15} dai gettoni Obiettivo. Quando si trova in una Zona con un segnalino Obiettivo, {label.specialOne@2} pu&ograve; spendere 1 azione per {label.specialOne@11}. Subisce 1 Ferita e aumenta {label.specialOne@8} di 1 (posiziona 1 segnalino {symbol.corruptionToken} sulla sua Carta Eroe).",
                                                         EN:"{label.specialOne:capital@9} are {label.specialOne@15} by Objective tokens. When standing in a Zone with an Objective token, {label.specialOne@2} may spend 1 action to {label.specialOne@11}. They take 1 Wound and advance {label.specialOne@8} by 1 (place 1{symbol.corruptionToken} token on their Hero Card)."
                                                     }
                                                 ]
