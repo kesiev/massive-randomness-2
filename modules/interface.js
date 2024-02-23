@@ -42,8 +42,8 @@ ModManager.modules.push(function(){
                                             EN:"Massive Darkness 2: Heavenfall"
                                         },
                                         description:{
-                                            IT:"Una modalit&agrave; campagna per MD2",
-                                            EN:"A campaign mode for MD2"
+                                            IT:"Una modalit&agrave; campagna per Massive Darkness 2",
+                                            EN:"A campaign mode for Massive Darkness 2"
                                         },
                                         tags:[ "md2-heavenfall" ]
                                     },{
