@@ -2,10 +2,18 @@ QuestRenderer=(function(){
 
     let
         SIMPLE_ENTITIES={
+            eacute:"e'",
+            Eacute:"E'",
             ograve:"o'",
             agrave:"a'",
             egrave:"e'",
-            igrave:"i'"
+            igrave:"i'",
+            ugrave:"u'",
+            Ograve:"O'",
+            Agrave:"A'",
+            Egrave:"E'",
+            Igrave:"I'",
+            Ugrave:"U'"
         };
 
     function createNode(into,type,className) {
