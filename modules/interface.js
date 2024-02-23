@@ -36,6 +36,17 @@ ModManager.modules.push(function(){
                                         },
                                         tags:[ "md2-hellscape" ]
                                     },{
+                                        code:"C",
+                                        label:{
+                                            IT:"Massive Darkness: Heavenfall",
+                                            EN:"Massive Darkness: Heavenfall"
+                                        },
+                                        description:{
+                                            IT:"Una modalit&agrave; campagna per MD2",
+                                            EN:"A campaign mode for MD2"
+                                        },
+                                        tags:[ "md2-heavenfall" ]
+                                    },{
                                         code:"B",
                                         label:{
                                             IT:"Massive Darkness: Una Missione di Lava &amp; Cristalli",
