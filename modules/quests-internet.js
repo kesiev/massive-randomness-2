@@ -10,7 +10,7 @@ ModManager.modules.push(function(){
                 EN:"MD2 Fanmade quests inspired quest models"
             },
             content:[
-            {
+                {
                     type:"quests",
                     data:[
                         {
