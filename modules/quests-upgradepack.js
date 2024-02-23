@@ -30,7 +30,7 @@ ModManager.modules.push(function(){
                                                         IT:[ "Il Mago della Vallata", "Ha bisogno di proseguire il suo viaggio e ha chiesto agli Eroi di aiutarlo ad", "riuscito" ],
                                                         EN:[ "The Wizard of the Valley", "He needs to continue his journey and has asked the Heroes to help him", "manage" ]
                                                     },{
-                                                        IT:[ "La Guardia Cittadina", "E' fuggito di corsa non appena ha potuto ed ha lasciato agli eroi il compito di", "riuscita" ],
+                                                        IT:[ "La Guardia Cittadina", "&Egrave; fuggito di corsa non appena ha potuto ed ha lasciato agli eroi il compito di", "riuscita" ],
                                                         EN:[ "The City Guard", "He ran away as fast as he could and left the heroes", "manage" ]
                                                     },{
                                                         IT:[ "Una giovane guerriero", "Il ragazzo &egrave; sopravvissuto per miracolo... ma ora tocca agli Eroi", "riuscito" ],
@@ -496,7 +496,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
-                            type:"collect",
+                            type:"collectAndBoss",
                             by:{
                                 IT:"Ispirato all'avventura del Pack di Aggiornamento \"La Caverna dei Cristalli\"",
                                 EN:"Inspired by the Upgrade Pack quest \"Crystal Cave\""
@@ -533,7 +533,7 @@ ModManager.modules.push(function(){
                                                 ],
                                                 but:[
                                                     {
-                                                        IT:[ "che però sembra corrotto e deformato:" ],
+                                                        IT:[ "che per&ograve; sembra corrotto e deformato:" ],
                                                         EN:[ "which however seems corrupted and deformed:" ]
                                                     },{
                                                         IT:[ "ma sembra continuare a ripetersi come una cupa cantilena:" ],
@@ -545,7 +545,7 @@ ModManager.modules.push(function(){
                                                 ],
                                                 exception:[
                                                     {
-                                                        IT:[ "&egrave; il canto dei servi dell’Oscurità." ],
+                                                        IT:[ "&egrave; il canto dei servi dell'Oscurit&agrave;." ],
                                                         EN:[ "it is the song of the servants of Darkness." ]
                                                     },{
                                                         IT:[ "&egrave; il grido dei Mostri Corrotti." ],
@@ -569,7 +569,7 @@ ModManager.modules.push(function(){
                                                 ],
                                                 now:[
                                                     {
-                                                        IT:[ "È giunto il momento che gli eroi si uniscano al coro, con" ],
+                                                        IT:[ "&Egrave; giunto il momento che gli eroi si uniscano al coro, con" ],
                                                         EN:[ "It's time for the heroes to join the chorus, with" ]
                                                     },{
                                                         IT:[ "Gli eroi sono pronti a portare la loro musica," ],
@@ -713,7 +713,7 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"I segnalini Obiettivo con il lato colorato a faccia in su rappresentano le {tokensCount.objective} {label.compose@0} che devono essere unite all’entrata {label.base@2} {label.base@5}. Un qualsiasi Eroe che si trovi nella Zona di un segnalino Obiettivo con il lato colorato a faccia in su può spendere 1 PM per raccoglierlo. I segnalini Obiettivo con il lato colorato a faccia in su possono essere scambiati come fossero oggetti. Un qualsiasi Eroe che trasporta un segnalino Obiettivo con il lato colorato a faccia in su può spendere 1 azione nella Zona della del segnalino Obiettivo sul lato grigio {label.compose@1} {label.base@6}.",
+                                                        IT:"I segnalini Obiettivo con il lato colorato a faccia in su rappresentano le {tokensCount.objective} {label.compose@0} che devono essere unite all'entrata {label.base@2} {label.base@5}. Un qualsiasi Eroe che si trovi nella Zona di un segnalino Obiettivo con il lato colorato a faccia in su pu&ograve; spendere 1 PM per raccoglierlo. I segnalini Obiettivo con il lato colorato a faccia in su possono essere scambiati come fossero oggetti. Un qualsiasi Eroe che trasporta un segnalino Obiettivo con il lato colorato a faccia in su pu&ograve; spendere 1 azione nella Zona della del segnalino Obiettivo sul lato grigio {label.compose@1} {label.base@6}.",
                                                         EN:"Objective tokens with the colored side up represent the {tokensCount.objective} {label.compose@0} that must be composed near the entry {label.base@2} {label.base@5}. Any Hero who is in the Zone of an Objective token with the colored side up can spend 1 MP to pick it up. Objective tokens with the colored side up can be exchanged as if they were objects. Any Hero carrying an Objective token with the colored side up can spend 1 action in the Zone of the Objective token on the gray side {label.compose@1} {label.base@6}."
                                                     }
                                                 ]
@@ -735,7 +735,476 @@ ModManager.modules.push(function(){
                                     ]
                                 }
                             ]
-                        },
+                        },{
+                            type:"capture",
+                            by:{
+                                IT:"Ispirato all'avventura del Pack di Aggiornamento \"Smarriti nella Musica\"",
+                                EN:"Inspired by the Upgrade Pack quest \"Lost in the Music\""
+                            },
+                            suggestedTilesCount:5,
+                            versions:[
+                                {
+                                    labels:[
+                                        [
+                                            {
+                                                investigation:[
+                                                    {
+                                                        IT:[ "Gli eroi hanno smentito le voci secondo cui", "Voci" ],
+                                                        EN:[ "The heroes denied the rumors that it was", "Voices" ]
+                                                    },{
+                                                        IT:[ "Gli eroi hanno scoperto la verit&agrave;: non", "Scoperte" ],
+                                                        EN:[ "The heroes discovered the truth: it wasn't", "Discoveries" ]
+                                                    },{
+                                                        IT:[ "Era una bugia. Gli eroi avevano scoperto che non", "Bugie" ],
+                                                        EN:[ "It was a lie. The heroes had discovered that it wasn't", "Lies" ]
+                                                    }
+                                                ],
+                                                clue:[
+                                                    {
+                                                        IT:[ "erano stati i contadini a dar fuoco al porto.", "agli Incendiari" ],
+                                                        EN:[ "the farmers who set fire to the port.", "to the Arsonists" ]
+                                                    },{
+                                                        IT:[ "erano stati i ladri ad assaltare la carovana dei mercanti.", "ai Furfanti" ],
+                                                        EN:[ "the thieves who attacked the merchants' caravan.", "to the Scoundrels" ]
+                                                    },{
+                                                        IT:[ "erano state le guardie a saccheggiare i villaggi.", "ai Saccheggiatori" ],
+                                                        EN:[ "the guards who sacked the villages.", "to the Looters" ]
+                                                    }
+                                                ],
+                                                consequence1:[
+                                                    {
+                                                        IT:[ "Le indagini erano durate settimane e ora" ],
+                                                        EN:[ "The investigations had lasted weeks and now" ]
+                                                    },{
+                                                        IT:[ "Non &egrave; stato facile scoprirlo e ora" ],
+                                                        EN:[ "It was not easy to find out and now" ]
+                                                    },{
+                                                        IT:[ "Per scoprirlo, hanno dovuto vagare senza sosta per mesi. Ora" ],
+                                                        EN:[ "To find out, they had to wander non-stop for months and hours. Now" ]
+                                                    }
+                                                ],
+                                                consequence2:[
+                                                    {
+                                                        IT:[ "si sentono esausti." ],
+                                                        EN:[ "they feel exhausted." ]
+                                                    },{
+                                                        IT:[ "sono quasi senza forze." ],
+                                                        EN:[ "they are almost powerless." ]
+                                                    },{
+                                                        IT:[ "servirebbe una lunga pausa." ],
+                                                        EN:[ "a long break would be needed." ]
+                                                    }
+                                                ],
+                                                recover:[
+                                                    {
+                                                        IT:[ "Ma non c'&egrave; tempo da perdere:" ],
+                                                        EN:[ "But there is no time to waste:" ]
+                                                    },{
+                                                        IT:[ "Ma non possono mollare ora:" ],
+                                                        EN:[ "But they can't give up now:" ]
+                                                    },{
+                                                        IT:[ "Ma manca un ultimo sforzo:" ],
+                                                        EN:[ "But one last effort is missing:" ]
+                                                    }
+                                                ],
+                                                newPlace:[
+                                                    {
+                                                        IT:[ "hanno trovato finalmente i mostri responsabili." ],
+                                                        EN:[ "they have finally found the responsible monsters." ]
+                                                    },{
+                                                        IT:[ "hanno scoperto il nascondiglio dei responsabili." ],
+                                                        EN:[ "they discovered the hideout of those responsible." ]
+                                                    },{
+                                                        IT:[ "i veri responsabili si nascondevano poco lontano." ],
+                                                        EN:[ "the real culprits were hiding not far away." ]
+                                                    }
+                                                ],
+                                                mission:[
+                                                    {
+                                                        IT:[ "Prenderanno a calci gli agenti del male,", "Calci" ],
+                                                        EN:[ "They will kick the agents of evil,", "Kicks" ]
+                                                    },{
+                                                        IT:[ "&Egrave; arrivato il momento di impartirgli una bella lezione,", "Lezioni" ],
+                                                        EN:[ "The time has come to teach him a good lesson,", "Lessons" ]
+                                                    },{
+                                                        IT:[ "Faranno passare ai colpevoli brutto quarto d'ora,", "Dolori" ],
+                                                        EN:[ "They will give the guilty a hard time,", "Pain" ]
+                                                    }
+                                                ],
+                                                objective:[
+                                                    {
+                                                        IT:[ "per poi interrogarli.", "Interrogatori" ],
+                                                        EN:[ "and then question them.", "Interrogations" ]
+                                                    },{
+                                                        IT:[ "per chiedergli poi spiegazioni.", "Spiegazioni" ],
+                                                        EN:[ "to then ask him for explanations.", "Explanations" ]
+                                                    },{
+                                                        IT:[ "per scambiare poi quattro chiacchiere con loro.", "Chiacchierate" ],
+                                                        EN:[ "to then have a chat with them.", "Chat" ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    title:[
+                                        {
+                                            IT:"{label.mission@1} e {label.objective@1}",
+                                            EN:"{label.mission@1} and {label.objective@1}",
+                                        },{
+                                            IT:"{label.investigation@1} e {label.mission@1}",
+                                            EN:"{label.investigation@1} and {label.mission@1}",
+                                        },{
+                                            EN:"{label.mission@1} {label.clue@1}",
+                                        }
+                                    ],
+                                    story:[
+                                        {
+                                            EN:"{label.investigation@0} {label.clue@0} {label.consequence1@0} {label.consequence2@0} {label.recover@0} {label.newPlace@0} {label.mission@0} {label.objective@0}"
+                                        }
+                                    ],
+                                    rules:[
+                                        [
+                                            {
+                                                type:"objective",
+                                                name:[
+                                                    {
+                                                        IT:"Raduniamoli",
+                                                        EN:"Gather Them",
+                                                    }
+                                                ],
+                                                summary:[
+                                                    {
+                                                        IT:"Catturare 3 Mostri Erranti <i>(Vedi Regole Speciali)</i>",
+                                                        EN:"Capture 3 Roaming Monsters <i>(See Special Rules)</i>"
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        IT:"Mostri a Non Finire",
+                                                        EN:"Never Ending Monsters"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"All'inizio di ogni Fase dell'Oscurit&agrave;, se ci sono segnalini Corruzione {symbol.corruptionToken} disponibili, tirare 1{symbol.yellowDie}. Se si ottiene almeno un risultato {symbol.mana}, generare 1 Mostro Errante su 1 dei segnalini Corruzione disponibili (a scelta dei giocatori). Dopo che un Mostro Errante &egrave; stato generato in questo modo, girare il segnalino Corruzione mostrando il lato Tempo {symbol.timeToken}. Questo segnalino Corruzione non sar&agrave; pi&ugrave; disponibile per la generazione.<p>Se all'inizio di una Fase dell'Oscurit&agrave; non ci sono segnalini Corruzione disponibili e ci sono meno di 2 Mostri Erranti nel Dungeon, girare a tutti i segnalini Tempo sul lato Corruzione.",
+                                                        EN:"At the start of each Darkness Phase, if there are {symbol.corruptionToken} Corruption tokens available, roll 1{symbol.yellowDie}. If you roll at least one {symbol.mana} result, spawn 1 Roaming Monster on 1 of the available Corruption tokens (players' choice). After a Roaming Monster is spawned in this way, flip the Corruption token to the Time {symbol.timeToken} side. This Corruption token will no longer be available for generation.<p>If at the start of a Darkness Phase, there are no Corruption tokens available and there are fewer than 2 Roaming Monsters in the Dungeon, flip all Time tokens to their Corruption side."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        IT:"Una Rete",
+                                                        EN:"The Net"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Ciascun segnalino Obiettivo sul lato colorato rappresenta una Rete che pu&ograve; essere usata per catturare un Mostro Errante (vedere sotto). Un qualsiasi Eroe che si trovi nella Zona di una Rete pu&ograve; spendere 1 PM per raccoglierla. L'Eroe che lo fa ottiene 5 PE. Le Reti possono essere scambiate come fossero oggetti.",
+                                                        EN:"Each Objective token on the colored side represents a Net that can be used to capture a Roaming Monster (see below). Any Hero who is in the Zone of a Net can spend 1 MP to collect it. The Hero who does so gains 5 XP. Nets can be exchanged as if they were items."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        IT:"Catturare un Mostro",
+                                                        EN:"Capture a Monster"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Un Eroe in possesso di una Rete (segnalino Obiettivo sul lato colorato) pu&ograve; tentare di catturare un Mostro Errante che si trovi nella sua Zona spendendo 1 azione e tirando 2{symbol.orangeDie}. Se il numero di {symbol.sword} ottenuti &egrave; pari o superiore alla Salute rimanente del Mostro Errante, quel mostro &egrave; catturato. Rimuoverlo dal Dungeon e scartare la Rete usata; l'Eroe che lo ha catturato ottiene i PE e le ricompense previste come se avesse ucciso il Mostro Errante. Se il tentativo di cattura fallisce, la Rete non viene scartata.",
+                                                        EN:"A Hero in possession of a Net (Objective token on the colored side) can attempt to capture a Roaming Monster that is in his Zone by spending 1 action and rolling 2{symbol.orangeDie}. If the number of {symbol.sword} obtained is equal to or greater than the Roaming Monster's remaining Health, that monster is captured. Remove it from the Dungeon and discard the used Net; the Hero who captured it gains the expected XP and rewards as if he had killed the Roaming Monster. If the capture attempt fails, the Net is not discarded."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    map:[
+                                        {
+                                            structure:[ "roaming-large" ],
+                                            gameMode: [ "capture" ],
+                                            difficulty:[ "default" ],
+                                            roomLimits:[ "default" ],
+                                            skin:[ "default" ],
+                                            size: [ "default" ],
+                                            bridges:[ "default" ],
+                                            lootRatio: [ "default" ],
+                                            corridors: [ "capture" ],
+                                        }
+                                    ]
+                                }
+                            ]
+                        },{
+                            type:"collect",
+                            by:{
+                                IT:"Ispirato all'avventura del Pack di Aggiornamento \"Discesa agli Inferi\"",
+                                EN:"Inspired by the Upgrade Pack quest \"Stairway to Hell\""
+                            },
+                            suggestedTilesCount:6,
+                            versions:[
+                                {
+                                    labels:[
+                                        [
+                                            {
+                                                onlyThing:[
+                                                    {
+                                                        IT:[ "C'&egrave; solo una cosa da fare:" ],
+                                                        EN:[ "There's only one thing to do:" ]
+                                                    },{
+                                                        IT:[ "&Egrave; arrivato il momento: ora dovranno" ],
+                                                        EN:[ "The time has come: now they will have to" ]
+                                                    },{
+                                                        IT:[ "Non rimane altro che" ],
+                                                        EN:[ "There's nothing left but to" ]
+                                                    }
+                                                ],
+                                                break:[
+                                                    {
+                                                        IT:[ "sabotare il rituale" ],
+                                                        EN:[ "sabotage the ritual" ]
+                                                    },{
+                                                        IT:[ "interrompere la cerimonia" ],
+                                                        EN:[ "interrupt the ceremony" ]
+                                                    },{
+                                                        IT:[ "porre fine all'evocazione" ],
+                                                        EN:[ "put an end to the summoning" ]
+                                                    }
+                                                ],
+                                                and:[
+                                                    {
+                                                        IT:[ "e uccidere chiunque sia tanto stupido da mettersi sulla loro strada." ],
+                                                        EN:[ "and kill anyone stupid enough to get in their way." ]
+                                                    },{
+                                                        IT:[ "eliminando chiunque provi a fermarli." ],
+                                                        EN:[ "and eliminate anyone who tries to stop them." ]
+                                                    },{
+                                                        IT:[ "senza fermarsi davanti a nulla." ],
+                                                        EN:[ "without stopping at anything." ]
+                                                    }
+                                                ],
+                                                close:[
+                                                    {
+                                                        IT:[ "{label.enemies:capital@0} si sono rinchiusi in una camera." ],
+                                                        EN:[ "{label.enemies:capital@0} locked themselves in a room." ]
+                                                    },{
+                                                        IT:[ "{label.enemies:capital@0} si sono barricati da qualche parte." ],
+                                                        EN:[ "{label.enemies:capital@0} barricaded themselves somewhere." ]
+                                                    },{
+                                                        IT:[ "{label.enemies:capital@0} si trovano in una stanza sigillata." ],
+                                                        EN:[ "{label.enemies:capital@0} are in a sealed room." ]
+                                                    }
+                                                ],
+                                                mission:[
+                                                    {
+                                                        IT:[ "Gli eroi dovranno {label.lock@1} che impediscono loro di entrare" ],
+                                                        EN:[ "The heroes will have to {label.lock@1} that prevent them from entering" ]
+                                                    },{
+                                                        IT:[ "Gli eroi dovranno trovare un modo per {label.lock@1}" ],
+                                                        EN:[ "The heroes will have to find a way to {label.lock@1}" ]
+                                                    },{
+                                                        IT:[ "Gli eroi dovranno {label.lock@1}" ],
+                                                        EN:[ "The heroes will have to {label.lock@1}" ]
+                                                    }
+                                                ],
+                                                end:[
+                                                    {
+                                                        IT:[ "e porre fine a tutto questo una volta per tutte." ],
+                                                        EN:[ "and put an end to all this once and for all." ]
+                                                    },{
+                                                        IT:[ "e concludere la loro lunga avventura." ],
+                                                        EN:[ "and end their long adventure." ]
+                                                    },{
+                                                        IT:[ "e risolvere il problema alla radice." ],
+                                                        EN:[ "and solve the root of the problem." ]
+                                                    }
+                                                ],
+                                                learn:[
+                                                    {
+                                                        IT:[ "Presto l'Oscurit&agrave; capir&agrave; che" ],
+                                                        EN:[ "Soon the Darkness will understand that" ]
+                                                    },{
+                                                        IT:[ "Il Male imparer&agrave; presto che" ],
+                                                        EN:[ "Evil will learn soon that" ]
+                                                    },{
+                                                        IT:[ "I loro nemici impareranno a loro spese che" ],
+                                                        EN:[ "Their enemies will learn to their cost that" ]
+                                                    }
+                                                ],
+                                                lesson:[
+                                                    {
+                                                        IT:[ "gli Eroi sono pi&ugrave; pericolosi di quello che sembra." ],
+                                                        EN:[ "the Heroes are more dangerous than they seem." ]
+                                                    },{
+                                                        IT:[ "anche il Bene sa mostrare i denti." ],
+                                                        EN:[ "even the Good knows how to show its teeth." ]
+                                                    },{
+                                                        IT:[ "prendersela con i pi&ugrave; deboli non paga mai." ],
+                                                        EN:[ "picking on the weakest never pays." ]
+                                                    }
+                                                ],
+                                                enemies:[
+                                                    {
+                                                        IT:[ "gli sciamani", "gli Sciamani" ],
+                                                        EN:[ "the shamans", "the Shamans" ]
+                                                    },{
+                                                        IT:[ "i sacerdoti", "i Sacerdoti" ],
+                                                        EN:[ "the priests", "the Priests" ]
+                                                    },{
+                                                        IT:[ "gli adepti", "gli Adepti" ],
+                                                        EN:[ "the followers", "the Followers" ]
+                                                    }
+                                                ],
+                                                collect:[
+                                                    {
+                                                        IT:[ "Gemme", "Trovare le Gemme", "Gemma" ],
+                                                        EN:[ "Gems", "Finding the Gems", "Gem" ]
+                                                    },{
+                                                        IT:[ "Sfere", "Trovare le Sfere", "Sfere" ],
+                                                        EN:[ "Spheres", "Finding the Spheres", "Sphere" ]
+                                                    },{
+                                                        IT:[ "Chiavi", "Trovare le Chiavi", "Chiavi" ],
+                                                        EN:[ "Keys", "Finding the Keys", "Key" ]
+                                                    }
+                                                ],
+                                                doors:[
+                                                    {
+                                                        IT:[ "delle Porte di Cristallo", "le Porte di Cristallo", "Porte di Cristallo" ],
+                                                        EN:[ "of the Crystal Doors", "the Crystal Doors", "Crystal Doors" ]
+                                                    },{
+                                                        IT:[ "delle Porte Sigillate", "le Porte Sigillate", "Porte Sigillate" ],
+                                                        EN:[ "of the Sealed Doors", "the Sealed Doors", "Sealed Doors" ]
+                                                    },{
+                                                        IT:[ "delle Porte d'Argento", "le Porte d'Argento", "Porte d'Argento" ],
+                                                        EN:[ "of the Silver Doors", "the Silver Doors", "Silver Doors" ]
+                                                    }
+                                                ],
+                                                lock:[
+                                                    {
+                                                        IT:[ "sono sigillate magicamente", "distruggerne le serrature incantate" ],
+                                                        EN:[ "are magically sealed", "destroy the enchanted locks" ]
+                                                    },{
+                                                        IT:[ "sono bloccate da dei meccanisimi", "sbloccarne i meccanismi" ],
+                                                        EN:[ "are blocked by some mechanism", "unlock the mechanisms" ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    title:[
+                                        {
+                                            EN:"{label.doors:capital@1}"
+                                        },{
+                                            EN:"{label.enemies:capital@1}"
+                                        },{
+                                            EN:"{label.break:capital@0}"
+                                        }
+                                    ],
+                                    story:[
+                                        {
+                                            EN:"{label.onlyThing@0} {label.break@0} {label.and@0} {label.close@0} {label.mission@0} {label.end@0} {label.learn@0} {label.lesson@0}"
+                                        }
+                                    ],
+                                    challenges:[
+                                        { intensity:1, tag:"default" },
+                                        { intensity:2, tag:"default" },
+                                        { intensity:3, tag:"default" },
+                                    ],
+                                    objectivesHeader:[
+                                        {
+                                            IT:"Completate gli obiettivi nell'ordine indicato:",
+                                            EN:"Complete the objectives in order:"
+                                        }
+                                    ],
+                                    rules:[
+                                        [
+                                            {
+                                                type:"objective",
+                                                name:[
+                                                    {
+                                                        IT:"Sconfiggere {label.enemies@1}",
+                                                        EN:"Defeat {label.enemies@1}"
+                                                    }
+                                                ],
+                                                summary:[
+                                                    {
+                                                        IT:"Uccidere entrambi i Mostri Erranti che vengono generati sui segnalini Obiettivo",
+                                                        EN:"Kill both Roaming Monsters that spawn on Objective tokens"
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        EN:"{label.doors@2}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Le 2 porte chiuse a chiave (contrassegnate in rosso) sulla mappa {label.lock@0}. Non possono essere aperte finch&eacute; gli Eroi non riescono a prelevare 4 {label.collect@0} <i>(vedere sotto)</i>.",
+                                                        EN:"The 2 locked doors (marked in red) on the map {label.lock@0}. They cannot be opened until the Heroes manage to collect 4 {label.collect@0} <i>(see below)</i>."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        EN:"{label.collect@1}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Dopo che un Eroe ha ucciso un Comandante o un Mostro Errante, tirare 1{symbol.blackDie}. Con un risultato di {symbol.fang} gli Eroi trovano 1 {label.collect@2}. Con un risultato di {symbol.fang}+{symbol.scratch}, gli Eroi trovano 2 {label.collect@0}. Altrimenti, non accade nulla. Una volta raccolte 4 {label.collect@0}, smettere di prelevarle.",
+                                                        EN:"After a Hero kills a Leader or a Roaming Monster, roll 1{symbol.blackDie}. On a roll of {symbol.fang} the Heroes find 1 {label.collect@2}. On a roll of {symbol.fang}+{symbol.scratch}, the Heroes find 2 {label.collect@0}. Otherwise, nothing happens. Once you collect 4 {label.collect@0}, stop collecting them."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        EN:"{label.enemies:capital@1}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Quando 1 {label.doors@0} si apre, aprire entrambe {label.doors@1} e non pescare una carta Porta. Generare semplicemente 2 Mostri Erranti di Livello 5, 1 su ognuno dei 2 segnalini Obiettivo. Questi Mostri Erranti sono pi&ugrave; difficili da sconfiggere. Possiedono il doppio dell'ammontare di Salute indicato.",
+                                                        EN:"When 1 {label.doors@0} is opened, open both {label.doors@1} and do not draw a Door card. Simply spawn 2 Level 5 Roaming Monsters, 1 on each of the 2 Objective tokens. These Roaming Monsters are harder to defeat. They have double the indicated amount of Health."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    map:[
+                                        {
+                                            structure:[ "maze-huge" ],
+                                            gameMode: [ "doubleBoss" ],
+                                            difficulty:[ "default" ],
+                                            roomLimits:[ "default" ],
+                                            skin:[ "default" ],
+                                            size: [ "huge" ],
+                                            bridges:[ "default" ],
+                                            lootRatio: [ "default" ],
+                                            corridors: [ "doubleBoss" ],
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
                     ]
                 }
             ]
