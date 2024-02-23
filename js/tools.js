@@ -4,10 +4,10 @@ Tools=(function(){
         DEBUG_QUEST = false,
         TESTQUESTS_ITERATIONS = 400,
         ALLOWED_ENTITIES={
-            IT:[ "ograve", "agrave", "egrave", "eacute", "ugrave", "igrave", "deg", "amp" ],
+            IT:[ "ograve", "agrave", "egrave", "eacute", "ugrave", "igrave", "deg", "amp", "Egrave" ],
             EN:[ "amp" ]
         },
-        ALLOWED_TAGS=[ "p", "/p", "ul", "/ul", "ol", "/ol", "li", "/li", "b", "/b" ],
+        ALLOWED_TAGS=[ "p", "/p", "ul", "/ul", "ol", "/ol", "li", "/li", "b", "/b", "i", "/i", "span class='phase'", "/span" ],
         ALLOWED_PLACEHOLDER_MODS=[ "capital" ],
         ALLOWED_CELLTYPES=[ "light", "dark", "crystal", "lava", "blocking" ],
         DEFAULT_TILELABELS=[ "first", "second", "third", "fourth", "fifth", "center" ],
@@ -26,10 +26,25 @@ Tools=(function(){
                 id:"maps-size-large",
                 excludes:[],
                 needs:[ "quests", "maps-default", "md2-hellscape", "maps-size-large", "maps-default-uniform" ]
+            },{
+                id:"maps-size-small-heavenfall",
+                excludes:[],
+                needs:[ "quests", "maps-default", "md2-hellscape", "md2-heavenfall", "maps-size-small", "maps-default-uniform" ]
+            },
+            {
+                id:"maps-size-normal-heavenfall",
+                excludes:[],
+                needs:[ "quests", "maps-default", "md2-hellscape", "md2-heavenfall", "maps-size-normal", "maps-default-uniform" ]
+            },
+            {
+                id:"maps-size-large-heavenfall",
+                excludes:[],
+                needs:[ "quests", "maps-default", "md2-hellscape", "md2-heavenfall", "maps-size-large", "maps-default-uniform" ]
             }
         ];
 
     let
+        decodeElement = document.createElement('div'),
         resourcesDump;
     
     function createNode(into,type,className) {
@@ -147,7 +162,35 @@ Tools=(function(){
         return out;
     }
 
-    function checkLabel(errors,errorHeader,placeholders,set) {
+    function decodeEntities(str) {
+        if (str && typeof str === 'string') {
+            str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+            str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+            decodeElement.innerHTML = str;
+            str = decodeElement.textContent;
+            decodeElement.textContent = '';
+        }
+        return str;
+    }
+
+    function addSentenceTokens(tokens,language,sentence) {
+        if (!tokens[language]) tokens[language]={};
+        decodeEntities(sentence)
+            .toLowerCase()
+            .replace(/<([^>]+)>/g," ")
+            .replace(/{([^}]+)}/g," ")
+            .replace(/[0-9]/g," ")
+            .replace(/[!?&/.;+,:\"()°-]/g," ")
+            .replace(/'s /g," ")
+            .split(" ").forEach(m=>{
+                if (m) {
+                    if (!tokens[language][m]) tokens[language][m]=[];
+                    tokens[language][m].push(sentence);
+                }
+            });
+    }
+
+    function checkLabel(errors,wordTokens,errorHeader,placeholders,set) {
         if (set.EN === undefined)
             errors.push(errorHeader,"EN language missing");
         for (let lang in set) {
@@ -176,11 +219,12 @@ Tools=(function(){
                             errors.push(errorHeader+" L["+lang+"] O["+aid+"]: invalid entity for "+lang+": &amp;"+m1+";");
                         return "XXX";
                     }),
-                    checkArgument = orgArgument.replace(/([^0-9a-zA-Z() +/\-,.:'!?"]+)/g,function(m,m1){
+                    checkArgument = orgArgument.replace(/([^0-9a-zA-Z() +/\-,.;:'!?"]+)/g,function(m,m1){
                         return "<span style='background-color:#000;color:#fff'>"+m1+"</span>";
                     });
                 if (orgArgument != checkArgument)
                     errors.push(errorHeader+" L["+lang+"] O["+aid+"]: "+checkArgument);
+                addSentenceTokens(wordTokens,lang,argument);
             })
         }
     }
@@ -225,8 +269,12 @@ Tools=(function(){
         if (!results) results=[];
         if (!test)
             if (tests.length) {
+                let logLine;
+
                 test = tests.shift();
-                screen.innerHTML = tests.length+" test(s) left... (current: "+test.quest.by.EN+")";
+                logLine = tests.length+" test(s) left... (current: "+test.quest.by.EN+")";
+                screen.innerHTML = logLine;
+                console.log(logLine);
                 iteration = 0;
                 testResult = {
                     test:test,
@@ -467,6 +515,13 @@ Tools=(function(){
         })
     }
 
+    function addMapTag(tags,section,id,tag) {
+        if (!tags[section]) tags[section]={};
+        if (!tags[section][id]) tags[section][id]={};
+        if (!tags[section][id][tag]) tags[section][id][tag]=0;
+        tags[section][id][tag]++;
+    }
+
     return {
 
         checkTiles:(into)=>{
@@ -531,10 +586,10 @@ Tools=(function(){
                             cellNode.title=title;
                             cellNode.style.backgroundColor=cell.isRoom ? "#f00" : cell.isBlocking ? "#ccc" : "#fff";
 
-                            if ((rowId == 0) && (cell.isRoom || cell.isBlocking)) closedSides[0]++;
-                            if ((colId == cols-1) && (cell.isRoom || cell.isBlocking)) closedSides[1]++;                            
-                            if ((rowId == rows-1) && (cell.isRoom || cell.isBlocking)) closedSides[2]++;
-                            if ((colId == 0) && (cell.isRoom || cell.isBlocking)) closedSides[3]++;
+                            if ((rowId == 0) && (cell.isRoom || cell.isBlocking || (cell.isWalled && cell.walls[0]))) closedSides[0]++;
+                            if ((colId == cols-1) && (cell.isRoom || cell.isBlocking || (cell.isWalled && cell.walls[1]))) closedSides[1]++;                            
+                            if ((rowId == rows-1) && (cell.isRoom || cell.isBlocking || (cell.isWalled && cell.walls[2]))) closedSides[2]++;
+                            if ((colId == 0) && (cell.isRoom || cell.isBlocking || (cell.isWalled && cell.walls[3]))) closedSides[3]++;
 
                             let
                                 roomSize = countRooms(side.angles[0],colId,rowId,roomsMap);
@@ -546,25 +601,25 @@ Tools=(function(){
 
                             // --- Cell walls check
                             if (cell.walls[0]) {
-                                if (upperCell && !upperCell.walls[2])
+                                if (!cell.isWalled && upperCell && !upperCell.walls[2])
                                     errors.push(errorHeaderCell+": mismatching wall on upper cell");
                                 cellNode.style.borderTop="1px solid #000";
                             }
 
                             if (cell.walls[1]) {
-                                if (rightCell && !rightCell.walls[3])
+                                if (!cell.isWalled && rightCell && !rightCell.walls[3])
                                     errors.push(errorHeaderCell+": mismatching wall on right cell");
                                 cellNode.style.borderRight="1px solid #000";
                             }
 
                             if (cell.walls[2]) {
-                                if (lowerCell && !lowerCell.walls[0])
+                                if (!cell.isWalled && lowerCell && !lowerCell.walls[0])
                                     errors.push(errorHeaderCell+": mismatching wall on lower cell");
                                 cellNode.style.borderBottom="1px solid #000";
                             }
 
                             if (cell.walls[3]) {
-                                if (leftCell && !leftCell.walls[1])
+                                if (!cell.isWalled && leftCell && !leftCell.walls[1])
                                     errors.push(errorHeaderCell+": mismatching wall on left cell");
                                 cellNode.style.borderLeft="1px solid #000";
                             }
@@ -599,31 +654,31 @@ Tools=(function(){
                                     errors.push(errorHeaderCell+": extra wall on room left");
 
                             } else if (!cell.isBlocking) {
-                                if (!upperCell && cell.walls[0])
+                                if (!cell.isWalled && !upperCell && cell.walls[0])
                                     errors.push(errorHeaderCell+": wrong wall on corridor top");
-                                if (!rightCell && cell.walls[1])
+                                if (!cell.isWalled && !rightCell && cell.walls[1])
                                     errors.push(errorHeaderCell+": wrong wall on corridor right");
-                                if (!lowerCell && cell.walls[2])
+                                if (!cell.isWalled && !lowerCell && cell.walls[2])
                                     errors.push(errorHeaderCell+": wrong wall on corridor bottom");
-                                if (!leftCell && cell.walls[3])
+                                if (!cell.isWalled && !leftCell && cell.walls[3])
                                     errors.push(errorHeaderCell+": wrong wall on corridor left");
 
-                                if (upperCell && (upperCell.isRoom || upperCell.isBlocking) && !cell.walls[0])
+                                if (!cell.isWalled && upperCell && (upperCell.isRoom || upperCell.isBlocking) && !cell.walls[0])
                                     errors.push(errorHeaderCell+": missing wall on corridor top");
-                                if (rightCell && (rightCell.isRoom || rightCell.isBlocking) && !cell.walls[1])
+                                if (!cell.isWalled && rightCell && (rightCell.isRoom || rightCell.isBlocking) && !cell.walls[1])
                                     errors.push(errorHeaderCell+": missing wall on corridor right");
-                                if (lowerCell && (lowerCell.isRoom || lowerCell.isBlocking) && !cell.walls[2])
+                                if (!cell.isWalled && lowerCell && (lowerCell.isRoom || lowerCell.isBlocking) && !cell.walls[2])
                                     errors.push(errorHeaderCell+": missing wall on corridor bottom");
-                                if (leftCell && (leftCell.isRoom || leftCell.isBlocking) && !cell.walls[3])
+                                if (!cell.isWalled && leftCell && (leftCell.isRoom || leftCell.isBlocking) && !cell.walls[3])
                                     errors.push(errorHeaderCell+": missing wall on corridor left");
 
-                                if (upperCell && !(upperCell.isRoom || upperCell.isBlocking) && cell.walls[0])
+                                if (!cell.isWalled && upperCell && !(upperCell.isRoom || upperCell.isBlocking) && cell.walls[0])
                                     errors.push(errorHeaderCell+": extra wall on corridor top");
-                                if (rightCell && !(rightCell.isRoom || rightCell.isBlocking) && cell.walls[1])
+                                if (!cell.isWalled && rightCell && !(rightCell.isRoom || rightCell.isBlocking) && cell.walls[1])
                                     errors.push(errorHeaderCell+": extra wall on corridor right");
-                                if (lowerCell && !(lowerCell.isRoom || lowerCell.isBlocking) && cell.walls[2])
+                                if (!cell.isWalled && lowerCell && !(lowerCell.isRoom || lowerCell.isBlocking) && cell.walls[2])
                                     errors.push(errorHeaderCell+": extra wall on corridor bottom");
-                                if (leftCell && !(leftCell.isRoom || leftCell.isBlocking) && cell.walls[3])
+                                if (!cell.isWalled && leftCell && !(leftCell.isRoom || leftCell.isBlocking) && cell.walls[3])
                                     errors.push(errorHeaderCell+": extra wall on corridor left");
 
                             } else {
@@ -652,6 +707,7 @@ Tools=(function(){
                         deniedCells.push("light");
                         allowedSkins.push("lava");
                         deniedSkins.push("crystal");
+                        deniedSkins.push("heaven");
                         deniedSkins.push("red");
                         deniedSkins.push("light");
                         expectedSpecialRules.push("noLydian");
@@ -660,12 +716,14 @@ Tools=(function(){
                         deniedCells.push("light");
                         allowedSkins.push("crystal");
                         deniedSkins.push("lava");
+                        deniedSkins.push("heaven");
                         deniedSkins.push("red");
                         deniedSkins.push("light");
                         expectedSpecialRules.push("noLydian");
                     } else {
                         deniedCells.push("crystal");
                         deniedCells.push("lava");
+                        allowedSkins.push("heaven");
                         allowedSkins.push("red");
                         allowedSkins.push("light");
                         deniedSkins.push("lava");
@@ -757,10 +815,13 @@ Tools=(function(){
         checkQuests:(into)=>{
             
             let
+                html = "",
                 errorsNode = createErrorsNode(into),
+                resultsNode = createNode(into,"div"),
                 errors = [],
-                resources = getAllResourcesTypes([ "quests", "tokensAvailable", "symbols", "globalLabels" ]),
-                globalLabels = {};
+                resources = getAllResourcesTypes([ "quests", "tokensAvailable", "symbols", "globalLabels", "challenges" ]),
+                globalLabels = {},
+                wordTokens = {};
 
             for (let k in resources.tokensAvailable)
                 globalLabels["tokensCount."+k]=true;
@@ -773,14 +834,36 @@ Tools=(function(){
             });
 
             for (let k in resources.globalLabels)
-                checkLabel(errors,"Global label "+k,globalLabels,resources.globalLabels[k]);
+                checkLabel(errors,wordTokens,"Global label "+k,globalLabels,resources.globalLabels[k]);
+
+            resources.challenges.forEach((challenge,cid)=>{
+                challenge.rules.forEach((rule,rid)=>{
+                    let
+                        errorRVHeader = "Challenge "+cid+" R"+(rid+1);
+
+                    rule.name.forEach((set,sid)=>{
+                        checkLabel(errors,wordTokens,errorRVHeader+" NAME"+(sid+1),globalLabels,set);
+                    });
+
+                    if (rule.summary)
+                        rule.summary.forEach((set,sid)=>{
+                            checkLabel(errors,wordTokens,errorRVHeader+" SUMMARY"+(sid+1),globalLabels,set);
+                        });
+
+                    if (rule.explanation)
+                        rule.explanation.forEach((set,sid)=>{
+                            checkLabel(errors,wordTokens,errorRVHeader+" EXPLAN"+(sid+1),globalLabels,set);
+                        });
+
+                })
+            });
 
             resources.quests.forEach((quest,id)=>{
                 let
                     errorHeader="["+quest._package+"] Quest "+(id+1);
 
                 if (quest.by)
-                    checkLabel(errors,errorHeader+" BY",0,quest.by);
+                    checkLabel(errors,wordTokens,errorHeader+" BY",0,quest.by);
                 else
                     errors.push(errorHeader+" BY: Origin missing (by)");
 
@@ -805,16 +888,16 @@ Tools=(function(){
                             // Check this version labels
 
                             version.title.forEach((set,sid)=>{
-                                checkLabel(errors,errorVHeader+" TITLE"+(sid+1),placeholders,set);
+                                checkLabel(errors,wordTokens,errorVHeader+" TITLE"+(sid+1),placeholders,set);
                             });
         
                             version.story.forEach((set,sid)=>{
-                                checkLabel(errors,errorVHeader+" STORY"+(sid+1),placeholders,set);
+                                checkLabel(errors,wordTokens,errorVHeader+" STORY"+(sid+1),placeholders,set);
                             });
         
                             if (version.objectivesHeader)
                                 version.objectivesHeader.forEach((set,sid)=>{
-                                    checkLabel(errors,errorVHeader+" OBJHEADER"+(sid+1),placeholders,set);
+                                    checkLabel(errors,wordTokens,errorVHeader+" OBJHEADER"+(sid+1),placeholders,set);
                                 });
 
                             version.rules.forEach((rule,rid)=>{
@@ -823,17 +906,17 @@ Tools=(function(){
                                         errorRVHeader = errorVHeader+" R"+(rid+1)+" V"+rvid;
 
                                     version.name.forEach((set,sid)=>{
-                                        checkLabel(errors,errorRVHeader+" NAME"+(sid+1),placeholders,set);
+                                        checkLabel(errors,wordTokens,errorRVHeader+" NAME"+(sid+1),placeholders,set);
                                     });
 
                                     if (version.summary)
                                         version.summary.forEach((set,sid)=>{
-                                            checkLabel(errors,errorRVHeader+" SUMMARY"+(sid+1),placeholders,set);
+                                            checkLabel(errors,wordTokens,errorRVHeader+" SUMMARY"+(sid+1),placeholders,set);
                                         });
 
                                     if (version.explanation)
                                         version.explanation.forEach((set,sid)=>{
-                                            checkLabel(errors,errorRVHeader+" EXPLAN"+(sid+1),placeholders,set);
+                                            checkLabel(errors,wordTokens,errorRVHeader+" EXPLAN"+(sid+1),placeholders,set);
                                         });
 
                                 })
@@ -841,7 +924,7 @@ Tools=(function(){
 
                             for (let label in set) {
                                 set[label].forEach((option, oid)=>{
-                                    checkLabel(errors,errorLVId+" S"+sid+" L["+label+"] O"+oid,placeholders,option);
+                                    checkLabel(errors,wordTokens,errorLVId+" S"+sid+" L["+label+"] O"+oid,placeholders,option);
                                 })
                             }
 
@@ -851,7 +934,41 @@ Tools=(function(){
                 })
             });
 
+            let
+                languageId = 0,
+                entryId = 0;
+
+            for (let k in wordTokens) {
+                let
+                    languageSetId = "language-"+languageId,
+                    list = [];
+
+                languageId++;
+                    
+                html+="<h2 style='cursor:pointer' onclick=\"document.getElementById('"+languageSetId+"').style.display=(document.getElementById('"+languageSetId+"').style.display == 'block' ? 'none' : 'block')\">"+k+"</h2><ol id='"+languageSetId+"' style='display:none'>";
+                for (let w in wordTokens[k])
+                    list.push({word:w, count:wordTokens[k][w].length, entries:wordTokens[k][w] });
+                list.sort((a,b)=>{
+                    if (a.word < b.word) return -1;
+                    else if (a.word > b.word) return 1;
+                    else return 0;
+                });
+                list.forEach(word=>{
+                    let
+                        setId = "set-"+entryId;
+                    entryId++;
+                    html+="<li style='cursor:pointer' onclick=\"document.getElementById('"+setId+"').style.display=(document.getElementById('"+setId+"').style.display == 'block' ? 'none' : 'block')\">"+word.word+" ("+word.count+")<ul id='"+setId+"' style='display:none'>";
+                    word.entries.forEach(entry=>{
+                        html+="<li>"+entry+"</li>";
+                    })
+                    html+="</ul></li>";
+                });
+                html+="</ol>";
+            }
+
             dumpErrors(errorsNode,errors);
+            resultsNode.innerHTML=html;
+
         },
 
         testQuests:(into)=>{
@@ -948,6 +1065,48 @@ Tools=(function(){
             dumpErrors(errorsNode,errors);
             resultsNode.innerHTML="<ul><li>"+mapConfigIndex.join("</li><li>")+"</li></ul>";
 
+        },
+
+        mapElementsIndex:(into)=>{
+            let
+                html = "<div style='font-size:12px'>Notes:<ul style='margin:0'><li>Make sure that gameModes requiring a room ID are on structures with the matcing tile with at least 1 room (like adding the roomsCount1+ requirement)</li></ul></div>",
+                tags = {},
+                errors = [],
+                errorsNode = createErrorsNode(into),
+                resultsNode = createNode(into,"div"),
+                resources = getAllResourcesTypes([ "mapConfigs" ]);
+
+            resources.mapConfigs.forEach(mapConfig=>{
+                let
+                    id = mapConfig.attribute+"/"+mapConfig.value;
+                switch (mapConfig.attribute) {
+                    case "gameMode":{
+                        // Rooms arrangement
+                        if (mapConfig.config.roomsContent)
+                            mapConfig.config.roomsContent.forEach(version=>{
+                                version.forEach(room=>{
+                                    if (room.atTileId)
+                                        addMapTag(tags,"gameMode",id,"Requires room ID "+room.atTileId);
+                                })
+                            });
+                        break;
+                    }
+                }
+            });
+            
+            for (let k in tags) {
+                html+="<h2>"+k+"</h2><ul>";
+                for (let z in tags[k]) {
+                    html+="<li>"+z+"<ul>";
+                    for (let y in tags[k][z])
+                        html+="<li>"+y+" ("+tags[k][z][y]+")</li>";
+                    html+="</ul></li>";
+                }
+                html+="</ul>";
+            }
+
+            dumpErrors(errorsNode,errors);
+            resultsNode.innerHTML=html;
         }
 
     }

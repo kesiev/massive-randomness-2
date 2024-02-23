@@ -15,6 +15,7 @@
 	<script src="../js/questgenerator.js"></script>
 	<script src="../js/questrenderer.js"></script>
 	<script src="../js/labels.js"></script>
+    <script src="../modules/md2-heavenfall.js"></script>
     <script src="../modules/md2-crystallava.js"></script>
     <script src="../modules/md2-hellscape.js"></script>
     <script src="../modules/maps-default.js"></script>
@@ -30,6 +31,7 @@
 	<input type="button" value="Quests" onclick="doCheckQuests()">
 	<input type="button" value="Test Quests" onclick="doTestQuests()">
 	<input type="button" value="Map Configs" onclick="doTestMapConfigs()">
+	<input type="button" value="Map Elements Index" onclick="doMapElementsIndex()">
 	<hr>
 	<span id="nodeBody"></span>
 </body><script>
@@ -55,6 +57,10 @@ function doTestQuests() {
 
 function doTestMapConfigs() {
 	Tools.testMapConfigs(getNodeBody("Map Configs"));
+}
+
+function doMapElementsIndex() {
+	Tools.mapElementsIndex(getNodeBody("Map Elements Index"));
 }
 
 function onl() {
