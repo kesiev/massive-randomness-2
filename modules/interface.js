@@ -139,28 +139,26 @@ ModManager.modules.push(function(){
                                     }
                                 ]
                             },{
-                                type:"includeSelected",
-                                isSingleOption:true,
-                                isMandatory:true,
+                                type:"includeExclude",
                                 title:{
-                                    IT:"Modalit&agrave; di gioco",
-                                    EN:"Game mode"
+                                    IT:"Extra",
+                                    EN:"Extras"
                                 },
                                 entries:[
                                     {
-                                        code:"Y",
-                                        isDefault:true,
+                                        code:"X",
                                         label:{
-                                            IT:"Modalit&agrave; Normale",
-                                            EN:"Normal Mode"
+                                            IT:"Sfide",
+                                            EN:"Challenges"
                                         },
                                         description:{
-                                            IT:"La classica esperienza di Massive Darkness 2.",
-                                            EN:"The classic Massive Darkness 2 experience",
+                                            IT:"Aggiunge all'avventura delle sfide extra, che potrai decidere se accettare o meno.",
+                                            EN:"It adds extra challenges to the adventure, you can decide whether to accept or not.",
                                         },
-                                        tags:[]
-                                    },{
-                                        code:"y",
+                                        tags:[ "challenges-default" ]
+                                    },
+                                    {
+                                        code:"Y",
                                         label:{
                                             IT:"Modalit&agrave; Esplorazione",
                                             EN:"Dungeon Crawling Mode"
