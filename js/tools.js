@@ -15,31 +15,31 @@ Tools=(function(){
             {
                 id:"maps-size-small",
                 excludes:[],
-                needs:[ "quests", "maps-default", "md2-hellscape", "maps-size-small", "maps-default-uniform" ]
+                needs:[ "quests", "maps-default", "md2-hellscape", "maps-size-small", "maps-default-uniform", "challenges-default" ]
             },
             {
                 id:"maps-size-normal",
                 excludes:[],
-                needs:[ "quests", "maps-default", "md2-hellscape", "maps-size-normal", "maps-default-uniform" ]
+                needs:[ "quests", "maps-default", "md2-hellscape", "maps-size-normal", "maps-default-uniform", "challenges-default" ]
             },
             {
                 id:"maps-size-large",
                 excludes:[],
-                needs:[ "quests", "maps-default", "md2-hellscape", "maps-size-large", "maps-default-uniform" ]
+                needs:[ "quests", "maps-default", "md2-hellscape", "maps-size-large", "maps-default-uniform", "challenges-default" ]
             },{
                 id:"maps-size-small-heavenfall",
                 excludes:[],
-                needs:[ "quests", "maps-default", "md2-hellscape", "md2-heavenfall", "maps-size-small", "maps-default-uniform" ]
+                needs:[ "quests", "maps-default", "md2-hellscape", "md2-heavenfall", "maps-size-small", "maps-default-uniform", "challenges-default" ]
             },
             {
                 id:"maps-size-normal-heavenfall",
                 excludes:[],
-                needs:[ "quests", "maps-default", "md2-hellscape", "md2-heavenfall", "maps-size-normal", "maps-default-uniform" ]
+                needs:[ "quests", "maps-default", "md2-hellscape", "md2-heavenfall", "maps-size-normal", "maps-default-uniform", "challenges-default" ]
             },
             {
                 id:"maps-size-large-heavenfall",
                 excludes:[],
-                needs:[ "quests", "maps-default", "md2-hellscape", "md2-heavenfall", "maps-size-large", "maps-default-uniform" ]
+                needs:[ "quests", "maps-default", "md2-hellscape", "md2-heavenfall", "maps-size-large", "maps-default-uniform", "challenges-default" ]
             }
         ];
 
