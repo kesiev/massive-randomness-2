@@ -76,6 +76,8 @@ QuestRenderer=(function(){
                 let
                     quest = result.quest,
                     questNode = createNode(into,"div","quest"),
+                    sheetHeader = createNode(questNode,"div","sheetHeader displayonly"),
+                    sheetQuestHeader = createNode(questNode,"div","sheetQuestHeader displayonly"),
                     questHeadNode = createNode(questNode,"div","questHead"),
                     titleNode = createNode(questHeadNode,"div","title"),
                     authorNode = createNode(questHeadNode,"div","author"),
@@ -91,6 +93,7 @@ QuestRenderer=(function(){
                     printMiniMapNode = createNode(questNode,"div","miniMap"),
                     mapNode = createNode(questNode,"div","map"),
                     printMapNode = createNode(questNode,"div","map"),
+                    footerNode,
                     objectivesList,
                     tilesList,
                     tilesGroups = {};
@@ -105,11 +108,17 @@ QuestRenderer=(function(){
                 // Prepare quest outline
 
                 authorNode.innerHTML = Labels.getLabel(flags,resources,result,language,quest.by);
-                titleNode.innerHTML = simplifyEntities(Labels.getLabel(flags,resources,result,language,quest.title));
+
+                sheetQuestHeader.innerHTML = Labels.getLabel(flags,resources,result,language,resources.globalLabels.questHeader);
+
+                createNode(titleNode,"div","left diamond displayonly");
+                createNode(titleNode,"div","text").innerHTML = simplifyEntities(Labels.getLabel(flags,resources,result,language,quest.title));
+                createNode(titleNode,"div","right diamond displayonly");
+
                 storyNode.innerHTML = Labels.getLabel(flags,resources,result,language,quest.story);
                 
-                objectivesTitleNode.innerHTML = Labels.getLabel(flags,resources,result,language,resources.globalLabels.objectives);
-                specialRulesTitleNode.innerHTML = Labels.getLabel(flags,resources,result,language,resources.globalLabels.specialRules);
+                objectivesTitleNode.innerHTML = "<div class='diamond displayonly'></div>"+Labels.getLabel(flags,resources,result,language,resources.globalLabels.objectives);
+                specialRulesTitleNode.innerHTML = "<div class='diamond displayonly'></div>"+Labels.getLabel(flags,resources,result,language,resources.globalLabels.specialRules);
 
                 // Prepare the tiles list
 
@@ -181,7 +190,7 @@ QuestRenderer=(function(){
                         challengesNode = createNode(questHeadNode,"div","challenges"),
                         challengesList;
 
-                    challengesTitleNode.innerHTML =  Labels.getLabel(flags,resources,result,language,resources.globalLabels.challenges);
+                    challengesTitleNode.innerHTML =  "<div class='diamond displayonly'></div>"+Labels.getLabel(flags,resources,result,language,resources.globalLabels.challenges);
                     challengesNode.innerHTML =  Labels.getLabel(flags,resources,result,language,resources.globalLabels.challengesExplanation);
 
                     challengesList = createNode(challengesNode,"ul");
@@ -201,6 +210,8 @@ QuestRenderer=(function(){
    
                 }
 
+                createNode(questHeadNode,"div","mapSeparator displayonly");
+
                 // Prepare the loot ratio grid
 
                 if (result.mapConfig.lootRatio) {
@@ -209,8 +220,7 @@ QuestRenderer=(function(){
                         lootRatioNode = createNode(questNode,"div","lootRatio"),
                         lootRatioLabel = createNode(lootRatioNode,"div","lootRatioLabel"),
                         lootRatioContentNode = createNode(lootRatioNode,"div","lootRatioContent");
-                        
-
+                    
                     lootRatioLabel.innerHTML="*"+Labels.getLabel(flags,resources,result,language,resources.globalLabels.lootRatio);
 
                     result.mapConfig.lootRatio.forEach(ratio=>{
@@ -226,6 +236,9 @@ QuestRenderer=(function(){
                     })
 
                 }
+
+                footerNode = createNode(questNode,"div","questfooter displayonly");
+                footerNode.innerHTML = "<div class='arrow left'></div>"+Labels.getLabel(flags,resources,result,language,resources.globalLabels.questFooter)+"<div class='arrow right'></div>";
 
                 result.printTitleSuffix = titleNode.innerText;
 

@@ -40,6 +40,14 @@ ModManager.modules.push(function(){
                         lootRatio:{
                             IT:"I segnalini Bottino vanno collocati in base al numero di Eroi:",
                             EN:"Loot tokens are placed according to the number of Heroes:"
+                        },
+                        questHeader:{
+                            IT:"Avventura One-Shot:",
+                            EN:"One-Shot Quest:"
+                        },
+                        questFooter:{
+                            IT:"Massive Randomness 2 - Avventura One-Shot",
+                            EN:"Massive Randomness 2 - One Shot Quest"
                         }
                     }
                 }
