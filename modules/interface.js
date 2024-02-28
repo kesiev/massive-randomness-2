@@ -168,6 +168,18 @@ ModManager.modules.push(function(){
                                             EN:"The content of the Chambers is hidden and is shown when they are revealed.",
                                         },
                                         tags:[ "gamemode-dungeoncrawling" ]
+                                    },
+                                    {
+                                        isButton:true,
+                                        isInstallerButton:true,
+                                        label:{
+                                            IT:"Installa",
+                                            EN:"Install"
+                                        },
+                                        description:{
+                                            IT:"Permette di usare Massive Randomness 2 offline.",
+                                            EN:"Allows you to use Massive Randomness 2 offline."
+                                        }
                                     }
                                 ]
                             }

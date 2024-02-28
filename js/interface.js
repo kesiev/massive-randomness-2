@@ -10,11 +10,12 @@ Interface=(function() {
         },
         LOCALSTORAGE_PREFIX="MARA2_",
         LOCALSTORAGE_LANGUAGE=LOCALSTORAGE_PREFIX+"LANG",
+        LOCALSTORAGE_ID=LOCALSTORAGE_PREFIX+"ID",
         SETTINGS_SOURCES={
             MEMORY:0,
             DEFAULT:1,
             UI:2,
-            HASH:3
+            SESSION:3
         },
         SETTINGS_DEFAULT={
             needs:[ "quests", "maps-default" ],
@@ -23,7 +24,9 @@ Interface=(function() {
 
     let
         INTERFACE,
+        isAppMode = document.location.href.indexOf("user_mode=app") != -1,
         settingsMode = false,
+        showInstaller = false,
         seed = 0,
         settings,
         lastResult,
@@ -66,6 +69,26 @@ Interface=(function() {
         return language;
     }
 
+    function loadId() {
+
+        let
+            loaded = "";
+
+        if (isAppMode)
+            loaded = localStorage[LOCALSTORAGE_ID];
+        else
+            loaded = document.location.hash;
+        
+        return (loaded || "").trim().replace(/#/g,"");
+    }
+
+    function saveId(id) {
+        if (isAppMode)
+            localStorage[LOCALSTORAGE_ID] = id;
+        else
+            history.replaceState(undefined, undefined, id);
+    }
+
     function renderLastQuest() {
         let
             printTitlePrefix = getLabel(language,INTERFACE.labels.toolName);
@@ -95,16 +118,17 @@ Interface=(function() {
                     selected = settings[sid];
                 
                 setting.entries.forEach((entry,id)=>{
-                    if (selected.indexOf(id) != -1)
-                        entry.tags.forEach(tag=>{
-                            if (picked.indexOf(tag) == -1)
-                                picked.push(tag)
-                        });
-                    else
-                        entry.tags.forEach(tag=>{
-                            if (notPicked.indexOf(tag) == -1)
-                            notPicked.push(tag)
-                        });
+                    if (entry.tags)
+                        if (selected.indexOf(id) != -1)
+                            entry.tags.forEach(tag=>{
+                                if (picked.indexOf(tag) == -1)
+                                    picked.push(tag)
+                            });
+                        else
+                            entry.tags.forEach(tag=>{
+                                if (notPicked.indexOf(tag) == -1)
+                                notPicked.push(tag)
+                            });
                 });
 
                 switch (setting.type) {
@@ -130,7 +154,7 @@ Interface=(function() {
                 debugQuest:DEBUG_QUEST
             },(resources,result)=>{
                 seed = result.questSeed;
-                history.replaceState(undefined, undefined, settingsToHash());
+                saveId(settingsToHash());
                 generating = false;
                 lastResources = resources;
                 lastResult = result;
@@ -167,56 +191,80 @@ Interface=(function() {
             sectionNode.innerHTML = getLabel(language,setting.title);
 
             setting.entries.forEach((entry,eid)=>{
-                let
-                    itemNode = createNode(itemsNode,"div","item"),
-                    selectorNode = createNode(itemNode,"div","selector"),
-                    labelNode = createNode(itemNode,"label","label"),
-                    entryId = "selector"+id;
 
                 id++;
 
-                labelNode.setAttribute("for",entryId);
+                if (entry.isButton) {
 
-                if (setting.isSingleOption) {
-                    entry._selector = createNode(selectorNode,"input","control");
-                    entry._selector.id = entryId;
-                    entry._selector.type = "radio";
-                    entry._selector.onclick=()=>{
-                        settings[sid]=[eid];
-                        loadSettingsFrom(SETTINGS_SOURCES.MEMORY);
-                        showSettings();
+                    if (!entry.isInstallerButton || showInstaller) {
+
+                        let
+                            itemNode = createNode(itemsNode,"div","item"),
+                            selectorNode = createNode(itemNode,"div","selector"),
+                            labelNode = createNode(itemNode,"label","label"),
+                            entryId = "selector"+id;
+
+                        entry._selector = createNode(selectorNode,"div","optionbutton");
+                        entry._selector.id = entryId;
+                        entry._selector.innerHTML = getLabel(language,entry.label);
+                        if (entry.isInstallerButton)
+                            entry._selector.onclick=()=>{
+                                Installer.install(()=>{
+                                    showInstaller = false;
+                                    drawSettings();
+                                })
+                            }
+                        labelNode.innerHTML = "<span class='description'>"+getLabel(language,entry.description)+"</span>";
                     }
+
                 } else {
-                    entry._selector = createNode(selectorNode,"input","control");
-                    entry._selector.id = entryId;
-                    entry._selector.type = "checkbox";
-                    if (entry.isMandatory)
-                        entry._selector.disabled = "disabled";
-                    else
+
+                    let
+                        itemNode = createNode(itemsNode,"div","item"),
+                        selectorNode = createNode(itemNode,"div","selector"),
+                        labelNode = createNode(itemNode,"label","label"),
+                        entryId = "selector"+id;
+
+                    labelNode.setAttribute("for",entryId);
+
+                    if (setting.isSingleOption) {
+                        entry._selector = createNode(selectorNode,"input","control");
+                        entry._selector.id = entryId;
+                        entry._selector.type = "radio";
                         entry._selector.onclick=()=>{
-                            let
-                                pos = settings[sid].indexOf(eid);
-                            if (pos == -1)
-                                settings[sid].push(eid);
-                            else
-                                settings[sid].splice(pos,1);
+                            settings[sid]=[eid];
                             loadSettingsFrom(SETTINGS_SOURCES.MEMORY);
                             showSettings();
                         }
-                }
+                    } else {
+                        entry._selector = createNode(selectorNode,"input","control");
+                        entry._selector.id = entryId;
+                        entry._selector.type = "checkbox";
+                        if (entry.isMandatory)
+                            entry._selector.disabled = "disabled";
+                        else
+                            entry._selector.onclick=()=>{
+                                let
+                                    pos = settings[sid].indexOf(eid);
+                                if (pos == -1)
+                                    settings[sid].push(eid);
+                                else
+                                    settings[sid].splice(pos,1);
+                                loadSettingsFrom(SETTINGS_SOURCES.MEMORY);
+                                showSettings();
+                            }
+                    }
                 
-                labelNode.innerHTML = "<span class='name'>"+getLabel(language,entry.label)+"</span><span class='description'> - "+getLabel(language,entry.description)+"</span>";
+                    labelNode.innerHTML = "<span class='name'>"+getLabel(language,entry.label)+"</span><span class='description'> - "+getLabel(language,entry.description)+"</span>";
+
+                }
             })
         })
     }
 
-    function getHash() {
-        return document.location.hash.trim().replace(/#/g,"");
-    }
-
     function loadSettingsFrom(source) {
         let
-            hash = getHash().split("-"),
+            hash = loadId().split("-"),
             newSettings = [];
 
         INTERFACE.settings.forEach((setting,sid)=>{
@@ -237,7 +285,7 @@ Interface=(function() {
                             selected.push(id);
                         break;
                     }
-                    case SETTINGS_SOURCES.HASH:{
+                    case SETTINGS_SOURCES.SESSION:{
                         if (entry.code && (hash[0].indexOf(entry.code) !== -1))
                             selected.push(id);
                         break;
@@ -264,7 +312,7 @@ Interface=(function() {
 
         settings = newSettings;
 
-        if (source == SETTINGS_SOURCES.HASH) {
+        if (source == SETTINGS_SOURCES.SESSION) {
             seed = parseInt(hash[1].replace(/[^0-9]/g,""));
             if (seed < 0) seed=0;
             if (seed >= Generator.SEED_RANGE) seed=Generator.SEED_RANGE-1;
@@ -278,7 +326,8 @@ Interface=(function() {
                 selected = settings[sid];
            
             setting.entries.forEach((entry,id)=>{
-                entry._selector.checked = selected.indexOf(id) != -1;
+                if (!entry.isButton)
+                    entry._selector.checked = selected.indexOf(id) != -1;
             });
         });
     }
@@ -394,8 +443,8 @@ Interface=(function() {
                 setSettingsMode(!settingsMode);
             }
 
-            if (getHash())
-                loadSettingsFrom(SETTINGS_SOURCES.HASH);
+            if (loadId())
+                loadSettingsFrom(SETTINGS_SOURCES.SESSION);
             else
                 loadSettingsFrom(SETTINGS_SOURCES.DEFAULT);
 
@@ -405,9 +454,15 @@ Interface=(function() {
 
             generate();
 
+            if (window.Installer)
+                Installer.check(()=>{
+                    showInstaller = true;
+                    drawSettings();
+                });
+
             window.onhashchange=()=>{
-                if (getHash()) {
-                    loadSettingsFrom(SETTINGS_SOURCES.HASH);
+                if (loadId()) {
+                    loadSettingsFrom(SETTINGS_SOURCES.SESSION);
                     showSettings();
                     generate();
                 }

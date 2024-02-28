@@ -7,6 +7,11 @@ BODY {
     padding: 0;
 }
 
+HTML,BODY {
+    width: 100%;
+    height: 100%;
+}
+
 * {
     -webkit-print-color-adjust: exact !important;
     color-adjust: exact !important;
@@ -92,6 +97,19 @@ BODY {
 
 .header .settings .item .name {
     font-weight: bold;
+}
+
+.header .settings .item .optionbutton {
+    display: inline-block;
+    background-color: #333;
+    color:#fff;
+    border-radius: 5px;
+    padding: 0px 10px;
+    font-family: Seshat;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .header .toolbar {
@@ -1019,7 +1037,7 @@ BODY {
     }
 
     .quest .objectivesTitle, .quest .specialRulesTitle, .quest .challengesTitle {
-        margin:10px 0;
+        margin:15px 0 10px 0;
         padding-bottom:5px;
     }
 
