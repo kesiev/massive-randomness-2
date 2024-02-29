@@ -2,7 +2,7 @@
     "name": "Massive Randomness 2",
     "short_name": "MR2",
     "lang": "en",
-    "start_url": "index.html?user_mode=app",
+    "start_url": "index.html#user_mode=app",
     "display": "fullscreen",
     "theme_color": "#333333",
     "background_color": "#333333",

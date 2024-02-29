@@ -14,7 +14,7 @@ Installer=(function(){
 			}
 		},
 		check:function (showInstallerCb) {
-			if (document.location.href.indexOf("user_mode=app")==-1) {
+			if (document.location.hash != "#user_mode=app") {
 				if ('serviceWorker' in navigator) {
 					if (!navigator.serviceWorker.controller) {
 					  navigator.serviceWorker.register('worker.php', { scope: './'}).then(function(reg) {

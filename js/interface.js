@@ -24,7 +24,7 @@ Interface=(function() {
 
     let
         INTERFACE,
-        isAppMode = document.location.href.indexOf("user_mode=app") != -1,
+        isAppMode = document.location.hash == "#user_mode=app",
         settingsMode = false,
         showInstaller = false,
         seed = 0,
