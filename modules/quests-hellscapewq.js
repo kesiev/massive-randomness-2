@@ -225,7 +225,7 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"I segnalini Obiettivo con il lato colorato a faccia in su rappresentano {label.cure@2} {label.cure@1}. Qualsiasi Eroe che si trova {label.cure@3} pu&ograve; spendere 1 MP per raccoglierla e guadagnare immediatamente 5 XP. {label.cure:capital@2} {label.cure@1} pu&ograve; essere scambiata come un oggetto.",
+                                                        IT:"I segnalini Obiettivo con il lato colorato a faccia in su rappresentano {label.cure@2} {label.cure@1}. Qualsiasi Eroe che si trova {label.cure@3} pu&ograve; spendere 1 MP per raccoglierla e guadagnare immediatamente 5 PE. {label.cure:capital@2} {label.cure@1} pu&ograve; essere scambiata come un oggetto.",
                                                         EN:"The color-side-up Objective tokens represent {label.cure@2} {label.cure@1}. Any Hero standing {label.cure@3} may spend 1 MP to pick it up and immediately gain 5 XP. {label.cure:capital@2} {label.cure@1} may be traded as an item."
                                                     }
                                                 ]
@@ -242,7 +242,7 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"Se un Eroe viene messo KO mentre trasporta {label.cure@2} {label.cure@1}, la Missione termina con la sconfitta.",
-                                                        EN:"If a Hero is KO'd while carrying {label.cure@2} {label.cure@1}, the Quest ends in defeat."
+                                                        EN:"If a Hero is KO'd while carrying {label.cure@2} {label.cure@1}, the Mission ends in defeat."
                                                     }
                                                 ]
                                             }
@@ -258,7 +258,7 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"Dopo che {label.cure@2} {label.cure@1} &egrave; stata raccolta, qualsiasi Eroe pu&ograve; spendere 1 PM nella Zona del segnalini Obiettivo grigio per lasciare il Dungeon. Non appena tutti gli Eroi hanno lasciato il Dungeon, la Missione termina con la vittoria.",
-                                                        EN:"After {label.cure@2} {label.cure@1} has been picked up, any Hero may spend 1 MP in the gray Objective token Zone to leave the Dungeon. As soon as all Heroes have left the Dungeon, the Quest ends in victory."
+                                                        EN:"After {label.cure@2} {label.cure@1} has been picked up, any Hero may spend 1 MP in the gray Objective token Zone to leave the Dungeon. As soon as all Heroes have left the Dungeon, the Mission ends in victory."
                                                     }
                                                 ]
                                             }
@@ -936,7 +936,6 @@ ModManager.modules.push(function(){
                                 EN:"Inspired by the Web Quest \"Hardcore Trial\""
                             },
                             suggestedTilesCount:4,
-                            _debug:true,
                             versions:[
                                 {
                                     labels:[
@@ -1216,7 +1215,7 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"Una volta che {label.passage@4} {label.passage@3} {label.passage@10}, qualsiasi Eroe che si trova {label.passage@6} pu&ograve; fuggire {label.passage@8} spendendo 1 PM. Una volta che tutti gli Eroi sono fuggiti, la Missione termina con una vittoria.",
-                                                        EN:"Once {label.passage@4} {label.passage@3} {label.passage@10}, any Hero standing {label.passage@6} may escape {label.passage@8} by spending 1 MP. Once all Heroes have escaped, the Quest ends in victory."
+                                                        EN:"Once {label.passage@4} {label.passage@3} {label.passage@10}, any Hero standing {label.passage@6} may escape {label.passage@8} by spending 1 MP. Once all Heroes have escaped, the Mission ends in victory."
                                                     }
                                                 ]
                                             }
@@ -1420,7 +1419,7 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"I segnalini Obiettivo con il lato colorato verso l'alto rappresentano {label.holes@3} {label.hazard:capital@3}. Qualsiasi Eroe che si trova in una Zona con questi segnalini Obiettivo pu&ograve; spendere 1 azione per {label.hazard@10} e riattivare {label.holes@2}. Quando {label.holes@3} viene {label.holes@6}, rimuovi il segnalino dal Dungeon e ogni Eroe guadagna 5 XP.",
+                                                        IT:"I segnalini Obiettivo con il lato colorato verso l'alto rappresentano {label.holes@3} {label.hazard:capital@3}. Qualsiasi Eroe che si trova in una Zona con questi segnalini Obiettivo pu&ograve; spendere 1 azione per {label.hazard@10} e riattivare {label.holes@2}. Quando {label.holes@3} viene {label.holes@6}, rimuovi il segnalino dal Dungeon e ogni Eroe guadagna 5 PE.",
                                                         EN:"The color-side-up Objective tokens represent {label.hazard:capital@3} {label.holes:capital@1}. Any Hero standing in a Zone with these Objective tokens may spend 1 action to {label.hazard@10} and awake {label.holes@2}. When {label.holes@3} is awakened, remove the token from the Dungeon and each Hero gains 5 XP."
                                                     }
                                                 ]
@@ -1452,11 +1451,11 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"I mostri sembrano essersi adattati a questo {label.hazard@6}. Durante questa missione, segui queste regole speciali per i nemici:<ul>"+
+                                                        IT:"I mostri sembrano essersi adattati a questo {label.hazard@6}. Durante questa Missione, segui queste regole speciali per i nemici:<ul>"+
                                                         "<li>I nemici non possono prendere segnalini {label.hazard@1}.</li>"+
                                                         "<li>Quando generi un Nemico, posiziona 1 segnalino {label.hazard@1} sulla sua arma o sulla sua statistica dei dadi di Attacco. La prima volta che un Nemico infligge 1 o pi&ugrave; Ferite a un Eroe, quell'Eroe prende il segnalino {label.hazard@1} di quel Nemico.</li>"+
                                                         "</ul>",
-                                                        EN:"Monsters seem to have adapted themselves to this {label.hazard@6}. During this Quest, follow these special rules for Enemies:<ul>"+
+                                                        EN:"Monsters seem to have adapted themselves to this {label.hazard@6}. During this Mission, follow these special rules for Enemies:<ul>"+
                                                         "<li>Enemies can't take {label.hazard@1} tokens.</li>"+
                                                         "<li>When spawning an Enemy, place 1{label.hazard@1} token on its weapon or Attack dice stat. The first time an Enemy deals 1 or more Wounds to a Hero, that Hero takes this Enemy's {label.hazard@1} token.</li>"+
                                                         "</ul>"
@@ -1490,7 +1489,7 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"Qualsiasi Eroe nella Zona del segnalino Obiettivo grigio pu&ograve; spendere 1 PM per uscire dal Dungeon. Una volta che tutti gli Eroi sono usciti, la Missione termina con la vittoria.",
-                                                        EN:"Any Hero on the gray Objective token Zone may spend 1 MP to exit the Dungeon. Once all Heroes have exited, the Quest ends in victory."
+                                                        EN:"Any Hero on the gray Objective token Zone may spend 1 MP to exit the Dungeon. Once all Heroes have exited, the Mission ends in victory."
                                                     }
                                                 ]
                                             }
@@ -1737,7 +1736,7 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"La Zona con un gettone Obiettivo grigio &egrave; {label.forge@1}. Una volta che gli Eroi hanno raccolto collettivamente almeno {label.shard@3}, qualsiasi Eroe {label.forge@4} pu&ograve; spendere 1 azione per Forgiare {label.artifact@1}. Non appena {label.artifact@2} {label.artifact@4}, la Missione termina con la vittoria.",
-                                                        EN:"The Zone with a gray Objective token is {label.forge@1}. Once the Heroes collectively gathered at least {label.shard@3}, any Hero standing {label.forge@4} may spend 1 action to Forge {label.artifact@1}. As soon as {label.artifact@2} {label.artifact@4}, the Quest ends in victory."
+                                                        EN:"The Zone with a gray Objective token is {label.forge@1}. Once the Heroes collectively gathered at least {label.shard@3}, any Hero standing {label.forge@4} may spend 1 action to Forge {label.artifact@1}. As soon as {label.artifact@2} {label.artifact@4}, the Mission ends in victory."
                                                     }
                                                 ]
                                             }
@@ -1933,7 +1932,7 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"Non appena {label.specialOne@2} ha 7 gettoni Corruzione ({label.specialOne@14}), la Missione termina con la vittoria.",
-                                                        EN:"As soon as {label.specialOne@2} has 7 Corruption tokens ({label.specialOne@14}), the Quest ends in victory."
+                                                        EN:"As soon as {label.specialOne@2} has 7 Corruption tokens ({label.specialOne@14}), the Mission ends in victory."
                                                     }
                                                 ]
                                             }

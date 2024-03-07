@@ -1345,7 +1345,7 @@ ModManager.modules.push(function(){
                                                         "<li><b>1st round</b>: 1 Wound</li>"+
                                                         "<li><b>2nd consecutive round</b>: 2 Wounds</li>"+
                                                         "<li><b>3rd consecutive round</b>: 3 Wounds</li>"+
-                                                        "<li><b>4th consecutive round</b>: Defeated! If a Hero begins his 4th consecutive round holding {label.weapon@0}, {label.consequence@1} and the Quest ends in defeat.</li>"+
+                                                        "<li><b>4th consecutive round</b>: Defeated! If a Hero begins his 4th consecutive round holding {label.weapon@0}, {label.consequence@1} and the Mission ends in defeat.</li>"+
                                                         "</ul><p>Use Corruption tokens {symbol.corruptionToken} to keep track of the number of rounds a single Hero has wielded {label.weapon@0}. As soon as a Hero passes {label.weapon@0} to another Hero through a Trade action, discard the tokens and start counting again. {label.weapon:capital@0} cannot be stored in a Hero's Inventory.</p>"
                                                     }
                                                 ]

@@ -218,7 +218,7 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"Seleziona uno degli Eroi che sia {label.chosenOne@0}. Se {label.chosenOne@0} finisce KO, la Missione termina immediatamente con una sconfitta.<p>Cerca nei mazzi Tesori Rari e Tesori Epici ogni {label.equipment@5} {label.equipment@2}, rimuovile e tienile da parte.</p>",
-                                                        EN:"Select one of the Heroes to be {label.chosenOne@0}. If {label.chosenOne@0} is KOed, the Quest immediately ends in defeat.<p>Search the Rare and Epic Treasure decks and remove every {label.equipment@5} {label.equipment@2} from the decks and set them aside.</p>"
+                                                        EN:"Select one of the Heroes to be {label.chosenOne@0}. If {label.chosenOne@0} is KOed, the Mission immediately ends in defeat.<p>Search the Rare and Epic Treasure decks and remove every {label.equipment@5} {label.equipment@2} from the decks and set them aside.</p>"
                                                     }
                                                 ]
                                             }
@@ -296,7 +296,7 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"Una volta che {label.badGuy@0} {label.badGuy@2} e ogni Eroe si trova nella zona del segnalino Obiettivo con il lato colorato rivolto verso l'alto della Tessera {tileLabel.fifth} senza che ci siano nemici in quella zona, la Missione termina con la vittoria.",
-                                                        EN:"Once {label.badGuy@0} {label.badGuy@2} and every hero is at the color-side-up Objective token zone on the {tileLabel.fifth} Tile and with no enemies in that zone, the Quest ends in victory."
+                                                        EN:"Once {label.badGuy@0} {label.badGuy@2} and every hero is at the color-side-up Objective token zone on the {tileLabel.fifth} Tile and with no enemies in that zone, the Mission ends in victory."
                                                     }
                                                 ]
                                             }
