@@ -9,6 +9,17 @@ QuestGenerator=(function() {
         return seed / 233280 * max;
     }
 
+    function shuffle(list) {
+        for (let j=0;j<3;j++)
+            for (let i=0;i<list.length;i++) {
+                let
+                    dest = Math.floor(random(list.length)),
+                    tmp = list[i];
+                list[i] = list[dest];
+                list[dest] = tmp;
+            }
+    }
+
     function pickRandomElementId(list) {
         return Math.floor(random(list.length));
     }
@@ -43,6 +54,17 @@ QuestGenerator=(function() {
         if (resources.quests.length) {
 
             let
+                interface={
+                    random:(max)=>{
+                        return random(max)
+                    },
+                    shuffle:(list)=>{
+                        return shuffle(list)
+                    },
+                    pickRandomElementValue:(list)=>{
+                        return pickRandomElementValue(list)
+                    }
+                },
                 quest = { rules:[], challenges:[] },
                 mapConfig = {},
                 questModel,
@@ -70,6 +92,7 @@ QuestGenerator=(function() {
 
             quest.by = questModel.by;
             quest.suggestedTilesCount = questModel.suggestedTilesCount;
+            quest.code = questModel.code;
             quest.title = pickRandomElementValue(questVersion.title);
             quest.story = pickRandomElementValue(questVersion.story);
             
@@ -83,6 +106,15 @@ QuestGenerator=(function() {
                     ruleVersion = pickRandomElementValue(rule);
                 quest.rules.push(createRuleFromVersion(ruleVersion))
             });
+
+            // Add special rules
+            
+            if (questVersion.specialRules)
+                questVersion.specialRules.forEach(rule=>{
+                    resources.specialRules[rule].forEach(rule=>{
+                        quest.rules.push(rule);
+                    })
+                })
 
             // Add dungeon mods
             
@@ -158,6 +190,9 @@ QuestGenerator=(function() {
             result.quest = quest;
             result.mapConfig = mapConfig;
             result.labels = labels;
+
+            if (quest.code && quest.code.onQuestFinalize)
+                quest.code.onQuestFinalize(interface,resources,result,questVersion,questLabels);
 
         }
 

@@ -5,7 +5,9 @@ ModManager=(function() {
         modulesData=[];
 
     function clone(obj) {
-        return JSON.parse(JSON.stringify(obj));
+        let copy = JSON.parse(JSON.stringify(obj));
+        if (obj.code) copy.code = obj.code;
+        return copy;
     }        
 
     function initialize() {
