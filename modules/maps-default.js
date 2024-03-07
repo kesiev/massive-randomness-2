@@ -2417,6 +2417,64 @@ ModManager.modules.push(function(){
                                     ]
                                 ]
                             }
+                        },{
+                            attribute:"structure",
+                            value:"towerDefense",
+                            config:{
+                                mapTiles:[
+                                    [
+                                        {
+                                            tileId:"first", 
+                                            at:{ x:0, y:0 },
+                                            includeTags:[
+                                                [
+                                                    "openSides4+"
+                                                ],[
+                                                    "roomsCount2+"
+                                                ]
+                                            ]
+                                        },{
+                                            tileId:"second", 
+                                            at:{ x:0, y:-3 },
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ],[
+                                                    "roomsCount2+"
+                                                ]
+                                            ]
+                                        },{
+                                            tileId:"third", 
+                                            at:{ x:3, y:0 },
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ],[
+                                                    "roomsCount2+"
+                                                ]
+                                            ]
+                                        },{
+                                            tileId:"fourth", 
+                                            at:{ x:0, y:3 },
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },
+                                        {
+                                            tileId:"fifth", 
+                                            at:{ x:-3, y:0 },
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },
+                                    ]
+                                ],
+                                mapNoSquaresScore:[ -1 ]
+                            }
                         }
                     ]
                 }
@@ -2900,6 +2958,65 @@ ModManager.modules.push(function(){
                                         },{
                                             elements:[
                                                 { at:0.45, tokens:[ { id:"fountain" }]},
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        },{
+                            attribute:"corridors",
+                            value:"towerDefense",
+                            config:{
+                                corridorsSpawnPoints:[],
+                                corridorsContent:[
+                                    [
+                                        {
+                                            atTileId:"first",
+                                            elements:[
+                                                { at:0.5, tokens:[
+                                                    { id:"startPoint", isVisible:true },
+                                                    { id:"objective", isVisible:true },
+                                                ]}
+                                            ]
+                                        },{
+                                            atTileId:"second",
+                                            elements:[
+                                                { at:1, tokens:[ { id:"greenPortal", isVisible:true }]}
+                                            ]
+                                        },{
+                                            atTileId:"second",
+                                            elements:[
+                                                { at:0, tokens:[ { id:"objective", flipped:true, isVisible:true }]}
+                                            ]
+                                        },{
+                                            atTileId:"third",
+                                            elements:[
+                                                { at:1, tokens:[ { id:"greenPortal", isVisible:true }]}
+                                            ]
+                                        },{
+                                            atTileId:"third",
+                                            elements:[
+                                                { at:0, tokens:[ { id:"objective", flipped:true, isVisible:true }]}
+                                            ]
+                                        },{
+                                            atTileId:"fourth",
+                                            elements:[
+                                                { at:1, tokens:[ { id:"greenPortal", isVisible:true }]}
+                                            ]
+                                        },{
+                                            atTileId:"fourth",
+                                            elements:[
+                                                { at:0, tokens:[ { id:"objective", flipped:true, isVisible:true }]}
+                                            ]
+                                        },{
+                                            atTileId:"fifth",
+                                            elements:[
+                                                { at:1, tokens:[ { id:"regularPortal", isVisible:true }]}
+                                            ]
+                                        },{
+                                            atTileId:"fifth",
+                                            elements:[
+                                                { at:0, tokens:[ { id:"objective", flipped:true, isVisible:true }]}
                                             ]
                                         }
                                     ]
@@ -4813,7 +4930,129 @@ ModManager.modules.push(function(){
                                     ]
                                 ]
                             }
-                        }
+                        },{
+                            attribute:"gameMode",
+                            value:"investigation",
+                            config:{
+                                roomsContent:[
+                                    [
+                                        {
+                                            at:1,
+                                            relevance:1,
+                                            onPathAdd:[
+                                                [
+                                                    { at:0.4, tokens:[ { id:"spikeTrap" } ] },
+                                                    { at:0.4, tokens:[ { id:"bearTrap" } ] },
+                                                ]
+                                            ],
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" },
+                                                            { id:"corruption" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:1,
+                                            relevance:1,
+                                            onPathAdd:[
+                                                [
+                                                    { at:0.4, tokens:[ { id:"spikeTrap" } ] },
+                                                    { at:0.4, tokens:[ { id:"bearTrap" } ] },
+                                                ]
+                                            ],
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" },
+                                                            { id:"time" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0.6,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective", flipped:true },
+                                                            { id:"corruption" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0.6,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective", flipped:true },
+                                                            { id:"time" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        },{
+                            attribute:"gameMode",
+                            value:"towerDefense",
+                            config:{
+                                roomsExpectedRatio:[ 0 ],
+                                roomsContent:[
+                                    [
+                                        {
+                                            at:1,
+                                            atTileId:"first",
+                                            relevance:1,
+                                            doors:[ { id:"door", flipped:true, doNotCrossTile:true } ],
+                                            intensity:{ risk:0, reward:0 },
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"fountain" },
+                                                            { id:"fountain" },
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:1,
+                                            atTileId:"first",
+                                            relevance:1,
+                                            doors:[ { id:"door", flipped:true, doNotCrossTile:true } ],
+                                            intensity:{ risk:0, reward:0 },
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"forge" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        },
                     ]
                 }
             ]
