@@ -1204,6 +1204,311 @@ ModManager.modules.push(function(){
                                     ]
                                 }
                             ]
+                        },{
+                            type:"towerDefense",
+                            by:{
+                                IT:"Ispirato all'avventura del Pack di Aggiornamento \"Il Labirinto dell'Oscurit&agrave;\"",
+                                EN:"Inspired by the Upgrade Pack quest \"Maze of Darkness\""
+                            },
+                            suggestedTilesCount:5,
+                            versions:[
+                                {
+                                    labels:[
+                                        [
+                                            {
+                                                item:[
+                                                    {
+                                                        IT:[ "potenti artefatti", "il forziere pieno di artefatti", "l'Artefatto", "Caccia all'Artefatto" ],
+                                                        EN:[ "powerful artifacts", "the chest full of artifacts", "the Artifact", "Artifact Hunt" ]
+                                                    },{
+                                                        IT:[ "gemme magiche", "la cassa piena di gemme magiche", "la Gemma", "Caccia alla Gemma" ],
+                                                        EN:[ "magic gems", "the chest full of magic gems", "the Gem", "Gem Hunt" ]
+                                                    },{
+                                                        IT:[ "pergamene arcane", "la sacca piena di pergamene arcane", "la Pergamena", "Caccia alla Pergamena" ],
+                                                        EN:[ "arcane scrolls", "the bag full of arcane scrolls", "the Scroll", "Scroll Hunt" ]
+                                                    }
+                                                ],
+                                                barrier:[
+                                                    {
+                                                        IT:[ "Barriere Magiche", "sono Barriere Magiche", "le Barriere Magiche", "ogni Barriera", "una Barriera", "alla Barriera", "una Barriera Magica", "la Barriera pi&ugrave; vicina", "la Barriera", "verso di essa" ],
+                                                        EN:[ "Magic Barriers", "are Magic Barriers", "Magic Barriers", "each Barrier", "a Barrier", "on the Barrier", "a Magic Barrier", "the closest Barrier", "the Barrier", "toward it" ]
+                                                    },{
+                                                        IT:[ "Piloni Protettivi", "sono Piloni Protettivi", "i Piloni Protettivi", "ogni Pilone", "un Pilone", "al Pilone", "un Pilone Protettivo", "il Pilone pi&ugrave; vicino", "il Pilone", "verso di esso" ],
+                                                        EN:[ "Protective Pylons", "are Protective Pylons", "Protective Pylons", "each Pylon", "a Pylon", "on the Pylon", "a Protective Pylon", "the closest Pylon", "the Pylon", "toward it" ]
+                                                    },{
+                                                        IT:[ "Torrette Difensive", "sono Torrette Difensive", "le Torrette Difensive", "ogni Torretta", "una Torretta", "alla Torretta", "una Torretta Difensiva", "la Torretta pi&ugrave; vicina", "la Torretta", "verso di essa" ],
+                                                        EN:[ "Defensive Turrets", "are Defensive Turrets", "Defensive Turrets", "each Turret", "a Turret", "on the Turret", "a Defensive Turret", "the closest Turret", "the Turret", "toward it" ]
+                                                    }
+                                                ],
+                                                interference:[
+                                                    {
+                                                        IT:[ "Sembra che le forze dell'Oscurit&agrave; alla fine siano venute a sapere delle interferenze degli eroi." ],
+                                                        EN:[ "It seems that the forces of Darkness eventually learned of the heroes' interference." ]
+                                                    },{
+                                                        IT:[ "I piani degli eroi sono stati scoperti." ],
+                                                        EN:[ "The heroes' plans have been exposed." ]
+                                                    },{
+                                                        IT:[ "Gli eroi avevano un piano ben preciso ma non sono stati abbastanza scrupolosi nel mantenerlo segreto." ],
+                                                        EN:[ "The heroes had a very specific plan but they were not scrupulous enough in keeping it secret." ]
+                                                    }
+                                                ],
+                                                purpose:[
+                                                    {
+                                                        IT:[ "Sapendo che gli eroi stanno accumulando {label.item@0}," ],
+                                                        EN:[ "Knowing that the heroes are amassing {label.item@0}," ]
+                                                    },{
+                                                        IT:[ "Per qualche motivo, gli eroi sono alla ricerca di {label.item@0} per cui"],
+                                                        EN:[ "The heroes are looking for {label.item@0} for some reason, so"]
+                                                    },{
+                                                        IT:[ "Qualcuno ha visto gli eroi mentre facevano domande su dove trovare {label.item@0} e" ],
+                                                        EN:[ "Someone saw the heroes asking questions about where to find {label.item@0} and" ]
+                                                    }
+                                                ],
+                                                trap:[
+                                                    {
+                                                        IT:[ "i nemici hanno trovato un modo per attirarli in trappola con l'inganno!" ],
+                                                        EN:[ "the enemies have found a way to lure them into a trap by deception!" ]
+                                                    },{
+                                                        IT:[ "i nemici sono riusciti ad attirarli nella loro trappola mortale!" ],
+                                                        EN:[ "the enemies managed to lure them into their deadly trap!" ]
+                                                    },{
+                                                        IT:[ "i nemici hanno organizzato una trappola per attirarli nel bel mezzo del loro territorio!" ],
+                                                        EN:[ "the enemies have set up a trap to lure them into the middle of their territory!" ]
+                                                    }
+                                                ],
+                                                onlyWay:[
+                                                    {
+                                                        IT:[ "C'&egrave; un solo modo per fuggirne:" ],
+                                                        EN:[ "There is only one way to escape:" ]
+                                                    },{
+                                                        IT:[ "Ormai non possono pi&ugrave; fuggire. Devono"],
+                                                        EN:[ "Now they can no longer escape. They have to" ]
+                                                    },{
+                                                        IT:[ "Non hanno alcuno scampo. Per sopravvivere devono" ],
+                                                        EN:[ "They have no escape. To survive they must" ]
+                                                    }
+                                                ],
+                                                survive:[
+                                                    {
+                                                        IT:[ "sopravvivere a questa battaglia e proteggere {label.item@1}!" ],
+                                                        EN:[ "survive this battle and protect {label.item@1}!" ]
+                                                    },{
+                                                        IT:[ "proteggere {label.item@1} senza lasciarci la pelle!" ],
+                                                        EN:[ "protect {label.item@1} without killing us!" ]
+                                                    },{
+                                                        IT:[ "rimanere vivi e difendere {label.item@1}!" ],
+                                                        EN:[ "stay alive and defend {label.item@1}!" ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    title:[
+                                        {
+                                           EN:"{label.item:capital@3}"
+                                        },{
+                                            EN:"{label.barrier:capital@2}"
+                                        },{
+                                            EN:"{label.item:capital@1}"
+                                        }
+                                    ],
+                                    story:[
+                                        {
+                                            EN:"{label.interference@0} {label.purpose@0} {label.trap@0} {label.onlyWay@0} {label.survive@0}"
+                                        }
+                                    ],
+                                    challenges:[
+                                        { intensity:1, tag:"default" },
+                                        { intensity:2, tag:"default" },
+                                        { intensity:3, tag:"default" },
+                                    ],
+                                    rules:[
+                                        [
+                                            {
+                                                type:"objective",
+                                                name:[
+                                                    {
+                                                        IT:"Proteggere {label.item@2}",
+                                                        EN:"Defend {label.item@2}"
+                                                    }
+                                                ],
+                                                summary:[
+                                                    {
+                                                        IT:"Se c'&egrave; un Nemico nella Zona con il segnalino Obiettivo sul lato colorato all'inizio della Fase dei Nemici, la Missione termina con una sconfitta",
+                                                        EN:"If there is an Enemy in the Zone with the Objective token on its colored side at the start of the Enemy Phase, the Mission ends in defeat"
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"objective",
+                                                name:[
+                                                    {
+                                                        IT:"Uccidere tutti i Nemici",
+                                                        EN:"Eliminate all Enemies",
+                                                    }
+                                                ],
+                                                summary:[
+                                                    {
+                                                        IT:"Una volta che i Nemici hanno smesso di generarsi, uccidere tutti i Nemici per vincere la Missione",
+                                                        EN:"Once Enemies stop spawning, kill all Enemies to win the Mission"
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        IT:"Preparazione Speciale",
+                                                        EN:"Special Preparation"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Collocare il segnalino Tesoro Raro, che solitamente si aggiunge nel 4&deg; round, nel sacchetto dei Tesori. Quando il tracciato Oscurit&agrave; raggiunge il 4&deg; round, evitare semplicemente di aggiungere il segnalino Tesoro Raro (collocare un segnalino Clessidra sopra l'icona Tesoro Raro sul tracciato Oscurit&agrave; come promemoria). Aggiungere i segnalini Tesoro al 6&deg; e 8&deg; round come di norma."+
+                                                        "<p>Generare 1 Orda su ognuno dei 4 Portali. Collocare in ognuna delle Zone delle Camere della Tessera centrale ({tileLabel.first}) un ammontare di segnalini Tesoro estratti dal sacchetto in base al numero dei giocatori:</p>"+
+                                                        "<ul>"+
+                                                        "<li>1-2 Eroi: 1 segnalino Tesoro per Zona</li>"+
+                                                        "<li>3-4 Eroi: 2 segnalini Tesoro per Zona</li>"+
+                                                        "<li>5-6 Eroi: 3 segnalini Tesoro per Zona</li>"+
+                                                        "</ul>"+
+                                                        "<p>Collocare i segnalini Corruzione sulla 2&deg;, 4&deg;, 6&deg; e 8&deg; casella del tracciato Oscurit&agrave;. Collocare, inoltre, un segnalino Generazione sulla 3&deg;, 7&deg; e 9&deg; casella del tracciato Oscurit&agrave;.",
+                                                        EN:"Place the Rare Treasure token, which is usually added in the 4th round, into the Treasure bag. When the Darkness track reaches the 4th round, simply do not add the Rare Treasure token (place an Hourglass token over the Rare Treasure icon on the Darkness track as a reminder.) Add Treasure tokens on the 6th and 8th rounds as normal."+
+                                                        "<p>Generate 1 Horde on each of the 4 Portals. Place an amount of Treasure tokens drawn from the bag based on the number of players in each of the Chamber Zones of the central tile ({tileLabel.first}):</p> "+
+                                                        "<ul>"+
+                                                        "<li>1-2 Heroes: 1 Treasure token per Zone</li>"+
+                                                        "<li>3-4 Heroes: 2 Treasure tokens per Zone</li>"+
+                                                        "<li>5-6 Heroes: 3 Treasure tokens per Zone</li>"+
+                                                        "</ul>"+
+                                                        "<p>Place the Corruption tokens on the 2nd, 4th, 6th, and 8th spaces of the Darkness track. Additionally, place a Spawn token on the 3rd, 7th, and 9th spaces of the Darkness track.",
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        IT:"Nessun Rinforzo Extra",
+                                                        EN:"No Extra Reinforcement"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Ignorare tutte le capacit&agrave; o gli effetti dei Nemici che generano Orde extra o Mostri Erranti extra.",
+                                                        EN:"Ignore any Enemy abilities or effects that generate extra Mobs or extra Roaming Monsters."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        IT:"Ondate di Nemici",
+                                                        EN:"Enemy Waves"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Per questa Missione, ignorare qualsiasi generazione dal tracciato Oscurit&agrave;. Invece, ogni volta che il tracciato Oscurit&agrave; raggiunge una casella con un segnalino, scartare quel segnalino e risolvere l'effetto corrispondente:"+
+                                                        "<ul>"+
+                                                        "<li><b>Segnalino Corruzione:</b> Generare 1 Mostro Errante sul Portale dei Mostri Erranti. Fatto questo, scambiare la posizione del Portale dei Mostri Erranti con il Portale successivo in senso orario. Il Portale dei Mostri Erranti passa alle Tessere seguenti:"+
+                                                        "<ul>"+
+                                                        "<li>Round 2: {tileLabel.second}</li>"+
+                                                        "<li>Round 4: {tileLabel.third}</li>"+
+                                                        "<li>Round 6: {tileLabel.fourth}</li>"+
+                                                        "<li>Round 8: {tileLabel.fifth}</li>"+
+                                                        "</ul>"+
+                                                        "</li>"+
+                                                        "<li><b>Segnalino Generazione:</b> Generare 1 Orda su ognuno dei 4 Portali. Collocare in ognuna delle Zone delle Camere della Tessera centrale ({tileLabel.first}) un ammontare di segnalini Tesoro estratti dal sacchetto in base al numero degli Eroi:"+
+                                                        "<ul>"+
+                                                        "<li><b>1-2 Eroi:</b> 1 segnalino Tesoro per Zona</li>"+
+                                                        "<li><b>3-4 Eroi:</b> 2 segnalini Tesoro per Zona</li>"+
+                                                        "<li><b>5-6 Eroi:</b> 3 segnalini Tesoro per Zona</li>"+
+                                                        "</ul>"+
+                                                        "</li>"+
+                                                        "</ul>",
+                                                        EN:"For this Mission, ignore any spawns from the Darkness track. Instead, whenever the Darkness track reaches a space with a marker, discard that marker and resolve the corresponding effect:"+
+                                                        "<ul>"+
+                                                        "<li><b>Corruption Token:</b> Spawn 1 Roaming Monster on the Roaming Monster Portal. Once this is done, swap the location of the Roaming Monster Portal with the next Portal clockwise. The Roaming Monster Portal switches to the following tiles:"+
+                                                        "<ul>"+
+                                                        "<li>Round 2: {tileLabel.second}</li>"+
+                                                        "<li>Round 4: {tileLabel.third}</li>"+
+                                                        "<li>Round 6: {tileLabel.fourth}</li>"+
+                                                        "<li>Round 8: {tileLabel.fifth}</li>"+
+                                                        "</ul>"+
+                                                        "</li>"+
+                                                        "<li><b>Spawn Token:</b> Spawn 1 Horde on each of the 4 Portals. Place an amount of Treasure tokens taken from the bag in each of the Chamber Zones of the central tile ({tileLabel.first}) based on the number of Heroes:"+
+                                                        "<ul>"+
+                                                        "<li><b>1-2 Heroes:</b> 1 Treasure token per Zone</li>"+
+                                                        "<li><b>3-4 Heroes:</b> 2 Treasure tokens per Zone</li>"+
+                                                        "<li><b>5-6 Heroes:</b> 3 Treasure tokens per Zone</li>"+
+                                                        "</ul>"+
+                                                        "</li>"+
+                                                        "</ul>",
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        EN:"{label.barrier@0}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"I segnalini Obiettivo sul lato grigio {label.barrier@1} che bloccano i Nemici e impediscono loro di lasciare quella Zona. I Nemici bersagliano {label.barrier@2} come se bersagliassero gli Eroi, e {label.barrier@3} possiede 5 Salute. Ogni volta che un Nemico attacca {label.barrier@4}, non tirare i dadi come in un combattimento regolare. Infliggere invece 1 Ferita {label.barrier@5}.",
+                                                        EN:"The Objective tokens on the gray side {label.barrier@1} that block Enemies and prevent them from leaving that Zone. Enemies target le Barriere Magiche {label.barrier@2} as if they were targeting Heroes, and {label.barrier@3} has 5 Health. Whenever an Enemy attacks {label.barrier@4}, do not roll dice as in regular combat. Instead, inflict 1 Wound {label.barrier@5}."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        EN:"{label.item@3}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"In questa Missione, invece dell'attivazione regolare, tutti i Nemici, inclusi i Mostri Erranti, devono seguire un comportamento diverso. Effettuano 2 azioni. Per ogni azione, controllare le condizioni seguenti. Se la prima viene soddisfatta, effettuare quella. Altrimenti, passare alla condizione successiva, finch&eacute; non se ne soddisfa una."+
+                                                        "<ul>"+
+                                                        "<li><b>Se c'&egrave; {label.barrier@6} tra il Nemico e il segnalino Obiettivo sul lato colorato:</b> Il Nemico considera {label.barrier@7} come suo bersaglio per attaccare o muoversi. Questo significa che pu&ograve; attaccare {label.barrier@8}, se si trova a gittata. Altrimenti si muove di 1 Zona {label.barrier@9} (ignorando eventuali Eroi).</li>"+
+                                                        "<li><b>Se c'&egrave; almeno 1 Eroe tra il Nemico e il segnalino Obiettivo sul lato colorato:</b> Il Nemico considera l'Eroe pi&ugrave; vicino come suo bersaglio per attaccare o muoversi.</li>"+
+                                                        "<li><b>Altrimenti:</b> Il Nemico si muove di 1 Zona verso il segnalino Obiettivo sul lato colorato."+
+                                                        "</ul>"+
+                                                        "<p>Se, all'inizio della Fase dei Nemici, c'&egrave; un Nemico nella Zona del segnalino Obiettivo sul lato colorato, la Missione termina con una sconfitta.</p>",
+                                                        EN:"In this Mission, instead of the regular activation, all Enemies, including Roaming Monsters, must follow a different behavior. They perform 2 actions. For each action, check the following conditions. If the first one is met, perform that one. Otherwise, move on to the next condition until one is satisfied."+
+                                                        "<ul>"+
+                                                        "<li><b>If there is {label.barrier@6} between the Enemy and the Objective token on the colored side:</b> The Enemy treats {label.barrier@7} as its target to attack or move. This means it can attack {label.barrier@8}, if within range. Otherwise, move 1 Zone {label.barrier@9} (ignoring any Heroes).</li>"+
+                                                        "<li><b>If there is at least 1 Hero between the Enemy and the Objective token on the colored side:</b> The Enemy treats the closest Hero as its target to attack or move.</li>" +
+                                                        "<li><b>Otherwise:</b> The Enemy moves 1 Zone toward the Objective marker on the colored side."+
+                                                        "</ul>"+
+                                                        "<p>If, at the start of the Enemy Phase, there is an Enemy in the Zone of the Objective marker on the colored side, the Mission ends in defeat.</p>"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    map:[
+                                        {
+                                            structure:[ "towerDefense" ],
+                                            gameMode: [ "towerDefense" ],
+                                            difficulty:[ "default" ],
+                                            roomLimits:[ "default" ],
+                                            skin:[ "default" ],
+                                            size: [ "none" ],
+                                            bridges:[ "none" ],
+                                            corridors: [ "towerDefense" ],
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 }
