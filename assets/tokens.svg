@@ -9,7 +9,7 @@
    id="svg5"
    inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
    sodipodi:docname="tokens.svg"
-   inkscape:export-filename="C:\Users\FrancescoCottone\Desktop\KesieV\stuff-2023\boards\images\iconSettings.png"
+   inkscape:export-filename="C:\Users\FrancescoCottone\Desktop\KesieV\stuff-2024\boards\images\tokenOpenDoor.png"
    inkscape:export-xdpi="38.099998"
    inkscape:export-ydpi="38.099998"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -34,7 +34,7 @@
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g1953" />
+     inkscape:current-layer="g6663" />
   <defs
      id="defs2" />
   <g
@@ -1353,8 +1353,8 @@
   <g
      inkscape:groupmode="layer"
      id="layer13"
-     inkscape:label="doorToken"
-     style="display:none">
+     inkscape:label="openDoorToken"
+     style="display:inline">
     <g
        id="g6663"
        transform="translate(-1.4874978,-7.1954975)">
@@ -1379,6 +1379,44 @@
       <rect
          style="fill:#000000;stroke:#000000;stroke-width:6.00001;stroke-miterlimit:4;stroke-dasharray:none;paint-order:fill markers stroke"
          id="rect6139-5"
+         width="131.84166"
+         height="20.187489"
+         x="84.631401"
+         y="51.611656"
+         rx="0"
+         ry="0"
+         transform="rotate(40.88824)" />
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g1507"
+     inkscape:label="doorToken"
+     style="display:none">
+    <g
+       id="g1504"
+       transform="translate(-1.4874978,-7.1954975)">
+      <rect
+         style="fill:#000000;stroke:#000000;stroke-width:6.00001;stroke-miterlimit:4;stroke-dasharray:none;paint-order:fill markers stroke"
+         id="rect1498"
+         width="43.999989"
+         height="43.999989"
+         x="6.7333274"
+         y="85.195503"
+         rx="0"
+         ry="0" />
+      <rect
+         style="fill:#000000;stroke:#000000;stroke-width:6.00001;stroke-miterlimit:4;stroke-dasharray:none;paint-order:fill markers stroke"
+         id="rect1500"
+         width="43.999989"
+         height="43.999989"
+         x="152.24196"
+         y="85.195503"
+         rx="0"
+         ry="0" />
+      <rect
+         style="fill:#000000;stroke:#000000;stroke-width:6.00001;stroke-miterlimit:4;stroke-dasharray:none;paint-order:fill markers stroke"
+         id="rect1502"
          width="131.84166"
          height="20.187489"
          x="35.566666"
@@ -1837,7 +1875,7 @@
      inkscape:groupmode="layer"
      id="g1953"
      inkscape:label="iconSettings"
-     style="display:inline">
+     style="display:none">
     <rect
        style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:12;stroke-linecap:square;paint-order:stroke fill markers"
        id="rect2057"

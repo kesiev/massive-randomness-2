@@ -559,6 +559,15 @@ HTML,BODY {
     background-image: url(../images/footerArrowRight.png);
 }
 
+.quest .showtext {
+    border-radius:5px;
+    white-space: inherit;
+    border:2px solid #333;
+    background-color: rgba(0,255,0,0.2);
+    padding:5px;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 980px) {
 
     .quest .questFooter {
@@ -891,6 +900,10 @@ HTML,BODY {
     background-image: url('../images/tokenDoor.png');
 }
 
+.token.flipped.door {
+    background-image: url('../images/tokenOpenDoor.png');
+}
+
 .cell .door {
     z-index: 50;
     width:30px;
@@ -925,9 +938,10 @@ HTML,BODY {
 }
 
 .token.door.side-2 {
-    border-bottom-width: 4px;
-    left:47px;
-    bottom:-19px;
+    border-top-width: 4px;
+    left:46px;
+    bottom:-18px;
+    transform: rotate(180deg);
 }
 
 .token.door.marked.side-2 {
@@ -937,8 +951,8 @@ HTML,BODY {
 }
 
 .token.door.side-3 {
-    border-right-width: 4px;
-    transform: rotate(90deg);
+    border-left-width: 4px;
+    transform: rotate(270deg);
     left:-17px;
     top:45px;
 }
@@ -963,8 +977,16 @@ HTML,BODY {
         font-size:14px;
     }
 
-    .printonly {
-        display: inherit;
+    SPAN.printonly {
+        display: inline;
+    }
+
+    DIV.printonly {
+        display: block;
+    }
+
+    LI.printonly {
+        display: list-item;
     }
 
     .displayonly {
@@ -1075,6 +1097,14 @@ HTML,BODY {
     .quest .mapImage {
         transform-origin: 0 0;
         transform:scale(0.5);
+    }
+
+    .quest .showtext {
+        display: none;
+    }
+
+    .quest .hiddentext {
+        display:inline !important;
     }
 
     .tile .cell.room .inner {

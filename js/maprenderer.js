@@ -135,7 +135,7 @@ MapRenderer=(function(){
                     if (door) {
                         let
                             doorNode = document.createElement("div");
-                        doorNode.className=resources.tokensMetadata.door.className.map+(door.className ? " "+door.className : "")+" side-"+side;
+                        doorNode.className=resources.tokensMetadata[door.id].className.map+(door.className ? " "+door.className : "")+(door.flipped ? " flipped" : "")+" side-"+side;
                         cellNode.cell.appendChild(doorNode);
                     }
 

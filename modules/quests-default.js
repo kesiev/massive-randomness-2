@@ -48,6 +48,10 @@ ModManager.modules.push(function(){
                         questFooter:{
                             IT:"Massive Randomness 2 - Avventura One-Shot",
                             EN:"Massive Randomness 2 - One Shot Quest"
+                        },
+                        showHiddenText:{
+                            IT:"Mostra testo nascosto",
+                            EN:"Show hidden text"
                         }
                     }
                 }

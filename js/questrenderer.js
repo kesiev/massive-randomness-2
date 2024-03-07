@@ -21,7 +21,7 @@ QuestRenderer=(function(){
             node = document.createElement(type);
 
         if (className) node.className=className;
-        into.appendChild(node);
+        if (into) into.appendChild(node);
 
         return node;
     }
@@ -255,6 +255,23 @@ QuestRenderer=(function(){
                 printMiniMapNode.className += " printOnly";
                 printMapNode.className += " printOnly";
 
+                // Hide hidden text
+
+                let
+                    hiddenText = document.getElementsByClassName("hiddentext");
+                for (let i=0;i<hiddenText.length;i++) {
+                    let
+                        node = hiddenText[i],
+                        button = createNode(0,"span","showtext");
+                    
+                    node.style.display = "none";
+                    button.onclick=function() {
+                        this.style.display = "none";
+                        node.style.display = "";
+                    }
+                    button.innerHTML=Labels.getLabel(flags,resources,result,language,resources.globalLabels.showHiddenText);
+                    node.parentElement.insertBefore(button,node);
+                }
                 
             }
     
