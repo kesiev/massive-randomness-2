@@ -1,13 +1,13 @@
 ModManager.modules.push(function(){
 
     return [
-            {
+        {
 
-            id:"md2-crystallava",
+            id:"md2-crystallava-cl",
             needs:[ ],
-            provides:[ "md2-crystallava" ],
+            provides:[ "md2-crystallava-cl" ],
             label:{
-                EN:"MD A Quest of Crystal & Lava box content"
+                EN:"MD A Quest of Crystal & Lava box content (crystal & lava tiles)"
             },
             content:[
                 {
@@ -18,7 +18,8 @@ ModManager.modules.push(function(){
                             IT:"da MD Una Missione di Lava e Cristalli"
                         }
                     }
-                },{
+                },
+                {
                     type:"specialRules",
                     data:{
                         noLydian:[
@@ -35,6 +36,234 @@ ModManager.modules.push(function(){
                                 }
                             }
                         ]
+                    }
+                },
+                {
+                    type:"tiles",
+                    data:[
+                        {
+                            id:"10",
+                            label:"10",
+                            from:"boxMd2CrystalLava",
+                            sides:[
+                                {
+                                    id:"10V",
+                                    label:"10V",
+                                    skins:[ "crystal" ],
+                                    specialRules:[ "noLydian" ],
+                                    tags: [ "any", "roomSize5", "roomSize1+", "roomSize2+", "roomSize3+", "roomSize4+", "roomSize5+", "openSides3", "openSides1+", "openSides2+", "openSides3+", "roomsCount1", "roomsCount1+" ],
+                                    angles:[
+                                        [
+                                            [ { type:[ "dark" ], isRoom:false, walls:[ false, false, true, false ] }, { type:[ "dark" ], isRoom:false, walls:[ false, false, true, false ] }, { type:[ "dark" ], isRoom:false, walls:[ false, false, false, false ] } ],
+                                            [ { type:[ "crystal" ], isRoom:true,  walls:[ true, false, false, true ] }, { type:[ "crystal" ], isRoom:true, walls:[ true, true, false, false ]}, { type:[ "dark" ], isRoom:false,  walls:[ false, false, true, true ] } ],
+                                            [ { type:[ "crystal" ], isRoom:true, walls:[ false, false, true, true ] }, { type:[ "crystal" ], isRoom:true, walls:[ false, false, true, false ]}, { type:[ "crystal" ], isRoom:true, walls:[ true, true, true, false ] } ]
+                                        ]
+                                    ]
+                                },{
+                                    id:"10R",
+                                    label:"10R",
+                                    skins:[ "lava" ],
+                                    specialRules:[ "noLydian" ],
+                                    tags: [ "any", "roomSize1", "roomSize1+", "openSides4", "openSides1+", "openSides2+", "openSides3+", "openSides4+", "roomsCount3", "roomsCount1+", "roomsCount2+", "roomsCount3+" ],
+                                    angles:[
+                                        [
+                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, true, true, true ] }, { type:[ "lava" ], walls:[ false, false, false, true ]}, { type:[ "lava" ], walls:[ false, false, true, false ] } ],
+                                            [ { type:[ "lava" ], walls:[ true, false, true, false ] }, { type:[ "lava" ], walls:[ false, true, false, false ]}, { type:[ "dark" ], isRoom:true,  walls:[ true, true, true, true ] } ],
+                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, true, true, true ] }, { type:[ "lava" ], walls:[ false, false, false, true ]}, { type:[ "lava" ], walls:[ true, false, false, false ] } ],
+                                        ]
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id:"11",
+                            label:"11",
+                            from:"boxMd2CrystalLava",
+                            sides:[
+                                {
+                                    id:"11R",
+                                    label:"11R",
+                                    skins:[ "lava" ],
+                                    specialRules:[ "noLydian" ],
+                                    tags: [ "any", "roomSize2", "roomSize1+", "roomSize2+", "openSides4", "openSides1+", "openSides2+", "openSides3+", "openSides4+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
+                                    angles:[
+                                        [
+                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, true, false, true ] }, { type:[ "lava" ], isRoom:false, walls:[ false, false, false, true ] }, { type:[ "lava" ], isRoom:false, walls:[ false, false, true, false ] } ],
+                                            [ { type:[ "dark" ], isRoom:true,  walls:[ false, true, true, true ] }, { type:[ "lava" ], isRoom:false, walls:[ false, true, false, true ]}, { type:[ "dark" ], isRoom:true,  walls:[ true, true, false, true ] } ],
+                                            [ { type:[ "lava" ], isRoom:false, walls:[ true, false, false, false ] }, { type:[ "lava" ], isRoom:false, walls:[ false, true, false, false ]}, { type:[ "dark" ], isRoom:true, walls:[ false, true, true, true ] } ]
+                                        ]
+                                    ]
+                                },{
+                                    id:"11V",
+                                    label:"11V",
+                                    skins:[ "crystal" ],
+                                    specialRules:[ "noLydian" ],
+                                    tags: [ "any", "roomSize2", "roomSize1+", "roomSize2+", "openSides4", "openSides1+", "openSides2+", "openSides3+", "openSides4+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
+                                    angles:[
+                                        [
+                                            [ { type:[ "crystal" ], isRoom:true, walls:[ true, true, false, true ] }, { type:[ "dark" ], isRoom:false, walls:[ false, false, false, true ] }, { type:[ "dark" ], isRoom:false, walls:[ false, false, true, false ] } ],
+                                            [ { type:[ "crystal" ], isRoom:true,  walls:[ false, true, true, true ] }, { type:[ "dark" ], isRoom:false, walls:[ false, true, false, true ]}, { type:[ "crystal" ], isRoom:true,  walls:[ true, true, false, true ] } ],
+                                            [ { type:[ "dark" ], isRoom:false, walls:[ true, false, false, false ] }, { type:[ "dark" ], isRoom:false, walls:[ false, true, false, false ]}, { type:[ "crystal" ], isRoom:true, walls:[ false, true, true, true ] } ]
+                                        ]
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id:"12",
+                            label:"12",
+                            from:"boxMd2CrystalLava",
+                            sides:[
+                                {
+                                    id:"12V",
+                                    label:"12V",
+                                    skins:[ "crystal" ],
+                                    specialRules:[ "noLydian" ],
+                                    tags: [ "any", "roomSize2", "roomSize1+", "roomSize2+", "roomSize3", "roomSize3+", "openSides3", "openSides1+", "openSides2+", "openSides3+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
+                                    angles:[
+                                        [
+                                            [ { type:[ "dark" ], isRoom:false, walls:[ false, true, false, false ] }, { type:[ "crystal" ], isRoom:true, walls:[ true, false, true, true ] }, { type:[ "crystal" ], isRoom:true, walls:[ true, true, true, false ] } ],
+                                            [ { type:[ "dark" ], isRoom:false,  walls:[ false, false, true, false ] }, { type:[ "dark" ], isRoom:false, walls:[ true, false, true, false ]}, { type:[ "dark" ], isRoom:false,  walls:[ true, false, true, false ] } ],
+                                            [ { type:[ "crystal" ], isRoom:true, walls:[ true, false, true, true ] }, { type:[ "crystal" ], isRoom:true, walls:[ true, false, true, false ]}, { type:[ "crystal" ], isRoom:true, walls:[ true, true, true, false ] } ]
+                                        ]
+                                    ]
+                                },{
+                                    id:"12R",
+                                    label:"12R",
+                                    skins:[ "lava" ],
+                                    specialRules:[ "noLydian" ],
+                                    tags: [ "any", "roomSize1", "roomSize1+", "roomSize3", "roomSize2+", "roomSize3+", "openSides3", "openSides1+", "openSides2+", "openSides3+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
+                                    angles:[
+                                        [
+                                            [ { type:[ "lava" ], isRoom:false, walls:[ false, true, false, false ] }, { type:[ "dark" ], isRoom:true, walls:[ true, true, true, true ] }, { type:[ "lava" ], isRoom:false, walls:[ false, false, false, true ] } ],
+                                            [ { type:[ "lava" ], isRoom:false,  walls:[ false, false, true, false ] }, { type:[ "lava" ], isRoom:false, walls:[ true, false, true, false ]}, { type:[ "lava" ], isRoom:false,  walls:[ false, false, true, false ] } ],
+                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, false, true, true ] }, { type:[ "dark" ], isRoom:true, walls:[ true, false, true, false ]}, { type:[ "dark" ], isRoom:true, walls:[ true, true, true, false ] } ]
+                                        ]
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id:"13",
+                            label:"13",
+                            from:"boxMd2CrystalLava",
+                            sides:[
+                                {
+                                    id:"13V",
+                                    label:"13V",
+                                    skins:[ "crystal" ],
+                                    specialRules:[ "noLydian" ],
+                                    tags: [ "any", "roomSize2", "roomSize1+", "roomSize2+", "openSides4", "openSides1+", "openSides2+", "openSides3+", "openSides4+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
+                                    angles:[
+                                        [
+                                            [ { type:[ "dark" ], isRoom:false, walls:[ false, false, true, false ] }, { type:[ "dark" ], isRoom:false, walls:[ false, true, false, false ] }, { type:[ "crystal" ], isRoom:true, walls:[ true, true, false, true ] } ],
+                                            [ { type:[ "crystal" ], isRoom:true,  walls:[ true, true, false, true ] }, { type:[ "dark" ], isRoom:false, walls:[ false, true, false, true ]}, { type:[ "crystal" ], isRoom:true,  walls:[ false, true, true, true ] } ],
+                                            [ { type:[ "crystal" ], isRoom:true, walls:[ false, true, true, true ] }, { type:[ "dark" ], isRoom:false, walls:[ false, false, false, true ]}, { type:[ "dark" ], isRoom:false, walls:[ true, false, false, false ] } ]
+                                        ]
+                                    ]
+                                },{
+                                    id:"13R",
+                                    label:"13R",
+                                    skins:[ "lava" ],
+                                    specialRules:[ "noLydian" ],
+                                    tags: [ "any", "roomSize2", "roomSize1+", "roomSize2+", "openSides4", "openSides1+", "openSides2+", "openSides3+", "openSides4+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
+                                    angles:[
+                                        [
+                                            [ { type:[ "lava" ], isRoom:false, walls:[ false, false, true, false ] }, { type:[ "lava" ], isRoom:false, walls:[ false, true, false, false ] }, { type:[ "dark" ], isRoom:true, walls:[ true, true, false, true ] } ],
+                                            [ { type:[ "dark" ], isRoom:true,  walls:[ true, true, false, true ] }, { type:[ "lava" ], isRoom:false, walls:[ false, true, false, true ]}, { type:[ "dark" ], isRoom:true,  walls:[ false, true, true, true ] } ],
+                                            [ { type:[ "dark" ], isRoom:true, walls:[ false, true, true, true ] }, { type:[ "lava" ], isRoom:false, walls:[ false, false, false, true ]}, { type:[ "lava" ], isRoom:false, walls:[ true, false, false, false ] } ]
+                                        ]
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id:"14",
+                            label:"14",
+                            from:"boxMd2CrystalLava",
+                            sides:[
+                                {
+                                    id:"14V",
+                                    label:"14V",
+                                    skins:[ "crystal" ],
+                                    specialRules:[ "noLydian" ],
+                                    tags: [ "any", "roomSize5", "roomSize1+", "roomSize2+", "roomSize3+", "roomSize4+", "roomSize5+", "openSides3", "openSides1+", "openSides2+", "openSides3+", "roomsCount1", "roomsCount1+" ],
+                                    angles:[
+                                        [
+                                            [ { type:[ "dark" ], isRoom:false, walls:[ false, false, false, false ] }, { type:[ "dark" ], isRoom:false, walls:[ false, false, true, false ] }, { type:[ "dark" ], isRoom:false, walls:[ false, false, true, false ] } ],
+                                            [ { type:[ "dark" ], isRoom:false,  walls:[ false, true, true, false ] }, { type:[ "crystal" ], isRoom:true, walls:[ true, false, false, true ]}, { type:[ "crystal" ], isRoom:true,  walls:[ true, true, false, false ] } ],
+                                            [ { type:[ "crystal" ], isRoom:true, walls:[ true, false, true, true ] }, { type:[ "crystal" ], isRoom:true, walls:[ false, false, true, false ]}, { type:[ "crystal" ], isRoom:true, walls:[ false, true, true, false ] } ]
+                                        ]
+                                    ]
+                                },{
+                                    id:"14R",
+                                    label:"14R",
+                                    skins:[ "lava" ],
+                                    specialRules:[ "noLydian" ],
+                                    tags: [ "any", "roomSize1", "roomSize1+", "roomSize3", "roomSize2+", "roomSize3+", "openSides3", "openSides1+", "openSides2+", "openSides3+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
+                                    angles:[
+                                        [
+                                            [ { type:[ "lava" ], isRoom:false, walls:[ false, true, false, false ] }, { type:[ "dark" ], isRoom:true, walls:[ true, true, true, true ] }, { type:[ "lava" ], isRoom:false, walls:[ false, false, false, true ] } ],
+                                            [ { type:[ "lava" ], isRoom:false,  walls:[ false, false, true, false ] }, { type:[ "lava" ], isRoom:false, walls:[ true, false, true, false ]}, { type:[ "lava" ], isRoom:false,  walls:[ false, false, true, false ] } ],
+                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, false, true, true ] }, { type:[ "dark" ], isRoom:true, walls:[ true, false, true, false ]}, { type:[ "dark" ], isRoom:true, walls:[ true, true, true, false ] } ]
+                                        ]
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id:"15",
+                            label:"15",
+                            from:"boxMd2CrystalLava",
+                            sides:[
+                                {
+                                    id:"15V",
+                                    label:"15V",
+                                    skins:[ "crystal" ],
+                                    specialRules:[ "noLydian" ],
+                                    tags: [ "any", "roomSize3", "roomSize1+", "roomSize2+", "roomSize3+", "roomSize2", "openSides3", "openSides1+", "openSides2+", "openSides3+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
+                                    angles:[
+                                        [
+                                            [ { type:[ "crystal" ], isRoom:true, walls:[ true, true, false, true ] }, { type:[ "dark" ], walls:[ false, true, false, true ]}, { type:[ "crystal" ], isRoom:true, walls:[ true, true, false, true ] } ],
+                                            [ { type:[ "crystal" ], isRoom:true, walls:[ false, true, false, true ] }, { type:[ "dark" ], walls:[ false, true, false, true ]}, { type:[ "crystal" ], isRoom:true,  walls:[ false, true, true, true ] } ],
+                                            [ { type:[ "crystal" ], isRoom:true, walls:[ false, true, true, true ] }, { type:[ "dark" ], walls:[ false, false, false, true ]}, { type:[ "dark" ], walls:[ true, false, false, false ] } ],
+                                        ]
+                                    ]
+                                },{
+                                    id:"15R",
+                                    label:"15R",
+                                    skins:[ "lava" ],
+                                    specialRules:[ "noLydian" ],
+                                    tags: [ "any", "roomSize1", "roomSize1+", "openSides4", "openSides1+", "openSides2+", "openSides3+", "openSides4+", "roomsCount3", "roomsCount1+", "roomsCount2+", "roomsCount3+" ],
+                                    angles:[
+                                        [
+                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, true, true, true ] }, { type:[ "lava" ], walls:[ false, false, false, true ]}, { type:[ "lava" ], walls:[ false, false, true, false ] } ],
+                                            [ { type:[ "lava" ], walls:[ true, false, true, false ] }, { type:[ "lava" ], walls:[ false, true, false, false ]}, { type:[ "dark" ], isRoom:true,  walls:[ true, true, true, true ] } ],
+                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, true, true, true ] }, { type:[ "lava" ], walls:[ false, false, false, true ]}, { type:[ "lava" ], walls:[ true, false, false, false ] } ],
+                                        ]
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },{
+
+            id:"md2-crystallava-up",
+            needs:[ ],
+            provides:[ "md2-crystallava-up" ],
+            label:{
+                EN:"MD A Quest of Crystal & Lava box content (upgrade pack tiles)"
+            },
+            content:[
+                {
+                    type:"globalLabels",
+                    data:{
+                        boxMd2CrystalLava:{
+                            EN:"from MD A Quest of Crystal &amp; Lava",
+                            IT:"da MD Una Missione di Lava e Cristalli"
+                        }
                     }
                 },
                 {
@@ -323,208 +552,6 @@ ModManager.modules.push(function(){
                                             [ { type:[ "light" ], isRoom:true, walls:[ true, true, true, true ] }, { type:[ "dark" ], walls:[ false, false, false, true ]}, { type:[ "dark" ], walls:[ false, false, true, false ] } ],
                                             [ { type:[ "light" ], walls:[ true, false, true, false ] }, { type:[ "dark" ], walls:[ false, true, false, false ]}, { type:[ "dark" ], isRoom:true,  walls:[ true, true, true, true ] } ],
                                             [ { type:[ "dark" ], isRoom:true, walls:[ true, true, true, true ] }, { type:[ "light" ], walls:[ false, false, false, true ]}, { type:[ "light" ], walls:[ true, false, false, false ] } ],
-                                        ]
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            id:"10",
-                            label:"10",
-                            from:"boxMd2CrystalLava",
-                            sides:[
-                                {
-                                    id:"10V",
-                                    label:"10V",
-                                    skins:[ "crystal" ],
-                                    specialRules:[ "noLydian" ],
-                                    tags: [ "any", "roomSize5", "roomSize1+", "roomSize2+", "roomSize3+", "roomSize4+", "roomSize5+", "openSides3", "openSides1+", "openSides2+", "openSides3+", "roomsCount1", "roomsCount1+" ],
-                                    angles:[
-                                        [
-                                            [ { type:[ "dark" ], isRoom:false, walls:[ false, false, true, false ] }, { type:[ "dark" ], isRoom:false, walls:[ false, false, true, false ] }, { type:[ "dark" ], isRoom:false, walls:[ false, false, false, false ] } ],
-                                            [ { type:[ "crystal" ], isRoom:true,  walls:[ true, false, false, true ] }, { type:[ "crystal" ], isRoom:true, walls:[ true, true, false, false ]}, { type:[ "dark" ], isRoom:false,  walls:[ false, false, true, true ] } ],
-                                            [ { type:[ "crystal" ], isRoom:true, walls:[ false, false, true, true ] }, { type:[ "crystal" ], isRoom:true, walls:[ false, false, true, false ]}, { type:[ "crystal" ], isRoom:true, walls:[ true, true, true, false ] } ]
-                                        ]
-                                    ]
-                                },{
-                                    id:"10R",
-                                    label:"10R",
-                                    skins:[ "lava" ],
-                                    specialRules:[ "noLydian" ],
-                                    tags: [ "any", "roomSize1", "roomSize1+", "openSides4", "openSides1+", "openSides2+", "openSides3+", "openSides4+", "roomsCount3", "roomsCount1+", "roomsCount2+", "roomsCount3+" ],
-                                    angles:[
-                                        [
-                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, true, true, true ] }, { type:[ "lava" ], walls:[ false, false, false, true ]}, { type:[ "lava" ], walls:[ false, false, true, false ] } ],
-                                            [ { type:[ "lava" ], walls:[ true, false, true, false ] }, { type:[ "lava" ], walls:[ false, true, false, false ]}, { type:[ "dark" ], isRoom:true,  walls:[ true, true, true, true ] } ],
-                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, true, true, true ] }, { type:[ "lava" ], walls:[ false, false, false, true ]}, { type:[ "lava" ], walls:[ true, false, false, false ] } ],
-                                        ]
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            id:"11",
-                            label:"11",
-                            from:"boxMd2CrystalLava",
-                            sides:[
-                                {
-                                    id:"11R",
-                                    label:"11R",
-                                    skins:[ "lava" ],
-                                    specialRules:[ "noLydian" ],
-                                    tags: [ "any", "roomSize2", "roomSize1+", "roomSize2+", "openSides4", "openSides1+", "openSides2+", "openSides3+", "openSides4+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
-                                    angles:[
-                                        [
-                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, true, false, true ] }, { type:[ "lava" ], isRoom:false, walls:[ false, false, false, true ] }, { type:[ "lava" ], isRoom:false, walls:[ false, false, true, false ] } ],
-                                            [ { type:[ "dark" ], isRoom:true,  walls:[ false, true, true, true ] }, { type:[ "lava" ], isRoom:false, walls:[ false, true, false, true ]}, { type:[ "dark" ], isRoom:true,  walls:[ true, true, false, true ] } ],
-                                            [ { type:[ "lava" ], isRoom:false, walls:[ true, false, false, false ] }, { type:[ "lava" ], isRoom:false, walls:[ false, true, false, false ]}, { type:[ "dark" ], isRoom:true, walls:[ false, true, true, true ] } ]
-                                        ]
-                                    ]
-                                },{
-                                    id:"11V",
-                                    label:"11V",
-                                    skins:[ "crystal" ],
-                                    specialRules:[ "noLydian" ],
-                                    tags: [ "any", "roomSize2", "roomSize1+", "roomSize2+", "openSides4", "openSides1+", "openSides2+", "openSides3+", "openSides4+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
-                                    angles:[
-                                        [
-                                            [ { type:[ "crystal" ], isRoom:true, walls:[ true, true, false, true ] }, { type:[ "dark" ], isRoom:false, walls:[ false, false, false, true ] }, { type:[ "dark" ], isRoom:false, walls:[ false, false, true, false ] } ],
-                                            [ { type:[ "crystal" ], isRoom:true,  walls:[ false, true, true, true ] }, { type:[ "dark" ], isRoom:false, walls:[ false, true, false, true ]}, { type:[ "crystal" ], isRoom:true,  walls:[ true, true, false, true ] } ],
-                                            [ { type:[ "dark" ], isRoom:false, walls:[ true, false, false, false ] }, { type:[ "dark" ], isRoom:false, walls:[ false, true, false, false ]}, { type:[ "crystal" ], isRoom:true, walls:[ false, true, true, true ] } ]
-                                        ]
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            id:"12",
-                            label:"12",
-                            from:"boxMd2CrystalLava",
-                            sides:[
-                                {
-                                    id:"12V",
-                                    label:"12V",
-                                    skins:[ "crystal" ],
-                                    specialRules:[ "noLydian" ],
-                                    tags: [ "any", "roomSize2", "roomSize1+", "roomSize2+", "roomSize3", "roomSize3+", "openSides3", "openSides1+", "openSides2+", "openSides3+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
-                                    angles:[
-                                        [
-                                            [ { type:[ "dark" ], isRoom:false, walls:[ false, true, false, false ] }, { type:[ "crystal" ], isRoom:true, walls:[ true, false, true, true ] }, { type:[ "crystal" ], isRoom:true, walls:[ true, true, true, false ] } ],
-                                            [ { type:[ "dark" ], isRoom:false,  walls:[ false, false, true, false ] }, { type:[ "dark" ], isRoom:false, walls:[ true, false, true, false ]}, { type:[ "dark" ], isRoom:false,  walls:[ true, false, true, false ] } ],
-                                            [ { type:[ "crystal" ], isRoom:true, walls:[ true, false, true, true ] }, { type:[ "crystal" ], isRoom:true, walls:[ true, false, true, false ]}, { type:[ "crystal" ], isRoom:true, walls:[ true, true, true, false ] } ]
-                                        ]
-                                    ]
-                                },{
-                                    id:"12R",
-                                    label:"12R",
-                                    skins:[ "lava" ],
-                                    specialRules:[ "noLydian" ],
-                                    tags: [ "any", "roomSize1", "roomSize1+", "roomSize3", "roomSize2+", "roomSize3+", "openSides3", "openSides1+", "openSides2+", "openSides3+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
-                                    angles:[
-                                        [
-                                            [ { type:[ "lava" ], isRoom:false, walls:[ false, true, false, false ] }, { type:[ "dark" ], isRoom:true, walls:[ true, true, true, true ] }, { type:[ "lava" ], isRoom:false, walls:[ false, false, false, true ] } ],
-                                            [ { type:[ "lava" ], isRoom:false,  walls:[ false, false, true, false ] }, { type:[ "lava" ], isRoom:false, walls:[ true, false, true, false ]}, { type:[ "lava" ], isRoom:false,  walls:[ false, false, true, false ] } ],
-                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, false, true, true ] }, { type:[ "dark" ], isRoom:true, walls:[ true, false, true, false ]}, { type:[ "dark" ], isRoom:true, walls:[ true, true, true, false ] } ]
-                                        ]
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            id:"13",
-                            label:"13",
-                            from:"boxMd2CrystalLava",
-                            sides:[
-                                {
-                                    id:"13V",
-                                    label:"13V",
-                                    skins:[ "crystal" ],
-                                    specialRules:[ "noLydian" ],
-                                    tags: [ "any", "roomSize2", "roomSize1+", "roomSize2+", "openSides4", "openSides1+", "openSides2+", "openSides3+", "openSides4+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
-                                    angles:[
-                                        [
-                                            [ { type:[ "dark" ], isRoom:false, walls:[ false, false, true, false ] }, { type:[ "dark" ], isRoom:false, walls:[ false, true, false, false ] }, { type:[ "crystal" ], isRoom:true, walls:[ true, true, false, true ] } ],
-                                            [ { type:[ "crystal" ], isRoom:true,  walls:[ true, true, false, true ] }, { type:[ "dark" ], isRoom:false, walls:[ false, true, false, true ]}, { type:[ "crystal" ], isRoom:true,  walls:[ false, true, true, true ] } ],
-                                            [ { type:[ "crystal" ], isRoom:true, walls:[ false, true, true, true ] }, { type:[ "dark" ], isRoom:false, walls:[ false, false, false, true ]}, { type:[ "dark" ], isRoom:false, walls:[ true, false, false, false ] } ]
-                                        ]
-                                    ]
-                                },{
-                                    id:"13R",
-                                    label:"13R",
-                                    skins:[ "lava" ],
-                                    specialRules:[ "noLydian" ],
-                                    tags: [ "any", "roomSize2", "roomSize1+", "roomSize2+", "openSides4", "openSides1+", "openSides2+", "openSides3+", "openSides4+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
-                                    angles:[
-                                        [
-                                            [ { type:[ "lava" ], isRoom:false, walls:[ false, false, true, false ] }, { type:[ "lava" ], isRoom:false, walls:[ false, true, false, false ] }, { type:[ "dark" ], isRoom:true, walls:[ true, true, false, true ] } ],
-                                            [ { type:[ "dark" ], isRoom:true,  walls:[ true, true, false, true ] }, { type:[ "lava" ], isRoom:false, walls:[ false, true, false, true ]}, { type:[ "dark" ], isRoom:true,  walls:[ false, true, true, true ] } ],
-                                            [ { type:[ "dark" ], isRoom:true, walls:[ false, true, true, true ] }, { type:[ "lava" ], isRoom:false, walls:[ false, false, false, true ]}, { type:[ "lava" ], isRoom:false, walls:[ true, false, false, false ] } ]
-                                        ]
-                                    ]
-                                }
-                            ]
-                        },{
-                            id:"14",
-                            label:"14",
-                            from:"boxMd2CrystalLava",
-                            sides:[
-                                {
-                                    id:"14V",
-                                    label:"14V",
-                                    skins:[ "crystal" ],
-                                    specialRules:[ "noLydian" ],
-                                    tags: [ "any", "roomSize5", "roomSize1+", "roomSize2+", "roomSize3+", "roomSize4+", "roomSize5+", "openSides3", "openSides1+", "openSides2+", "openSides3+", "roomsCount1", "roomsCount1+" ],
-                                    angles:[
-                                        [
-                                            [ { type:[ "dark" ], isRoom:false, walls:[ false, false, false, false ] }, { type:[ "dark" ], isRoom:false, walls:[ false, false, true, false ] }, { type:[ "dark" ], isRoom:false, walls:[ false, false, true, false ] } ],
-                                            [ { type:[ "dark" ], isRoom:false,  walls:[ false, true, true, false ] }, { type:[ "crystal" ], isRoom:true, walls:[ true, false, false, true ]}, { type:[ "crystal" ], isRoom:true,  walls:[ true, true, false, false ] } ],
-                                            [ { type:[ "crystal" ], isRoom:true, walls:[ true, false, true, true ] }, { type:[ "crystal" ], isRoom:true, walls:[ false, false, true, false ]}, { type:[ "crystal" ], isRoom:true, walls:[ false, true, true, false ] } ]
-                                        ]
-                                    ]
-                                },{
-                                    id:"14R",
-                                    label:"14R",
-                                    skins:[ "lava" ],
-                                    specialRules:[ "noLydian" ],
-                                    tags: [ "any", "roomSize1", "roomSize1+", "roomSize3", "roomSize2+", "roomSize3+", "openSides3", "openSides1+", "openSides2+", "openSides3+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
-                                    angles:[
-                                        [
-                                            [ { type:[ "lava" ], isRoom:false, walls:[ false, true, false, false ] }, { type:[ "dark" ], isRoom:true, walls:[ true, true, true, true ] }, { type:[ "lava" ], isRoom:false, walls:[ false, false, false, true ] } ],
-                                            [ { type:[ "lava" ], isRoom:false,  walls:[ false, false, true, false ] }, { type:[ "lava" ], isRoom:false, walls:[ true, false, true, false ]}, { type:[ "lava" ], isRoom:false,  walls:[ false, false, true, false ] } ],
-                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, false, true, true ] }, { type:[ "dark" ], isRoom:true, walls:[ true, false, true, false ]}, { type:[ "dark" ], isRoom:true, walls:[ true, true, true, false ] } ]
-                                        ]
-                                    ]
-                                }
-                            ]
-                        },{
-                            id:"15",
-                            label:"15",
-                            from:"boxMd2CrystalLava",
-                            sides:[
-                                {
-                                    id:"15V",
-                                    label:"15V",
-                                    skins:[ "crystal" ],
-                                    specialRules:[ "noLydian" ],
-                                    tags: [ "any", "roomSize3", "roomSize1+", "roomSize2+", "roomSize3+", "roomSize2", "openSides3", "openSides1+", "openSides2+", "openSides3+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
-                                    angles:[
-                                        [
-                                            [ { type:[ "crystal" ], isRoom:true, walls:[ true, true, false, true ] }, { type:[ "dark" ], walls:[ false, true, false, true ]}, { type:[ "crystal" ], isRoom:true, walls:[ true, true, false, true ] } ],
-                                            [ { type:[ "crystal" ], isRoom:true, walls:[ false, true, false, true ] }, { type:[ "dark" ], walls:[ false, true, false, true ]}, { type:[ "crystal" ], isRoom:true,  walls:[ false, true, true, true ] } ],
-                                            [ { type:[ "crystal" ], isRoom:true, walls:[ false, true, true, true ] }, { type:[ "dark" ], walls:[ false, false, false, true ]}, { type:[ "dark" ], walls:[ true, false, false, false ] } ],
-                                        ]
-                                    ]
-                                },{
-                                    id:"15R",
-                                    label:"15R",
-                                    skins:[ "lava" ],
-                                    specialRules:[ "noLydian" ],
-                                    tags: [ "any", "roomSize1", "roomSize1+", "openSides4", "openSides1+", "openSides2+", "openSides3+", "openSides4+", "roomsCount3", "roomsCount1+", "roomsCount2+", "roomsCount3+" ],
-                                    angles:[
-                                        [
-                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, true, true, true ] }, { type:[ "lava" ], walls:[ false, false, false, true ]}, { type:[ "lava" ], walls:[ false, false, true, false ] } ],
-                                            [ { type:[ "lava" ], walls:[ true, false, true, false ] }, { type:[ "lava" ], walls:[ false, true, false, false ]}, { type:[ "dark" ], isRoom:true,  walls:[ true, true, true, true ] } ],
-                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, true, true, true ] }, { type:[ "lava" ], walls:[ false, false, false, true ]}, { type:[ "lava" ], walls:[ true, false, false, false ] } ],
                                         ]
                                     ]
                                 }

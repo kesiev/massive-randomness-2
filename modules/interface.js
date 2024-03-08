@@ -53,10 +53,21 @@ ModManager.modules.push(function(){
                                             EN:"Massive Darkness: A Quest of Crystal & Lava"
                                         },
                                         description:{
-                                            IT:"Una nuova campagna e 15 tessere",
-                                            EN:"A new campaign and 15 tiles"
+                                            IT:"6 tessere cristalli/lava",
+                                            EN:"6 crystal/lava tiles"
                                         },
-                                        tags:[ "md2-crystallava" ]
+                                        tags:[ "md2-crystallava-cl" ]
+                                    },{
+                                        code:"b",
+                                        label:{
+                                            IT:"Massive Darkness: Una Missione di Lava &amp; Cristalli",
+                                            EN:"Massive Darkness: A Quest of Crystal & Lava"
+                                        },
+                                        description:{
+                                            IT:"9 tessere del pack di aggiornamento",
+                                            EN:"9 tiles from the upgrade pack"
+                                        },
+                                        tags:[ "md2-crystallava-up" ]
                                     }
                                 ]
                             },{
