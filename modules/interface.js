@@ -65,7 +65,7 @@ ModManager.modules.push(function(){
                                         },
                                         description:{
                                             IT:"9 tessere del pack di aggiornamento",
-                                            EN:"9 tiles from the upgrade pack"
+                                            EN:"9 upgrade pack tiles"
                                         },
                                         tags:[ "md2-crystallava-up" ]
                                     }
