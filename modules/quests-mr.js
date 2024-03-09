@@ -39,7 +39,6 @@ ModManager.modules.push(function(){
                                 EN:"By KesieV"
                             },
                             suggestedTilesCount:5,
-                            _debug:true,
                             code:{
                                 onQuestFinalize:(questGenerator,resources,result,questVersion,questLabels)=>{
                                 
