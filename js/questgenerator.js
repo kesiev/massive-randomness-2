@@ -51,7 +51,7 @@ QuestGenerator=(function() {
 
     function generate(resources,result,flags) {
 
-        if (resources.quests.length) {
+        if (resources.quests && resources.quests.length) {
 
             let
                 interface={
@@ -65,7 +65,7 @@ QuestGenerator=(function() {
                         return pickRandomElementValue(list)
                     }
                 },
-                quest = { rules:[], challenges:[] },
+                quest = { languages:[], rules:[], challenges:[] },
                 mapConfig = {},
                 questModel,
                 questVersion,
@@ -114,7 +114,12 @@ QuestGenerator=(function() {
                     resources.specialRules[rule].forEach(rule=>{
                         quest.rules.push(rule);
                     })
-                })
+                });
+
+            // Generate languages list
+
+            for (let k in quest.by)
+                quest.languages.push(k);
 
             // Add dungeon mods
             

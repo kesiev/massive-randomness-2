@@ -1692,7 +1692,7 @@ MapGenerator=(function() {
                 grid:[]
             };
 
-        if (resources.tiles && resources.tiles.length) {
+        if (result.mapConfig && resources.tiles && resources.tiles.length) {
                 
             resources.tiles.forEach(tile=>{
                 tilesAvailable.push(tile);

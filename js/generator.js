@@ -30,15 +30,22 @@ Generator=(function(){
 
         // console.log(flags && flags.quest ? flags.quest.by.EN : "", questSeed,mapSeed);
 
-        QuestGenerator.generate(resources,result,flags);
-        MapGenerator.generate(resources,result);
+        if (resources.quests) {
 
-        if (result && result.map && result.map.index && result.map.isValid)
+            QuestGenerator.generate(resources,result,flags);
+            MapGenerator.generate(resources,result);
+        
+            if (result && result.map && result.map.index && result.map.isValid)
+                cb(resources,result);
+            else {
+                setTimeout(()=>{
+                    rawGenerate(needs,questSeed,flags,cb,mapSeed,attempt);
+                },10);
+            }
+
+        } else {
+            result.noQuestsAvailable = true;
             cb(resources,result);
-        else {
-            setTimeout(()=>{
-                rawGenerate(needs,questSeed,flags,cb,mapSeed,attempt);
-            },10);
         }
 
     }

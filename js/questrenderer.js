@@ -273,6 +273,14 @@ QuestRenderer=(function(){
                     node.parentElement.insertBefore(button,node);
                 }
                 
+            } else {
+                let
+                    questNode = createNode(into,"div","quest"),
+                    notAvailableNode = createNode(questNode,"div","notavailable");
+
+                if (flags.questUnavailableLabel)
+                    notAvailableNode.innerHTML = Labels.getLabel(flags,resources,result,language,flags.questUnavailableLabel);
+
             }
     
         }

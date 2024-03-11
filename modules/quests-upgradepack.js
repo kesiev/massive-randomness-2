@@ -5,7 +5,7 @@ ModManager.modules.push(function(){
 
             id:"quests-upgradepack",
             needs:[ "quests-default", "md2-upgradepack" ],
-            provides:[ "quests", "quests-upgradepack" ],
+            provides:[ "quests", "quests-upgradepack", "untranslated-fr" ],
             label:{
                 EN:"MD2 Upgrade pack inspired quest models"
             },

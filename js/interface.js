@@ -36,6 +36,7 @@ Interface=(function() {
         headerNode,
         footerNode,
         settingsNode,
+        noticebarNode,
         actionsNode,
         logoTitleNode,
         logoSubtitleNode,
@@ -98,8 +99,16 @@ Interface=(function() {
         if (lastResources) {
             lastResult.printTitlePrefix = printTitlePrefix;
             QuestRenderer.render(lastResources,lastResult,language,bodyNode,{
-                debugRender:DEBUG_RENDER
+                debugRender:DEBUG_RENDER,
+                questUnavailableLabel:INTERFACE.labels.questUnavailable
             });
+            if (lastResult.quest && (lastResult.quest.languages.indexOf(language) == -1)) {
+                noticebarNode.innerHTML=getLabel(language,INTERFACE.labels.languageUnavailable);
+                noticebarNode.style.display="block";
+            } else {
+                noticebarNode.innerHTML="";
+                noticebarNode.style.display="none";
+            }
         }
     }
 
@@ -118,7 +127,13 @@ Interface=(function() {
                     selected = settings[sid];
                 
                 setting.entries.forEach((entry,id)=>{
-                    if (entry.tags)
+                    if (entry.languageExcludeTags && entry.languageExcludeTags[language]) {
+                        if (selected.indexOf(id) != -1)
+                            entry.languageExcludeTags[language].forEach(tag=>{
+                                if (notPicked.indexOf(tag) == -1)
+                                    notPicked.push(tag)
+                            });
+                    } else if (entry.tags)
                         if (selected.indexOf(id) != -1)
                             entry.tags.forEach(tag=>{
                                 if (picked.indexOf(tag) == -1)
@@ -403,6 +418,7 @@ Interface=(function() {
             INTERFACE=ModManager.load({ needs:[ "interface" ]}).interface;
 
             headerNode = createNode(root,"div","header");
+            noticebarNode = createNode(root,"div","noticebar");
             headerContentNode = createNode(headerNode,"div","content");
             settingsNode = createNode(headerContentNode,"div","settings");
             actionsNode = createNode(headerContentNode,"div","actions");

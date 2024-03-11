@@ -181,6 +181,25 @@ ModManager.modules.push(function(){
                                         tags:[ "gamemode-dungeoncrawling" ]
                                     },
                                     {
+                                        code:"W",
+                                        label:{
+                                            IT:"Escludi avventure non tradotte",
+                                            EN:"Exclude untranslated quests",
+                                            FR:"Exclure les qu&#xEA;tes non traduites"
+
+                                        },
+                                        description:{
+                                            IT:"Non vengono generate le avventure non disponibili nella lingua selezionata.",
+                                            EN:"Adventures not available in the selected language are not generated.",
+                                            FR:"Les aventures non disponibles dans la langue s&#xE9;lectionn&#xE9;e ne sont pas g&#xE9;n&#xE9;r&#xE9;es."
+                                        },
+                                        languageExcludeTags:{
+                                            IT:[ "untranslated-it" ],
+                                            EN:[ "untranslated-en" ],
+                                            FR:[ "untranslated-fr" ]
+                                        }
+                                    },
+                                    {
                                         isButton:true,
                                         isInstallerButton:true,
                                         label:{
@@ -197,7 +216,8 @@ ModManager.modules.push(function(){
                         ],
                         supportedLanguages:{
                             EN:"English",
-                            IT:"Italiano"
+                            IT:"Italiano",
+                            FR:"Fran&#xE7;ais"
                         },
                         labels:{                            
                             toolName:{
@@ -227,6 +247,16 @@ ModManager.modules.push(function(){
                             tooltipSettings:{
                                 IT:"Impostazioni",
                                 EN:"Settings"
+                            },
+                            languageUnavailable:{
+                                IT:"Questa avventura non &egrave; disponibile in italiano. Puoi escludere le avventure non tradotte dalle opzioni.",
+                                EN:"This adventure is not available in English. You can exclude untranslated adventures from the options.",
+                                FR:"Cette aventure n&#x27;est pas disponible en fran&#xE7;ais. Vous pouvez exclure les aventures non traduites des options."
+                            },
+                            questUnavailable:{
+                                IT:"Spiacente. Questa avventura non &egrave; disponibile.",
+                                EN:"Sorry. This adventure is not available.",
+                                FR:"D&#xE9;sol&#xE9;. Cette aventure n&#x27;est pas disponible."
                             }
                         }
                     }

@@ -19,7 +19,8 @@ Tools=(function(){
         ],
         WARNING_WORDS={
             EN:[ "wandering", "quest" ],
-            IT:[ "quest", "xp", "avventura" ]
+            IT:[ "quest", "xp", "avventura" ],
+            FR:[ ]
         },
         QUEST_CONFIGS=[
             {
@@ -157,6 +158,7 @@ Tools=(function(){
                         if (!out[item.type]) out[item.type]=[];
                         item.data.forEach(element=>{
                             element._package = package.id;
+                            element._packageData = package;
                             out[item.type].push(element);
                         })
                     } else {
@@ -833,9 +835,21 @@ Tools=(function(){
                 errorsNode = createErrorsNode(into),
                 resultsNode = createNode(into,"div"),
                 errors = [],
-                resources = getAllResourcesTypes([ "quests", "tokensAvailable", "symbols", "globalLabels", "challenges" ]),
+                resources = getAllResourcesTypes([ "quests", "tokensAvailable", "symbols", "globalLabels", "challenges", "interface" ]),
                 globalLabels = {},
-                wordTokens = {};
+                wordTokens = {},
+                translations = {},
+                translationExcludeOption;
+
+            // Look for the untranslated exclusion option
+            resources.interface.settings.forEach(option=>{
+                option.entries.forEach(entry=>{
+                    if (entry.languageExcludeTags)
+                        translationExcludeOption = entry.languageExcludeTags;
+                })
+            })
+
+            // Prepare global labels
 
             for (let k in resources.tokensAvailable)
                 globalLabels["tokensCount."+k]=true;
@@ -849,6 +863,8 @@ Tools=(function(){
 
             for (let k in resources.globalLabels)
                 checkLabel(errors,wordTokens,"Global label "+k,globalLabels,resources.globalLabels[k]);
+
+            // Check data
 
             resources.challenges.forEach((challenge,cid)=>{
                 challenge.rules.forEach((rule,rid)=>{
@@ -873,8 +889,15 @@ Tools=(function(){
             });
 
             resources.quests.forEach((quest,id)=>{
+
                 let
                     errorHeader="["+quest._package+"] Quest "+(id+1);
+
+                if (!translations[quest._package]) translations[quest._package] = { packageData:quest._packageData, translations:{} };
+                for (let k in quest.by) {
+                    if (!translations[quest._package].translations[k]) translations[quest._package].translations[k]=0;
+                    translations[quest._package].translations[k]++;
+                }    
 
                 if (quest.by)
                     checkLabel(errors,wordTokens,errorHeader+" BY",0,quest.by);
@@ -947,6 +970,28 @@ Tools=(function(){
 
                 })
             });
+
+            // Show stats
+
+            html+="<h2>Translations</h2><ul>";
+            for (let k in translations) {
+                let total = translations[k].translations.EN;
+                html+="<li><b>"+k+"</b><ul>";
+                for (let l in resources.interface.supportedLanguages) {
+                    let
+                        count = translations[k].translations[l]||0,
+                        prc = count/total;
+                    if (prc > 1)
+                        errors.push("Quest set "+k+": Invalid "+l+" percentage "+prc);
+                    else if ((prc <1) && (translations[k].packageData.provides.indexOf(translationExcludeOption[l][0]) == -1))
+                        errors.push("Quest set "+k+": missing provides tag "+translationExcludeOption[l][0]);
+                    else if ((prc == 1) && (translations[k].packageData.provides.indexOf(translationExcludeOption[l][0]) != -1))
+                        errors.push("Quest set "+k+": provides tag "+translationExcludeOption[l][0]+" not needed");
+                    html+="<li>"+l+": "+formatPercentage(prc)+" ("+count+"/"+total+")</li>";
+                }
+                html+="</ul></li>";
+            }
+            html+="</ul>";
 
             let
                 languageId = 0,

@@ -4,7 +4,7 @@ ModManager.modules.push(function(){
         {
             id:"quests-mr",
             needs:[ "quests-default", "md2-hellscape" ],
-            provides:[ "quests", "quests-mr" ],
+            provides:[ "quests", "quests-mr", "untranslated-fr" ],
             label:{
                 EN:"Original Massive Randomness 2 quest models"
             },

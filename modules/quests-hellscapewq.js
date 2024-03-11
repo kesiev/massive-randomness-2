@@ -5,7 +5,7 @@ ModManager.modules.push(function(){
 
             id:"quests-hellscapewq",
             needs:[ "quests-default", "md2-hellscape" ],
-            provides:[ "quests", "quests-hellscapewq" ],
+            provides:[ "quests", "quests-hellscapewq", "untranslated-fr" ],
             label:{
                 EN:"MD2 Hellscape Web Quest inspired quest models"
             },

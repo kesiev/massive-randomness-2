@@ -5,7 +5,7 @@ ModManager.modules.push(function(){
 
             id:"quests-internet",
             needs:[ "quests-default", "md2-hellscape" ],
-            provides:[ "quests", "quests-internet" ],
+            provides:[ "quests", "quests-internet", "untranslated-fr" ],
             label:{
                 EN:"MD2 Fanmade quests inspired quest models"
             },
