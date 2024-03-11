@@ -104,7 +104,7 @@ Interface=(function() {
             });
             if (lastResult.quest && (lastResult.quest.languages.indexOf(language) == -1)) {
                 noticebarNode.innerHTML=getLabel(language,INTERFACE.labels.languageUnavailable);
-                noticebarNode.style.display="block";
+                noticebarNode.style.display="";
             } else {
                 noticebarNode.innerHTML="";
                 noticebarNode.style.display="none";

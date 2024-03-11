@@ -1005,7 +1005,7 @@ HTML,BODY {
         display: none !important;
     }
 
-    .header, .footer {
+    .header, .footer, .noticebar {
         display: none;
     }
 
