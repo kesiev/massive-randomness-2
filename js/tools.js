@@ -157,9 +157,10 @@ Tools=(function(){
                     if (Array.isArray(item.data)) {
                         if (!out[item.type]) out[item.type]=[];
                         item.data.forEach(element=>{
-                            element._package = package.id;
-                            element._packageData = package;
-                            out[item.type].push(element);
+                            let copy = JSON.parse(JSON.stringify(element));
+                            copy._package = package.id;
+                            copy._packageData = package;
+                            out[item.type].push(copy);
                         })
                     } else {
                         if (!out[item.type]) out[item.type]={};
@@ -294,8 +295,9 @@ Tools=(function(){
                 iteration = 0;
                 testResult = {
                     test:test,
-                    questSeeds:[],
+                    seeds:[],
                     bridgeSeeds:[],
+                    mergedRoomsSeeds:[],
                     counters:{},
                     tokensIndex:[],
                     tokens:[]
@@ -313,13 +315,17 @@ Tools=(function(){
                 },(resources,result)=>{
                     questTesterAddCounter(testResult,iteration,result.map.placedTiles > result.quest.suggestedTilesCount ? "map-large" : result.map.placedTiles < result.quest.suggestedTilesCount ? "map-small" : "map-normal" )
                     if (result.map.hasBridge) {
-                        testResult.bridgeSeeds.push(result.questSeed);
+                        testResult.bridgeSeeds.push(result.seed);
                         questTesterAddCounter(testResult,iteration,"hasBridge");
+                    }
+                    if (result.map.hasMergedRooms.length) {
+                        testResult.mergedRoomsSeeds.push(result.seed);
+                        questTesterAddCounter(testResult,iteration,"hasMergedRooms");
                     }
                     if (result.map.bridgeRemoved) questTesterAddCounter(testResult,iteration,"bridgeRemoved");
                     testResult.label = result.quest.by.EN;
                     testResult.roomsDefaults = result.mapConfig.roomsDefaults;
-                    testResult.questSeeds.push(result.questSeed);
+                    testResult.seeds.push(result.seed);
                     result.map.grid.forEach(row=>{
                         row.forEach(cell=>{
                             if (cell) {
@@ -330,15 +336,17 @@ Tools=(function(){
                         })
                     });
                     result.map.rooms.forEach(room=>{
-                        let
-                            mobs = 0;
-                        room.cells.forEach(cell=>{
-                            cell.tokens.forEach(token=>{
-                                if (token.id == "mob")
-                                    mobs++;
-                            })
-                        });
-                        questTesterAddToken(testResult,iteration,{ id:"ROOM-mobs-"+mobs });
+                        if (room) {
+                            let
+                                mobs = 0;
+                            room.cells.forEach(cell=>{
+                                cell.tokens.forEach(token=>{
+                                    if (token.id == "mob")
+                                        mobs++;
+                                })
+                            });
+                            questTesterAddToken(testResult,iteration,{ id:"ROOM-mobs-"+mobs });
+                        }
                     });
                     questTesterAddToken(testResult,iteration,{ id:"ATTEMPTS" },result.attempt);
                     setTimeout(()=>{
@@ -370,6 +378,7 @@ Tools=(function(){
                         stats:"Sug.Tiles: "+result.test.quest.suggestedTilesCount+" | Risk:"+result.roomsDefaults.risk+" | Reward:"+result.roomsDefaults.reward,
                         counters:result.counters,
                         bridgeSeeds:result.bridgeSeeds,
+                        mergedRoomsSeeds:result.mergedRoomsSeeds,
                         tokensResult:[]
                     };
 
@@ -393,13 +402,13 @@ Tools=(function(){
                         }
 
                         if ((max === undefined) || (amount > max)) {
-                            maxSeed = result.questSeeds[id];
+                            maxSeed = result.seeds[id];
                             max = amount;
                             maxCount = 0;
                         }
 
                         if ((min === undefined) || (amount < min)) {
-                            minSeed = result.questSeeds[id];
+                            minSeed = result.seeds[id];
                             min = amount;
                             minCount = 0;
                         }
@@ -466,6 +475,14 @@ Tools=(function(){
 
                 seedSelectorNode =  createNode(countersNode,"select");
                 createNode(seedSelectorNode,"option").innerHTML="---";
+
+
+                resultRow.mergedRoomsSeeds.forEach(seed=>{
+                    let
+                        option = createNode(seedSelectorNode,"option");
+                    option.value = seed;
+                    option.innerHTML = "MERGED: "+seed
+                });
 
                 resultRow.bridgeSeeds.forEach(seed=>{
                     let
