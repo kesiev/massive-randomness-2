@@ -473,6 +473,7 @@ Interface=(function() {
             if (window.Installer)
                 Installer.check(()=>{
                     showInstaller = true;
+                    drawSettings();
                     showSettings();
                 });
 
