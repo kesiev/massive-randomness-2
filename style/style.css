@@ -331,6 +331,10 @@ HTML,BODY {
     margin: 0 auto 10px auto;
 }
 
+.quest .tokenElement .token.door {
+    border-bottom-width: 4px;
+}
+
 .quest .token.door {
     width:30px;
     height:30px;
@@ -959,7 +963,7 @@ HTML,BODY {
 .token.door.marked.side-2 {
     border-left-style: dotted;
     border-right-style: dotted;
-    border-top-style: dotted;
+    border-bottom-style: dotted;
 }
 
 .token.door.side-3 {
@@ -970,7 +974,7 @@ HTML,BODY {
 }
 
 .token.door.marked.side-3 {
-    border-left-style: dotted;
+    border-right-style: dotted;
     border-bottom-style: dotted;
     border-top-style: dotted;
 }
@@ -1136,13 +1140,18 @@ HTML,BODY {
         border-style: dashed;
         border-color: #333;
     }
+
     .tile .cell.room.crystal .background, .tile .cell.corridor.lava .background {
         border-style: dotted;
         border-color: #333;
     }
 
-    .token.greenPortal, .token.portal3, .token.portal5, .token.startPoint, .token.startRoaming {
+    .token.greenPortal, .token.portal3, .token.portal5, .token.startPoint {
         background-color: transparent;
+    }
+
+    .token.startRoaming {
+        background-color: #333;
     }
 
     .token.regularPortal {
