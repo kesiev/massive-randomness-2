@@ -308,6 +308,7 @@ ModManager.modules.push(function(){
                                             gameMode: [ "armorToBoss" ],
                                             difficulty:[ "increasedLoot" ],
                                             roomLimits:[ "default" ],
+                                            roomsMerges:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
                                             bridges:[ "none" ],

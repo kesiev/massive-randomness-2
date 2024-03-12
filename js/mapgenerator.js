@@ -8,8 +8,16 @@ MapGenerator=(function() {
         GETLABEL_LANGUAGE = "EN",
         GETLABEL_FLAGS = {},
         DEFAULT_ROOMSDOORSTYPE={ id:"door" },
+        DEFAULT_INNERROOMDOORSTYPE={ id:"door", flipped:true, isInner:true },
         DEFAULT_ROOMLIMITS={ tokensPerRoomLimit:{}, tokensPerRoomCellLimit:{} },
-        DEFAULT_ROOMSEXPECTEDRATIO=1.1;
+        DEFAULT_ROOMSEXPECTEDRATIO=1.1,
+        LIMIT_ROOMSIZE=9,
+        ADJACENT_DIRECTIONS=[
+            { dx:0, dy:-1, fromDirection:0, toDirection:2 },
+            { dx:1, dy:0, fromDirection:1, toDirection:3 },
+            { dx:0, dy:1, fromDirection:2, toDirection:0 },
+            { dx:-1, dy:0, fromDirection:3, toDirection:1 }
+        ];
 
     // --- Math & Data structures
 
@@ -124,6 +132,16 @@ MapGenerator=(function() {
 
     // --- Tokens
 
+    function solveTokenId(resources,flipped,id) {
+        if (resources.tokensMetadata[id]) {
+            if (resources.tokensMetadata[id].aggregateTo)
+                id = resources.tokensMetadata[id].aggregateTo;
+            if (flipped && resources.tokensMetadata[id].splitFlippedTo)
+                id = resources.tokensMetadata[id].splitFlippedTo;
+        }
+        return id;
+    }
+
     function getToken(resources,result,tokenModel,hidden,map) {
         
         let
@@ -133,18 +151,14 @@ MapGenerator=(function() {
         token.id = Labels.getLabel(GETLABEL_FLAGS,resources,result,GETLABEL_LANGUAGE,token.id);
 
         if (resources.tokensAvailable[token.id]) {
-            let
-                usedTokenId = token.id;
 
-            if (resources.tokensMetadata[usedTokenId]) {
-                if (resources.tokensMetadata[usedTokenId].aggregateTo)
-                    usedTokenId = resources.tokensMetadata[usedTokenId].aggregateTo;
-                if (token.flipped && resources.tokensMetadata[usedTokenId].splitFlippedTo)
-                    usedTokenId = resources.tokensMetadata[usedTokenId].splitFlippedTo;
-            }
+            let
+                usedTokenId = solveTokenId(resources,token.flipped,token.id);
+
             if (!map.usedTokens[usedTokenId])
                 map.usedTokens[usedTokenId]=0;
             map.usedTokens[usedTokenId]++;
+
             if (!hidden) {
                 if (!map.visibleUsedTokens[usedTokenId])
                     map.visibleUsedTokens[usedTokenId]=0;
@@ -153,6 +167,23 @@ MapGenerator=(function() {
             resources.tokensAvailable[token.id]--;
             return token;
         }
+    }
+
+    function putToken(resources,result,token,map) {
+        
+        let
+            usedTokenId = solveTokenId(resources,token.flipped,token.id);
+
+        map.usedTokens[usedTokenId]--;
+        if (!map.usedTokens[usedTokenId])
+            delete map.usedTokens[usedTokenId];
+
+        if (!token.hidden) {
+            map.visibleUsedTokens[usedTokenId]--;
+            if (!map.visibleUsedTokens[usedTokenId])
+                delete map.visibleUsedTokens[usedTokenId];
+        }
+        resources.tokensAvailable[token.id]++;
     }
 
     function addToken(resources,result,token,hidden,map,pos) {
@@ -873,6 +904,7 @@ MapGenerator=(function() {
                             rooms[roomId]={
                                 id:roomId,
                                 distance:0,
+                                isMerged:false,
                                 hasBridge:false,
                                 bridgeRemoved:false,
                                 doors:[],
@@ -1144,6 +1176,131 @@ MapGenerator=(function() {
         }
     }
 
+    // --- Merged rooms
+
+    function canMergeRoom(room,defaults) {
+        let
+            canMerge = -1;
+
+        if (room.isMerged)
+            canMerge = false;
+        else {
+
+            // Rooms forced to be in the same tile are not mergeable
+            room.doors.forEach(door=>{
+                if (door.doNotCrossTile)
+                    canMerge = false;
+            })
+            if (canMerge == -1)
+                canMerge = !defaults.doNotCrossTile;
+
+        }
+
+        return canMerge;
+    }
+
+    function mergeRooms(resources,result,map,defaults) {
+
+        if (map.rooms && map.rooms.length && resources.tokensAvailable.door) {
+
+            let
+                adjacent = [];
+            
+            map.rooms.forEach(room1=>{
+                if (room1 && canMergeRoom(room1,defaults)) {
+
+                    let
+                        index = {};
+
+                    room1.cells.forEach(cell=>{
+                        index[cell.id] = cell;
+                    }); 
+
+                    map.rooms.forEach(room2=>{
+                        if (room2 && (room1 !== room2) && !room2.isBusy && (room1.size+room2.size<=LIMIT_ROOMSIZE) && canMergeRoom(room2,defaults)) {
+                            let
+                                joinDirections = [];
+                            room2.cells.forEach(fromCell=>{
+                                ADJACENT_DIRECTIONS.forEach(side=>{
+                                    let
+                                        id = (fromCell.x+side.dx)+","+(fromCell.y+side.dy),
+                                        toCell = index[id];
+                                    if (toCell)
+                                        joinDirections.push({ from:{ cell:fromCell, direction:side.fromDirection}, to:{ cell:toCell, direction:side.toDirection }});
+                                })
+                            })
+                            if (joinDirections.length)
+                                adjacent.push({
+                                    fromRoom:room1,
+                                    toRoom:room2,
+                                    joinDirections:joinDirections
+                                })
+                        }
+                    });
+                }
+            });
+
+            if (adjacent.length) {
+
+                let
+                    join = pickRandomElementValue(adjacent),
+                    joinDirection = pickRandomElementValue(join.joinDirections),
+                    door = getToken(resources,result,DEFAULT_INNERROOMDOORSTYPE,result.mapConfig.roomsHideTokens,map);
+
+                // Creates open door
+                joinDirection.from.cell.walls[joinDirection.from.direction] = false;
+                joinDirection.to.cell.walls[joinDirection.to.direction] = false;
+                joinDirection.from.cell.doors[joinDirection.from.direction]=door;
+
+                // Merge rooms
+                join.fromRoom.add.forEach(item=>join.toRoom.add.push(item));
+                join.fromRoom.exits.forEach(item=>join.toRoom.exits.push(item));
+                join.fromRoom.onPathAdd.forEach(item=>join.toRoom.onPathAdd.push(item));
+                join.fromRoom.doors.forEach(item=>join.toRoom.doors.push(item));
+                join.fromRoom.cells.forEach(item=>{
+                    item.roomId=join.toRoom.id;
+                    join.toRoom.cells.push(item);
+                });
+
+                join.toRoom.isBusy = join.fromRoom.isBusy || join.toRoom.isBusy;
+                join.toRoom.hasBridge = join.fromRoom.hasBridge || join.toRoom.hasBridge;
+                join.toRoom.tileData = join.fromRoom.tileData;
+
+                join.toRoom.size += join.fromRoom.size;
+
+                join.toRoom.relevance = Math.max(join.fromRoom.relevance, join.toRoom.relevance);
+                join.toRoom.intensity.risk = Math.max(join.fromRoom.intensity.risk, join.toRoom.intensity.risk);
+                join.toRoom.intensity.reward = Math.max(join.fromRoom.intensity.reward, join.toRoom.intensity.reward);
+                join.toRoom.distance = Math.min(join.fromRoom.distance, join.toRoom.distance);
+
+                join.toRoom.isMerged = true;
+
+                // Remove the starting room
+                map.rooms[map.rooms.indexOf(join.fromRoom)]=false;
+                map.hasMergedRooms.push(join.toRoom);
+
+            }
+
+        }
+    }
+
+    function cleanMergedRooms(resources,result,map) {
+
+        map.hasMergedRooms = map.hasMergedRooms.filter(room=>{
+            if (room.isMerged && !room.isBusy) {
+                room.cells.forEach(cell=>{
+                    cell.doors.forEach(door=>{
+                        if (door.isInner)
+                            putToken(resources,result,door,map);
+                    })
+                    cell.doors.length = 0;
+                })
+                return false;
+            } else return true;
+        });
+
+    }
+
     // --- Corridors & Pillars
 
     function findCorridor(corridorMap,corridorsList,id,map,x,y,direction,dx,dy,minCorridorLength) {
@@ -1348,28 +1505,32 @@ MapGenerator=(function() {
 
             map.rooms.forEach(room=>{
 
-                if (room.relevance) {
-                    relevantRooms++;
+                if (room) {
 
-                    if (!room.doors.length && !room.isEmpty) {
-                        let
-                            expectedDoors = getExpectedDoorsCount(room);
-                        for (let j=0;j<expectedDoors;j++)
-                            room.doors.push(defaultDoorType);
-                    }
+                    if (room.relevance) {
+                        relevantRooms++;
+
+                        if (!room.doors.length && !room.isEmpty) {
+                            let
+                                expectedDoors = getExpectedDoorsCount(room);
+                            for (let j=0;j<expectedDoors;j++)
+                                room.doors.push(defaultDoorType);
+                        }
+                        
+                        relevantDoors += room.doors.length;
+                    } else
+                        extraRooms.push(room);
+
+                    if (!room.isEmpty) {
+
+                        // Apply intensity
+                        fillRoomWithIntensity(room,room.intensity);
+
+                        // Place elements
+                        finalizeRoom(resources,result,map,room,limits);
                     
-                    relevantDoors += room.doors.length;
-                } else
-                    extraRooms.push(room);
+                    }
 
-                if (!room.isEmpty) {
-
-                    // Apply intensity
-                    fillRoomWithIntensity(room,room.intensity);
-
-                    // Place elements
-                    finalizeRoom(resources,result,map,room,limits);
-                
                 }
 
             });
@@ -1404,6 +1565,7 @@ MapGenerator=(function() {
                         if (room) {
 
                             room.relevance = 0.1;
+                            room.isBusy = true;
 
                             for (let j=0;j<expectedDoors;j++)
                                 room.doors.push(defaultDoorType);
@@ -1549,40 +1711,44 @@ MapGenerator=(function() {
         if (map.rooms && map.rooms.length) {
                 
             map.rooms.forEach(room=>{
-                if (room.onPathAdd.length && room.exits.length) {
-                    let
-                        routes;
-                    
-                    routes=room.exits
-                        .map(exit=>exit.paths[map.startPoint.id].filter(cell=>!cell.isStartPoint && (cell.tokens.length == 0)))
-                        .filter(route=>route.length>0);
-                    
-                    if (routes.length) {
+                
+                if (room) {
+                        
+                    if (room.onPathAdd.length && room.exits.length) {
                         let
-                            routesBag=createBag(routes);
-
-                        room.onPathAdd.forEach(options=>{
-
+                            routes;
+                        
+                        routes=room.exits
+                            .map(exit=>exit.paths[map.startPoint.id].filter(cell=>!cell.isStartPoint && (cell.tokens.length == 0)))
+                            .filter(route=>route.length>0);
+                        
+                        if (routes.length) {
                             let
-                                add=pickRandomElementValue(options),
-                                route=routesBag.pick();
+                                routesBag=createBag(routes);
 
-                            if (route) {
+                            room.onPathAdd.forEach(options=>{
 
-                                if (add.at === undefined)
-                                    cell = pickRandomElement(route);
-                                else
-                                    cell = getItemAtPercentage(route,add.at);
+                                let
+                                    add=pickRandomElementValue(options),
+                                    route=routesBag.pick();
 
-                                if (!route.length)
-                                    routesBag.delete(route);
+                                if (route) {
 
-                                add.tokens.forEach(token=>{
-                                    addToken(resources,result,token,false,map,cell);
-                                })
+                                    if (add.at === undefined)
+                                        cell = pickRandomElement(route);
+                                    else
+                                        cell = getItemAtPercentage(route,add.at);
 
-                            }
-                        })
+                                    if (!route.length)
+                                        routesBag.delete(route);
+
+                                    add.tokens.forEach(token=>{
+                                        addToken(resources,result,token,false,map,cell);
+                                    })
+
+                                }
+                            })
+                        }
                     }
                 }
             })
@@ -1684,6 +1850,7 @@ MapGenerator=(function() {
                 usedTokens:{},
                 visibleUsedTokens:{},
                 specialRules:[],
+                hasMergedRooms:[],
                 width:0,
                 height:0,
                 index:[],
@@ -1712,15 +1879,22 @@ MapGenerator=(function() {
                 analyzeMap(resources,map);
 
                 let
-                    corridorCells=map.corridorCellsByDistance;
+                    corridorCells=map.corridorCellsByDistance,
+                    defaultRoomType=result.mapConfig.roomsDoorsDefaultType || DEFAULT_ROOMSDOORSTYPE;
 
                 assignRooms(resources,map,result.mapConfig.roomsContent,result.mapConfig.roomsDefaults);
+
+                if (result.mapConfig.roomsMerges)
+                    for (let i=0;i<result.mapConfig.roomsMerges;i++)
+                        mergeRooms(resources,result,map,defaultRoomType);
+
                 fillRooms(
                     resources,result,map,result.mapConfig.roomsDefaults,
                     result.mapConfig.roomLimits || DEFAULT_ROOMLIMITS,
-                    result.mapConfig.roomsDoorsDefaultType || DEFAULT_ROOMSDOORSTYPE,
+                    defaultRoomType,
                     result.mapConfig.roomsExpectedRatio === undefined ? DEFAULT_ROOMSEXPECTEDRATIO : result.mapConfig.roomsExpectedRatio
                 );
+                cleanMergedRooms(resources,resources,map);
                 addDoors(resources,result,map);
 
                 if (corridorCells && result.mapConfig.corridorsSpawnPoints)

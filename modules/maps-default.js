@@ -3033,6 +3033,14 @@ ModManager.modules.push(function(){
                                 ]
                             }
                         },
+                        // --- Room merges
+                        {
+                            attribute:"roomsMerges",
+                            value:"default",
+                            config:{
+                                roomsMerges: [ 0, 1, 2 ]
+                            }
+                        },
                         // --- Difficulty
                         {
                             attribute:"difficulty",

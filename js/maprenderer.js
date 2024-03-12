@@ -65,6 +65,19 @@ MapRenderer=(function(){
         });
     }
 
+    function renderCellDoors(resources,cellNode,hideHidden,hiddenOnly) {
+        cellNode.cellData.doors.forEach((door,side)=>{
+
+            if (door && (!door.isHidden || !hideHidden) && (!hiddenOnly || door.isHidden)) {
+                let
+                    doorNode = document.createElement("div");
+                doorNode.className=resources.tokensMetadata[door.id].className.map+(door.className ? " "+door.className : "")+(door.flipped ? " flipped" : "")+" side-"+side;
+                cellNode.cell.appendChild(doorNode);
+            }
+
+        })
+    }
+
     function renderHiddenBlock(resources,cellNode,hiddenGroup) {
         let
             node = document.createElement("div");
@@ -79,6 +92,7 @@ MapRenderer=(function(){
                 elements = Array.from(document.getElementsByClassName(hiddenGroup));
             elements.forEach(element=>{
                 renderCellTokens(resources,element._cellNode,false);
+                renderCellDoors(resources,element._cellNode,false,true);
                 element.parentNode.removeChild(element);
             });
         }
@@ -93,7 +107,7 @@ MapRenderer=(function(){
                 let
                     cellNode = createCellNode();
                 tileNode.container.appendChild(cellNode.cell);
-                cell._node = cellNode.cell;
+                if (hideHidden) cell._node = cellNode.cell;
                 cellNode.cellData = cell;
 
                 if (cell.isRoom) {
@@ -130,16 +144,7 @@ MapRenderer=(function(){
 
                 }
 
-                cell.doors.forEach((door,side)=>{
-
-                    if (door) {
-                        let
-                            doorNode = document.createElement("div");
-                        doorNode.className=resources.tokensMetadata[door.id].className.map+(door.className ? " "+door.className : "")+(door.flipped ? " flipped" : "")+" side-"+side;
-                        cellNode.cell.appendChild(doorNode);
-                    }
-
-                })
+                renderCellDoors(resources,cellNode,hideHidden,false);
 
             });
             let

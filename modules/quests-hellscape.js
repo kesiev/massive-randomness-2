@@ -12,7 +12,6 @@ ModManager.modules.push(function(){
             content:[
             {
                     type:"quests",
-                    
                     data:[
                         {
                             type:"finalBoss",
@@ -257,6 +256,7 @@ ModManager.modules.push(function(){
                                             gameMode: [ "cross" ],
                                             difficulty:[ "none" ],
                                             roomLimits:[ "default" ],
+                                            roomsMerges:[ "none" ],
                                             skin:[ "default" ],
                                             bridges:[ "none" ],
                                             lootRatio: [ "same" ],
@@ -439,6 +439,7 @@ ModManager.modules.push(function(){
                                             gameMode: [ "xpAndDeliver" ],
                                             difficulty:[ "default" ],
                                             roomLimits:[ "default" ],
+                                            roomsMerges:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
                                             bridges:[ "default" ],
@@ -736,6 +737,7 @@ ModManager.modules.push(function(){
                                             gameMode: [ "unlockAndActivate" ],
                                             difficulty:[ "default" ],
                                             roomLimits:[ "default" ],
+                                            roomsMerges:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
                                             bridges:[ "default" ],
@@ -962,6 +964,7 @@ ModManager.modules.push(function(){
                                             gameMode: [ "targets" ],
                                             difficulty:[ "default" ],
                                             roomLimits:[ "default" ],
+                                            roomsMerges:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
                                             bridges:[ "default" ],
@@ -1173,6 +1176,7 @@ ModManager.modules.push(function(){
                                             gameMode: [ "magicMazeHunt" ],
                                             difficulty:[ "default" ],
                                             roomLimits:[ "default" ],
+                                            roomsMerges:[ "none" ],
                                             skin:[ "default" ],
                                             size: [ "square" ],
                                             bridges:[ "default" ],
@@ -1416,6 +1420,7 @@ ModManager.modules.push(function(){
                                             gameMode: [ "targets" ],
                                             difficulty:[ "default" ],
                                             roomLimits:[ "default" ],
+                                            roomsMerges:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
                                             bridges:[ "default" ],
@@ -1670,6 +1675,7 @@ ModManager.modules.push(function(){
                                             gameMode: [ "escort" ],
                                             difficulty:[ "default" ],
                                             roomLimits:[ "default" ],
+                                            roomsMerges:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
                                             bridges:[ "default" ],
@@ -1896,6 +1902,7 @@ ModManager.modules.push(function(){
                                             gameMode: [ "collectAndDeliver" ],
                                             difficulty:[ "default" ],
                                             roomLimits:[ "default" ],
+                                            roomsMerges:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
                                             bridges:[ "default" ],

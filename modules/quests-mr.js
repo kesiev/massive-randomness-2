@@ -488,6 +488,7 @@ ModManager.modules.push(function(){
                                             gameMode: [ "investigation" ],
                                             difficulty:[ "default" ],
                                             roomLimits:[ "default" ],
+                                            roomsMerges:[ "default" ],
                                             skin:[ "default" ],
                                             size: [ "default" ],
                                             bridges:[ "default" ],
