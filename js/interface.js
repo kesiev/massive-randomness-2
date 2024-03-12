@@ -168,7 +168,7 @@ Interface=(function() {
             Generator.generate(requirements,seed,{
                 debugQuest:DEBUG_QUEST
             },(resources,result)=>{
-                seed = result.questSeed;
+                seed = result.seed;
                 saveId(settingsToHash());
                 generating = false;
                 lastResources = resources;
