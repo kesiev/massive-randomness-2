@@ -3038,7 +3038,7 @@ ModManager.modules.push(function(){
                             attribute:"roomsMerges",
                             value:"default",
                             config:{
-                                roomsMerges: [ 0, 1, 2 ]
+                                roomsMerges: [ 0, 0, 1, 2 ]
                             }
                         },
                         // --- Difficulty
