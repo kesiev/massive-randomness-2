@@ -855,6 +855,52 @@ ModManager.modules.push(function(){
                             }
                         },{
                             attribute:"structure",
+                            value:"arena",
+                            config:{
+                                mapTiles: [
+                                    [
+                                        { 
+                                            tileId:"first", 
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"second", 
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"third", 
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"extra", 
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"fourth", 
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ],
+                                mapAsGrid:[ false ]
+                            }
+                        },{
+                            attribute:"structure",
                             value:"pathToRooms",
                             config:{
                                 mapTiles:[
@@ -1852,6 +1898,45 @@ ModManager.modules.push(function(){
                                 mapAsGrid:[ true, false ],
                                 mapDistanceScore: [ -1 ]
                             }
+                        },{
+                            attribute:"structure",
+                            value:"arena",
+                            config:{
+                                mapTiles: [
+                                    [
+                                        { 
+                                            tileId:"first", 
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"second", 
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"third", 
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"fourth", 
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ],
+                                mapAsGrid:[ false ]
+                            }
                         },
                         // --- Room sizes
                         {
@@ -2029,6 +2114,11 @@ ModManager.modules.push(function(){
                                                 [
                                                     "roomSize4+"
                                                 ]
+                                            ],
+                                            excludeTags:[
+                                                [
+                                                    "roomSize8+"
+                                                ]
                                             ]
                                         },{
                                             tileId:"first", 
@@ -2036,6 +2126,11 @@ ModManager.modules.push(function(){
                                             includeTags:[
                                                 [
                                                     "roomSize3+"
+                                                ]
+                                            ],
+                                            excludeTags:[
+                                                [
+                                                    "roomSize8+"
                                                 ]
                                             ]
                                         },{
@@ -2045,6 +2140,11 @@ ModManager.modules.push(function(){
                                                 [
                                                     "roomSize3+"
                                                 ]
+                                            ],
+                                            excludeTags:[
+                                                [
+                                                    "roomSize8+"
+                                                ]
                                             ]
                                         },{
                                             tileId:"third", 
@@ -2053,6 +2153,11 @@ ModManager.modules.push(function(){
                                                 [
                                                     "roomsCount2+"
                                                 ]
+                                            ],
+                                            excludeTags:[
+                                                [
+                                                    "roomSize8+"
+                                                ]
                                             ]
                                         },{
                                             tileId:"fourth", 
@@ -2060,6 +2165,11 @@ ModManager.modules.push(function(){
                                             includeTags:[
                                                 [
                                                     "roomsCount2+"
+                                                ]
+                                            ],
+                                            excludeTags:[
+                                                [
+                                                    "roomSize8+"
                                                 ]
                                             ]
                                         }
@@ -3038,7 +3148,7 @@ ModManager.modules.push(function(){
                             attribute:"roomsMerges",
                             value:"default",
                             config:{
-                                roomsMerges: [ 0, 0, 1, 2 ]
+                                roomsMerges: [ 0, 0, 0, 1, 2 ]
                             }
                         },
                         // --- Difficulty
@@ -5008,6 +5118,80 @@ ModManager.modules.push(function(){
                                                         tokens:[
                                                             { id:"objective", flipped:true },
                                                             { id:"time" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        },{
+                            attribute:"gameMode",
+                            value:"massiveRandomness",
+                            config:{
+                                roomsContent:[
+                                    [
+                                        {
+                                            at:1,
+                                            relevance:1,
+                                            onPathAdd:[
+                                                [
+                                                    { at:0.4, tokens:[ { id:"spikeTrap" } ] },
+                                                    { at:0.4, tokens:[ { id:"bearTrap" } ] },
+                                                ]
+                                            ],
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"corruption" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:1,
+                                            relevance:1,
+                                            onPathAdd:[
+                                                [
+                                                    { at:0.4, tokens:[ { id:"spikeTrap" } ] },
+                                                    { at:0.4, tokens:[ { id:"bearTrap" } ] },
+                                                ]
+                                            ],
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"time" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0.6,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0.6,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective", flipped:true }
                                                         ]
                                                     }
                                                 ]
