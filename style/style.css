@@ -99,7 +99,7 @@ HTML,BODY {
     font-weight: bold;
 }
 
-.header .settings .item .optionbutton {
+.header .settings .item .optionbutton, .popupcontainer .popupbox .popupbutton {
     display: inline-block;
     background-color: #333;
     color:#fff;
@@ -186,9 +186,43 @@ HTML,BODY {
     text-shadow: 0px 1px 0px #fff;
 }
 
+/* Popup */
+
+.popupcontainer {
+    position: fixed;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    background-color: rgba(51, 51, 51, 0.9);
+}
+
+.popupcontainer .popupbox {
+    width:80%;
+    max-width: 500px;
+    margin:auto;
+    border-radius:10px;
+    background-color: #fff;
+    border:2px solid #333;
+    padding:20px;
+    margin-top:5px;
+    text-align: center;
+}
+
+.popupcontainer .popupbox P {
+    margin:0 0 10px 0;
+}
+
+.popupcontainer .popupbox .popupbutton {
+    margin:10px 10px 0 10px;
+    padding:10px 20px;
+    min-width:40px;
+}
+
 /* Quest */
 
 .quest {
+    position: relative;
     padding:30px 0 0 0;
     width:70%;
     margin:auto;
@@ -201,6 +235,94 @@ HTML,BODY {
 .quest .notavailable {
     padding: 0 10px 20px 10px;
     text-align: center;
+}
+
+@keyframes massiverandomness-bg {
+    from {background-size: 100% 0px, auto;}
+    50% {background-size: 100% 0px, auto;}
+    to {background-size: 100% 160px, auto;}
+}
+
+@keyframes massiverandomness-colors {
+    from {filter: none; }
+    50% {filter: none;}
+    to {filter: brightness(40%) sepia(40) saturate(40) hue-rotate(13deg);}
+}
+
+@keyframes massiverandomness-text {
+    from { color:#333 }
+    50% { color:#333; text-shadow: 0px -1px 1px rgba(51, 51, 51, 0), 0px 1px 1px rgba(255, 255, 255, 0); }
+    to { color:#000; text-shadow: 0px -1px 1px rgba(51, 51, 51, 1), 0px 1px 1px rgba(255, 255, 255, 1); }
+}
+
+@keyframes massiverandomness-left {
+    from { transform: rotate(0); filter: none; }
+    50% { transform: rotate(0); filter: none; }
+    to { transform: rotate(45deg); filter: brightness(40%) sepia(40) saturate(40) hue-rotate(13deg); }
+}
+
+@keyframes massiverandomness-right {
+    from { transform: rotate(0); filter: none; }
+    50% { transform: rotate(0); filter: none; }
+    to { transform: rotate(-45deg); filter: brightness(40%) sepia(40) saturate(40) hue-rotate(13deg); }
+}
+
+.quest.massiverandomness {
+    background-image: linear-gradient(to bottom, rgb(204, 204, 204, 1), rgba(204, 204, 204, 0)), url(../images/background.png);
+    background-repeat: no-repeat, repeat-y;
+    background-size: 100% 160px, auto;
+    animation-name: massiverandomness-bg;
+    animation-timing-function: ease-out;
+    animation-duration: 3s;
+}
+
+.quest.massiverandomness .questHead .title, .quest.massiverandomness .sheetQuestHeader {
+    color: #000;
+    text-shadow: 0px -1px 1px #333, 0px 1px 1px #fff;
+    animation-name: massiverandomness-text;
+    animation-timing-function: ease-out;
+    animation-duration: 3s;
+}
+
+.quest.massiverandomness .sheetHeader {
+    filter: brightness(40%) sepia(40) saturate(40) hue-rotate(13deg);
+    animation-name: massiverandomness-colors;
+    animation-timing-function: ease-out;
+    animation-duration: 3s;
+}
+
+.quest.massiverandomness .left.diamond {
+    filter: brightness(40%) sepia(40) saturate(40) hue-rotate(13deg);
+    animation-name: massiverandomness-left;
+    animation-timing-function: ease-out;
+    animation-duration: 3s;
+    transform: rotate(45deg);
+}
+
+.quest.massiverandomness .right.diamond {
+    filter: brightness(40%) sepia(40) saturate(40) hue-rotate(13deg);
+    animation-name: massiverandomness-right;
+    animation-timing-function: ease-out;
+    animation-duration: 3s;
+    transform: rotate(-45deg);
+}
+
+.quest.massiverandomness .diamond, .quest.massiverandomness .mapSeparator {
+    filter: brightness(40%) sepia(40) saturate(40) hue-rotate(13deg);
+    animation-name: massiverandomness-colors;
+    animation-timing-function: ease-out;
+    animation-duration: 3s;
+}
+
+.quest A {
+    color:#333;
+}
+
+.quest .credits {
+    text-align: center;
+    border-bottom:1px solid #ccc;
+    margin:0;
+    padding:10px;
 }
 
 .quest .sheetHeader {
@@ -655,6 +777,38 @@ HTML,BODY {
     border-left:3px solid #999;
 }
 
+.tile .cell.solidtopborder .inner {
+    border-top:3px dotted #999;
+}
+
+.tile .cell.solidrightborder .inner {
+    border-right:3px dotted #999;
+}
+
+.tile .cell.solidbottomborder .inner {
+    border-bottom:3px dotted #999;
+}
+
+.tile .cell.solidleftborder .inner {
+    border-left:3px dotted #999;
+}
+
+.tile .cell.tophedge .inner {
+    border-top:3px dashed #388238;
+}
+
+.tile .cell.righthedge .inner {
+    border-right:3px dashed #388238;
+}
+
+.tile .cell.bottomhedge .inner {
+    border-bottom:3px dashed #388238;
+}
+
+.tile .cell.lefthedge .inner {
+    border-left:3px dashed #388238;
+}
+
 .tile .cell.dark .background {
     background-color: #333;
 }
@@ -669,6 +823,10 @@ HTML,BODY {
 
 .tile .cell.light .background, .tile .cell.crystal .background {
     background-color: #fff;
+}
+
+.tile .cell.water .background  {
+    border: 2px dashed #33f;
 }
 
 .tile .cell.blocking .inner {
@@ -1009,16 +1167,28 @@ HTML,BODY {
         display: none !important;
     }
 
-    .header, .footer, .noticebar {
+    .header, .footer, .noticebar, .popupcontainer {
         display: none;
     }
 
-    .quest {
+    .quest, .quest.massiverandomness {
+        animation-name:none;
         margin:0;
         padding:0;
         width:auto;
         box-shadow: none;
         background-image: none;
+    }
+
+    .quest.massiverandomness .questHead .title, .quest.massiverandomness .sheetQuestHeader {
+        animation-name:none;
+        color:#333;
+        text-shadow: none;
+    }
+
+    .quest.massiverandomness .title .diamond, .quest.massiverandomness .sheetHeader {
+        animation-name:none;
+        filter: none;
     }
 
     .quest .questHead {
@@ -1123,6 +1293,14 @@ HTML,BODY {
         display:inline !important;
     }
 
+    .tile .cell.tophedge .inner, .tile .cell.righthedge .inner, .tile .cell.bottomhedge .inner, .tile .cell.lefthedge .inner {
+        border-color:#ccc;
+    }
+
+    .tile .cell.water .background  {
+        border: 2px dotted #333;
+    }
+
     .tile .cell.room .inner {
         background-color: transparent;
     }
@@ -1188,7 +1366,9 @@ HTML,BODY {
 
 }
 
-@media screen and (max-width: 800px) {
+/* Mobile */
+
+@media screen and (max-width: 825px) {
 
     .noticebar {
         font-size: 12px;
@@ -1230,4 +1410,5 @@ HTML,BODY {
     .header .logo {
         display: none;
     }
+    
 }

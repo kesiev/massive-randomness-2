@@ -42,10 +42,32 @@ ModManager.modules.push(function(){
                                             EN:"Massive Darkness 2: Heavenfall"
                                         },
                                         description:{
-                                            IT:"Una modalit&agrave; campagna per Massive Darkness 2",
-                                            EN:"A campaign mode for Massive Darkness 2"
+                                            IT:"4 tessere paradiso",
+                                            EN:"4 heaven tiles"
                                         },
                                         tags:[ "md2-heavenfall" ]
+                                    },{
+                                        code:"G",
+                                        label:{
+                                            IT:"Massive Darkness 2: Rainbow Crossing",
+                                            EN:"Massive Darkness 2: Rainbow Crossing"
+                                        },
+                                        description:{
+                                            IT:"4 tessere arcobaleno",
+                                            EN:"4 rainbow tiles"
+                                        },
+                                        tags:[ "md2-rainbowcrossing" ]
+                                    },{
+                                        code:"D",
+                                        label:{
+                                            IT:"Massive Darkness",
+                                            EN:"Massive Darkness"
+                                        },
+                                        description:{
+                                            IT:"9 tessere dungeon",
+                                            EN:"9 dungeon tiles"
+                                        },
+                                        tags:[ "md1-base" ]
                                     },{
                                         code:"B",
                                         label:{
@@ -64,10 +86,58 @@ ModManager.modules.push(function(){
                                             EN:"Massive Darkness: A Quest of Crystal & Lava"
                                         },
                                         description:{
-                                            IT:"9 tessere del pack di aggiornamento",
-                                            EN:"9 upgrade pack tiles"
+                                            IT:"9 tessere dungeon che replicano quelle di Massive Darkness 1",
+                                            EN:"9 dungeon tiles replicating Massive Darkness 1 tiles"
                                         },
                                         tags:[ "md2-crystallava-up" ]
+                                    },{
+                                        ifFlag:"zombicide",
+                                        code:"E",
+                                        label:{
+                                            IT:"Zombicide: Black Plague",
+                                            EN:"Zombicide: Black Plague"
+                                        },
+                                        description:{
+                                            IT:"9 tessere esterne",
+                                            EN:"9 outdoor tiles"
+                                        },
+                                        tags:[ "zc-blackplague" ]
+                                    },{
+                                        ifFlag:"zombicide",
+                                        code:"F",
+                                        label:{
+                                            IT:"Zombicide: Green Horde",
+                                            EN:"Zombicide: Green Horde"
+                                        },
+                                        description:{
+                                            IT:"9 tessere esterne/villaggio",
+                                            EN:"9 outdoor/village tiles"
+                                        },
+                                        tags:[ "zc-greenhorde" ]
+                                    },{
+                                        ifFlag:"zombicide",
+                                        code:"f",
+                                        label:{
+                                            IT:"Zombicide: Friends and Foes",
+                                            EN:"Zombicide: Friends and Foes"
+                                        },
+                                        description:{
+                                            IT:"5 tessere esterne/villaggio",
+                                            EN:"5 outdoor/village tiles"
+                                        },
+                                        tags:[ "zc-friendfoes" ]
+                                    },{
+                                        ifFlag:"zombicide",
+                                        code:"e",
+                                        label:{
+                                            IT:"Zombicide: Wulfsburg",
+                                            EN:"Zombicide: Wulfsburg"
+                                        },
+                                        description:{
+                                            IT:"2 tessere torre",
+                                            EN:"2 tower tiles"
+                                        },
+                                        tags:[ "zc-wulfsburg" ]
                                     }
                                 ]
                             },{
@@ -167,8 +237,7 @@ ModManager.modules.push(function(){
                                             EN:"It adds extra challenges to the adventure, you can decide whether to accept or not.",
                                         },
                                         tags:[ "challenges-default" ]
-                                    },
-                                    {
+                                    },{
                                         code:"Y",
                                         label:{
                                             IT:"Modalit&agrave; Esplorazione",
@@ -179,8 +248,7 @@ ModManager.modules.push(function(){
                                             EN:"The content of the Chambers is hidden and is shown when they are revealed.",
                                         },
                                         tags:[ "gamemode-dungeoncrawling" ]
-                                    },
-                                    {
+                                    },{
                                         code:"W",
                                         label:{
                                             IT:"Escludi avventure non tradotte",
@@ -198,8 +266,46 @@ ModManager.modules.push(function(){
                                             EN:[ "untranslated-en" ],
                                             FR:[ "untranslated-fr" ]
                                         }
-                                    },
-                                    {
+                                    },{
+                                        ifFlag:"zombicide",
+                                        isFlag:"zombicideRules",
+                                        label:{
+                                            IT:"Nascondi regole per Zombicide",
+                                            EN:"Hide Zombicide rules"
+
+                                        },
+                                        description:{
+                                            IT:"Le regole comuni per giocare con le tessere di Zombicide non vengono aggiunte all'avventura.",
+                                            EN:"The common rules for playing with Zombicide tiles are not added to the adventure."
+                                        },
+                                        excludeTags:[ "quest-default-zombicide" ]
+                                    },{
+                                        ifNotFlag:"zombicide",
+                                        isButton:true,
+                                        isFlagButton:"zombicide",
+                                        label:{
+                                            IT:"Usa",
+                                            EN:"Use"
+                                        },
+                                        description:{
+                                            IT:"Prova ad usare alcuni componenti della serie Zombicide.",
+                                            EN:"Try using some components from the Zombicide series."
+                                        },
+                                        message:{
+                                            IT:"<p>Alcuni capitoli della serie <i>Fantasy Zombicide</i> usano tessere dalla dimensione e struttura simile a quelle usate da Massive Darkness 2. Queste includono nuove ambientazioni, spazi aperti e nuovi ostacoli ma possono risultare troppo facili o difficili da affrontare con le regole di Massive Darkness 2.</p><p>Se disponi di questi materiali e ti senti <i>molto coraggioso</i>, Massive Randomness 2 pu&ograve; usarle per generare le avventure.</p><p>Vuoi provarci?</p>",
+                                            EN:"<p>Some chapters in the <i>Fantasy Zombicide</i> series use tiles with a similar size and structure to those used in Massive Darkness 2. These include new environments, open spaces, and new obstacles but may be too easy or difficult to deal with the Massive Darkness 2 rules.</p><p>If you have these materials and are feeling <i>very brave</i>, Massive Randomness 2 can use them to generate adventures.</p><p>Do you want to try it?</p>"
+                                        },
+                                        buttons:{
+                                            yes:{
+                                                IT:"Si",
+                                                EN:"Yes"
+                                            },
+                                            no:{
+                                                IT:"No",
+                                                EN:"No"
+                                            }
+                                        }
+                                    },{
                                         isButton:true,
                                         isInstallerButton:true,
                                         label:{
@@ -210,6 +316,10 @@ ModManager.modules.push(function(){
                                             IT:"Permette di usare Massive Randomness 2 offline.",
                                             EN:"Allows you to use Massive Randomness 2 offline."
                                         }
+                                    },{
+                                        isHidden:true,
+                                        isCounterTrigger:true,
+                                        tags:[ "quests-mr-ending" ]
                                     }
                                 ]
                             }
@@ -233,8 +343,8 @@ ModManager.modules.push(function(){
                                 EN:"Best on Firefox/Chrome - {toolName} - {toolVersion} - &copy; 2024 by KesieV - Sources at <a target=_blank href='{sourcesAtFull}'>{sourcesAtShort}</a>"
                             },
                             notice:{
-                                EN:"Massive Darkness 2 and all related properties are owned by CMON Global Limited",
-                                IT:"Massive Darkness 2 e tutte le relative propriet&agrave; sono marchi registrati CMON Global Limited"
+                                EN:"Massive Darkness, Zombicide, and all related properties are owned by CMON Global Limited",
+                                IT:"Massive Darkness, Zombicide e tutte le relative propriet&agrave; sono marchi registrati CMON Global Limited"
                             },
                             wait:{
                                 IT:"Sto preparando l'avventura...",
