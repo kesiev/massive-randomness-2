@@ -45,8 +45,15 @@ MapRenderer=(function(){
         return node;
     }
 
-    function renderSideColor(cell,side,className) {
+    function renderSideColor(cell,side,className,solidClassName) {
         if (cell.doors[side] || cell.originalWalls[side])
+            return " "+(!cell.solidWalls || !cell.solidWalls[side] ? className : solidClassName);
+        else
+            return "";
+    }
+
+    function renderHedgesColor(cell,side,className) {
+        if (cell.hedges && cell.hedges[side])
             return " "+className;
         else
             return "";
@@ -113,19 +120,25 @@ MapRenderer=(function(){
                 if (cell.isRoom) {
                     cellNode.cell.className+=
                         " room"+
-                        renderSideColor(cell,0,"topBorder")+
-                        renderSideColor(cell,1,"rightBorder")+
-                        renderSideColor(cell,2,"bottomBorder")+
-                        renderSideColor(cell,3,"leftBorder");
+                        renderSideColor(cell,0,"topBorder","solidTopBorder")+
+                        renderSideColor(cell,1,"rightBorder","solidRightBorder")+
+                        renderSideColor(cell,2,"bottomBorder","solidBottomBorder")+
+                        renderSideColor(cell,3,"leftBorder","solidLeftBorder");
                 } else if (cell.isWalled) {
                     cellNode.cell.className+=
                         " corridor walled"+
-                        renderSideColor(cell,0,"topBorder")+
-                        renderSideColor(cell,1,"rightBorder")+
-                        renderSideColor(cell,2,"bottomBorder")+
-                        renderSideColor(cell,3,"leftBorder");
-                } else
-                    cellNode.cell.className+=" corridor";
+                        renderSideColor(cell,0,"topBorder","solidTopBorder")+renderHedgesColor(cell,0,"topHedge")+
+                        renderSideColor(cell,1,"rightBorder","solidRightBorder")+renderHedgesColor(cell,1,"rightHedge")+
+                        renderSideColor(cell,2,"bottomBorder","solidBottomBorder")+renderHedgesColor(cell,2,"bottomHedge")+
+                        renderSideColor(cell,3,"leftBorder","solidLeftBorder");renderHedgesColor(cell,3,"leftHedge");
+                } else {
+                    cellNode.cell.className+=
+                    " corridor "+
+                        renderHedgesColor(cell,0,"topHedge")+
+                        renderHedgesColor(cell,1,"rightHedge")+
+                        renderHedgesColor(cell,2,"bottomHedge")+
+                        renderHedgesColor(cell,3,"leftHedge");
+                }
 
                 if (cell.type)
                     cell.type.forEach(type=>{

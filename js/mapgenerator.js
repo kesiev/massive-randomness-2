@@ -35,9 +35,20 @@ MapGenerator=(function() {
 
     function rotateCell(cell) {
         let
+            pos,
             out=clone(cell);
-        for (let i=0;i<4;i++)
-            out.walls[i]=cell.walls[(i+3)%4];
+        for (let i=0;i<4;i++) {
+            pos = (i+3)%4;
+            out.walls[i]=cell.walls[pos];
+            if (cell.hedges) {
+                if (!out.hedges) out.hedges=[];
+                out.hedges[i]=cell.hedges[pos];
+            }
+            if (cell.solidWalls) {
+                if (!out.solidWalls) out.solidWalls=[];
+                out.solidWalls[i]=cell.solidWalls[pos];
+            }
+        }
         return out;
     }
 
@@ -606,9 +617,11 @@ MapGenerator=(function() {
                     });
                 }
                 if (ok && criteria.excludeTags)
-                    criteria.excludeTags.forEach(tag=>{
-                        if (side.tags.indexOf(tag) != -1)
-                            ok = false;
+                    criteria.excludeTags.forEach(conditions=>{
+                        conditions.forEach(tag=>{
+                            if (side.tags.indexOf(tag) != -1)
+                                ok = false;
+                        });
                     });
                 
                 if (ok)
@@ -1589,11 +1602,11 @@ MapGenerator=(function() {
             destinationCell = isCoordInMap(map,dx,dy);
 
         if (
-            destinationCell && !cell.hasDoor && cell.walls[direction] && !cell.doors[direction] &&
+            destinationCell && !cell.hasDoor && cell.walls[direction] && (!cell.solidWalls || !cell.solidWalls[direction]) && !cell.doors[direction] &&
             (!doorType.doNotCrossTile || (cell.tileData === destinationCell.tileData))
         ) {
 
-            if (isCellCorridor(destinationCell) && destinationCell.walls[oppositeDirection]) {
+            if (isCellCorridor(destinationCell) && destinationCell.walls[oppositeDirection] && (!destinationCell.solidWalls || !destinationCell.solidWalls[oppositeDirection])) {
 
                 let
                     score = 0;
@@ -1918,9 +1931,10 @@ MapGenerator=(function() {
             }
 
             map.specialRules.forEach(rule=>{
-                resources.specialRules[rule].forEach(rule=>{
-                    result.quest.rules.push(rule);
-                })
+                if (resources.specialRules[rule])
+                    resources.specialRules[rule].forEach(rule=>{
+                        result.quest.rules.push(rule);
+                    })
             })
             result.map = map;
 
