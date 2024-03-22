@@ -75,7 +75,7 @@ QuestRenderer=(function(){
 
                 let
                     quest = result.quest,
-                    questNode = createNode(into,"div","quest"),
+                    questNode = createNode(into,"div","quest"+(quest.specialClass ? " "+quest.specialClass : "")),
                     sheetHeader = createNode(questNode,"div","sheetHeader displayonly"),
                     sheetQuestHeader = createNode(questNode,"div","sheetQuestHeader displayonly"),
                     questHeadNode = createNode(questNode,"div","questHead"),
@@ -257,20 +257,25 @@ QuestRenderer=(function(){
 
                 // Hide hidden text
 
-                let
-                    hiddenText = document.getElementsByClassName("hiddentext");
-                for (let i=0;i<hiddenText.length;i++) {
+                if (!flags.debugHiddenText) {
+                        
                     let
-                        node = hiddenText[i],
-                        button = createNode(0,"span","showtext");
-                    
-                    node.style.display = "none";
-                    button.onclick=function() {
-                        this.style.display = "none";
-                        node.style.display = "";
+                        hiddenText = document.getElementsByClassName("hiddentext");
+                    for (let i=0;i<hiddenText.length;i++) {
+                        let
+                            node = hiddenText[i],
+                            button = createNode(0,"span","showtext");
+                        
+                        node.style.display = "none";
+                        button.onclick=function() {
+                            this.style.display = "none";
+                            node.style.display = "";
+                        }
+                        button.innerHTML=Labels.getLabel(flags,resources,result,language,resources.globalLabels.showHiddenText);
+                        node.parentElement.insertBefore(button,node);
+
                     }
-                    button.innerHTML=Labels.getLabel(flags,resources,result,language,resources.globalLabels.showHiddenText);
-                    node.parentElement.insertBefore(button,node);
+
                 }
                 
             } else {

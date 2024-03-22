@@ -93,6 +93,7 @@ QuestGenerator=(function() {
             quest.by = questModel.by;
             quest.suggestedTilesCount = questModel.suggestedTilesCount;
             quest.code = questModel.code;
+            quest.specialClass = questVersion.specialClass;
             quest.title = pickRandomElementValue(questVersion.title);
             quest.story = pickRandomElementValue(questVersion.story);
             
