@@ -7,18 +7,21 @@ Tools=(function(){
             IT:[ "ograve", "agrave", "egrave", "eacute", "ugrave", "igrave", "deg", "amp", "Egrave" ],
             EN:[ "amp" ]
         },
-        ALLOWED_TAGS=[ "p", "/p", "ul", "/ul", "ol", "/ol", "li", "/li", "b", "/b", "i", "/i", "span class='phase'", "span class='displayonly'", "span class='printonly'", "span class='hiddentext'",  "/span" ],
+        ALLOWED_TAGS=[ "p", "/p", "ul", "/ul", "ol", "/ol", "li", "/li", "b", "/b", "i", "/i", "span class='phase'", "span class='displayonly'", "span class='printonly'", "span class='hiddentext'",  "/span", "br", "p class='credits'", "/a", /^a target=_blank href='[^']+'$/ ],
         ALLOWED_PLACEHOLDER_MODS=[ "capital" ],
-        ALLOWED_CELLTYPES=[ "light", "dark", "crystal", "lava", "blocking" ],
+        ALLOWED_CELLTYPES=[ "light", "dark", "crystal", "lava", "blocking", "water" ],
         ALLOWED_PLACEHOLDERS=[
             // Common tile labels
             "tileLabel.first", "tileLabel.second", "tileLabel.third", "tileLabel.fourth", "tileLabel.fifth", "tileLabel.center",
             // Investigation quest placeholders
             "who", "testimony.corruptionLord", "testimony.corruptionLordServant", "testimony.timeLord", "testimony.timeLordServant",
-            "ending.corruptionLord", "ending.timeLord"
+            "ending.corruptionLord", "ending.timeLord",
+            // Ending
+            "token.order1", "token.order2", "token.order3", "token.order4",
+            "action.order1", "action.order2", "action.order3"
         ],
         WARNING_WORDS={
-            EN:[ "wandering", "quest" ],
+            EN:[ "wandering", "quest", "marker" ],
             IT:[ "quest", "xp", "avventura" ],
             FR:[ ]
         },
@@ -37,7 +40,25 @@ Tools=(function(){
                 id:"maps-size-large",
                 excludes:[],
                 needs:[ "quests", "maps-default", "md2-hellscape", "maps-size-large", "maps-default-uniform", "challenges-default" ]
-            },{
+            },
+            // --- MD2: Rainbow Crossing
+            {
+                id:"maps-size-small-rainbowcrossing",
+                excludes:[],
+                needs:[ "quests", "maps-default", "md2-hellscape", "md2-rainbowcrossing", "maps-size-small", "maps-default-uniform", "challenges-default" ]
+            },
+            {
+                id:"maps-size-normal-rainbowcrossing",
+                excludes:[],
+                needs:[ "quests", "maps-default", "md2-hellscape", "md2-rainbowcrossing", "maps-size-normal", "maps-default-uniform", "challenges-default" ]
+            },
+            {
+                id:"maps-size-large-rainbowcrossing",
+                excludes:[],
+                needs:[ "quests", "maps-default", "md2-hellscape", "md2-rainbowcrossing", "maps-size-large", "maps-default-uniform", "challenges-default" ]
+            },
+            // --- MD2: Heavenfall
+            {
                 id:"maps-size-small-heavenfall",
                 excludes:[],
                 needs:[ "quests", "maps-default", "md2-hellscape", "md2-heavenfall", "maps-size-small", "maps-default-uniform", "challenges-default" ]
@@ -51,6 +72,38 @@ Tools=(function(){
                 id:"maps-size-large-heavenfall",
                 excludes:[],
                 needs:[ "quests", "maps-default", "md2-hellscape", "md2-heavenfall", "maps-size-large", "maps-default-uniform", "challenges-default" ]
+            },
+            // --- ZC: Black Plague
+            {
+                id:"maps-size-small-zcblackplague",
+                excludes:[],
+                needs:[ "quests", "maps-default", "md2-hellscape", "zc-blackplague", "maps-size-small", "maps-default-uniform", "challenges-default" ]
+            },
+            {
+                id:"maps-size-normal-zcblackplague",
+                excludes:[],
+                needs:[ "quests", "maps-default", "md2-hellscape", "zc-blackplague", "maps-size-normal", "maps-default-uniform", "challenges-default" ]
+            },
+            {
+                id:"maps-size-large-zcblackplague",
+                excludes:[],
+                needs:[ "quests", "maps-default", "md2-hellscape", "zc-blackplague", "maps-size-large", "maps-default-uniform", "challenges-default" ]
+            },
+            // --- ZC: Green horde
+            {
+                id:"maps-size-small-zcgreenhorde",
+                excludes:[],
+                needs:[ "quests", "maps-default", "md2-hellscape", "zc-greenhorde", "maps-size-small", "maps-default-uniform", "challenges-default" ]
+            },
+            {
+                id:"maps-size-normal-zcgreenhorde",
+                excludes:[],
+                needs:[ "quests", "maps-default", "md2-hellscape", "zc-greenhorde", "maps-size-normal", "maps-default-uniform", "challenges-default" ]
+            },
+            {
+                id:"maps-size-large-zcgreenhorde",
+                excludes:[],
+                needs:[ "quests", "maps-default", "md2-hellscape", "zc-greenhorde", "maps-size-large", "maps-default-uniform", "challenges-default" ]
             }
         ];
 
@@ -212,15 +265,23 @@ Tools=(function(){
             errors.push(errorHeader,"EN language missing");
         for (let lang in set) {
             let
+                okTag = "XXX",
                 entry = set[lang];
             if (!Array.isArray(entry))
                 entry = [entry];
             entry.forEach((argument,aid)=>{
                 let
                     orgArgument = argument.replace(/<([^>]+)>/g,(m,m1)=>{
-                        if (ALLOWED_TAGS.indexOf(m1) == -1)
-                            errors.push(errorHeader+" L["+lang+"] O["+aid+"]: invalid tag &lt;"+m1+"&gt;");
-                        return "XXX";
+                        for (let i=0;i<ALLOWED_TAGS.length;i++) {
+                            let allowedTag = ALLOWED_TAGS[i];
+                            if (allowedTag instanceof RegExp) {
+                                if (allowedTag.test(m1))
+                                    return okTag;
+                            } else if (allowedTag == m1)
+                                return okTag;
+                        }
+                        errors.push(errorHeader+" L["+lang+"] O["+aid+"]: invalid tag &lt;"+m1+"&gt;");
+                        return okTag;
                     }).replace(/{([^}]+)}/g,(m,m1)=>{
                         let
                             errorPHeader=errorHeader+" L["+lang+"] O["+aid+"]: ",
@@ -230,11 +291,11 @@ Tools=(function(){
                             errors.push(errorPHeader+"unavailable placeholder "+parts[0]);
                         if (parts[1] && (ALLOWED_PLACEHOLDER_MODS.indexOf(parts[1]) == -1))
                             errors.push(errorPHeader+"invalid placeholder modifier '"+parts[1]+"'");
-                        return "XXX"
+                        return okTag;
                     }).replace(/&([^;]+);/g,(m,m1)=>{
                         if (ALLOWED_ENTITIES[lang] && (ALLOWED_ENTITIES[lang].indexOf(m1) == -1))
                             errors.push(errorHeader+" L["+lang+"] O["+aid+"]: invalid entity for "+lang+": &amp;"+m1+";");
-                        return "XXX";
+                        return okTag;
                     }),
                     checkArgument = orgArgument.replace(/([^0-9a-zA-Z() +/\-,.;:'!?"]+)/g,function(m,m1){
                         return "<span style='background-color:#000;color:#fff'>"+m1+"</span>";
@@ -580,6 +641,10 @@ Tools=(function(){
                         sideContainerNode = createNode(tileNode,"div"),
                         sideInfo = createNode(sideContainerNode,"div"),
                         sideNode = createTileTo(sideContainerNode,"div"),
+                        isOutdoor = side.skins.indexOf("outdoor") != -1,
+                        hasHedges,
+                        hasWater,
+                        hasSolidWalls,
                         rows = side.angles[0].length,
                         cols = side.angles[0][0].length,
                         expectedTags = [ "any" ],
@@ -611,6 +676,11 @@ Tools=(function(){
                             
                             if (cell.type)
                                 cell.type.forEach(type=>{
+                                    if (type == "water") hasWater = true;
+                                    if (cell.solidWalls)
+                                        cell.solidWalls.forEach(wall=>{
+                                            if (wall) hasSolidWalls = true;
+                                        })
                                     label+=type.substr(0,2);
                                     title+=type+" ";
                                 });
@@ -632,29 +702,42 @@ Tools=(function(){
                                 roomsCount++;
                             }
 
+                            if (cell.hedges)
+                                cell.hedges.forEach(hedge=>{
+                                    if (hedge) hasHedges = true;
+                                })
+
                             // --- Cell walls check
                             if (cell.walls[0]) {
                                 if (!cell.isWalled && upperCell && !upperCell.walls[2])
                                     errors.push(errorHeaderCell+": mismatching wall on upper cell");
-                                cellNode.style.borderTop="1px solid #000";
+                                cellNode.style.borderTop=cell.solidWalls && cell.solidWalls[0] ? "2px solid #000" : "1px solid #000";
+                            } else if (cell.hedges && cell.hedges[0]) {
+                                cellNode.style.borderTop="1px solid #0F0";
                             }
 
                             if (cell.walls[1]) {
                                 if (!cell.isWalled && rightCell && !rightCell.walls[3])
                                     errors.push(errorHeaderCell+": mismatching wall on right cell");
-                                cellNode.style.borderRight="1px solid #000";
+                                cellNode.style.borderRight=cell.solidWalls && cell.solidWalls[1] ? "2px solid #000" : "1px solid #000";
+                            } else if (cell.hedges && cell.hedges[1]) {
+                                cellNode.style.borderRight="1px solid #0F0";
                             }
 
                             if (cell.walls[2]) {
                                 if (!cell.isWalled && lowerCell && !lowerCell.walls[0])
                                     errors.push(errorHeaderCell+": mismatching wall on lower cell");
-                                cellNode.style.borderBottom="1px solid #000";
+                                cellNode.style.borderBottom=cell.solidWalls && cell.solidWalls[2] ? "2px solid #000" :  "1px solid #000";
+                            } else if (cell.hedges && cell.hedges[2]) {
+                                cellNode.style.borderBottom="1px solid #0F0";
                             }
 
                             if (cell.walls[3]) {
                                 if (!cell.isWalled && leftCell && !leftCell.walls[1])
                                     errors.push(errorHeaderCell+": mismatching wall on left cell");
-                                cellNode.style.borderLeft="1px solid #000";
+                                cellNode.style.borderLeft=cell.solidWalls && cell.solidWalls[3] ? "2px solid #000" : "1px solid #000";
+                            } else if (cell.hedges && cell.hedges[3]) {
+                                cellNode.style.borderLeft="1px solid #0F0";
                             }
 
                             if (cell.isRoom) {
@@ -714,6 +797,18 @@ Tools=(function(){
                                 if (!cell.isWalled && leftCell && !(leftCell.isRoom || leftCell.isBlocking) && cell.walls[3])
                                     errors.push(errorHeaderCell+": extra wall on corridor left");
 
+                                if (cell.hedges) {
+
+                                    if (cell.hedges[0] && upperCell && (!upperCell.hedges || !upperCell.hedges[2]))
+                                        errors.push(errorHeaderCell+": hedges not matching on top");
+                                    if (cell.hedges[1] && rightCell && (!rightCell.hedges || !rightCell.hedges[3]))
+                                        errors.push(errorHeaderCell+": hedges not matching on right");
+                                    if (cell.hedges[2] && lowerCell && (!lowerCell.hedges || !lowerCell.hedges[0]))
+                                        errors.push(errorHeaderCell+": hedges not matching on bottom");
+                                    if (cell.hedges[3] && leftCell && (!leftCell.hedges || !leftCell.hedges[1]))
+                                        errors.push(errorHeaderCell+": hedges not matching on left");
+                                }
+
                             } else {
                                 if (!(cell.walls[0] && cell.walls[1] && cell.walls[2] && cell.walls[3]))
                                     errors.push(errorHeaderCell+": missing walls on a blocking cell");
@@ -729,6 +824,17 @@ Tools=(function(){
                                 });
                             else
                                 errors.push(errorHeaderCell+": missing cell types");
+
+                            // --- Cell outdoor check
+                            if (isOutdoor)
+                                if ((cell.type.indexOf("light")!= -1) && cell.isRoom)
+                                    errors.push(errorHeaderCell+": outdoor light cell can't bee a room");
+                                else if ((cell.type.indexOf("dark") != -1) && !cell.isRoom && !cell.isBlocking)
+                                    errors.push(errorHeaderCell+": outdoor dark cell must be a room");
+                                else if ((cell.type.indexOf("dark") == -1) && cell.isRoom)
+                                    errors.push(errorHeaderCell+": outdoor room cell must be dark");
+                                else if ((cell.type.indexOf("light") == -1) && (cell.type.indexOf("water") == -1) && !cell.isRoom && !cell.isBlocking)
+                                    errors.push(errorHeaderCell+": outdoor street cell must be light or water");
 
                         });
 
@@ -753,12 +859,42 @@ Tools=(function(){
                         deniedSkins.push("red");
                         deniedSkins.push("light");
                         expectedSpecialRules.push("noLydian");
+                    } else if (hasHedges) {
+                        deniedCells.push("crystal");
+                        deniedCells.push("lava");
+                        deniedSkins.push("heaven");
+                        deniedSkins.push("red");
+                        deniedSkins.push("light");
+                        allowedSkins.push("outdoor");
+                        allowedSkins.push("village");
+                        deniedSkins.push("lava");
+                        deniedSkins.push("crystal");
+                        expectedSpecialRules.push("noLydian");
+                        expectedSpecialRules.push("zombicideHedges");
+                        expectedSpecialRules.push("zombicideTiles");
+                        if (hasWater) expectedSpecialRules.push("zombicideWater");
+                        if (hasSolidWalls) expectedSpecialRules.push("zombicideSolidWalls");
+                    } else if (isOutdoor) {
+                        deniedCells.push("crystal");
+                        deniedCells.push("lava");
+                        deniedSkins.push("heaven");
+                        deniedSkins.push("red");
+                        deniedSkins.push("light");
+                        allowedSkins.push("outdoor");
+                        deniedSkins.push("lava");
+                        deniedSkins.push("crystal");
+                        expectedSpecialRules.push("noLydian");
+                        expectedSpecialRules.push("zombicideTiles");
+                        if (hasWater) expectedSpecialRules.push("zombicideWater");
+                        if (hasSolidWalls) expectedSpecialRules.push("zombicideSolidWalls");
                     } else {
                         deniedCells.push("crystal");
                         deniedCells.push("lava");
+                        allowedSkins.push("rainbow");
                         allowedSkins.push("heaven");
                         allowedSkins.push("red");
                         allowedSkins.push("light");
+                        deniedSkins.push("outdoor");
                         deniedSkins.push("lava");
                         deniedSkins.push("crystal");
                     }
@@ -781,12 +917,16 @@ Tools=(function(){
                     // --- Extra rules check
 
                     if (expectedSpecialRules.length)
-                        if (side.specialRules)
+                        if (side.specialRules) {
                             expectedSpecialRules.forEach(rule=>{
                                 if (side.specialRules.indexOf(rule) == -1)
                                     errors.push(errorHeaderSide+": expected extra rule "+rule);
                             })
-                        else
+                            side.specialRules.forEach(rule=>{
+                                if (expectedSpecialRules.indexOf(rule) == -1)
+                                    errors.push(errorHeaderSide+": unexpected extra rule "+rule);
+                            })
+                        } else
                             errors.push(errorHeaderSide+": expected extra rules "+expectedSpecialRules.join(", "));
 
                     // --- Tags check
