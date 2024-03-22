@@ -1435,7 +1435,7 @@ ModManager.modules.push(function(){
                                                         "</ul>"+
                                                         "</li>"+
                                                         "</ul>",
-                                                        EN:"For this Mission, ignore any spawns from the Darkness track. Instead, whenever the Darkness track reaches a space with a marker, discard that marker and resolve the corresponding effect:"+
+                                                        EN:"For this Mission, ignore any spawns from the Darkness track. Instead, whenever the Darkness track reaches a space with a token, discard that token and resolve the corresponding effect:"+
                                                         "<ul>"+
                                                         "<li><b>Corruption Token:</b> Spawn 1 Roaming Monster on the Roaming Monster Portal. Once this is done, swap the location of the Roaming Monster Portal with the next Portal clockwise. The Roaming Monster Portal switches to the following tiles:"+
                                                         "<ul>"+
@@ -1492,9 +1492,9 @@ ModManager.modules.push(function(){
                                                         "<ul>"+
                                                         "<li><b>If there is {label.barrier@6} between the Enemy and the Objective token on the colored side:</b> The Enemy treats {label.barrier@7} as its target to attack or move. This means it can attack {label.barrier@8}, if within range. Otherwise, move 1 Zone {label.barrier@9} (ignoring any Heroes).</li>"+
                                                         "<li><b>If there is at least 1 Hero between the Enemy and the Objective token on the colored side:</b> The Enemy treats the closest Hero as its target to attack or move.</li>" +
-                                                        "<li><b>Otherwise:</b> The Enemy moves 1 Zone toward the Objective marker on the colored side."+
+                                                        "<li><b>Otherwise:</b> The Enemy moves 1 Zone toward the Objective token on the colored side."+
                                                         "</ul>"+
-                                                        "<p>If, at the start of the Enemy Phase, there is an Enemy in the Zone of the Objective marker on the colored side, the Mission ends in defeat.</p>"
+                                                        "<p>If, at the start of the Enemy Phase, there is an Enemy in the Zone of the Objective token on the colored side, the Mission ends in defeat.</p>"
                                                     }
                                                 ]
                                             }

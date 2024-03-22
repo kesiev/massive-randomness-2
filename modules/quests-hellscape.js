@@ -7,7 +7,7 @@ ModManager.modules.push(function(){
             needs:[ "quests-default", "md2-hellscape" ],
             provides:[ "quests", "quests-hellscape", "untranslated-fr" ],
             label:{
-                EN:"MD2 Hellscape inspired quest models"
+                EN:"MD2: Hellscape inspired quest models"
             },
             content:[
             {
@@ -996,7 +996,7 @@ ModManager.modules.push(function(){
                                                         EN:[ "It is said that"]
                                                     },{
                                                         IT:[ "Nei testi sacri si dice che" ],
-                                                        EN:[ "In the sacred texts it is said that"]
+                                                        EN:[ "In the sacred texts, it is said that"]
                                                     }
                                                 ],
                                                 monsters:[
@@ -1044,7 +1044,7 @@ ModManager.modules.push(function(){
                                                         EN:[ "No one has ever managed to defeat them all but, in ancient texts, it is said that those who will be able to defeat them all" ]
                                                     },{
                                                         IT:[ "Chi riuscir&agrave; a porre fine alla loro tormento" ],
-                                                        EN:[ "Who will be able to put an end to their torment" ]
+                                                        EN:[ "Those who will be able to put an end to their torment" ]
                                                     }
                                                 ],
                                                 prize:[

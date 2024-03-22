@@ -7,15 +7,15 @@ ModManager.modules.push(function(){
             needs:[ ],
             provides:[ "md2-hellscape" ],
             label:{
-                EN:"MD2 Hellscape box content"
+                EN:"MD2: Hellscape box content"
             },
             content:[
                 {
                     type:"globalLabels",
                     data:{
                         boxMd2CoreBox:{
-                            EN:"from MD2 Hellscape",
-                            IT:"da MD2 Hellscape"
+                            EN:"from MD2: Hellscape",
+                            IT:"da MD2: Hellscape"
                         }
                     }
                 },{

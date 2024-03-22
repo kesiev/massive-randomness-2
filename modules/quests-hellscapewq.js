@@ -7,7 +7,7 @@ ModManager.modules.push(function(){
             needs:[ "quests-default", "md2-hellscape" ],
             provides:[ "quests", "quests-hellscapewq", "untranslated-fr" ],
             label:{
-                EN:"MD2 Hellscape Web Quest inspired quest models"
+                EN:"MD2: Hellscape Web Quest inspired quest models"
             },
             content:[
                 {
@@ -1172,8 +1172,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Le porte contrassegnate da un contorno rosso rappresentano {label.door@3} {label.door@1}. Queste porte {label.door@5}. Non appena tutte le Camere nella Tessera iniziale ({tileLabel.first}) sono state rivelate, {label.door@3} {label.door@1} {label.door@4} {label.door@6} come solito.",
-                                                        EN:"The doors marked with a red outline represent {label.door@3} {label.door@1}. These doors {label.door@5}. As soon as all Chambers in the starting Tile ({tileLabel.first}) have been revealed, {label.door@3} {label.door@1} {label.door@4} and {label.door@6} as usual."
+                                                        IT:"Le porte contrassegnate da un contorno rosso rappresentano {label.door@3} {label.door@1}. Queste porte {label.door@5}. Non appena tutte le Camere con almeno 1 Zona nella Tessera iniziale ({tileLabel.first}) sono state rivelate, {label.door@3} {label.door@1} {label.door@4} {label.door@6} come solito.",
+                                                        EN:"The doors marked with a red outline represent {label.door@3} {label.door@1}. These doors {label.door@5}. As soon as all Chambers with at least 1 Zone in the starting Tile ({tileLabel.first}) have been revealed, {label.door@3} {label.door@1} {label.door@4} and {label.door@6} as usual."
                                                     }
                                                 ]
                                             }
