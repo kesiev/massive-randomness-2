@@ -36,8 +36,6 @@ I've been looking for _that Diablo-esque tabletop experience_ for a long time an
 
 The challenges feature is inspired by the [Dungeon Skill Challenge](https://boardgamegeek.com/filepage/245223/dungeon-skills-challenge) variant by **anubys** and by the **Hard Mode** rules of the official web-quest **Hardcore Trial**.
 
-_Dungeon Crawling Mode_ suggested by [kaarol116](https://boardgamegeek.com/user/kaarol116).
-
 Finally, I've used the excellent [Seshat](http://dotcolon.net/font/seshat/) and [Ferrum](https://dotcolon.net/font/ferrum) fonts by Dot Colon even this time.
 
-_Massive Darkness 2 and all related properties are owned by CMON Global Limited._
+_Massive Darkness, Zombicide, and all related properties are owned by CMON Global Limited._
