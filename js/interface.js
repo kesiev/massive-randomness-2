@@ -3,14 +3,18 @@ Interface=(function() {
     const
         DEBUG_RENDER = false,
         DEBUG_QUEST = false,
+        DEBUG_HIDDENTEXT = false,
         VERSION = "0.1b",
         SOURCES_AT = {
             short:"github.com/kesiev/massive-randomness-2",
             full:"https://github.com/kesiev/massive-randomness-2"
         },
         LOCALSTORAGE_PREFIX="MARA2_",
+        LOCALSTORAGE_FLAG=LOCALSTORAGE_PREFIX+"FLAG_",
         LOCALSTORAGE_LANGUAGE=LOCALSTORAGE_PREFIX+"LANG",
         LOCALSTORAGE_ID=LOCALSTORAGE_PREFIX+"ID",
+        LOCALSTORAGE_COUNTER=LOCALSTORAGE_PREFIX+"COUNT",
+        COUNTER_LIMIT = 30,
         SETTINGS_SOURCES={
             MEMORY:0,
             DEFAULT:1,
@@ -28,11 +32,13 @@ Interface=(function() {
         settingsMode = false,
         showInstaller = false,
         seed = 0,
+        generationCounter = 0,
         settings,
         lastResult,
         lastResources,
         language,
         generating,
+        rootNode,
         headerNode,
         footerNode,
         settingsNode,
@@ -83,11 +89,40 @@ Interface=(function() {
         return (loaded || "").trim().replace(/#/g,"");
     }
 
+    function loadCounter() {
+
+        generationCounter = parseInt(localStorage[LOCALSTORAGE_COUNTER]) || 0;
+
+    }
+
+    function increaseCounter() {
+
+        if (generationCounter < COUNTER_LIMIT)
+            generationCounter++;
+        else
+            generationCounter = COUNTER_LIMIT;
+
+        localStorage[LOCALSTORAGE_COUNTER] = generationCounter;
+
+    }
+
     function saveId(id) {
         if (isAppMode)
             localStorage[LOCALSTORAGE_ID] = id;
         else
             history.replaceState(undefined, undefined, id);
+    }
+
+    function isFlag(id) {
+        return !!localStorage[LOCALSTORAGE_FLAG+id];
+    }
+
+    function setFlag(id) {
+        localStorage[LOCALSTORAGE_FLAG+id] = 1;
+    }
+
+    function unsetFlag(id) {
+        delete localStorage[LOCALSTORAGE_FLAG+id];
     }
 
     function renderLastQuest() {
@@ -100,6 +135,7 @@ Interface=(function() {
             lastResult.printTitlePrefix = printTitlePrefix;
             QuestRenderer.render(lastResources,lastResult,language,bodyNode,{
                 debugRender:DEBUG_RENDER,
+                debugHiddenText:DEBUG_HIDDENTEXT,
                 questUnavailableLabel:INTERFACE.labels.questUnavailable
             });
             if (lastResult.quest && (lastResult.quest.languages.indexOf(language) == -1)) {
@@ -112,6 +148,15 @@ Interface=(function() {
         }
     }
 
+    function isOptionSelected(selected,entry,id) {
+        if (entry.isCounterTrigger)
+            return generationCounter == COUNTER_LIMIT;
+        else if (entry.isFlag)
+            return isFlag(entry.isFlag);
+        else
+            return selected.indexOf(id) != -1;
+    }
+
     function generate() {
         if (!generating) {
             let
@@ -121,6 +166,7 @@ Interface=(function() {
                 requirements[k] = SETTINGS_DEFAULT[k].slice();
 
             INTERFACE.settings.forEach((setting,sid)=>{
+
                 let
                     picked = [],
                     notPicked = [],
@@ -128,13 +174,14 @@ Interface=(function() {
                 
                 setting.entries.forEach((entry,id)=>{
                     if (entry.languageExcludeTags && entry.languageExcludeTags[language]) {
-                        if (selected.indexOf(id) != -1)
+                        if (isOptionSelected(selected,entry,id))
                             entry.languageExcludeTags[language].forEach(tag=>{
                                 if (notPicked.indexOf(tag) == -1)
                                     notPicked.push(tag)
                             });
-                    } else if (entry.tags)
-                        if (selected.indexOf(id) != -1)
+                    }
+                    if (entry.tags)
+                        if (isOptionSelected(selected,entry,id))
                             entry.tags.forEach(tag=>{
                                 if (picked.indexOf(tag) == -1)
                                     picked.push(tag)
@@ -143,6 +190,12 @@ Interface=(function() {
                             entry.tags.forEach(tag=>{
                                 if (notPicked.indexOf(tag) == -1)
                                 notPicked.push(tag)
+                            });
+                    if (entry.excludeTags)
+                        if (isOptionSelected(selected,entry,id))
+                            entry.excludeTags.forEach(tag=>{
+                                if (notPicked.indexOf(tag) == -1)
+                                    notPicked.push(tag)
                             });
                 });
 
@@ -165,6 +218,8 @@ Interface=(function() {
 
             generating = true;
             bodyNode.innerHTML = "<div class='generating'>"+getLabel(language,INTERFACE.labels.wait)+"</div>";
+            if (!seed) increaseCounter();
+
             Generator.generate(requirements,seed,{
                 debugQuest:DEBUG_QUEST
             },(resources,result)=>{
@@ -193,6 +248,32 @@ Interface=(function() {
         settingsNode.className = "settings "+ (mode ? "open" : "closed");
     }
 
+    function showFlagPopup(entry) {
+        let
+            yesNode, noNode,
+            containerNode = createNode(rootNode,"div","popupcontainer"),
+            boxNode = createNode(containerNode,"div","popupbox");
+        
+        boxNode.innerHTML = getLabel(language,entry.message);
+        yesNode = createNode(boxNode,"div","popupbutton");
+        noNode = createNode(boxNode,"div","popupbutton");
+
+        yesNode.innerHTML = getLabel(language,entry.buttons.yes);
+        noNode.innerHTML = getLabel(language,entry.buttons.no);
+
+        yesNode.onclick = ()=>{
+            setFlag(entry.isFlagButton);
+            drawSettings();
+            showSettings();
+            rootNode.removeChild(containerNode);
+        }
+
+        noNode.onclick = ()=>{
+            rootNode.removeChild(containerNode);
+        }
+        
+    }
+
     function drawSettings() {
         let
             id = 0;
@@ -209,7 +290,13 @@ Interface=(function() {
 
                 id++;
 
-                if (entry.isButton) {
+                if (
+                    entry.isHidden ||
+                    (entry.ifFlag && !isFlag(entry.ifFlag)) ||
+                    (entry.ifNotFlag && isFlag(entry.ifNotFlag))
+                ) {
+                    // Hide entry
+                } else if (entry.isButton) {
 
                     if (!entry.isInstallerButton || showInstaller) {
 
@@ -228,6 +315,10 @@ Interface=(function() {
                                     showInstaller = false;
                                     drawSettings();
                                 })
+                            }
+                        else if (entry.isFlagButton)
+                            entry._selector.onclick=()=>{
+                                showFlagPopup(entry);
                             }
                         labelNode.innerHTML = "<span class='description'>"+getLabel(language,entry.description)+"</span>";
                     }
@@ -259,12 +350,19 @@ Interface=(function() {
                             entry._selector.disabled = "disabled";
                         else
                             entry._selector.onclick=()=>{
-                                let
-                                    pos = settings[sid].indexOf(eid);
-                                if (pos == -1)
-                                    settings[sid].push(eid);
-                                else
-                                    settings[sid].splice(pos,1);
+                                if (entry.isFlag) {
+                                    if (isFlag(entry.isFlag))
+                                        unsetFlag(entry.isFlag);
+                                    else
+                                        setFlag(entry.isFlag);
+                                } else {
+                                    let
+                                        pos = settings[sid].indexOf(eid);
+                                    if (pos == -1)
+                                        settings[sid].push(eid);
+                                    else
+                                        settings[sid].splice(pos,1);
+                                }
                                 loadSettingsFrom(SETTINGS_SOURCES.MEMORY);
                                 showSettings();
                             }
@@ -294,18 +392,22 @@ Interface=(function() {
                 if (entry.isMandatory)
                     mandatory.push(id);
 
-                switch (source) {
-                    case SETTINGS_SOURCES.UI:{
-                        if (entry._selector.checked)
-                            selected.push(id);
-                        break;
+                if (entry.isFlag) {
+                    if (isFlag(entry.isFlag))
+                        selected.push(id);
+                } else
+                    switch (source) {
+                        case SETTINGS_SOURCES.UI:{
+                            if (entry._selector.checked)
+                                selected.push(id);
+                            break;
+                        }
+                        case SETTINGS_SOURCES.SESSION:{
+                            if (entry.code && (hash[0].indexOf(entry.code) !== -1))
+                                selected.push(id);
+                            break;
+                        }
                     }
-                    case SETTINGS_SOURCES.SESSION:{
-                        if (entry.code && (hash[0].indexOf(entry.code) !== -1))
-                            selected.push(id);
-                        break;
-                    }
-                }
             });
             
             if ((source == SETTINGS_SOURCES.DEFAULT) && setting.isMandatory && (selected.length == 0))
@@ -341,8 +443,13 @@ Interface=(function() {
                 selected = settings[sid];
            
             setting.entries.forEach((entry,id)=>{
-                if (!entry.isButton)
-                    entry._selector.checked = selected.indexOf(id) != -1;
+                if (
+                    !entry.isButton &&
+                    !entry.isHidden &&
+                    (!entry.ifFlag || isFlag(entry.ifFlag)) &&
+                    (!entry.ifNotFlag || !isFlag(entry.ifNotFlag))
+                )
+                    entry._selector.checked = isOptionSelected(selected,entry,id);
             });
         });
     }
@@ -417,13 +524,14 @@ Interface=(function() {
 
             INTERFACE=ModManager.load({ needs:[ "interface" ]}).interface;
 
-            headerNode = createNode(root,"div","header");
-            noticebarNode = createNode(root,"div","noticebar");
+            rootNode = root;
+            headerNode = createNode(rootNode,"div","header");
+            noticebarNode = createNode(rootNode,"div","noticebar");
             headerContentNode = createNode(headerNode,"div","content");
             settingsNode = createNode(headerContentNode,"div","settings");
             actionsNode = createNode(headerContentNode,"div","actions");
-            bodyNode = createNode(root,"div","body"),
-            footerNode = createNode(root,"div","footer");
+            bodyNode = createNode(rootNode,"div","body"),
+            footerNode = createNode(rootNode,"div","footer");
 
             let
                 toolbarNode = createNode(actionsNode,"div","toolbar"),
@@ -464,6 +572,7 @@ Interface=(function() {
             else
                 loadSettingsFrom(SETTINGS_SOURCES.DEFAULT);
 
+            loadCounter();
             setLanguage(loadLanguage());
             setSettingsMode(settingsMode);
             showSettings();
