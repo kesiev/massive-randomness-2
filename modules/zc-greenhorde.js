@@ -162,12 +162,12 @@ ModManager.modules.push(function(){
                                     label:"[Z]16R",
                                     skins:[ "outdoor" ],
                                     specialRules:[ "noLydian", "zombicideTiles" ],
-                                    tags:[ "any", "roomSize3", "roomSize1+", "roomSize2+", "roomSize3+", "roomSize1", "openSides3", "openSides1+", "openSides2+", "openSides3+", "roomsCount3", "roomsCount1+", "roomsCount2+", "roomsCount3+" ],
+                                    tags:[ "any", "roomSize3", "roomSize1+", "roomSize2+", "roomSize3+", "roomSize1", "openSides3", "openSides1+", "openSides2+", "openSides3+", "roomsCount2", "roomsCount1+", "roomsCount2+" ],
                                     angles:[
                                         [
-                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, true, false, true ] }, { type:[ "light" ], walls:[ false, true, false, true ]}, { type:[ "dark" ], isRoom:true, walls:[ true, true, true, true ] } ],
-                                            [ { type:[ "dark" ], isRoom:true, walls:[ false, true, false, true ]}, { type:[ "light" ], walls:[ false, false, false, true ] }, { type:[ "light" ], isRoom:false,  walls:[ true, false, true, false ] } ],
-                                            [ { type:[ "dark" ], isRoom:true, walls:[ false, true, true, true ] }, { type:[ "light" ], walls:[ false, true, false, true ]}, { type:[ "dark" ], isRoom:true, walls:[ true, true, true, true] } ],
+                                            [ { type:[ "dark" ], isRoom:true, walls:[ true, true, false, true ] }, { type:[ "light" ], walls:[ false, false, false, true ]}, { type:[ "light" ], isRoom:false, walls:[ false, false, true, false ] } ],
+                                            [ { type:[ "dark" ], isRoom:true, walls:[ false, true, false, true ]}, { type:[ "light" ], walls:[ false, true, false, true ] }, { type:[ "dark" ], isRoom:true,  walls:[ true, true, true, true ] } ],
+                                            [ { type:[ "dark" ], isRoom:true, walls:[ false, true, true, true ] }, { type:[ "light" ], walls:[ false, false, false, true ]}, { type:[ "light" ], isRoom:false, walls:[ true, false, false, false] } ],
                                         ]
                                     ]
                                 },{
