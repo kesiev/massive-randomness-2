@@ -126,7 +126,7 @@ MapRenderer=(function(){
                         renderSideColor(cell,3,"leftBorder","solidLeftBorder");
                 } else if (cell.isWalled) {
                     cellNode.cell.className+=
-                        " corridor walled"+
+                        " corridor walled"+(cell.isBridge ? " bridge" : "")+
                         renderSideColor(cell,0,"topBorder","solidTopBorder")+renderHedgesColor(cell,0,"topHedge")+
                         renderSideColor(cell,1,"rightBorder","solidRightBorder")+renderHedgesColor(cell,1,"rightHedge")+
                         renderSideColor(cell,2,"bottomBorder","solidBottomBorder")+renderHedgesColor(cell,2,"bottomHedge")+

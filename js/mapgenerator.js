@@ -1046,21 +1046,21 @@ MapGenerator=(function() {
         if (allowBridge && !spawnPoint.isDeadEnd && resources.tokensAvailable.bridge) {
 
             if (!isCoordInMap(map,spawnPoint.x,spawnPoint.y-1) && !isCoordWall(map,spawnPoint.x,spawnPoint.y-1) && !cell.originalWalls[0])
-                spawnPoints.push({ x:spawnPoint.x, y:spawnPoint.y-1 });
+                spawnPoints.push({ angle:1, x:spawnPoint.x, y:spawnPoint.y-1 });
 
             if (!isCoordInMap(map,spawnPoint.x+1,spawnPoint.y) && !isCoordWall(map,spawnPoint.x+1,spawnPoint.y) && !cell.originalWalls[1])
-                spawnPoints.push({ x:spawnPoint.x+1, y:spawnPoint.y });
+                spawnPoints.push({ angle:0, x:spawnPoint.x+1, y:spawnPoint.y });
 
             if (!isCoordInMap(map,spawnPoint.x,spawnPoint.y+1) && !isCoordWall(map,spawnPoint.x,spawnPoint.y+1) && !cell.originalWalls[2])
-                spawnPoints.push({  x:spawnPoint.x, y:spawnPoint.y+1 });
+                spawnPoints.push({ angle:1, x:spawnPoint.x, y:spawnPoint.y+1 });
 
             if (!isCoordInMap(map,spawnPoint.x-1,spawnPoint.y) && !isCoordWall(map,spawnPoint.x-1,spawnPoint.y) && !cell.originalWalls[3])
-                spawnPoints.push({ x:spawnPoint.x-1, y:spawnPoint.y });
+                spawnPoints.push({ angle:0, x:spawnPoint.x-1, y:spawnPoint.y });
 
             if (spawnPoints.length) {
                 getToken(resources,result,{ id:"bridge" },false,map);
                 spawnPoint = pickRandomElementValue(spawnPoints);
-                pasteTile(clone(resources.bridge),0,0,spawnPoint.x,spawnPoint.y,map);
+                pasteTile(clone(resources.bridge),0,resources.bridge.isTwoExits ? spawnPoint.angle : 0,spawnPoint.x,spawnPoint.y,map);
             }
 
         }

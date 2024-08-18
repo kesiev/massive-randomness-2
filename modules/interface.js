@@ -145,6 +145,40 @@ ModManager.modules.push(function(){
                                 isSingleOption:true,
                                 isMandatory:true,
                                 title:{
+                                    IT:"Ponti",
+                                    EN:"Bridges"
+                                },
+                                entries:[
+                                    {
+                                        code:"U",
+                                        isDefault:true,
+                                        label:{
+                                            IT:"Due uscite",
+                                            EN:"Two Exits"
+                                        },
+                                        description:{
+                                            IT:"Le tessere ponte possono essere attraversate orizzontalmente oppure verticalmente.",
+                                            EN:"Bridge tiles can be crossed horizontally or vertically.",
+                                        },
+                                        tags:[ "bridge-default-twoexits" ]
+                                    },{
+                                        code:"u",
+                                        label:{
+                                            IT:"Quattro uscite",
+                                            EN:"Four exits"
+                                        },
+                                        description:{
+                                            IT:"Le tessere ponte possono essere attraversate da ogni direzione.",
+                                            EN:"Bridge tiles can be crossed from any direction.",
+                                        },
+                                        tags:[ "bridge-default-fourexits" ]
+                                    }
+                                ]
+                            },{
+                                type:"includeSelected",
+                                isSingleOption:true,
+                                isMandatory:true,
+                                title:{
                                     IT:"Grandezza delle mappa",
                                     EN:"Map size"
                                 },
@@ -329,7 +363,7 @@ ModManager.modules.push(function(){
                             IT:"Italiano",
                             FR:"Fran&#xE7;ais"
                         },
-                        labels:{                            
+                        labels:{
                             toolName:{
                                 IT:"Massive Randomness 2",
                                 EN:"Massive Randomness 2"

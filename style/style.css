@@ -777,6 +777,22 @@ HTML,BODY {
     border-left:3px solid #999;
 }
 
+.tile .cell.bridge.topborder .inner {
+    border-top:6px solid #000;
+}
+
+.tile .cell.bridge.rightborder .inner {
+    border-right:6px solid #000;
+}
+
+.tile .cell.bridge.bottomborder .inner {
+    border-bottom:6px solid #000;
+}
+
+.tile .cell.bridge.leftborder .inner {
+    border-left:6px solid #000;
+}
+
 .tile .cell.solidtopborder .inner {
     border-top:3px dotted #999;
 }
@@ -1194,7 +1210,7 @@ HTML,BODY {
     .quest .questHead {
         margin:10px 0px 20px 0px;
         columns:2;
-    }    
+    }
 
     .quest .symbol.token {
         height: 12px;
@@ -1225,7 +1241,7 @@ HTML,BODY {
     .quest .author {
         margin:0px 0px 10px 0;
     }
-        
+
     .quest .story {
         font-size: 16px;
         line-height: 18px;
@@ -1267,14 +1283,14 @@ HTML,BODY {
     .quest OL, .quest UL, .quest LI, .quest P {
         margin:5px 0;
     }
-    
+
     .quest OL, .quest UL {
         padding-left:20px;
     }
 
     .quest .objectives LI, .quest .specialRules LI, .quest .objectives LI > * > LI, .quest .specialRules LI > * > LI {
         margin:5px 0;
-    }    
+    }
 
     .quest .map {
         overflow: hidden;
@@ -1400,7 +1416,7 @@ HTML,BODY {
 
     .quest .questHead, .quest .tokensList, .quest .miniMap, .quest .map, .quest .lootRatio {
         margin-left:10px;
-        margin-right:10px;   
+        margin-right:10px;
     }
 
 }
@@ -1410,5 +1426,5 @@ HTML,BODY {
     .header .logo {
         display: none;
     }
-    
+
 }

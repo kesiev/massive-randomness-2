@@ -353,22 +353,6 @@ ModManager.modules.push(function(){
                         startPoint:10
                     }
                 },{
-                    type:"bridge",
-                    data:{
-                        id:"bridge",
-                        sides:[
-                            {
-                                id:"Bridge",
-                                isBridge:true,
-                                angles:[
-                                    [
-                                        [ { type:[ "dark" ], walls:[ false, false, false, false ] } ]
-                                    ]
-                                ]
-                            }
-                        ]
-                    },
-                },{
                     type:"tiles",
                     data:[
                         {
@@ -623,6 +607,62 @@ ModManager.modules.push(function(){
                         }
                         */
                     ]
+                }
+            ]
+        },{
+            id:"md2-hellscape-bridges-twoexits",
+            needs:[ ],
+            provides:[ "bridge-default-twoexits" ],
+            label:{
+                EN:"MD2: Hellscape bridge (two exits)"
+            },
+            content:[
+                {
+                    type:"bridge",
+                    data:{
+                        id:"bridge",
+                        isTwoExits:true,
+                        sides:[
+                            {
+                                id:"Bridge",
+                                isBridge:true,
+                                angles:[
+                                    [
+                                        [ { type:[ "dark" ], isWalled:true, isBridge:true, walls:[ true, false, true, false ] } ]
+                                    ],
+                                    [
+                                        [ { type:[ "dark" ], isWalled:true, isBridge:true, walls:[ false, true, false, true ] } ]
+                                    ]
+                                ]
+                            }
+                        ]
+                    },
+                }
+            ]
+        },{
+            id:"md2-hellscape-bridges-fourexits",
+            needs:[ ],
+            provides:[ "bridge-default-fourexits" ],
+            label:{
+                EN:"MD2: Hellscape bridge (four exits)"
+            },
+            content:[
+                {
+                    type:"bridge",
+                    data:{
+                        id:"bridge",
+                        sides:[
+                            {
+                                id:"Bridge",
+                                isBridge:true,
+                                angles:[
+                                    [
+                                        [ { type:[ "dark" ], isWalled:true, isBridge:true, walls:[ false, false, false, false ] } ]
+                                    ]
+                                ]
+                            }
+                        ]
+                    },
                 }
             ]
         }
