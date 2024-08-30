@@ -145,6 +145,7 @@ ModManager.modules.push(function(){
                             }
                         },
                         objective:{
+                            groupWhen:2,
                             className:{
                                 map:"token largeRound objective"
                             },
@@ -237,6 +238,7 @@ ModManager.modules.push(function(){
                             }
                         },
                         corruption:{
+                            groupWhen:3,
                             className:{
                                 map:"token smallRound corruption"
                             },
@@ -246,6 +248,7 @@ ModManager.modules.push(function(){
                             }
                         },
                         time:{
+                            groupWhen:3,
                             className:{
                                 map:"token smallRound time"
                             },
@@ -327,8 +330,8 @@ ModManager.modules.push(function(){
                     data:{
                         frost:12,
                         fire:12,
-                        corruption:6,
-                        time:6,
+                        corruption:12,
+                        time:12,
                         bridge:2,
                         regularPortal:1,
                         portal3:1,

@@ -444,6 +444,7 @@ MapGenerator=(function() {
                                 }
                         
                         if (isFitting) {
+
                             side.tile.sides[side.side].angles.forEach((angle,angleId)=>{
 
                                 let
@@ -633,31 +634,61 @@ MapGenerator=(function() {
 
     function generateMap(resources,result,map,attempt,skins,mapConfig) {
 
-        // --- Plan usable sides for each step
-        let
-            // Bridges makes grid maps irregular so bridges are disabled.
-            attemptBridgeAt = !mapConfig.mapAsGrid && (attempt < BRIDGE_ATTEMPTS) ? mapConfig.mapBridgesAt === undefined ? -1 : Math.floor((mapConfig.mapTiles.length-1)*mapConfig.mapBridgesAt) : -1,
-            tilesPerRequirement=[],
-            tilesPerRequirementBySkin = [];
+        if (mapConfig.mapTiles) {
 
-        map.requiredTiles = mapConfig.mapTiles.length;
-        map.placedTiles = 0;
-        map.tilesById = {};
+            // --- Plan usable sides for each step
+            let
+                // Bridges makes grid maps irregular so bridges are disabled.
+                attemptBridgeAt = !mapConfig.mapAsGrid && (attempt < BRIDGE_ATTEMPTS) ? mapConfig.mapBridgesAt === undefined ? -1 : Math.floor((mapConfig.mapTiles.length-1)*mapConfig.mapBridgesAt) : -1,
+                tilesPerRequirement=[],
+                tilesPerRequirementBySkin = [];
 
-        if (mapConfig.mapSameSkin) {
+            map.requiredTiles = mapConfig.mapTiles.length;
+            map.placedTiles = 0;
+            map.tilesById = {};
 
-            // Select a skin that may fit the tiles requirement
-            
-            tilesPerRequirementBySkin = skins.map(skin=>{
-                let
-                    tilesPerRequirement,
-                    isValid = true;
+            if (mapConfig.mapSameSkin) {
+
+                // Select a skin that may fit the tiles requirement
+                
+                tilesPerRequirementBySkin = skins.map(skin=>{
+                    let
+                        tilesPerRequirement,
+                        isValid = true;
+                    tilesPerRequirement=mapConfig.mapTiles.map(requestedTile=>{
+                        let
+                            fittingTiles = [];
+                        resources.tiles.forEach(tile=>{
+                            let
+                                fittingSides = findFittingSides(tile.sides,requestedTile,skin);
+                            if (fittingSides.length)
+                                fittingTiles.push({
+                                    tile:tile,
+                                    fittingSides:fittingSides
+                                });
+                        });
+                        if (!fittingTiles.length) {
+                            isValid = false;
+                            return 0;
+                        } else
+                            return fittingTiles;
+                    });
+                    if (isValid)
+                        return tilesPerRequirement;
+                    else
+                        return 0;
+                }).filter(list=>list != 0);
+
+                tilesPerRequirement = pickRandomElementValue(tilesPerRequirementBySkin);
+
+            } else {
+
                 tilesPerRequirement=mapConfig.mapTiles.map(requestedTile=>{
                     let
                         fittingTiles = [];
                     resources.tiles.forEach(tile=>{
                         let
-                            fittingSides = findFittingSides(tile.sides,requestedTile,skin);
+                            fittingSides = findFittingSides(tile.sides,requestedTile);
                         if (fittingSides.length)
                             fittingTiles.push({
                                 tile:tile,
@@ -670,175 +701,160 @@ MapGenerator=(function() {
                     } else
                         return fittingTiles;
                 });
-                if (isValid)
-                    return tilesPerRequirement;
-                else
-                    return 0;
-            }).filter(list=>list != 0);
 
-            tilesPerRequirement = pickRandomElementValue(tilesPerRequirementBySkin);
-
-        } else {
-
-            tilesPerRequirement=mapConfig.mapTiles.map(requestedTile=>{
-                let
-                    fittingTiles = [];
-                resources.tiles.forEach(tile=>{
-                    let
-                        fittingSides = findFittingSides(tile.sides,requestedTile);
-                    if (fittingSides.length)
-                        fittingTiles.push({
-                            tile:tile,
-                            fittingSides:fittingSides
-                        });
-                });
-                if (!fittingTiles.length) {
-                    isValid = false;
-                    return 0;
-                } else
-                    return fittingTiles;
-            });
-
-        }
-
-        // Place the tiles
-
-        if (tilesPerRequirement)
-            tilesPerRequirement.forEach((tileset,id)=>{
-
-                let
-                    selectedSide,
-                    selectedAngle,
-                    selectedX,
-                    selectedY,
-                    availableSides = [],
-                    subTilesPerRequirement = [],
-                    filter = true;
-
-                // Copies the tiles requirement map
-
-                subTilesPerRequirement = tilesPerRequirement.map(row=>row.slice());
-
-                // Reserve tiles for forced future selections
-
-                while (filter) {
-
-                    filter = false;
-                    for (let i=id+1;i<subTilesPerRequirement.length;i++)
-                        if (subTilesPerRequirement[i].length == 1) {
-                            let
-                                tileToRemove = subTilesPerRequirement[i][0].tile;
-                            for (let j=id;j<subTilesPerRequirement.length;j++)
-                                subTilesPerRequirement[j]=subTilesPerRequirement[j].filter(tile=>{
-                                    return tile.tile!=tileToRemove;
-                                });
-                            filter=true;
-                        }
-                }
-
-                // Prepare remaining tiles
-
-                subTilesPerRequirement[id].forEach(tile=>{
-                    tile.fittingSides.forEach(side=>{
-                        availableSides.push({
-                            tile:tile.tile,
-                            side:side
-                        });
-                    });
-                });
-
-                // Select & Paste a tile
-
-                if (availableSides.length) {
-
-                    if (id == 0) {
-
-                        selectedSide = pickRandomElementValue(availableSides),
-                        selectedAngle = pickRandomElementId(selectedSide.tile.sides[selectedSide.side].angles);
-                        selectedX = map.ox;
-                        selectedY = map.oy;
-
-                    } else {
-
-                        let
-                            fits=findFittingTiles(map,availableSides),
-                            fit=getBestFittingTile(map,fits,mapConfig,mapConfig.mapTiles[id]);
-
-                        if (fit) {
-                            selectedSide = fit.side;
-                            selectedAngle = fit.angle;
-                            selectedX = fit.at.x;
-                            selectedY = fit.at.y;
-                        }
-                    }
-
-                    if (selectedSide) {
-
-                        let
-                            pastedTile;
-
-                        map.placedTiles++;
-                        pickTile(resources.tiles,selectedSide.tile);
-                        pastedTile = pasteTile(selectedSide.tile,selectedSide.side,selectedAngle,selectedX,selectedY,map);
-                        if (mapConfig.mapTiles[id].tileId) {
-                            let
-                                tileId = mapConfig.mapTiles[id].tileId;
-                            map.tilesById[tileId] = pastedTile;
-                            pastedTile.tileId = tileId;
-                        }
-
-                        for (let i=id;i<tilesPerRequirement.length;i++)
-                            tilesPerRequirement[i]=tilesPerRequirement[i].filter(tile=>{
-                                return tile.tile != selectedSide.tile;
-                            });
-                    }
-
-                }
-
-                // Add a bridge, if needed
-                
-                if ((attemptBridgeAt != -1) && (id >= attemptBridgeAt) && (mapConfig.mapMaxHeight || mapConfig.mapMaxWidth)) {
-
-                    let
-                        fits=findFittingTiles(map,[
-                            {
-                                side:0,
-                                tile:clone(resources.bridge)
-                            }
-                        ]),
-                        fit=getBestFittingTile(map,fits,mapConfig,BRIDGE_TILESTRATEGY);
-                        
-                        if (fit) {
-                            attemptBridgeAt = -1;
-                            map.hasBridge = pasteTile(fit.side.tile,fit.side.side,fit.angle,fit.at.x,fit.at.y,map);
-                        }
-
-                }
-
-
-            });
-    
-        // Remove orphaned bridge
-        if (map.hasBridge) {
-
-            let
-                bridgeData = analyzeBridge(map,map.hasBridge.at.x,map.hasBridge.at.y);
-
-            if (bridgeData.joinedSides < 2) {
-                removeBridge(map,map.hasBridge);
-                map.hasBridge = 0;
-                map.bridgeRemoved = true;
             }
 
-        }
+            // Place the tiles
 
-        if (map.hasBridge)
-            getToken(resources,result,{ id:"bridge" },false,map);
+            if (tilesPerRequirement)
+                tilesPerRequirement.forEach((tileset,id)=>{
+
+                    let
+                        selectedSide,
+                        selectedAngle,
+                        selectedX,
+                        selectedY,
+                        availableSides = [],
+                        subTilesPerRequirement = [],
+                        filter = true;
+
+                    // Copies the tiles requirement map
+
+                    subTilesPerRequirement = tilesPerRequirement.map(row=>row.slice());
+
+                    // Reserve tiles for forced future selections
+
+                    while (filter) {
+
+                        filter = false;
+                        for (let i=id+1;i<subTilesPerRequirement.length;i++)
+                            if (subTilesPerRequirement[i].length == 1) {
+                                let
+                                    tileToRemove = subTilesPerRequirement[i][0].tile;
+                                for (let j=id;j<subTilesPerRequirement.length;j++)
+                                    subTilesPerRequirement[j]=subTilesPerRequirement[j].filter(tile=>{
+                                        return tile.tile!=tileToRemove;
+                                    });
+                                filter=true;
+                            }
+                    }
+
+                    // Prepare remaining tiles
+
+                    subTilesPerRequirement[id].forEach(tile=>{
+                        tile.fittingSides.forEach(side=>{
+                            availableSides.push({
+                                tile:tile.tile,
+                                side:side
+                            });
+                        });
+                    });
+
+                    // Select & Paste a tile
+
+                    if (availableSides.length) {
+
+                        if (id == 0) {
+
+                            selectedSide = pickRandomElementValue(availableSides),
+                            selectedAngle = pickRandomElementId(selectedSide.tile.sides[selectedSide.side].angles);
+                            selectedX = map.ox;
+                            selectedY = map.oy;
+
+                        } else {
+
+                            let
+                                fits=findFittingTiles(map,availableSides),
+                                fit=getBestFittingTile(map,fits,mapConfig,mapConfig.mapTiles[id]);
+
+                            if (fit) {
+                                selectedSide = fit.side;
+                                selectedAngle = fit.angle;
+                                selectedX = fit.at.x;
+                                selectedY = fit.at.y;
+                            }
+                        }
+
+                        if (selectedSide) {
+
+                            let
+                                pastedTile;
+
+                            map.placedTiles++;
+                            pickTile(resources.tiles,selectedSide.tile);
+                            pastedTile = pasteTile(selectedSide.tile,selectedSide.side,selectedAngle,selectedX,selectedY,map);
+                            if (mapConfig.mapTiles[id].tileId) {
+                                let
+                                    tileId = mapConfig.mapTiles[id].tileId;
+                                map.tilesById[tileId] = pastedTile;
+                                pastedTile.tileId = tileId;
+                            }
+
+                            for (let i=id;i<tilesPerRequirement.length;i++)
+                                tilesPerRequirement[i]=tilesPerRequirement[i].filter(tile=>{
+                                    return tile.tile != selectedSide.tile;
+                                });
+                        }
+
+                    }
+
+                    // Add a bridge, if needed
+                    
+                    if ((attemptBridgeAt != -1) && (id >= attemptBridgeAt) && (mapConfig.mapMaxHeight || mapConfig.mapMaxWidth)) {
+
+                        let
+                            fits=findFittingTiles(map,[
+                                {
+                                    side:0,
+                                    tile:clone(resources.bridge)
+                                }
+                            ]),
+                            fit=getBestFittingTile(map,fits,mapConfig,BRIDGE_TILESTRATEGY);
+
+                            if (fit) {
+                                attemptBridgeAt = -1;
+                                map.hasBridge = pasteTile(fit.side.tile,fit.side.side,fit.angle,fit.at.x,fit.at.y,map);
+                            }
+
+                    }
+
+
+                });
+        
+            // Remove orphaned bridge
+            if (map.hasBridge) {
+
+                let
+                    bridgeData = analyzeBridge(map,map.hasBridge.at.x,map.hasBridge.at.y);
+
+                if (bridgeData.joinedSides < 2) {
+                    removeBridge(map,map.hasBridge);
+                    map.hasBridge = 0;
+                    map.bridgeRemoved = true;
+                }
+
+            }
+
+            if (map.hasBridge)
+                getToken(resources,result,{ id:"bridge" },false,map);
                             
-        map.isValid = map.placedTiles == map.requiredTiles;
+            map.isValid = map.placedTiles == map.requiredTiles;
+
+        } else
+            map.isValid = false;
     }
 
     // --- Map features analysis
+
+    function countTurns(path) {
+        let
+            turns = 0;
+        path.forEach((cell,id)=>{
+            if (path[id-2] && (path[id-2].x!=cell.x) && (path[id-2].y!=cell.y))
+                turns++;
+        });
+        return turns;
+    }
 
     function crawlRoomCell(cells,roomId,map,dx,dy,oppositeDirection,x,y,direction) {
         let
@@ -864,7 +880,7 @@ MapGenerator=(function() {
             if (!route) route=[];
             else route=route.slice();
             route.push(destinationCell);
-            if (!paths[id] || (paths[id].length>route.length)) {
+            if (!paths[id] || ((paths[id].length == route.length) && (countTurns(paths[id]) > countTurns(route))) || (paths[id].length>route.length)) {
                 paths[id]=route;
                 crawlCorridorCell(paths,map,dx,dy-1,2,dx,dy,0,route);
                 crawlCorridorCell(paths,map,dx+1,dy,3,dx,dy,1,route);
@@ -1080,107 +1096,136 @@ MapGenerator=(function() {
         return walls;
     }
 
-    function assignRooms(resources,map,requirements,defaults) {
+    function assignRooms(campaign,resources,map,requirements,defaults) {
 
         if (map.rooms && map.rooms.length) {
                
             if (requirements)
                 requirements.forEach(requirement=>{
+
                     let
-                        roomFound = false,
-                        pickedRoom,
-                        subrooms=[];
+                        run = false;
 
-                    // Get fitting rooms
-                    map.rooms.forEach(room=>{
-                        let
-                            roomIdMatches = false;
+                    if (requirement.ifSideQuestMod) {
 
-                        if (requirement.atTileId && (room.tileData.tileId == requirement.atTileId))
-                            roomIdMatches = roomFound = true;
-
-                        if (
-                            !room.isBusy &&
-                            (!requirement.atTileId || roomIdMatches)
-                        )
-                            subrooms.push(room);
-                    });
-
-                    if (requirement.atTileId && !roomFound)
-                        console.warn("For room, can't find tile",requirement.atTileId);
-                    
-                    if (subrooms.length) {
-
-                        let
-                            intensity = requirement.intensity || defaults;
-
-                        if (subrooms.length == 0)
-                            pickedRoom = subrooms[0];
-                        else if (
-                            (requirement.at !== undefined) ||
-                            (requirement.size !== undefined)
-                        ) {
-
-                            // Position/size selection
-                            subrooms.sort((a,b)=>{
-                                if (requirement.size !== undefined) {
-                                    if (a.size > b.size) return -requirement.size;
-                                    else if (a.size < b.size) return requirement.size;
-                                }
-                                if (requirement.at !== undefined) {
-                                    if (a.distance > b.distance) return 1;
-                                    else if (a.distance < b.distance) return -1;
-                                }
-                                else return 0;
+                        if (campaign && campaign.sideQuest && campaign.sideQuest.mods)
+                            requirement.ifSideQuestMod.forEach(mod=>{
+                                if (campaign.sideQuest.mods.indexOf(mod) != -1)
+                                    run = true;
                             });
+                        else if (requirement.ifOneShot)
+                            run = true;
 
-                            if (requirement.size !== undefined)
-                                subrooms = subrooms.filter(room=>room.size == subrooms[0].size);
+                    } else
+                        run = true;
 
-                            if (requirement.at === undefined)
-                                pickedRoom = subrooms[0];
-                            else
-                                pickedRoom = getItemAtPercentage(subrooms, requirement.at);
-                                
+                    if (run && requirement.ifNotSideQuestMod && campaign && campaign.sideQuest) {
 
-                        } else {
-                            
-                            // Random selection
-                            pickedRoom=pickRandomElementValue(subrooms);
+                        requirement.ifNotSideQuestMod.forEach(mod=>{
+                            if (campaign.sideQuest.mods.indexOf(mod) != -1)
+                                run = false;
+                        });
 
-                        }
+                    }
 
-                        if (intensity !== undefined) {
-                            pickedRoom.intensity.risk = Math.max(pickedRoom.intensity.risk,intensity.risk);
-                            pickedRoom.intensity.reward = Math.max(pickedRoom.intensity.reward,intensity.reward);
-                        }
+                    if (run) {
 
-                        if (requirement.doors !== undefined)
-                            requirement.doors.forEach(door=>{
-                                pickedRoom.doors.push(door);
-                            })
+                        let
+                            roomFound = false,
+                            pickedRoom,
+                            subrooms=[];
 
-                        if (requirement.isEmpty)
-                            pickedRoom.isEmpty = true;
-
-                        if (requirement.onPathAdd)
-                            requirement.onPathAdd.forEach(add=>{
-                                pickedRoom.onPathAdd.push(add);
-                            });
-
-                        if (requirement.relevance !== undefined)
-                            pickedRoom.relevance = Math.max(pickedRoom.relevance,requirement.relevance);
-
-                        if (requirement.add) {
+                        // Get fitting rooms
+                        map.rooms.forEach(room=>{
                             let
-                                set = pickRandomElementValue(requirement.add);
-                            set.forEach(item=>{
-                                pickedRoom.add.push(item);
-                            });
-                        }
+                                roomIdMatches = false;
 
-                        pickedRoom.isBusy = true;
-                        map.busyRooms++;
+                            if (requirement.atTileId && (room.tileData.tileId == requirement.atTileId))
+                                roomIdMatches = roomFound = true;
+
+                            if (
+                                !room.isBusy &&
+                                (!requirement.atTileId || roomIdMatches)
+                            )
+                                subrooms.push(room);
+                        });
+
+                        if (requirement.atTileId && !roomFound)
+                            console.warn("For room, can't find tile",requirement.atTileId);
+                        
+                        if (subrooms.length) {
+
+                            let
+                                intensity = requirement.intensity || defaults;
+
+                            if (subrooms.length == 0)
+                                pickedRoom = subrooms[0];
+                            else if (
+                                (requirement.at !== undefined) ||
+                                (requirement.size !== undefined)
+                            ) {
+
+                                // Position/size selection
+                                subrooms.sort((a,b)=>{
+                                    if (requirement.size !== undefined) {
+                                        if (a.size > b.size) return -requirement.size;
+                                        else if (a.size < b.size) return requirement.size;
+                                    }
+                                    if (requirement.at !== undefined) {
+                                        if (a.distance > b.distance) return 1;
+                                        else if (a.distance < b.distance) return -1;
+                                    }
+                                    else return 0;
+                                });
+
+                                if (requirement.size !== undefined)
+                                    subrooms = subrooms.filter(room=>room.size == subrooms[0].size);
+
+                                if (requirement.at === undefined)
+                                    pickedRoom = subrooms[0];
+                                else
+                                    pickedRoom = getItemAtPercentage(subrooms, requirement.at);
+                                    
+                            } else {
+                                
+                                // Random selection
+                                pickedRoom=pickRandomElementValue(subrooms);
+
+                            }
+
+                            if (intensity !== undefined) {
+                                pickedRoom.intensity.risk = Math.max(pickedRoom.intensity.risk,intensity.risk);
+                                pickedRoom.intensity.reward = Math.max(pickedRoom.intensity.reward,intensity.reward);
+                            }
+
+                            if (requirement.doors !== undefined)
+                                requirement.doors.forEach(door=>{
+                                    pickedRoom.doors.push(door);
+                                })
+
+                            if (requirement.isEmpty)
+                                pickedRoom.isEmpty = true;
+
+                            if (requirement.onPathAdd)
+                                requirement.onPathAdd.forEach(add=>{
+                                    pickedRoom.onPathAdd.push(add);
+                                });
+
+                            if (requirement.relevance !== undefined)
+                                pickedRoom.relevance = Math.max(pickedRoom.relevance,requirement.relevance);
+
+                            if (requirement.add) {
+                                let
+                                    set = pickRandomElementValue(requirement.add);
+                                set.forEach(item=>{
+                                    pickedRoom.add.push(item);
+                                });
+                            }
+
+                            pickedRoom.isBusy = true;
+                            map.busyRooms++;
+
+                        }
 
                     }
 
@@ -1775,54 +1820,137 @@ MapGenerator=(function() {
 
         if (map.startPoint) {
 
-            content.forEach(subcontent=>{
+            let
+                turnsCache = {},
+                cellsByTurns={};
 
+            for (let k in map.startPoint.paths) {
+                
                 let
-                    cellsByDistance={},
-                    maxDistance = 0;
+                    path = map.startPoint.paths[k],
+                    distance = path.length-1,
+                    lastCell = path[distance],
+                    turns = turnsCache[lastCell.id];
 
-                for (let k in map.startPoint.paths) {
-                    let
-                        path = map.startPoint.paths[k],
-                        distance = path.length-1,
-                        lastCell = path[distance];
-
-                    if (
-                        (!subcontent.atTileId || (lastCell.tileData.tileId == subcontent.atTileId))
-                    ) {
-
-                        if (!cellsByDistance[distance]) cellsByDistance[distance]=[];
-                        cellsByDistance[distance].push(path[path.length-1]);
-
-                        maxDistance=Math.max(maxDistance,distance);
-
-                    }
+                if (turns === undefined) {
+                    turns = countTurns(path);
+                    turnsCache[lastCell.id] = turns;
                 }
 
-                if (subcontent.tileId && !maxDistance)
-                    console.warn("For corridor, can't find tile",subcontent.atTileId);
+                if (!cellsByTurns[turns]) cellsByTurns[turns]={ maxDistance:0, cellsByDistance:{} };
+                if (!cellsByTurns[turns].cellsByDistance[distance])
+                    cellsByTurns[turns].cellsByDistance[distance]=[];
+                cellsByTurns[turns].cellsByDistance[distance].push(lastCell)
+                cellsByTurns[turns].maxDistance=Math.max(cellsByTurns[turns].maxDistance,distance);
 
-                subcontent.elements.forEach(element=>{
-                    
-                    let
-                        position = element.atCell === undefined ? Math.floor(maxDistance*element.at) : element.atCell;
+            }
 
-                    while (!cellsByDistance[position] && (position<=maxDistance) )
-                        position++;
-                    
-                    if (cellsByDistance[position]) {
+            content.forEach(subcontent=>{
+
+                if (subcontent.atTurn) {
+
+                    subcontent.elements.forEach(element=>{
+                        
                         let
-                            cell = pickRandomElement(cellsByDistance[position]);
+                            requestedTurns = subcontent.atTurn;
 
-                        element.tokens.forEach(token=>{
-                            addToken(resources,result,token,false,map,cell);
-                        })
+                        while (requestedTurns && !cellsByTurns[requestedTurns])
+                            requestedTurns--;
 
-                        if (cellsByDistance[position].length == 0)
-                            delete cellsByDistance[position];
+                        if (cellsByTurns[requestedTurns]) {
+
+                            let
+                                set = cellsByTurns[requestedTurns],
+                                position = element.atCell === undefined ? Math.floor(set.maxDistance*element.at) : element.atCell;
+
+                            while (!set.cellsByDistance[position] && (position<=set.maxDistance))
+                                position++;
+                            
+                            if (set.cellsByDistance[position]) {
+                                let
+                                    cell = pickRandomElementValue(set.cellsByDistance[position]);
+
+                                element.tokens.forEach(token=>{
+                                    addToken(resources,result,token,false,map,cell);
+                                })
+
+                                for (let s in cellsByTurns) {
+                                    let
+                                        set = cellsByTurns[s],
+                                        maxDistance = 0;
+                                    for (let k in set.cellsByDistance) {
+                                        let
+                                            pos = set.cellsByDistance[k].indexOf(cell);
+                                        if (pos != -1) {
+                                            set.cellsByDistance[k].splice(pos);
+                                            if (set.cellsByDistance[k].length == 0)
+                                                delete set.cellsByDistance[k];
+                                            else
+                                                maxDistance = Math.max(maxDistance,k);
+                                        } else
+                                            maxDistance = Math.max(maxDistance,k);
+                                    }
+                                    if (maxDistance)
+                                        cellsByTurns[s].maxDistance = maxDistance;
+                                    else
+                                        delete cellsByTurns[s];
+                                };
+
+                            }
+
+                        }
+                    });
+                        
+                } else {
+
+                    let
+                        cellsByDistance={},
+                        maxDistance = 0;
+
+                    for (let k in map.startPoint.paths) {
+                        let
+                            path = map.startPoint.paths[k],
+                            distance = path.length-1,
+                            lastCell = path[distance];
+    
+                        if (
+                            (!subcontent.atTileId || (lastCell.tileData.tileId == subcontent.atTileId))
+                        ) {
+    
+                            if (!cellsByDistance[distance]) cellsByDistance[distance]=[];
+                            cellsByDistance[distance].push(lastCell);
+    
+                            maxDistance=Math.max(maxDistance,distance);
+    
+                        }
                     }
+    
+                    if (subcontent.tileId && !maxDistance)
+                        console.warn("For corridor, can't find tile",subcontent.atTileId);
 
-                })
+                    subcontent.elements.forEach(element=>{
+                        
+                        let
+                            position = element.atCell === undefined ? Math.floor(maxDistance*element.at) : element.atCell;
+
+                        while (!cellsByDistance[position] && (position<=maxDistance))
+                            position++;
+                        
+                        if (cellsByDistance[position]) {
+                            let
+                                cell = pickRandomElement(cellsByDistance[position]);
+
+                            element.tokens.forEach(token=>{
+                                addToken(resources,result,token,false,map,cell);
+                            })
+
+                            if (cellsByDistance[position].length == 0)
+                                delete cellsByDistance[position];
+                        }
+
+                    })
+
+                }
 
             })
                 
@@ -1855,6 +1983,7 @@ MapGenerator=(function() {
     function generate(resources,result) {
 
         let
+            campaign = result.campaign && result.campaign.currentPage.generator ? result.campaign.currentPage.generator : false,
             tilesAvailable=[],
             skins = [],
             map={
@@ -1895,7 +2024,7 @@ MapGenerator=(function() {
                     corridorCells=map.corridorCellsByDistance,
                     defaultRoomType=result.mapConfig.roomsDoorsDefaultType || DEFAULT_ROOMSDOORSTYPE;
 
-                assignRooms(resources,map,result.mapConfig.roomsContent,result.mapConfig.roomsDefaults);
+                assignRooms(campaign,resources,map,result.mapConfig.roomsContent,result.mapConfig.roomsDefaults);
 
                 if (result.mapConfig.roomsMerges)
                     for (let i=0;i<result.mapConfig.roomsMerges;i++)
@@ -1936,7 +2065,18 @@ MapGenerator=(function() {
                         result.quest.rules.push(rule);
                     })
             })
+
             result.map = map;
+
+            if (campaign.sideQuest) {
+
+                campaign.sideQuest.isValid = true;
+
+                if (campaign.sideQuest.if)
+                    campaign.sideQuest.isValid = campaign.sideQuest.if(result);
+
+            }
+
 
         }
 

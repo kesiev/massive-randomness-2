@@ -14,6 +14,7 @@
 	<script src="../js/maprenderer.js"></script>
 	<script src="../js/questgenerator.js"></script>
 	<script src="../js/questrenderer.js"></script>
+	<script src="../js/campaigngenerator.js"></script>
 	<script src="../js/labels.js"></script>
     <script src="../modules/interface.js"></script>
     <script src="../modules/md2-rainbowcrossing.js"></script>
@@ -32,8 +33,14 @@
     <script src="../modules/quests-internet.js"></script>
     <script src="../modules/quests-mr.js"></script>
     <script src="../modules/challenges-default.js"></script>
+    <script src="../modules/campaign.js"></script>
 
 </head><body onload="onl()">
+	<input type="button" value="Summary" onclick="doGenerateSummary()">
+	<input type="button" value="Campaign" onclick="doTestCampaign()">
+	<input type="button" value="Campaign Text" onclick="doTestCampaignText()">
+	<input type="button" value="Campaign modules" onclick="doTestCampaignModules()">
+	<input type="button" value="Test Campaigns" onclick="doTestCampaigns()">
 	<input type="button" value="Tiles" onclick="doTestTiles()">
 	<input type="button" value="Quests" onclick="doCheckQuests()">
 	<input type="button" value="Test Quests" onclick="doTestQuests()">
@@ -48,6 +55,26 @@ function getNodeBody(title) {
 		node = document.getElementById('nodeBody');
 	node.innerHTML = "<h2>"+title+"</h2>";
 	return node;
+}
+
+function doTestCampaignText() {
+	Tools.testCampaignText(getNodeBody("Campaign Text"))
+}
+
+function doGenerateSummary() {
+	Tools.generateSummary(getNodeBody("Summary"));
+}
+
+function doTestCampaign() {
+	Tools.testCampaign(getNodeBody("Campaign"));
+}
+
+function doTestCampaigns() {
+	Tools.testCampaigns(getNodeBody("Test Campaigns"));
+}
+
+function doTestCampaignModules() {
+	Tools.testCampaignModules(getNodeBody("Test Campaign Modules"));
 }
 
 function doTestTiles() {
@@ -71,7 +98,7 @@ function doMapElementsIndex() {
 }
 
 function onl() {
-	doTestQuests();
+	doGenerateSummary();
 }
 
 </script></html>

@@ -14,7 +14,12 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
+                            forActs:[1,2],
+                            forMaps:[0,1],
                             type:"collect",
+                            objective:{
+                                EN:"One Hero is spreading sickness. Deliver the cure item to a zone safely to win."
+                            },
                             by:{
                                 IT:"Ispirato alla Web Quest \"The Cure\"",
                                 EN:"Inspired by the Web Quest \"The Cure\""
@@ -119,6 +124,12 @@ ModManager.modules.push(function(){
                                                     },{
                                                         IT:[ "raggiungere l'uscita del Dungeon con {label.cure@2} {label.cure@4} in mano e tutti interi!" ],
                                                         EN:[ "reach the exit of the Dungeon with {label.cure@2} {label.cure@4} in hand and in one piece!" ]
+                                                    }
+                                                ],
+                                                noInfection:[
+                                                    {
+                                                        IT:[ "ridurre l'infezione {label.problem@6} {label.problem@7}", "con 1 solo Eroe infettato {label.problem@3} {label.problem@4}" ],
+                                                        EN:[ "reduce the infection {label.problem@6} {label.problem@7}", "with just 1 Hero infected {label.problem@3} {label.problem@4}" ],
                                                     }
                                                 ]
                                             }
@@ -228,6 +239,12 @@ ModManager.modules.push(function(){
                                                         IT:"I segnalini Obiettivo con il lato colorato a faccia in su rappresentano {label.cure@2} {label.cure@1}. Qualsiasi Eroe che si trova {label.cure@3} pu&ograve; spendere 1 MP per raccoglierla e guadagnare immediatamente 5 PE. {label.cure:capital@2} {label.cure@1} pu&ograve; essere scambiata come un oggetto.",
                                                         EN:"The color-side-up Objective tokens represent {label.cure@2} {label.cure@1}. Any Hero standing {label.cure@3} may spend 1 MP to pick it up and immediately gain 5 XP. {label.cure:capital@2} {label.cure@1} may be traded as an item."
                                                     }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"I segnalini Obiettivo con il lato colorato a faccia in su rappresentano {label.cure@2} {label.cure@1}. Qualsiasi Eroe che si trova {label.cure@3} pu&ograve; spendere 1 MP per raccoglierla. {label.cure:capital@2} {label.cure@1} pu&ograve; essere scambiata come un oggetto.",
+                                                        EN:"The color-side-up Objective tokens represent {label.cure@2} {label.cure@1}. Any Hero standing {label.cure@3} may spend 1 MP to pick it up. {label.cure:capital@2} {label.cure@1} may be traded as an item."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -277,12 +294,23 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "noBridges" ],
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms", "noInfection" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         },
                         {
+                            forActs:[], // Uses specific level mobs
                             type:"collect",
+                            objective:{
+                                EN:"Eliminate very strong Mob Leaders to win."
+                            },
                             by:{
                                 IT:"Ispirato alla Web Quest \"Ruthless Leaders\"",
                                 EN:"Inspired by the Web Quest \"Ruthless Leaders\""
@@ -468,7 +496,15 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
+                            forActs:[1,2],
+                            forMaps:[2],
                             type:"collect",
+                            objective:{
+                                EN:"Some zones apply element effects to Heroes. Eliminate a strong Roaming Monster to win."
+                            },
+                            variants:{
+                                EN:"With custom fire/frost variants."
+                            },
                             by:{
                                 IT:"Ispirato alla Web Quest \"Into the Flames of Hell\"",
                                 EN:"Inspired by the Web Quest \"Into the Flames of Hell\""
@@ -491,7 +527,7 @@ ModManager.modules.push(function(){
                                                             "di quelle fiamme", "di Fuoco",
                                                             "Braceri", "Bracere", "il Fuoco",
                                                             "va a Fuoco",
-                                                            "Estinguere", "Estinguere"
+                                                            "estinguere", "Estinguere", "estinguendo"
                                                         ],
                                                         EN:[
                                                             "fire", "{symbol.fireToken}", " Heroes roll {symbol.orangeDie} instead of {symbol.yellowDie} when resolving {symbol.fireToken}.",
@@ -504,7 +540,7 @@ ModManager.modules.push(function(){
                                                             "Braziers", "Brazier", "the Fire",
                                                             "is on Fire",
                                                             "extinguish", "Quench",
-                                                            "a"
+                                                            "a", "extinguishing"
                                                         ]
                                                     },{
                                                         IT:[
@@ -517,7 +553,7 @@ ModManager.modules.push(function(){
                                                             "di quel gelo", "di Ghiaccio",
                                                             "Cumuli di Ghiaccio", "Cumulo di Ghiaccio", "il Ghiaccio",
                                                             "&egrave; Ghiacciato",
-                                                            "frantumare", "Frantumare"
+                                                            "frantumare", "Frantumare", "frantumando"
                                                         ],
                                                         EN:[
                                                             "frost", "{symbol.frostToken}","",
@@ -530,7 +566,7 @@ ModManager.modules.push(function(){
                                                             "Heaps of Ice", "Heap of Ice", "the Ice",
                                                             "is Frozen",
                                                             "shatter", "Shatter",
-                                                            "an"
+                                                            "an", "shattering"
                                                         ]
                                                     }
                                                 ],
@@ -617,6 +653,12 @@ ModManager.modules.push(function(){
                                                         IT:[ "Pozzi {label.hazard@20}", "Pozzo {label.hazard@20}", "i", "il", "tutti i", "un", "quel" ],
                                                         EN:[ "{label.hazard@20} Pits", "{label.hazard@20} Pit", "the", "the", "all", "{label.hazard@27}", "that" ]
                                                     }
+                                                ],
+                                                collectOptionalItems:[
+                                                    {
+                                                        IT:[ "a {label.hazard@25} {label.target@4} {label.target@0}", "{label.hazard@27} {label.collectOptionalItems@3} {label.target@0}", "{tokensCount.objective}" ],
+                                                        EN:[ "to {label.hazard@25} {label.target@4} {label.target@2} {label.target@0}", "{label.hazard@28} {label.collectOptionalItems@3} {label.target@0}", "{tokensCount.objective}"]
+                                                    }
                                                 ]
                                             }
                                         ]
@@ -655,6 +697,12 @@ ModManager.modules.push(function(){
                                                         IT:"{label.hazard@26} {label.target@4} {label.target@0} nel Dungeon",
                                                         EN:"{label.hazard@26} {label.target@4} {label.target@0} in the Dungeon"
                                                     }
+                                                ],
+                                                campaignSummary:[
+                                                    {
+                                                        IT:"{label.hazard@26} {label.collectOptionalItems@2} {label.target@0} nel Dungeon",
+                                                        EN:"{label.hazard@26} {label.collectOptionalItems@2} {label.target@0} in the Dungeon"
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -686,6 +734,12 @@ ModManager.modules.push(function(){
                                                     {
                                                         IT:"Evoca un Mostro Errante di livello 5 sul segnalino Corruzione {symbol.corruptionToken} e rimuovi il segnalino. Rimuovi le sue carte dagli altri mazzi dei Mostri Erranti.",
                                                         EN:"Spawn a Level 5 Roaming Monster on the Corruption token {symbol.corruptionToken} and remove the token. Remove its cards on the other Roaming Monster decks."
+                                                    }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"Evoca {label.campaignBoss@0} sul segnalino Corruzione {symbol.corruptionToken} e rimuovi il segnalino. Rimuovi le sue carte dagli altri mazzi dei Mostri Erranti.",
+                                                        EN:"Spawn {label.campaignBoss@0} on the Corruption token {symbol.corruptionToken} and remove the token. Remove its cards on the other Roaming Monster decks."
                                                     }
                                                 ]
                                             }
@@ -766,12 +820,23 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "elemental" ],
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms", "collectOptionalItems" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         },
                         {
+                            forActs:[], // Uses large maps and one-shot level cap.
                             type:"collect",
+                            objective:{
+                                EN:"Reach the highest level and eliminate Roaming Monsters to win."
+                            },
                             by:{
                                 IT:"Ispirato alla Web Quest \"Diabolic Challenge\"",
                                 EN:"Inspired by the Web Quest \"Diabolic Challenge\""
@@ -934,7 +999,12 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
+                            forMaps:[0,1],
+                            forActs:[1,2],
                             type:"collect",
+                            objective:{
+                                EN:"Collect some items to unlock the exit. Reach the exit zone to win."
+                            },
                             by:{
                                 IT:"Ispirato alla Web Quest \"Hardcore Trial\"",
                                 EN:"Inspired by the Web Quest \"Hardcore Trial\""
@@ -1043,14 +1113,20 @@ ModManager.modules.push(function(){
                                                 ],
                                                 key:[
                                                     {
-                                                        IT:[ "Chiave di Pietra", "Chiavi di Pietra", "la", "le", "in una zona con una Chiave di Pietra", "di una", "per usarla", "per raccoglierla" ],
-                                                        EN:[ "Keystone", "Keystones", "the", "the", "in a Zone with a Keystone", "a", "to use it", "to pick it up" ]
+                                                        IT:[ "Chiave di Pietra", "Chiavi di Pietra", "la", "le", "in una zona con una Chiave di Pietra", "di una", "per usarla", "per raccoglierla", "tutte" ],
+                                                        EN:[ "Keystone", "Keystones", "the", "the", "in a Zone with a Keystone", "a", "to use it", "to pick it up", "all" ]
                                                     },{
-                                                        IT:[ "Gemma Cromata", "Gemme Cromate", "la", "le", "in una zona con una Gemma Cromata", "di una", "per usarla", "per raccoglierla" ],
-                                                        EN:[ "Chrome Gem", "Chrome Gems", "the", "the", "in a Zone with a Chrome Gem", "a", "to use it", "to pick it up" ]
+                                                        IT:[ "Gemma Cromata", "Gemme Cromate", "la", "le", "in una zona con una Gemma Cromata", "di una", "per usarla", "per raccoglierla", "tutte" ],
+                                                        EN:[ "Chrome Gem", "Chrome Gems", "the", "the", "in a Zone with a Chrome Gem", "a", "to use it", "to pick it up", "all" ]
                                                     },{
-                                                        IT:[ "Pezzo del Puzzle", "Pezzi del Puzzle", "il", "i", "in una zona con un Pezzo del Puzzle", "di un", "per usarlo", "per raccoglierlo" ],
-                                                        EN:[ "Puzzle Piece", "Puzzle Pieces", "the", "the", "in a Zone with a Puzzle Piece", "a", "to use it", "to pick it up" ]
+                                                        IT:[ "Pezzo del Puzzle", "Pezzi del Puzzle", "il", "i", "in una zona con un Pezzo del Puzzle", "di un", "per usarlo", "per raccoglierlo", "tutti" ],
+                                                        EN:[ "Puzzle Piece", "Puzzle Pieces", "the", "the", "in a Zone with a Puzzle Piece", "a", "to use it", "to pick it up", "all" ]
+                                                    }
+                                                ],
+                                                collectOptionalItems:[
+                                                    {
+                                                        IT:[ "a raccoggliere {label.key@8} {label.key@3} {label.key@1}", "raccogliendo {label.collectOptionalItems@3} {label.key@1}", "{tokensCount.objective}" ],
+                                                        EN:[ "to collect {label.key@8} {label.key@3} {label.key@1}", "collecting {label.collectOptionalItems@3} {label.key@1}", "{tokensCount.objective}"]
                                                     }
                                                 ]
                                             }
@@ -1157,7 +1233,7 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Ogni segnalino Corruzione {symbol.corruptionToken} rappresenta una Zona di generazione dei Mostri Errante e non &egrave; influenzato dalle carte Porta. Quando la sua Camera viene rivelata, oltre alla generazione regolare, generare un Mostro Errante nella Zona dei gettoni Corruzione, quindi scartare il segnalino.",
+                                                        IT:"Ogni segnalino Corruzione {symbol.corruptionToken} rappresenta una Zona di generazione dei Mostri Erranti e non &egrave; influenzato dalle carte Porta. Quando la sua Camera viene rivelata, oltre alla generazione regolare, generare un Mostro Errante nella Zona dei gettoni Corruzione, quindi scartare il segnalino.",
                                                         EN:"Each Corruption token {symbol.corruptionToken} represents a Roaming Monster spawn Zone and is not affected by Door cards. When its Chamber is revealed, in addition to the regular spawn, spawn a Roaming Monster in the Corruption token Zone, then discard the token."
                                                     }
                                                 ]
@@ -1238,12 +1314,26 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ],
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms", "collectOptionalItems" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         },
                         {
+                            forMaps:[1],
                             type:"defuse",
+                            objective:{
+                                EN:"Unlock the exit and reach it to win."
+                            },
+                            variants:{
+                                EN:"With custom fire/frost variants."
+                            },
                             by:{
                                 IT:"Ispirato alla Web Quest \"Glacial Inferno\"",
                                 EN:"Inspired by the Web Quest \"Glacial Inferno\""
@@ -1333,6 +1423,12 @@ ModManager.modules.push(function(){
                                                     },{
                                                         IT:[ "le Leve", "leve", "la Leva", "una Leva", "le", "{label.hazard@11}", "riattivata" ],
                                                         EN:[ "the Lever", "levers", "the Lever", "a Lever" ]
+                                                    }
+                                                ],
+                                                noTraps:[
+                                                    {
+                                                        IT:[ "eliminare tutte le {label.hazard@5}", "rimuovendo tutte le Trappole con Spuntoni" ],
+                                                        EN:[ "clear all the {label.hazard@5}", "removing all the Spike Traps" ],
                                                     }
                                                 ]
                                             }
@@ -1427,6 +1523,12 @@ ModManager.modules.push(function(){
                                                         IT:"I segnalini Obiettivo con il lato colorato verso l'alto rappresentano {label.holes@3} {label.hazard:capital@3}. Qualsiasi Eroe che si trova in una Zona con questi segnalini Obiettivo pu&ograve; spendere 1 azione per {label.hazard@10} e riattivare {label.holes@2}. Quando {label.holes@3} viene {label.holes@6}, rimuovi il segnalino dal Dungeon e ogni Eroe guadagna 5 PE.",
                                                         EN:"The color-side-up Objective tokens represent {label.hazard:capital@3} {label.holes:capital@1}. Any Hero standing in a Zone with these Objective tokens may spend 1 action to {label.hazard@10} and awake {label.holes@2}. When {label.holes@3} is awakened, remove the token from the Dungeon and each Hero gains 5 XP."
                                                     }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"I segnalini Obiettivo con il lato colorato verso l'alto rappresentano {label.holes@3} {label.hazard:capital@3}. Qualsiasi Eroe che si trova in una Zona con questi segnalini Obiettivo pu&ograve; spendere 1 azione per {label.hazard@10} e riattivare {label.holes@2}. Quando {label.holes@3} viene {label.holes@6}, rimuovi il segnalino dal Dungeon.",
+                                                        EN:"The color-side-up Objective tokens represent {label.hazard:capital@3} {label.holes:capital@1}. Any Hero standing in a Zone with these Objective tokens may spend 1 action to {label.hazard@10} and awake {label.holes@2}. When {label.holes@3} is awakened, remove the token from the Dungeon."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -1513,12 +1615,23 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "elementalTrapExit" ],
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms", "noTraps" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         },
                         {
+                            forMaps:[0,1],
                             type:"shards",
+                            objective:{
+                                EN:"One hero takes wounds and gains a token for every Leader or Roaming Monster killed. Reach a token quota to win."
+                            },
                             by:{
                                 IT:"Ispirato alla Web Quest \"Heaven's Secret Door\"",
                                 EN:"Inspired by the Web Quest \"Heaven's Secret Door\""
@@ -1577,7 +1690,7 @@ ModManager.modules.push(function(){
                                                         EN:[ "I'll try to open this passage for you..." ]
                                                     }
                                                 ],
-                                                missionVoicePlot:[
+                                                missionVoiceStory:[
                                                     {
                                                         IT:[ "Ma ho bisogno del vostro aiuto per ricomporre {label.artifact@1}, ora in frantumi." ],
                                                         EN:[ "But I will need your help to reforge {label.artifact@1} that has had {label.shard@6} and pieces scattered." ]
@@ -1591,14 +1704,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 missionVoice:[
                                                     {
-                                                        IT:[ "Dall'altra parte sentirono una voce: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoicePlot@0}\""],
-                                                        EN:[ "From the other side, they hear a voice: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoicePlot@0}\"" ]
+                                                        IT:[ "Dall'altra parte sentirono una voce: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoiceStory@0}\""],
+                                                        EN:[ "From the other side, they hear a voice: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoiceStory@0}\"" ]
                                                     },{
-                                                        IT:[ "Qualcuno dall'altra parte bisbigli&ograve;: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoicePlot@0}\""],
-                                                        EN:[ "Someone on the other end whispered: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoicePlot@0}\"" ]
+                                                        IT:[ "Qualcuno dall'altra parte bisbigli&ograve;: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoiceStory@0}\""],
+                                                        EN:[ "Someone on the other end whispered: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoiceStory@0}\"" ]
                                                     },{
-                                                        IT:[ "Poco dopo, sentirono una voce: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoicePlot@0}\""],
-                                                        EN:[ "Shortly after, they heard a voice: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoicePlot@0}\"" ]
+                                                        IT:[ "Poco dopo, sentirono una voce: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoiceStory@0}\""],
+                                                        EN:[ "Shortly after, they heard a voice: \"{label.missionVoiceEvent@0} {label.missionVoicePassage@0} {label.missionVoiceStory@0}\"" ]
                                                     }
                                                 ],
                                                 mission:[
@@ -1618,16 +1731,22 @@ ModManager.modules.push(function(){
                                                         EN:[ "the Gem", "the Scarlet Gem", "the gem", "of the broken gem", "is forged" ]
                                                     }
                                                 ],
+                                                collectMoreItems:[
+                                                    {
+                                                        IT:[ 10, "{label.shard@0}", "{label.shard@0}" ],
+                                                        EN:[ 10, "{label.shard@0}", "{label.shard@0}" ]
+                                                    }
+                                                ],
                                                 shard:[
                                                     {
-                                                        IT:[ "Frammenti Arcani", "i Frammenti Arcani", "1 Frammento", "10 Frammenti", "10 Frammenti Arcani", "i Frammenti", "i suoi frammenti", "possono essere raccolti", "Frammenti Spezzati", "i Frammenti Spezzati" ],
-                                                        EN:[ "Arcane Shards", "the Arcane Shards", "1 Shard", "10 Shards", "10 Sacred Shards", "the Shards", "its shards", "can be collected", "Broken Pieces", "the Broken Pieces" ]
+                                                        IT:[ "Frammenti Arcani", "i Frammenti Arcani", "1 Frammento", "Frammenti", "Frammenti Arcani", "i Frammenti", "i suoi frammenti", "possono essere raccolti", "Frammenti Spezzati", "i Frammenti Spezzati" ],
+                                                        EN:[ "Arcane Shards", "the Arcane Shards", "1 Shard", "Shards", "Sacred Shards", "the Shards", "its shards", "can be collected", "Broken Pieces", "the Broken Pieces" ]
                                                     },{
-                                                        IT:[ "Schegge Solari", "le Schegge Solari", "1 Scheggia", "10 Schegge", "10 Schegge Solari", "le Schegge", "le sue schegge", "possono essere raccolte", "Schegge Cadute", "le Schegge Cadute" ],
-                                                        EN:[ "Solar Shards", "the Solar Shards", "1 Shard", "10 Shards", "10 Solar Shards", "the Shards", "its shards", "can be collected", "Fallen Shards", "the Fallen Shards" ]
+                                                        IT:[ "Schegge Solari", "le Schegge Solari", "1 Scheggia", "Schegge", "Schegge Solari", "le Schegge", "le sue schegge", "possono essere raccolte", "Schegge Cadute", "le Schegge Cadute" ],
+                                                        EN:[ "Solar Shards", "the Solar Shards", "1 Shard", "Shards", "Solar Shards", "the Shards", "its shards", "can be collected", "Fallen Shards", "the Fallen Shards" ]
                                                     },{
-                                                        IT:[ "Scaglia Ambrata", "le Scaglie Ambrate", "1 Scaglia", "10 Scaglie", "10 Scaglie Ambrate", "le Scaglie", "le sue scaglie", "possono essere raccolte", "Scaglie Perdute", "le Scaglie Perdute" ],
-                                                        EN:[ "Amber Scale", "the Amber Scales", "1 Scale", "10 Scales", "10 Amber Scales", "the Scales", "its scales", "can be collected", "Lost Scales", "the Lost Scales" ]
+                                                        IT:[ "Scaglie Ambrate", "le Scaglie Ambrate", "1 Scaglia", "Scaglie", "Scaglie Ambrate", "le Scaglie", "le sue scaglie", "possono essere raccolte", "Scaglie Perdute", "le Scaglie Perdute" ],
+                                                        EN:[ "Amber Scales", "the Amber Scales", "1 Scale", "Scales", "Amber Scales", "the Scales", "its scales", "can be collected", "Lost Scales", "the Lost Scales" ]
                                                     }
                                                 ],
                                                 forge:[
@@ -1681,8 +1800,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 summary:[
                                                     {
-                                                        IT:"Raccogliere almeno {label.shard@4}",
-                                                        EN:"Collect at least {label.shard@4}"
+                                                        IT:"Raccogliere almeno 10 {label.shard@4}",
+                                                        EN:"Collect at least 10 {label.shard@4}"
+                                                    }
+                                                ],
+                                                campaignSummary:[
+                                                    {
+                                                        IT:"Raccogliere almeno 7 {label.shard@4}",
+                                                        EN:"Collect at least 7 {label.shard@4}"
                                                     }
                                                 ]
                                             }
@@ -1741,8 +1866,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"La Zona con un gettone Obiettivo grigio &egrave; {label.forge@1}. Una volta che gli Eroi hanno raccolto collettivamente almeno {label.shard@3}, qualsiasi Eroe {label.forge@4} pu&ograve; spendere 1 azione per Forgiare {label.artifact@1}. Non appena {label.artifact@2} {label.artifact@4}, la Missione termina con la vittoria.",
-                                                        EN:"The Zone with a gray Objective token is {label.forge@1}. Once the Heroes collectively gathered at least {label.shard@3}, any Hero standing {label.forge@4} may spend 1 action to Forge {label.artifact@1}. As soon as {label.artifact@2} {label.artifact@4}, the Mission ends in victory."
+                                                        IT:"La Zona con un gettone Obiettivo grigio &egrave; {label.forge@1}. Una volta che gli Eroi hanno raccolto collettivamente almeno 10 {label.shard@3}, qualsiasi Eroe {label.forge@4} pu&ograve; spendere 1 azione per Forgiare {label.artifact@1}. Non appena {label.artifact@2} {label.artifact@4}, la Missione termina con la vittoria.",
+                                                        EN:"The Zone with a gray Objective token is {label.forge@1}. Once the Heroes collectively gathered at least 10 {label.shard@3}, any Hero standing {label.forge@4} may spend 1 action to Forge {label.artifact@1}. As soon as {label.artifact@2} {label.artifact@4}, the Mission ends in victory."
+                                                    }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"La Zona con un gettone Obiettivo grigio &egrave; {label.forge@1}. Una volta che gli Eroi hanno raccolto collettivamente almeno 7 {label.shard@3}, qualsiasi Eroe {label.forge@4} pu&ograve; spendere 1 azione per Forgiare {label.artifact@1}. Non appena {label.artifact@2} {label.artifact@4}, la Missione termina con la vittoria.",
+                                                        EN:"The Zone with a gray Objective token is {label.forge@1}. Once the Heroes collectively gathered at least 7 {label.shard@3}, any Hero standing {label.forge@4} may spend 1 action to Forge {label.artifact@1}. As soon as {label.artifact@2} {label.artifact@4}, the Mission ends in victory."
                                                     }
                                                 ]
                                             }
@@ -1761,12 +1892,23 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ],
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "collectMoreItems", "visitAllRooms" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         },
                         {
+                            forMaps:[1],
                             type:"corruption",
+                            objective:{
+                                EN:"Collect resources from map tokens or a random amount eliminating enemies. Reach a resource quota and perform an action on a zone to win."
+                            },
                             by:{
                                 IT:"Ispirato alla Web Quest \"Hello, Darkness!\"",
                                 EN:"Inspired by the Web Quest \"Hello, Darkness!\""
@@ -1851,14 +1993,24 @@ ModManager.modules.push(function(){
                                                 ],
                                                 specialOne:[
                                                     {
-                                                        IT:[ "i Mezzi Demoni", "un Mezzo Demone", "l'Eroe Mezzo Demone", "Assorbire l'Oscurit&agrave;", "Portare a 7 il Potere Oscuro", "Potere Oscuro", "il \"Mezzo Demone\"", "dall'oscurit&agrave;", "il suo Potere Oscuro", "le fonti di Energia Oscura", "", "distruggerlo", "Assorbire l'Oscurit&agrave;", "Cumuli di Oscurit&agrave;", "il suo Potere Oscuro arriva a 7", "rappresentate" ],
-                                                        EN:[ "Half-Demons", "a Half-Demon", "the Half-Demon Hero", "Absorb Darkness", "Reach 7 Darkness Power", "Darkness Power", "the \"Half-Demon\"", "from the Darkness", "their Darkness Power", "sources of Dark Energy", "", "destroy it", "Absorbing Darkness", "Beacons of Darkness", "Darkness Power reaches 7", "represented" ]
+                                                        IT:[ "i Mezzi Demoni", "un Mezzo Demone", "l'Eroe Mezzo Demone", "Assorbire l'Oscurit&agrave;", "Portare a {label.tokensCount} il Potere Oscuro", "Potere Oscuro", "il \"Mezzo Demone\"", "dall'oscurit&agrave;", "il suo Potere Oscuro", "le fonti di Energia Oscura", "", "distruggerlo", "Assorbire l'Oscurit&agrave;", "Cumuli di Oscurit&agrave;", "il suo Potere Oscuro arriva a {label.tokensCount}", "rappresentate" ],
+                                                        EN:[ "Half-Demons", "a Half-Demon", "the Half-Demon Hero", "Absorb Darkness", "Reach {label.tokensCount} Darkness Power", "Darkness Power", "the \"Half-Demon\"", "from the Darkness", "their Darkness Power", "sources of Dark Energy", "", "destroy it", "Absorbing Darkness", "Beacons of Darkness", "Darkness Power reaches {label.tokensCount}", "represented" ]
                                                     },{
-                                                        IT:[ "i Figli del Bosco", "un Figlio del Bosco", "l'Eroe Figlio del Bosco", "Assorbire lo Spirito", "Portare a 7 lo Spirito Arboreo", "Spirito Arboreo", "il \"Figlio del Bosco\"", "dalle ombre", "il suo Spirito Arboreo", "le radici dello Spirito Arboreo", "", "raccoglierla", "Assorbire lo Spirito", "Radici dello Spirito", "il suo Spirito Arboreo arriva a 7", "rappresentate" ],
-                                                        EN:[ "the Children of the Woods", "a Child of the Woods", "the Child of the Woods Hero", "Absorb the Spirit", "Reach 7 Arboreal Spirit", "Arboreal Spirit", "the \"Child of the Woods \"", "from the shadows", "his Arboreal Spirit", "the roots of the Arboreal Spirit", "", "harvest it", "Absorb the Spirit", "Roots of the Spirit", "his Arboreal Spirit reaches 7", "represented" ]
+                                                        IT:[ "i Figli del Bosco", "un Figlio del Bosco", "l'Eroe Figlio del Bosco", "Assorbire lo Spirito", "Portare a {label.tokensCount} lo Spirito Arboreo", "Spirito Arboreo", "il \"Figlio del Bosco\"", "dalle ombre", "il suo Spirito Arboreo", "le radici dello Spirito Arboreo", "", "raccoglierla", "Assorbire lo Spirito", "Radici dello Spirito", "il suo Spirito Arboreo arriva a {label.tokensCount}", "rappresentate" ],
+                                                        EN:[ "the Children of the Woods", "a Child of the Woods", "the Child of the Woods Hero", "Absorb the Spirit", "Reach {label.tokensCount} Arboreal Spirit", "Arboreal Spirit", "the \"Child of the Woods \"", "from the shadows", "his Arboreal Spirit", "the roots of the Arboreal Spirit", "", "harvest it", "Absorb the Spirit", "Roots of the Spirit", "his Arboreal Spirit reaches {label.tokensCount}", "represented" ]
                                                     },{
-                                                        IT:[ "gli Adepti del Cielo", "un Adepto del Cielo", "l'Eroe Adepto del Cielo", "Assorbire l'Essenza", "Portare a 7 l'Essenza Notturna", "Essenza Notturna", "l'\"Adepto del Cielo\"", "della notte", "la sua Essenza Notturna", "i globi di Essenza Notturna", "", "frantumarlo", "Assorbire l'Essenza Notturna", "Globi di Essenza Notturna", "la sua Essenza Notturna arriva a 7", "rappresentati" ],
-                                                        EN:[ "the Sky Adepts", "a Sky Adept", "the Sky Adept Hero", "Absorb the Essence", "Reach 7 Night Essence", "Night Essence", "the \"Sky Adept\"", "from the night", "his Night Essence", "the orbs of Night Essence", "", "shatter it", "Absorb the Night Essence", "Orbs of Night Essence", "Night Essence reaches 7", "represented" ]
+                                                        IT:[ "gli Adepti del Cielo", "un Adepto del Cielo", "l'Eroe Adepto del Cielo", "Assorbire l'Essenza", "Portare a {label.tokensCount} l'Essenza Notturna", "Essenza Notturna", "l'\"Adepto del Cielo\"", "della notte", "la sua Essenza Notturna", "i globi di Essenza Notturna", "", "frantumarlo", "Assorbire l'Essenza Notturna", "Globi di Essenza Notturna", "la sua Essenza Notturna arriva a {label.tokensCount}", "rappresentati" ],
+                                                        EN:[ "the Sky Adepts", "a Sky Adept", "the Sky Adept Hero", "Absorb the Essence", "Reach {label.tokensCount} Night Essence", "Night Essence", "the \"Sky Adept\"", "from the night", "his Night Essence", "the orbs of Night Essence", "", "shatter it", "Absorb the Night Essence", "Orbs of Night Essence", "Night Essence reaches {label.tokensCount}", "represented" ]
+                                                    }
+                                                ],
+                                                tokensCount:[
+                                                    {
+                                                        EN:[ 7 ]
+                                                    }
+                                                ],
+                                                roundLimit:[
+                                                    {
+                                                        EN:[ 7 ]
                                                     }
                                                 ]
                                             }
@@ -1938,8 +2090,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Non appena {label.specialOne@2} ha 7 gettoni Corruzione ({label.specialOne@14}), la Missione termina con la vittoria.",
-                                                        EN:"As soon as {label.specialOne@2} has 7 Corruption tokens ({label.specialOne@14}), the Mission ends in victory."
+                                                        IT:"Non appena {label.specialOne@2} ha {label.tokensCount@0} gettoni Corruzione ({label.specialOne@14}), la Missione termina con la vittoria.",
+                                                        EN:"As soon as {label.specialOne@2} has {label.tokensCount@0} Corruption tokens ({label.specialOne@14}), the Mission ends in victory."
                                                     }
                                                 ]
                                             }
@@ -1958,7 +2110,14 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ],
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "roundLimit", "visitAllRooms" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         },

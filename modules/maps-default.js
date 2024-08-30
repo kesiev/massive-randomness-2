@@ -1139,6 +1139,59 @@ ModManager.modules.push(function(){
                                 ],
                                 mapAsGrid:[ true ]
                             }
+                        },{
+                            attribute:"structure",
+                            value:"pathToRoom-large",
+                            config:{
+                                mapTiles:[
+                                    [
+                                        { 
+                                            tileId:"first", 
+                                            includeTags:[
+                                                [
+                                                    "roomSize1",
+                                                    "roomSize2",
+                                                    "roomSize3"
+                                                ],[
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"second", 
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"third", 
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"extra", 
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"fourth", 
+                                            includeTags:[
+                                                [
+                                                    "roomSize4+"
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ],
+                                // mapNoSquaresScore:[ -0.1 ],
+                                // mapDistanceScore: [ 1 ]
+                                mapAsGrid:[ true, false ],
+                                mapRightmostScore:[ 1 ]
+                            }
                         },
                         // --- Game modes
                         {
@@ -1937,6 +1990,45 @@ ModManager.modules.push(function(){
                                 ],
                                 mapAsGrid:[ false ]
                             }
+                        },{
+                            attribute:"structure",
+                            value:"pathToRoom-large",
+                            config:{
+                                mapTiles:[
+                                    [
+                                        { 
+                                            tileId:"first", 
+                                            includeTags:[
+                                                [
+                                                    "roomSize1",
+                                                    "roomSize2",
+                                                    "roomSize3"
+                                                ],[
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"second", 
+                                            includeTags:[
+                                                [
+                                                    "openSides2+"
+                                                ]
+                                            ]
+                                        },{ 
+                                            tileId:"third", 
+                                            includeTags:[
+                                                [
+                                                    "roomSize4+"
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ],
+                                // mapNoSquaresScore:[ -0.1 ],
+                                // mapDistanceScore: [ 1 ]
+                                mapAsGrid:[ true, false ],
+                                mapRightmostScore:[ 1 ]
+                            }
                         },
                         // --- Room sizes
                         {
@@ -2698,7 +2790,7 @@ ModManager.modules.push(function(){
                             attribute:"corridors",
                             value:"default",
                             config:{
-                                
+
                                 corridorsPillarsMinDistance:[ 5 ],
                                 corridorsSpawnPoints:[
                                     [
@@ -3132,6 +3224,49 @@ ModManager.modules.push(function(){
                                     ]
                                 ]
                             }
+                        },{
+                            attribute:"corridors",
+                            value:"mirrorToBoss",
+                            config:{
+                                corridorsPillarsMinDistance:[ 5 ],
+                                corridorsSpawnPoints:[
+                                    [
+                                        { at:0.5, tokens:[ { id: "regularPortal", isVisible:true } ], allowBridge:false },
+                                        { at:0.055, tokens:[ { id: "portal5", isVisible:true } ], allowBridge:false },
+                                        { at:0.9, tokens:[ { id: "portal3", isVisible:true } ], allowBridge:false },
+                                    ]
+                                ],
+                                corridorsContent:[
+                                    [
+                                        {
+                                            elements:[
+                                                { atCell:0, tokens:[ { id:"startPoint", isVisible:true }, { id:"objective", flipped:true, isVisible:true }, { id:"objective", isVisible:true }, { id:"objective", isVisible:true }, { id:"objective", isVisible:true }, { id:"objective", isVisible:true } ]},
+                                                { atCell:6, tokens:[ { id:"startMob", isVisible:true } ]}
+                                            ]
+                                        },{
+                                            atTurn:1,
+                                            elements:[
+                                                { at:1, tokens:[ { id:"time", isVisible:true } ]}
+                                            ]
+                                        },{
+                                            atTurn:2,
+                                            elements:[
+                                                { at:1, tokens:[ { id:"time", isVisible:true } ]}
+                                            ]
+                                        },{
+                                            atTurn:3,
+                                            elements:[
+                                                { at:1, tokens:[ { id:"time", isVisible:true } ]}
+                                            ]
+                                        },{
+                                            atTurn:4,
+                                            elements:[
+                                                { at:1, tokens:[ { id:"time", isVisible:true } ]}
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
                         },
                         // --- Room limits
                         {
@@ -3328,6 +3463,21 @@ ModManager.modules.push(function(){
                                                     { at:0.5, tokens:[ { id:"bearTrap" } ] },
                                                 ]
                                             ]
+                                        },{
+                                            ifSideQuestMod:[ "extraObjectives" ],
+                                            at:1,
+                                            relevance:1,
+                                            intensity:{ risk:1.3, reward:1.3 },
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
                                         }
                                     ]
                                 ]
@@ -3377,6 +3527,22 @@ ModManager.modules.push(function(){
                                         },{
                                             at:0.2,
                                             size:1,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            ifSideQuestMod:[ "extraObjectives" ],
+                                            at:0.8,
+                                            size:1,
+                                            intensity:{ risk:1, reward:0.5 },
                                             relevance:1,
                                             add:[
                                                 [
@@ -3580,6 +3746,8 @@ ModManager.modules.push(function(){
                                                 ]   
                                             ]
                                         },{
+                                            ifSideQuestMod:[ "extraObjectives" ],
+                                            ifOneShot:true,
                                             at:0.2,
                                             size:1,
                                             relevance:1,
@@ -3651,6 +3819,7 @@ ModManager.modules.push(function(){
                                                 ]   
                                             ]
                                         },{
+                                            ifNotSideQuestMod:[ "removeObjectives" ],
                                             at:0.8,
                                             size:1,
                                             relevance:1,
@@ -4292,6 +4461,25 @@ ModManager.modules.push(function(){
                                                     }
                                                 ]   
                                             ]
+                                        },{
+                                            ifSideQuestMod:[ "extraObjectives" ],
+                                            at:1,
+                                            size:1,
+                                            relevance:1,
+                                            atTileId:"third",
+                                            doors:[
+                                                { id:"door", className:"marked red" }
+                                            ],
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
                                         }
                                     ]
                                 ]
@@ -4322,15 +4510,15 @@ ModManager.modules.push(function(){
                                                     },{
                                                         atExposure:-1,
                                                         tokens:[
-                                                            { id:"objective" }
+                                                            { id:"objective", isVisible:true }
                                                         ]
                                                     },{
                                                         tokens:[
-                                                            { id:"{label.hazard@0}" }
+                                                            { id:"{label.hazard@0}", isVisible:true }
                                                         ]
                                                     },{
                                                         tokens:[
-                                                            { id:"{label.hazard@0}" }
+                                                            { id:"{label.hazard@0}", isVisible:true }
                                                         ]
                                                     }
                                                 ]
@@ -4387,6 +4575,20 @@ ModManager.modules.push(function(){
                                                     {
                                                         tokens:[
                                                             { id:"fountain" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            ifSideQuestMod:[ "extraObjectives" ],
+                                            at:0.8,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
                                                         ]
                                                     }
                                                 ]
@@ -4690,6 +4892,21 @@ ModManager.modules.push(function(){
                                                     }
                                                 ]
                                             ]
+                                        },{
+                                            ifSideQuestMod:[ "extraObjectives" ],
+                                            at:1,
+                                            relevance:1,
+                                            intensity:{ risk:1.3, reward:1.3 },
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
                                         }
                                     ]
                                 ]
@@ -4948,6 +5165,21 @@ ModManager.modules.push(function(){
                                                     {
                                                         tokens:[
                                                             { id:"fountain" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            ifSideQuestMod:[ "extraObjectives" ],
+                                            at:0.8,
+                                            relevance:1,
+                                            size:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
                                                         ]
                                                     }
                                                 ]
@@ -5244,7 +5476,153 @@ ModManager.modules.push(function(){
                                     ]
                                 ]
                             }
-                        },
+                        },{
+                            attribute:"gameMode",
+                            value:"collectTimed",
+                            config:{
+                                roomsContent:[
+                                    [
+                                        {
+                                            at:1,
+                                            relevance:1,
+                                            intensity:{ risk:1.3, reward:1.3 },
+                                            doors:[ { id:"door", className:"marked red" } ],
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective", flipped:true }
+                                                        ]
+                                                    },{
+                                                        tokens:[
+                                                            {id:"startMob" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ],
+                                            onPathAdd:[
+                                                [
+                                                    { at:0.25, tokens:[ { id:"bearTrap" } ] },
+                                                    { at:0.25, tokens:[ { id:"spikeTrap" } ] }
+                                                ],[
+                                                    { at:0, tokens:[ { id:"greaterChest" } ] }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective", isVisible:true },
+                                                            { id:"time", isVisible:true }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0.1,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective", isVisible:true },
+                                                            { id:"time", isVisible:true },
+                                                            { id:"time", isVisible:true },
+                                                            { id:"time", isVisible:true }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0.79,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective", isVisible:true },
+                                                            { id:"time", isVisible:true },
+                                                            { id:"time", isVisible:true },
+                                                            { id:"time", isVisible:true },
+                                                            { id:"time", isVisible:true },
+                                                            { id:"time", isVisible:true }
+                                                        ]
+                                                    },{
+                                                        tokens:[
+                                                            {id:"forge", isVisible:true}
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        },{
+                            attribute:"gameMode",
+                            value:"mirrorToBoss",
+                            config:{
+                                roomsContent:[
+                                    [
+                                        {
+                                            at:1,
+                                            relevance:1,
+                                            doors:[ { id:"door", className:"marked red" } ],
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"corruption" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ],
+                                            onPathAdd:[
+                                                [
+                                                    { at:0.5, tokens:[ { id:"bearTrap" } ] },
+                                                    { at:0.5, tokens:[ { id:"spikeTrap" } ] }
+                                                ]
+                                            ]
+                                        },{
+                                            at:1,
+                                            relevance:1,
+                                            intensity:{ risk:0, reward:1.3 },
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"fountain" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0.75,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"forge" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
                     ]
                 }
             ]

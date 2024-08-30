@@ -1,7 +1,7 @@
 ModManager.modules.push(function(){
 
     return [
-            {
+        {
 
             id:"quests-upgradepack",
             needs:[ "quests-default", "md2-upgradepack" ],
@@ -10,11 +10,15 @@ ModManager.modules.push(function(){
                 EN:"MD2 Upgrade pack inspired quest models"
             },
             content:[
-            {
+                {
                     type:"quests",
                     data:[
                         {
+                            forMaps:[2],
                             type:"keyToBoss",
+                            objective:{
+                                EN:"Collect keys to unlock a Roaming Monster. Eliminate it to win."
+                            },
                             by:{
                                 IT:"Ispirato all'avventura del Pack di Aggiornamento \"Il Tesoro dell'Immondo\"",
                                 EN:"Inspired by the Upgrade Pack quest \"The Fiend's Treasure\""
@@ -52,14 +56,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 prison:[
                                                     {
-                                                        IT:[ "in una stanza all'interno del dungeon che stava esplorando", "Chiavi", "le", "Chiavi Nascoste", "&egrave; chiusa a chiave", "essere raccolte", "state raccolte" ],
-                                                        EN:[ "in a room inside the dungeon he was exploring", "Keys", "the", "Hidden Keys", "is locked", "collected", "collected" ]
+                                                        IT:[ "in una stanza all'interno del dungeon che stava esplorando", "Chiavi", "le", "Chiavi Nascoste", "&egrave; chiusa a chiave", "essere raccolte", "state raccolte", "raccogliere tutte", "raccogliendo" ],
+                                                        EN:[ "in a room inside the dungeon he was exploring", "Keys", "the", "Hidden Keys", "is locked", "collected", "collected", "collect all", "collecting" ]
                                                     },{
-                                                        IT:[ "in un cerchio magico di una stanza delle segrete che stava pattugliando", "Sigilli", "i", "Sigilli Magici", "&egrave; sigillata dalla magia", "essere raccolti", "stati raccolti" ],
-                                                        EN:[ "in a magic circle of a dungeon room he was patrolling", "Seals", "the", "Magic Seals", "is sealed by magic", "collected", "collected" ]
+                                                        IT:[ "in un cerchio magico di una stanza delle segrete che stava pattugliando", "Sigilli", "i", "Sigilli Magici", "&egrave; sigillata dalla magia", "essere raccolti", "stati raccolti", "raccogliere tutti", "raccogliendo" ],
+                                                        EN:[ "in a magic circle of a dungeon room he was patrolling", "Seals", "the", "Magic Seals", "is sealed by magic", "collected", "collected", "collect all", "collecting" ]
                                                     },{
-                                                        IT:[ "in una delle prigioni del dungeon", "Leve", "le", "Leve di Sicurezza", "&egrave; bloccata da un meccanismo", "essere tirate", "state tirate" ],
-                                                        EN:[ "in one of the prisons of the dungeon", "Levers", "the", "Safety Levers", "it is blocked by a mechanism", "pulled", "pulled" ]
+                                                        IT:[ "in una delle prigioni del dungeon", "Leve", "le", "Leve di Sicurezza", "&egrave; bloccata da un meccanismo", "essere tirate", "state tirate", "tirare tutte", "tirando" ],
+                                                        EN:[ "in one of the prisons of the dungeon", "Levers", "the", "Safety Levers", "it is blocked by a mechanism", "pulled", "pulled", "pull all", "pulling" ]
                                                     }
                                                 ],
                                                 but:[
@@ -96,6 +100,12 @@ ModManager.modules.push(function(){
                                                     },{
                                                         IT:[ "togliere di mezzo {label.prisoner@2}." ],
                                                         EN:[ "to get rid of {label.prisoner@2}." ]
+                                                    }
+                                                ],
+                                                collectOptionalItems:[
+                                                    {
+                                                        IT:[ "a {label.prison@7} {label.prison@2} {label.prison@3}", "{label.prison@8} {label.collectOptionalItems@3} {label.prison@3}", "{tokensCount.objective}" ],
+                                                        EN:[ "to {label.prison@7} all the {label.prison@3}", "{label.prison@8} {label.collectOptionalItems@3} {label.prison@3}", "{tokensCount.objective}"]
                                                     }
                                                 ]
                                             }
@@ -137,8 +147,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 summary:[
                                                     {
-                                                        IT:"Trovare {label.prison@2} {tokensCount.objective} {label.prison@1}",
-                                                        EN:"Find {label.prison@2} {tokensCount.objective} {label.prison@1}"
+                                                        IT:"Trovare {label.prison@2} {label.collectOptionalItems@2} {label.prison@1}",
+                                                        EN:"Find {label.prison@2} {label.collectOptionalItems@2} {label.prison@1}"
                                                     }
                                                 ]
                                             }
@@ -188,6 +198,12 @@ ModManager.modules.push(function(){
                                                         IT:"Generare un Mostro Errante di Livello 5 nella Zona indicata dal segnalino Corruzione {symbol.corruptionToken} (rimuovere tutte le altre carte di quel mostro dagli altri mazzi dei Mostri Erranti). {label.prisoner@9} Rimuovere poi il segnalino Corruzione.",
                                                         EN:"Spawn a random Level 5 Roaming Monster in the Zone indicated by the Corruption token {symbol.corruptionToken} (remove all other cards of that monster from other Roaming Monster decks). {label.prisoner@9} Then remove the Corruption token."
                                                     }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"Generare {label.campaignBoss@0} nella Zona indicata dal segnalino Corruzione {symbol.corruptionToken} (rimuovere tutte le altre carte di quel mostro dagli altri mazzi dei Mostri Erranti). {label.prisoner@9} Rimuovere poi il segnalino Corruzione.",
+                                                        EN:"Spawn {label.campaignBoss@0} in the Zone indicated by the Corruption token {symbol.corruptionToken} (remove all other cards of that monster from other Roaming Monster decks). {label.prisoner@9} Then remove the Corruption token."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -201,8 +217,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT: "{label.prisoner:capital@3} {label.prison@4}. Pu&ograve; essere aperta soltanto una volta che {label.prison@2} {tokensCount.objective} {label.prison@1} sono {label.prison@6}. {label.prisoner:capital@2} non si attiva finch&eacute; la sua Camera non viene aperta. {label.prisoner:capital@2} non pu&ograve; essere {label.prisoner@7} o {label.prisoner@8} da alcuna capacit&agrave; o effetto finch&eacute; {label.prisoner@3} non viene aperta.",
-                                                        EN: "{label.prisoner:capital@3} {label.prison@4}. It can only be opened once {label.prison@2} {tokensCount.objective} {label.prison@1} are {label.prison@6}. {label.prisoner:capital@2} does not activate until its Chamber is opened. {label.prisoner:capital@2} cannot be {label.prisoner@7} or {label.prisoner@8} by any ability or effect until {label.prisoner@3} is opened."
+                                                        IT: "{label.prisoner:capital@3} {label.prison@4}. Pu&ograve; essere aperta soltanto una volta che {label.prison@2} {label.collectOptionalItems@2} {label.prison@1} sono {label.prison@6}. {label.prisoner:capital@2} non si attiva finch&eacute; la sua Camera non viene aperta. {label.prisoner:capital@2} non pu&ograve; essere {label.prisoner@7} o {label.prisoner@8} da alcuna capacit&agrave; o effetto finch&eacute; {label.prisoner@3} non viene aperta.",
+                                                        EN: "{label.prisoner:capital@3} {label.prison@4}. It can only be opened once {label.prison@2} {label.collectOptionalItems@2} {label.prison@1} are {label.prison@6}. {label.prisoner:capital@2} does not activate until its Chamber is opened. {label.prisoner:capital@2} cannot be {label.prisoner@7} or {label.prisoner@8} by any ability or effect until {label.prisoner@3} is opened."
                                                     }
                                                 ]
                                             }
@@ -216,8 +232,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"{label.prison:capital@2} {label.prison@1} sono rappresentate dai segnalini Obiettivo. Possono {label.prison@5} spendendo 1 PM. Un Eroe che raccoglie un segnalino Obiettivo ottiene 5 PE e scarta il segnalino. Una volta che {label.prison@2} {tokensCount.objective} {label.prison@1} sono {label.prison@6}, la porta speciale {label.prisoner@4} pu&ograve; essere aperta da qualsiasi Eroe.",
-                                                        EN:"{label.prison:capital@2} {label.prison@1} are represented by Objective tokens. They can be {label.prison@5} by spending 1 MP. The Hero who collects an Objective token gains 5 XP and discards the token. Once {label.prison@2} {tokensCount.objective} {label.prison@1} are {label.prison@6}, the special door {label.prisoner@4} can be opened by any Hero."
+                                                        IT:"{label.prison:capital@2} {label.prison@1} sono rappresentate dai segnalini Obiettivo. Possono {label.prison@5} spendendo 1 PM. Un Eroe che raccoglie un segnalino Obiettivo ottiene 5 PE e scarta il segnalino. Una volta che {label.prison@2} {label.collectOptionalItems@2} {label.prison@1} sono {label.prison@6}, la porta speciale {label.prisoner@4} pu&ograve; essere aperta da qualsiasi Eroe.",
+                                                        EN:"{label.prison:capital@2} {label.prison@1} are represented by Objective tokens. They can be {label.prison@5} by spending 1 MP. The Hero who collects an Objective token gains 5 XP and discards the token. Once {label.prison@2} {label.collectOptionalItems@2} {label.prison@1} are {label.prison@6}, the special door {label.prisoner@4} can be opened by any Hero."
+                                                    }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"{label.prison:capital@2} {label.prison@1} sono rappresentate dai segnalini Obiettivo. Possono {label.prison@5} spendendo 1 PM. Un Eroe che raccoglie un segnalino Obiettivo lo scarta. Una volta che {label.prison@2} {label.collectOptionalItems@2} {label.prison@1} sono {label.prison@6}, la porta speciale {label.prisoner@4} pu&ograve; essere aperta da qualsiasi Eroe.",
+                                                        EN:"{label.prison:capital@2} {label.prison@1} are represented by Objective tokens. They can be {label.prison@5} by spending 1 MP. The Hero who collects an Objective token discards it. Once {label.prison@2} {label.collectOptionalItems@2} {label.prison@1} are {label.prison@6}, the special door {label.prisoner@4} can be opened by any Hero."
                                                     }
                                                 ]
                                             }
@@ -236,11 +258,26 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ]
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            {
+                                                mods:[ "removeObjectives" ],
+                                                tags:[
+                                                    [ "visitAllRooms", "collectOptionalItems" ]
+                                                ]
+                                            }
+                                        ]
+                                    }
                                 }
                             ]
                         },{
+                            forActs:[1,2],
+                            forMaps:[2],
                             type:"fallingDungeon",
+                            objective:{
+                                EN:"Eliminate a Roaming Monster before the dungeon falls."
+                            },
                             by:{
                                 IT:"Ispirato all'avventura del Pack di Aggiornamento \"Tamburi di Guerra dei Goblin\"",
                                 EN:"Inspired by the Upgrade Pack quest \"Goblin War Drums\""
@@ -333,6 +370,23 @@ ModManager.modules.push(function(){
                                                     },{
                                                         IT:[ "uno stridio assordante &egrave; emerso dalle sue profondit&agrave;..." ],
                                                         EN:[ "a deafening screech emerged from its depths..." ]
+                                                    }
+                                                ],
+                                                fallExplanation:[
+                                                    {
+                                                        IT:"<ul><li><b>Round 4</b>: {tileLabel.first}</li>"+
+                                                        "<li><b>Round 6</b>: {tileLabel.second}</li>"+
+                                                        "<li><b>Round 9</b>: {tileLabel.third}</li>"+
+                                                        "<li><b>Round 11</b>: {tileLabel.fourth}</li></ul>",
+                                                        EN:"<ul><li><b>Round 4</b>: {tileLabel.first}</li>"+
+                                                        "<li><b>Round 6</b>: {tileLabel.second}</li>"+
+                                                        "<li><b>Round 9</b>: {tileLabel.third}</li>"+
+                                                        "<li><b>Round 11</b>: {tileLabel.fourth}</li></ul>"
+                                                    }
+                                                ],
+                                                roundLimit:[
+                                                    {
+                                                        EN:[ 9 ]
                                                     }
                                                 ]
                                             }
@@ -435,16 +489,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Ogni volta che il tracciato Oscurit&agrave; raggiunge un numero con un segnalino Clessidra, scartarlo e rimuovere dalla mappa la Tessera pi&ugrave; lontana dal segnalino Obiettivo grigio, uccidendo ogni Nemico e ogni Eroe che si trovano su di essa. Queste uccisioni non forniscono alcun PE. Le Tessere vengono distrutte nell'ordine seguente:"+
-                                                        "<ul><li><b>Round 4</b>: {tileLabel.first}</li>"+
-                                                        "<li><b>Round 6</b>: {tileLabel.second}</li>"+
-                                                        "<li><b>Round 9</b>: {tileLabel.third}</li>"+
-                                                        "<li><b>Round 11</b>: {tileLabel.fourth}</li></ul>",
-                                                        EN:"Every time the Darkness track reaches a number with a Time token, discard it and remove the tile furthest from the gray Objective token from the map, killing every Enemy and every Hero on it. These kills do not provide any XP. Tiles are destroyed in the following order: "+
-                                                        "<ul><li><b>Round 4</b>: {tileLabel.first}</li>"+
-                                                        "<li><b>Round 6</b>: {tileLabel.second}</li>"+
-                                                        "<li><b>Round 9</b>: {tileLabel.third}</li>"+
-                                                        "<li><b>Round 11</b>: {tileLabel.fourth}</li></ul>"
+                                                        IT:"Ogni volta che il tracciato Oscurit&agrave; raggiunge un numero con un segnalino Clessidra, scartarlo e rimuovere dalla mappa la Tessera pi&ugrave; lontana dal segnalino Obiettivo grigio, uccidendo ogni Nemico e ogni Eroe che si trovano su di essa. Queste uccisioni non forniscono alcun PE. Le Tessere vengono distrutte nell'ordine seguente:{label.fallExplanation}",
+                                                        EN:"Every time the Darkness track reaches a number with a Time token, discard it and remove the tile furthest from the gray Objective token from the map, killing every Enemy and every Hero on it. These kills do not provide any XP. Tiles are destroyed in the following order:{label.fallExplanation}"
+                                                    }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"Ogni volta che il tracciato Oscurit&agrave; raggiunge un numero con un segnalino Clessidra, scartarlo e rimuovere dalla mappa la Tessera pi&ugrave; lontana dal segnalino Obiettivo grigio, uccidendo ogni Nemico, e ogni Eroe che si trovano su di essa. Queste uccisioni non forniscono alcun PE. Poi ogni Eroe ottiene 7 PE. Le Tessere vengono distrutte nell'ordine seguente:{label.fallExplanation}",
+                                                        EN:"Every time the Darkness track reaches a number with a Time token, discard it and remove the tile furthest from the gray Objective token from the map, killing every Enemy and every Hero on it. These kills do not provide any XP. Then, all Heroes gets 7 XP. Tiles are destroyed in the following order:{label.fallExplanation}"
                                                     }
                                                 ]
                                             }
@@ -477,6 +529,12 @@ ModManager.modules.push(function(){
                                                         IT:"Quando un qualsiasi Eroe si muove per la prima volta nella Zona con il segnalino Obiettivo con il lato colorato a faccia in su, scartare il segnalino e generare un Mostro Errante di Livello 5 sul Portale dei Mostri Erranti. {label.enemy@2}",
                                                         EN:"When any Hero moves into the Zone with the Objective token with the colored side up for the first time, discard the token and spawn a Level 5 Roaming Monster on the Roaming Monster Portal. {label.enemy@2}"
                                                     }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"Quando un qualsiasi Eroe si muove per la prima volta nella Zona con il segnalino Obiettivo con il lato colorato a faccia in su, scartare il segnalino e generare {label.campaignEasyBoss@0} sul Portale dei Mostri Erranti. {label.enemy@2}",
+                                                        EN:"When any Hero moves into the Zone with the Objective token with the colored side up for the first time, discard the token and spawn {label.campaignEasyBoss@0} on the Roaming Monster Portal. {label.enemy@2}"
+                                                    }
                                                 ]
                                             }
                                         ]
@@ -494,11 +552,22 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "fallingDungeon" ],
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "roundLimit", "visitAllRooms" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         },{
+                            forMaps:[2],
                             type:"collectAndBoss",
+                            objective:{
+                                EN:"Bring tokens to a zone to summon a Roaming Monster. Eliminate it to win."
+                            },
                             by:{
                                 IT:"Ispirato all'avventura del Pack di Aggiornamento \"La Caverna dei Cristalli\"",
                                 EN:"Inspired by the Upgrade Pack quest \"Crystal Cave\""
@@ -628,6 +697,12 @@ ModManager.modules.push(function(){
                                                         IT:[ "il Nascondiglio", "il nascondiglio {label.enemy@2}", "del nascondiglio", "Nascondiglio {label.enemy:capital@1}", "essere distrutto", "per distruggerlo", "in cima al nascondiglio", "Il Nascondiglio {label.enemy:capital@2}" ],
                                                         EN:[ "the Hideout", "the hideout {label.enemy@2}", "of the hideout", "Hideout {label.enemy:capital@1}", "be destroyed", "to destroy it", "on top of the hideout", "The Hideout {label.enemy:capital@2}" ],
                                                     }
+                                                ],
+                                                collectOptionalItems:[
+                                                    {
+                                                        IT:[ "a raccogliere tutte le {label.compose@0}", "raccogliendo {label.collectOptionalItems@3} {label.compose@0}", "{tokensCount.objective}" ],
+                                                        EN:[ "to collect all the {label.compose@0}", "collecting {label.collectOptionalItems@3} {label.compose@0}", "{tokensCount.objective}"]
+                                                    }
                                                 ]
                                             }
                                         ]
@@ -685,8 +760,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 summary:[
                                                     {
-                                                        IT:"Collocare i {tokensCount.objective} segnalini Obiettivo con il lato colorato a faccia in su nella Zona con il segnalino Obiettivo sul lato grigio",
-                                                        EN:"Place the {tokensCount.objective} Objective tokens with the colored side up in the Zone of the Objective token on the gray side"
+                                                        IT:"Collocare i {label.collectOptionalItems@2} segnalini Obiettivo con il lato colorato a faccia in su nella Zona con il segnalino Obiettivo sul lato grigio",
+                                                        EN:"Place the {label.collectOptionalItems@2} Objective tokens with the colored side up in the Zone of the Objective token on the gray side"
+                                                    }
+                                                ],
+                                                campaignSummary:[
+                                                    {
+                                                        IT:"Collocare {label.collectOptionalItems@2} segnalini Obiettivo con il lato colorato a faccia in su nella Zona con il segnalino Obiettivo sul lato grigio",
+                                                        EN:"Place {label.collectOptionalItems@2} Objective tokens with the colored side up in the Zone of the Objective token on the gray side"
                                                     }
                                                 ]
                                             }
@@ -703,6 +784,12 @@ ModManager.modules.push(function(){
                                                         IT:"La Zona con il segnalino Obiettivo sul lato grigio rappresenta {label.base@1} e deve {label.base@4}. Quando questa Camera viene rivelata, dopo avere risolto la carta Porta, generare un Mostro Errante di Livello 5 nella Zona del segnalino Obiettivo sul lato grigio.",
                                                         EN:"The Zone with the Objective token on the gray side represents {label.base@1} and must {label.base@4}. When this Chamber is revealed, after resolving the Door card, spawn a Level 5 Roaming Monster in the Zone of the Objective token on the gray side."
                                                     }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"La Zona con il segnalino Obiettivo sul lato grigio rappresenta {label.base@1} e deve {label.base@4}. Quando questa Camera viene rivelata, dopo avere risolto la carta Porta, generare {label.campaignBoss@0} nella Zona del segnalino Obiettivo sul lato grigio.",
+                                                        EN:"The Zone with the Objective token on the gray side represents {label.base@1} and must {label.base@4}. When this Chamber is revealed, after resolving the Door card, spawn {label.campaignBoss@0} in the Zone of the Objective token on the gray side."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -715,8 +802,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"I segnalini Obiettivo con il lato colorato a faccia in su rappresentano le {tokensCount.objective} {label.compose@0} che devono essere unite all'entrata {label.base@2} {label.base@5}. Un qualsiasi Eroe che si trovi nella Zona di un segnalino Obiettivo con il lato colorato a faccia in su pu&ograve; spendere 1 PM per raccoglierlo. I segnalini Obiettivo con il lato colorato a faccia in su possono essere scambiati come fossero oggetti. Un qualsiasi Eroe che trasporta un segnalino Obiettivo con il lato colorato a faccia in su pu&ograve; spendere 1 azione nella Zona della del segnalino Obiettivo sul lato grigio {label.compose@1} {label.base@6}.",
-                                                        EN:"Objective tokens with the colored side up represent the {tokensCount.objective} {label.compose@0} that must be composed near the entry {label.base@2} {label.base@5}. Any Hero who is in the Zone of an Objective token with the colored side up can spend 1 MP to pick it up. Objective tokens with the colored side up can be exchanged as if they were objects. Any Hero carrying an Objective token with the colored side up can spend 1 action in the Zone of the Objective token on the gray side {label.compose@1} {label.base@6}."
+                                                        IT:"I segnalini Obiettivo con il lato colorato a faccia in su rappresentano le {label.collectOptionalItems@2} {label.compose@0} che devono essere unite all'entrata {label.base@2} {label.base@5}. Un qualsiasi Eroe che si trovi nella Zona di un segnalino Obiettivo con il lato colorato a faccia in su pu&ograve; spendere 1 PM per raccoglierlo. I segnalini Obiettivo con il lato colorato a faccia in su possono essere scambiati come fossero oggetti. Un qualsiasi Eroe che trasporta un segnalino Obiettivo con il lato colorato a faccia in su pu&ograve; spendere 1 azione nella Zona della del segnalino Obiettivo sul lato grigio {label.compose@1} {label.base@6}.",
+                                                        EN:"Objective tokens with the colored side up represent the {label.collectOptionalItems@2} {label.compose@0} that must be composed near the entry {label.base@2} {label.base@5}. Any Hero in the Zone of an Objective token with the colored side up can spend 1 MP to pick it up. Objective tokens with the colored side up can be exchanged as if they were objects. Any Hero carrying an Objective token with the colored side up can spend 1 action in the Zone of the Objective token on the gray side {label.compose@1} {label.base@6}."
+                                                    }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"I segnalini Obiettivo con il lato colorato a faccia in su rappresentano {label.collectOptionalItems@2} {label.compose@0} che devono essere unite all'entrata {label.base@2} {label.base@5}. Un qualsiasi Eroe che si trovi nella Zona di un segnalino Obiettivo con il lato colorato a faccia in su pu&ograve; spendere 1 PM per raccoglierlo e ogni Eroe ottiene 7 PE. I segnalini Obiettivo con il lato colorato a faccia in su possono essere scambiati come fossero oggetti. Un qualsiasi Eroe che trasporta un segnalino Obiettivo con il lato colorato a faccia in su pu&ograve; spendere 1 azione nella Zona della del segnalino Obiettivo sul lato grigio {label.compose@1} {label.base@6}.",
+                                                        EN:"Objective tokens with the colored side up represent {label.collectOptionalItems@2} {label.compose@0} that must be composed near the entry {label.base@2} {label.base@5}. Any Hero in the Zone of an Objective token with the colored side up can spend 1 MP to pick it up and all Heroes gets 7 XP. Objective tokens with the colored side up can be exchanged as if they were objects. Any Hero carrying an Objective token with the colored side up can spend 1 action in the Zone of the Objective token on the gray side {label.compose@1} {label.base@6}."
                                                     }
                                                 ]
                                             }
@@ -735,11 +828,25 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ],
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            {
+                                                tags:[
+                                                    [ "visitAllRooms", "collectOptionalItems" ]
+                                                ]
+                                            }
+                                        ]
+                                    }
                                 }
                             ]
                         },{
+                            forActs:[1,2],
+                            forMaps:[1],
                             type:"capture",
+                            objective:{
+                                EN:"Capture Roaming Monsters to win."
+                            },
                             by:{
                                 IT:"Ispirato all'avventura del Pack di Aggiornamento \"Smarriti nella Musica\"",
                                 EN:"Inspired by the Upgrade Pack quest \"Lost in the Music\""
@@ -845,6 +952,12 @@ ModManager.modules.push(function(){
                                                         IT:[ "per scambiare poi quattro chiacchiere con loro.", "Chiacchierate" ],
                                                         EN:[ "to then have a chat with them.", "Chat" ]
                                                     }
+                                                ],
+                                                collectOptionalItems:[
+                                                    {
+                                                        IT:[ "a raccogliere tutte le Reti", "raccogliendo {label.collectOptionalItems@3} Reti", "{tokensCount.objective}" ],
+                                                        EN:[ "to collect all the Nets", "collecting {label.collectOptionalItems@3} Nets", "{tokensCount.objective}"]
+                                                    }
                                                 ]
                                             }
                                         ]
@@ -865,6 +978,11 @@ ModManager.modules.push(function(){
                                             EN:"{label.investigation@0} {label.clue@0} {label.consequence1@0} {label.consequence2@0} {label.recover@0} {label.newPlace@0} {label.mission@0} {label.objective@0}"
                                         }
                                     ],
+                                    challenges:[
+                                        { intensity:1, tag:"default" },
+                                        { intensity:2, tag:"default" },
+                                        { intensity:3, tag:"default" },
+                                    ],
                                     rules:[
                                         [
                                             {
@@ -877,8 +995,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 summary:[
                                                     {
-                                                        IT:"Catturare 3 Mostri Erranti <i>(Vedi Regole Speciali)</i>",
-                                                        EN:"Capture 3 Roaming Monsters <i>(See Special Rules)</i>"
+                                                        IT:"Catturare {label.collectOptionalItems@2} Mostri Erranti <i>(Vedi Regole Speciali)</i>",
+                                                        EN:"Capture {label.collectOptionalItems@2} Roaming Monsters <i>(See Special Rules)</i>"
                                                     }
                                                 ]
                                             }
@@ -910,7 +1028,13 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"Ciascun segnalino Obiettivo sul lato colorato rappresenta una Rete che pu&ograve; essere usata per catturare un Mostro Errante (vedere sotto). Un qualsiasi Eroe che si trovi nella Zona di una Rete pu&ograve; spendere 1 PM per raccoglierla. L'Eroe che lo fa ottiene 5 PE. Le Reti possono essere scambiate come fossero oggetti.",
-                                                        EN:"Each Objective token on the colored side represents a Net that can be used to capture a Roaming Monster (see below). Any Hero who is in the Zone of a Net can spend 1 MP to collect it. The Hero who does so gains 5 XP. Nets can be exchanged as if they were items."
+                                                        EN:"Each Objective token on the colored side represents a Net that can be used to capture a Roaming Monster (see below). Any Hero in the Zone of a Net can spend 1 MP to collect it. The Hero who does so gains 5 XP. Nets can be exchanged as if they were items."
+                                                    }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"Ciascun segnalino Obiettivo sul lato colorato rappresenta una Rete che pu&ograve; essere usata per catturare un Mostro Errante (vedere sotto). Un qualsiasi Eroe che si trovi nella Zona di una Rete pu&ograve; spendere 1 PM per raccoglierla. Tutti gli Eroi ottengono 5 PE. Le Reti possono essere scambiate come fossero oggetti.",
+                                                        EN:"Each Objective token on the colored side represents a Net that can be used to capture a Roaming Monster (see below). Any Hero in the Zone of a Net can spend 1 MP to collect it. All Heroes gets 5 XP. Nets can be exchanged as if they were items."
                                                     }
                                                 ]
                                             }
@@ -945,11 +1069,25 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "capture" ],
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            {
+                                                tags:[
+                                                    [ "visitAllRooms", "collectOptionalItems" ]
+                                                ]
+                                            }
+                                        ]
+                                    }
                                 }
                             ]
                         },{
+                            forActs:[2],
+                            forMaps:[2],
                             type:"collect",
+                            objective:{
+                                EN:"Collect a resource to open doors and find special Roaming Monsters. Eliminate them to win."
+                            },
                             by:{
                                 IT:"Ispirato all'avventura del Pack di Aggiornamento \"Discesa agli Inferi\"",
                                 EN:"Inspired by the Upgrade Pack quest \"Stairway to Hell\""
@@ -1073,10 +1211,10 @@ ModManager.modules.push(function(){
                                                         IT:[ "Gemme", "Trovare le Gemme", "Gemma" ],
                                                         EN:[ "Gems", "Finding the Gems", "Gem" ]
                                                     },{
-                                                        IT:[ "Sfere", "Trovare le Sfere", "Sfere" ],
+                                                        IT:[ "Sfere", "Trovare le Sfere", "Sfera" ],
                                                         EN:[ "Spheres", "Finding the Spheres", "Sphere" ]
                                                     },{
-                                                        IT:[ "Chiavi", "Trovare le Chiavi", "Chiavi" ],
+                                                        IT:[ "Chiavi", "Trovare le Chiavi", "Chiave" ],
                                                         EN:[ "Keys", "Finding the Keys", "Key" ]
                                                     }
                                                 ],
@@ -1174,6 +1312,12 @@ ModManager.modules.push(function(){
                                                         IT:"Dopo che un Eroe ha ucciso un Comandante o un Mostro Errante, tirare 1{symbol.blackDie}. Con un risultato di {symbol.fang} gli Eroi trovano 1 {label.collect@2}. Con un risultato di {symbol.fang}+{symbol.scratch}, gli Eroi trovano 2 {label.collect@0}. Altrimenti, non accade nulla. Una volta raccolte 4 {label.collect@0}, smettere di prelevarle.",
                                                         EN:"After a Hero kills a Leader or a Roaming Monster, roll 1{symbol.blackDie}. On a roll of {symbol.fang} the Heroes find 1 {label.collect@2}. On a roll of {symbol.fang}+{symbol.scratch}, the Heroes find 2 {label.collect@0}. Otherwise, nothing happens. Once you collect 4 {label.collect@0}, stop collecting them."
                                                     }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"Dopo che un Eroe ha ucciso un Comandante o un Mostro Errante, tirare 1{symbol.blackDie}. Con un risultato di {symbol.fang} gli Eroi trovano 1 {label.collect@2}. Con un risultato di {symbol.fang}+{symbol.scratch}, gli Eroi trovano 2 {label.collect@0}. Altrimenti, non accade nulla. Per ogni {label.collect@2} trovata ogni Eroe ottiene 3 PE. Una volta raccolte 4 {label.collect@0}, smettere di prelevarle.",
+                                                        EN:"After a Hero kills a Leader or a Roaming Monster, roll 1{symbol.blackDie}. On a roll of {symbol.fang} the Heroes find 1 {label.collect@2}. On a roll of {symbol.fang}+{symbol.scratch}, the Heroes find 2 {label.collect@0}. Otherwise, nothing happens. For each collected {label.collect@2} all Heroes gets 3 XP. Once you collect 4 {label.collect@0}, stop collecting them."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -1188,6 +1332,12 @@ ModManager.modules.push(function(){
                                                     {
                                                         IT:"Quando 1 {label.doors@0} si apre, aprire entrambe {label.doors@1} e non pescare una carta Porta. Generare semplicemente 2 Mostri Erranti di Livello 5, 1 su ognuno dei 2 segnalini Obiettivo. Questi Mostri Erranti sono pi&ugrave; difficili da sconfiggere. Possiedono il doppio dell'ammontare di Salute indicato.",
                                                         EN:"When 1 {label.doors@0} is opened, open both {label.doors@1} and do not draw a Door card. Simply spawn 2 Level 5 Roaming Monsters, 1 on each of the 2 Objective tokens. These Roaming Monsters are harder to defeat. They have double the indicated amount of Health."
+                                                    }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"Quando 1 {label.doors@0} si apre, aprire entrambe {label.doors@1} e non pescare una carta Porta. Generare semplicemente 2 {label.campaignBoss@1} 2 {label.campaignBoss@2}, 1 su ognuno dei 2 segnalini Obiettivo. Questi Mostri Erranti sono pi&ugrave; difficili da sconfiggere. Possiedono il doppio dell'ammontare di Salute indicato.",
+                                                        EN:"When 1 {label.doors@0} is opened, open both {label.doors@1} and do not draw a Door card. Simply spawn 2 {label.campaignBoss@1} 2 {label.campaignBoss@2}, 1 on each of the 2 Objective tokens. These Roaming Monsters are harder to defeat. They have double the indicated amount of Health."
                                                     }
                                                 ]
                                             }
@@ -1206,11 +1356,23 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "doubleBoss" ],
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         },{
+                            forActs:[1,2],
+                            forMaps:[1],
                             type:"towerDefense",
+                            objective:{
+                                EN:"Defend a zone from enemies."
+                            },
                             by:{
                                 IT:"Ispirato all'avventura del Pack di Aggiornamento \"Il Labirinto dell'Oscurit&agrave;\"",
                                 EN:"Inspired by the Upgrade Pack quest \"Maze of Darkness\""
@@ -1235,14 +1397,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 barrier:[
                                                     {
-                                                        IT:[ "Barriere Magiche", "sono Barriere Magiche", "le Barriere Magiche", "ogni Barriera", "una Barriera", "alla Barriera", "una Barriera Magica", "la Barriera pi&ugrave; vicina", "la Barriera", "verso di essa" ],
-                                                        EN:[ "Magic Barriers", "are Magic Barriers", "Magic Barriers", "each Barrier", "a Barrier", "on the Barrier", "a Magic Barrier", "the closest Barrier", "the Barrier", "toward it" ]
+                                                        IT:[ "Barriere Magiche", "sono Barriere Magiche", "le Barriere Magiche", "ogni Barriera", "una Barriera", "alla Barriera", "una Barriera Magica", "la Barriera pi&ugrave; vicina", "la Barriera", "verso di essa", "distrutta" ],
+                                                        EN:[ "Magic Barriers", "are Magic Barriers", "Magic Barriers", "each Barrier", "a Barrier", "on the Barrier", "a Magic Barrier", "the closest Barrier", "the Barrier", "toward it", "destroyed" ]
                                                     },{
-                                                        IT:[ "Piloni Protettivi", "sono Piloni Protettivi", "i Piloni Protettivi", "ogni Pilone", "un Pilone", "al Pilone", "un Pilone Protettivo", "il Pilone pi&ugrave; vicino", "il Pilone", "verso di esso" ],
-                                                        EN:[ "Protective Pylons", "are Protective Pylons", "Protective Pylons", "each Pylon", "a Pylon", "on the Pylon", "a Protective Pylon", "the closest Pylon", "the Pylon", "toward it" ]
+                                                        IT:[ "Piloni Protettivi", "sono Piloni Protettivi", "i Piloni Protettivi", "ogni Pilone", "un Pilone", "al Pilone", "un Pilone Protettivo", "il Pilone pi&ugrave; vicino", "il Pilone", "verso di esso", "distrutto" ],
+                                                        EN:[ "Protective Pylons", "are Protective Pylons", "Protective Pylons", "each Pylon", "a Pylon", "on the Pylon", "a Protective Pylon", "the closest Pylon", "the Pylon", "toward it", "destroyed" ]
                                                     },{
-                                                        IT:[ "Torrette Difensive", "sono Torrette Difensive", "le Torrette Difensive", "ogni Torretta", "una Torretta", "alla Torretta", "una Torretta Difensiva", "la Torretta pi&ugrave; vicina", "la Torretta", "verso di essa" ],
-                                                        EN:[ "Defensive Turrets", "are Defensive Turrets", "Defensive Turrets", "each Turret", "a Turret", "on the Turret", "a Defensive Turret", "the closest Turret", "the Turret", "toward it" ]
+                                                        IT:[ "Torrette Difensive", "sono Torrette Difensive", "le Torrette Difensive", "ogni Torretta", "una Torretta", "alla Torretta", "una Torretta Difensiva", "la Torretta pi&ugrave; vicina", "la Torretta", "verso di essa", "distrutta" ],
+                                                        EN:[ "Defensive Turrets", "are Defensive Turrets", "Defensive Turrets", "each Turret", "a Turret", "on the Turret", "a Defensive Turret", "the closest Turret", "the Turret", "toward it", "destroyed" ]
                                                     }
                                                 ],
                                                 interference:[
@@ -1303,6 +1465,18 @@ ModManager.modules.push(function(){
                                                     },{
                                                         IT:[ "rimanere vivi e difendere {label.item@1}!" ],
                                                         EN:[ "stay alive and defend {label.item@1}!" ]
+                                                    }
+                                                ],
+                                                spareItem:[
+                                                    {
+                                                        IT:[ "riescono a difendere {label.barrier@2}", "almeno {label.barrier@6} non venga {label.barrier@10} (al momento della vittoria deve esserci almeno {label.barrier@6} non {label.barrier@10})" ],
+                                                        EN:[ "manage to defend the {label.barrier@2}", "at least {label.barrier@6} is not {label.barrier@10} (at the time of victory there must be at least {label.barrier@6} not {label.barrier@10})" ]
+                                                    }
+                                                ],
+                                                collectAllItems:[
+                                                    {
+                                                        IT:[ "a raccogliere tutto il bottino", "raccogliendo tutti i Segnalini Bottino sulla tessera centrale ({tileLabel.first})" ],
+                                                        EN:[ "to collect all the loot", "collecting all the Loot Tokens on the central Tile ({tileLabel.first})"],
                                                     }
                                                 ]
                                             }
@@ -1372,7 +1546,7 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"Collocare il segnalino Tesoro Raro, che solitamente si aggiunge nel 4&deg; round, nel sacchetto dei Tesori. Quando il tracciato Oscurit&agrave; raggiunge il 4&deg; round, evitare semplicemente di aggiungere il segnalino Tesoro Raro (collocare un segnalino Clessidra sopra l'icona Tesoro Raro sul tracciato Oscurit&agrave; come promemoria). Aggiungere i segnalini Tesoro al 6&deg; e 8&deg; round come di norma."+
-                                                        "<p>Generare 1 Orda su ognuno dei 4 Portali. Collocare in ognuna delle Zone delle Camere della Tessera centrale ({tileLabel.first}) un ammontare di segnalini Tesoro estratti dal sacchetto in base al numero dei giocatori:</p>"+
+                                                        "<p>Generare 1 Orda su ognuno dei 4 Portali. Collocare in ognuna delle Zone delle Camere con almeno 1 Porta della Tessera centrale ({tileLabel.first}) un ammontare di segnalini Tesoro estratti dal sacchetto in base al numero dei giocatori:</p>"+
                                                         "<ul>"+
                                                         "<li>1-2 Eroi: 1 segnalino Tesoro per Zona</li>"+
                                                         "<li>3-4 Eroi: 2 segnalini Tesoro per Zona</li>"+
@@ -1380,13 +1554,21 @@ ModManager.modules.push(function(){
                                                         "</ul>"+
                                                         "<p>Collocare i segnalini Corruzione sulla 2&deg;, 4&deg;, 6&deg; e 8&deg; casella del tracciato Oscurit&agrave;. Collocare, inoltre, un segnalino Generazione sulla 3&deg;, 7&deg; e 9&deg; casella del tracciato Oscurit&agrave;.",
                                                         EN:"Place the Rare Treasure token, which is usually added in the 4th round, into the Treasure bag. When the Darkness track reaches the 4th round, simply do not add the Rare Treasure token (place an Hourglass token over the Rare Treasure icon on the Darkness track as a reminder.) Add Treasure tokens on the 6th and 8th rounds as normal."+
-                                                        "<p>Generate 1 Horde on each of the 4 Portals. Place an amount of Treasure tokens drawn from the bag based on the number of players in each of the Chamber Zones of the central tile ({tileLabel.first}):</p> "+
+                                                        "<p>Generate 1 Horde on each of the 4 Portals. Place an amount of Treasure tokens drawn from the bag based on the number of players in each of the Zones of the Chambers with at least 1 Door of the central Tile ({tileLabel.first}):</p> "+
                                                         "<ul>"+
                                                         "<li>1-2 Heroes: 1 Treasure token per Zone</li>"+
                                                         "<li>3-4 Heroes: 2 Treasure tokens per Zone</li>"+
                                                         "<li>5-6 Heroes: 3 Treasure tokens per Zone</li>"+
                                                         "</ul>"+
                                                         "<p>Place the Corruption tokens on the 2nd, 4th, 6th, and 8th spaces of the Darkness track. Additionally, place a Spawn token on the 3rd, 7th, and 9th spaces of the Darkness track.",
+                                                    }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"Generare 1 Orda su ognuno dei 4 Portali. Collocare in ognuna delle Zone delle Camere con almeno 1 Porta della Tessera centrale ({tileLabel.first}) 1 Segnalino Bottino."+
+                                                        "<p>Collocare i segnalini Corruzione sulla 2&deg;, 4&deg;, 6&deg; e 8&deg; casella del tracciato Oscurit&agrave;. Collocare, inoltre, un segnalino Generazione sulla 3&deg;, 7&deg; e 9&deg; casella del tracciato Oscurit&agrave;.",
+                                                        EN:"Generate 1 Horde on each of the 4 Portals. Place 1 Loot Token in each of the Zones of the Chambers with at least 1 Door of the central Tile ({tileLabel.first})."+
+                                                        "<p>Place the Corruption tokens on the 2nd, 4th, 6th, and 8th spaces of the Darkness track. Additionally, place a Spawn token on the 3rd, 7th, and 9th spaces of the Darkness track."
                                                     }
                                                 ]
                                             }
@@ -1445,7 +1627,7 @@ ModManager.modules.push(function(){
                                                         "<li>Round 8: {tileLabel.fifth}</li>"+
                                                         "</ul>"+
                                                         "</li>"+
-                                                        "<li><b>Spawn Token:</b> Spawn 1 Horde on each of the 4 Portals. Place an amount of Treasure tokens taken from the bag in each of the Chamber Zones of the central tile ({tileLabel.first}) based on the number of Heroes:"+
+                                                        "<li><b>Spawn Token:</b> Spawn 1 Horde on each of the 4 Portals. Place an amount of Treasure tokens taken from the bag in each of the Chamber Zones of the central Tile ({tileLabel.first}) based on the number of Heroes:"+
                                                         "<ul>"+
                                                         "<li><b>1-2 Heroes:</b> 1 Treasure token per Zone</li>"+
                                                         "<li><b>3-4 Heroes:</b> 2 Treasure tokens per Zone</li>"+
@@ -1512,7 +1694,16 @@ ModManager.modules.push(function(){
                                             bridges:[ "none" ],
                                             corridors: [ "towerDefense" ],
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            {
+                                                tags:[
+                                                    [ "spareItem", "collectAllItems" ]
+                                                ]
+                                            }
+                                        ]
+                                    }
                                 }
                             ]
                         }

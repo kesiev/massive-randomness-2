@@ -1,8 +1,7 @@
 ModManager.modules.push(function(){
 
     return [
-            {
-
+        {
             id:"quests-hellscape",
             needs:[ "quests-default", "md2-hellscape" ],
             provides:[ "quests", "quests-hellscape", "untranslated-fr" ],
@@ -10,11 +9,15 @@ ModManager.modules.push(function(){
                 EN:"MD2: Hellscape inspired quest models"
             },
             content:[
-            {
+                {
                     type:"quests",
                     data:[
                         {
+                            forMaps:[2],
                             type:"finalBoss",
+                            objective:{
+                                EN:"Separated Heroes must gather to a zone and beat a Roaming Monster to win."
+                            },
                             by:{
                                 IT:"Ispirato all'avventura di Hellscape \"Hellscape\"",
                                 EN:"Inspired by the Hellscape quest \"Hellscape\""
@@ -99,14 +102,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 gate:[
                                                     {
-                                                        IT:[ "Portale Arcano", "Portali Arcani", "i", "un", "il suo portale" ],
-                                                        EN:[ "Arcane Portal", "Arcane Portals", "the", "an", "his portal" ]
+                                                        IT:[ "Portale Arcano", "Portali Arcani", "i", "un", "il suo portale", "unicamente il proprio portale" ],
+                                                        EN:[ "Arcane Portal", "Arcane Portals", "the", "an", "his portal", "their own portal only" ]
                                                     },{
-                                                        IT:[ "Teletrasporto", "Teletrasporti", "i", "un", "il suo teletrasporto" ],
-                                                        EN:[ "Teleporter", "Teleporters", "the", "a", "his teleporter" ]
+                                                        IT:[ "Teletrasporto", "Teletrasporti", "i", "un", "il suo teletrasporto", "unicamente il proprio teletrasporto" ],
+                                                        EN:[ "Teleporter", "Teleporters", "the", "a", "his teleporter", "their own teleporter only" ]
                                                     },{
-                                                        IT:[ "Specchio Incantato", "Specchi Incantati", "gli", "uno", "il suo specchio" ],
-                                                        EN:[ "Enchanted Mirror", "Enchanted Mirrors", "the", "an", "his mirror" ]
+                                                        IT:[ "Specchio Incantato", "Specchi Incantati", "gli", "uno", "il suo specchio", "unicamente il proprio specchio" ],
+                                                        EN:[ "Enchanted Mirror", "Enchanted Mirrors", "the", "an", "his mirror", "their own mirror only" ]
                                                     }
                                                 ],
                                                 cliffhanger:[
@@ -119,6 +122,12 @@ ModManager.modules.push(function(){
                                                     },{
                                                         IT:[ "L'Ultima Prova" ],
                                                         EN:[ "The Last Challenge" ]
+                                                    }
+                                                ],
+                                                noDoor:[
+                                                    {
+                                                        IT:[ "{label.gate@5}" ],
+                                                        EN:[ "{label.gate@5}" ]
                                                     }
                                                 ]
                                             }
@@ -246,6 +255,12 @@ ModManager.modules.push(function(){
                                                         IT:"Quando aprite la porte con il bordo rosso sulla Tessera {tileLabel.center} non risolvete carte Porta, rimuovete il segnalino Corruzione {symbol.corruptionToken} e generate un Mostro Errante di Livello 5 nella sua zona.<p>Pescate carte dal mazzo degli Oggetti dell'Orda di Livello 5 finch&eacute; non rivelate un'arma con lo stesso tipo di attacco del Mostro Errante. Assegnate quell'arma al Mostro Errante, aggiungendo i dadi dell'arma alla riserva di dadi di Attacco del Mostro Errante.</p>",
                                                         EN:"When you open the door with the red outline on the {tileLabel.center} tile, do not resolve Door cards, remove the Corruption token {symbol.corruptionToken}, and generate a Level 5 Roaming Monster in its area.<p>Draw cards from the Level 5 Horde Items deck until you reveal a weapon with the same attack type as the Roaming Monster. Equip that weapon to the Roaming Monster, adding the weapon's dice to the Roaming Monster's Attack dice pool.</p>"
                                                     }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"Quando aprite la porte con il bordo rosso sulla Tessera {tileLabel.center} non risolvete carte Porta, rimuovete il segnalino Corruzione {symbol.corruptionToken} e generate {label.campaignBoss@0} nella sua zona.<p>Pescate carte dal mazzo degli Oggetti dell'Orda corrispondente al suo rango finch&eacute; non rivelate un'arma con lo stesso tipo di attacco del Mostro Errante. Assegnate quell'arma al Mostro Errante, aggiungendo i dadi dell'arma alla riserva di dadi di Attacco del Mostro Errante.</p>",
+                                                        EN:"When you open the door with the red outline on the {tileLabel.center} tile, do not resolve Door cards, remove the Corruption token {symbol.corruptionToken}, and generate {label.campaignBoss@0} in its area.<p>Draw cards from the Horde Items deck matching its rank until you reveal a weapon with the same attack type as the Roaming Monster. Equip that weapon to the Roaming Monster, adding the weapon's dice to the Roaming Monster's Attack dice pool.</p>"
+                                                    }
                                                 ]
                                             }
                                         ]
@@ -262,12 +277,24 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "same" ],
                                             corridors: [ "cross" ]
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms", "noDoor" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         },
                         {
+                            forActs:[2,3],
+                            forMaps:[0,1],
                             type:"xpAndDeliver",
+                            objective:{
+                                EN:"Collect resources from map tokens or a fixed amount depending on the eliminated enemy type. Reach a resource quota and perform an action on a zone to win."
+                            },
                             by:{
                                 IT:"Ispirato all'avventura di Hellscape \"Il Collezionista di Anime\"",
                                 EN:"Inspired by the Hellscape quest \"The Soul Collector\"",
@@ -304,14 +331,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 block:[
                                                     {
-                                                        IT:[ "un'Interdizione Demoniaca", "deve essere disattivata con un'offerta in Anime...", "Ma raccogliere qualcosa di effimero come un'anima pu&ograve; essere un'impresa complicata...", "raccogliere", "le", "anime", "anima", "le", "Prigioni delle Anime", "delle", "di" , "l'Interdizione", "dalla", "distruzione", "distrutto", "distruggerli", "distrutti" ],
-                                                        EN:[ "a Demonic Ward", "must be deactivated with an offering in Souls...", "But collecting something as ephemeral as a soul can be a tricky business...", "collect", "the", "souls", "soul", "the", "Souls Prisons", "of", "of", "the Interdiction", "from the", "destruction", "destroyed", "destroy them", "destroyed" ]
+                                                        IT:[ "un'Interdizione Demoniaca", "deve essere disattivata con un'offerta in Anime...", "Ma raccogliere qualcosa di effimero come un'anima pu&ograve; essere un'impresa complicata...", "raccogliere", "le", "anime", "anima", "le", "Prigioni delle Anime", "delle", "di" , "l'Interdizione", "dalla", "distruzione", "distrutto", "distruggerli", "distrutti", "a distruggere", "distruggendo", "tutte le" ],
+                                                        EN:[ "a Demonic Ward", "must be deactivated with an offering in Souls...", "But collecting something as ephemeral as a soul can be a tricky business...", "collect", "the", "souls", "soul", "the", "Souls Prisons", "of", "of", "the Interdiction", "from the", "destruction", "destroyed", "destroy them", "destroyed", "to destroy", "destroying", "all the" ]
                                                     },{
-                                                        IT:[ "un Grande Guardiano", "deve essere convinto del nostro eroismo...", "Ma dimostrarlo potrebbe essere molto pericoloso...", "raccogliere", "i", "trofei", "trofeo", "le", "Icone del Male", "dei", "di" , "il Custode", "dalla", "distruzione", "distrutte", "distruggerle", "distrutte" ],
-                                                        EN:[ "a Great Guardian", "must be convinced of our heroism...", "But proving it could be very dangerous...", "collect", "the", "trophies", "trophy", "the", "Icons of Evil", "of", "of", "the Keeper", "from the", "destruction", "destroyed", "destroy them", "destroyed" ]
+                                                        IT:[ "un Grande Guardiano", "deve essere convinto del nostro eroismo...", "Ma dimostrarlo potrebbe essere molto pericoloso...", "raccogliere", "i", "trofei", "trofeo", "le", "Icone del Male", "dei", "di" , "il Custode", "dalla", "distruzione", "distrutte", "distruggerle", "distrutte", "a distruggere", "distruggendo", "tutte le" ],
+                                                        EN:[ "a Great Guardian", "must be convinced of our heroism...", "But proving it could be very dangerous...", "collect", "the", "trophies", "trophy", "the", "Icons of Evil", "of", "of", "the Keeper", "from the", "destruction", "destroyed", "destroy them", "destroyed", "to destroy", "destroying", "all the" ]
                                                     },{
-                                                        IT:[ "una Guardia Corrotta", "deve essere convinta a collaborare con un bel sacco di monete...", "Ma trovare dell'oro, da queste parti, pu&ograve; costarci la vita...", "raccogliere", "le", "monete", "moneta", "i", "Forzieri", "delle", "di" , "la Guardia", "dall'", "apertura", "aperto", "aprirli", "aperti" ],
-                                                        EN:[ "a Corrupt Guard", "must be convinced to collaborate with a nice bag of coins...", "But finding gold in these parts can cost us our lives...", "collect" , "the", "coins", "coin", "the", "Chests", "of", "of" , "the Guard", "from the", "opening", "open", "open them" , "opened" ]
+                                                        IT:[ "una Guardia Corrotta", "deve essere convinta a collaborare con un bel sacco di monete...", "Ma trovare dell'oro, da queste parti, pu&ograve; costarci la vita...", "raccogliere", "le", "monete", "moneta", "i", "Forzieri", "delle", "di" , "la Guardia", "dall'", "apertura", "aperto", "aprirli", "aperti", "ad aprire", "aprendo", "tutti i" ],
+                                                        EN:[ "a Corrupt Guard", "must be convinced to collaborate with a nice bag of coins...", "But finding gold in these parts can cost us our lives...", "collect" , "the", "coins", "coin", "the", "Chests", "of", "of" , "the Guard", "from the", "opening", "open", "open them" , "opened", "to open", "opening", "all the" ]
                                                     }
                                                 ],
                                                 toGoOn:[
@@ -324,6 +351,18 @@ ModManager.modules.push(function(){
                                                     },{
                                                         IT:[ "Se vogliamo proseguire il nostro viaggio" ],
                                                         EN:[ "If we want to continue our journey" ]
+                                                    }
+                                                ],
+                                                collectMoreItems:[
+                                                    {
+                                                        IT:[ 15, "{label.block:capital@5}", "{label.block:capital@5} per ogni Eroe" ],
+                                                        EN:[ 15, "{label.block:capital@5}", "{label.block:capital@5} for each Hero" ]
+                                                    }
+                                                ],
+                                                collectAllItems:[
+                                                    {
+                                                        IT:[ "{label.block@17} {label.block@19} {label.block@8}", "{label.block@18} {label.block@19} {label.block@8}", "{label.block@18} {label.block@19} {label.block@8}" ],
+                                                        EN:[ "{label.block@17} {label.block@19} {label.block@8}", "{label.block@18} {label.block@19} {label.block@8}", "{label.block@18} {label.block@19} {label.block@8}"],
                                                     }
                                                 ]
                                             }
@@ -412,7 +451,13 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"I segnalini Obiettivo colorati a faccia in su rappresentano {label.block@7} {label.block@8}. Qualsiasi Eroe che si trovi nella stessa Zona di un segnalino Obiettivo pu&ograve; spendere 1 azione per {label.block@15}. Rimuovete il segnalino dal Dungeon. L'Eroe che l'ha {label.block@14} ottiene 5 PE e gli Eroi raccolgono 5 {label.block:capital@5}.",
-                                                        EN:"The colored face-up Objective tokens represent {label.block@7} {label.block@8}. Any Hero who is in the same Zone as an Objective token can spend 1 action to {label.block@15}. Remove the token from the Dungeon. The Hero who has {label.block@14} it gets 5 XP and the Heroes collect 5 {label.block:capital@5}."
+                                                        EN:"The colored face-up Objective tokens represent {label.block@7} {label.block@8}. Any Hero in the same Zone as an Objective token can spend 1 action to {label.block@15}. Remove the token from the Dungeon. The Hero who has {label.block@14} it gets 5 XP and the Heroes collect 5 {label.block:capital@5}."
+                                                    }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"I segnalini Obiettivo colorati a faccia in su rappresentano {label.block@7} {label.block@8}. Qualsiasi Eroe che si trovi nella stessa Zona di un segnalino Obiettivo pu&ograve; spendere 1 azione per {label.block@15}. Rimuovete il segnalino dal Dungeon. Gli Eroi raccolgono 5 {label.block:capital@5} e ogni Eroe ottiene 5 PE.",
+                                                        EN:"The colored face-up Objective tokens represent {label.block@7} {label.block@8}. Any Hero in the same Zone as an Objective token can spend 1 action to {label.block@15}. Remove the token from the Dungeon. The Heroes collect 5 {label.block:capital@5} and all Heroes gets 5 XP."
                                                     }
                                                 ]
                                             }
@@ -427,7 +472,7 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"Non appena gli Eroi possiedono un totale di 10 {label.block:capital@5} per Eroe, possono uscire dal Dungeon attraverso {label.gate@4} {label.gate:capital@5}: un Eroe che si trova nella {label.gate@6} pu&ograve; spendere 1 PM per uscire dal Dungeon. Non appena tutti gli Eroi sono usciti dal Dungeon, la Missione termina con una vittoria.",
-                                                        EN:"As soon as the Heroes have a total of 10 {label.block:capital@5} per Hero, they can exit the Dungeon through {label.gate@4} {label.gate:capital@5}: a Hero who is in the {label.gate@6} can spend 1 MP to exit the Dungeon. As soon as all Heroes have exited the Dungeon, the Mission ends with a victory."
+                                                        EN:"As soon as the Heroes have a total of 10 {label.block:capital@5} per Hero, they can exit the Dungeon through {label.gate@4} {label.gate:capital@5}: a Hero in the {label.gate@6} can spend 1 MP to exit the Dungeon. As soon as all Heroes have exited the Dungeon, the Mission ends with a victory."
                                                     }
                                                 ]
                                             }
@@ -446,12 +491,24 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ]
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms", "collectMoreItems", "collectAllItems" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         },
                         {
+                            forActs:[0],
+                            forMaps:[0,1],
                             type:"collect",
+                            objective:{
+                                EN:"Collect all tokens and perform an action on a zone to win."
+                            },
                             by:{
                                 IT:"Ispirato all'avventura di Hellscape \"La Via per Hellscape\"",
                                 EN:"Inspired by the Hellscape quest \"Highway to Hellscape\""
@@ -560,14 +617,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 unblock:[
                                                     {
-                                                        IT:[ "interruttore", "interruttori", "gli interruttori sono rappresentati", "attivare i" ],
-                                                        EN:[ "switch", "switches", "the switches are represented", "activate the" ],
+                                                        IT:[ "interruttore", "interruttori", "gli interruttori sono rappresentati", "attivare", "attivare almeno", "ad attivare tutti gli", "attivando" ],
+                                                        EN:[ "switch", "switches", "the switches are represented", "activate", "activate at least", "to activate all the", "activating" ],
                                                     },{
-                                                        IT:[ "candela", "candele", "le candele sono rappresentate", "accendere le" ],
-                                                        EN:[ "candle", "candles", "the candles are represented", "light the" ],
+                                                        IT:[ "candela", "candele", "le candele sono rappresentate", "accendere", "accendere almeno", "ad accendere tutte le", "accendendo" ],
+                                                        EN:[ "candle", "candles", "the candles are represented", "light", "light at least", "to light all the", "lighting" ],
                                                     },{
-                                                        IT:[ "leva", "leve", "le leve sono rappresentate", "tirare le" ],
-                                                        EN:[ "lever", "levers", "the levers are represented", "pull the" ],
+                                                        IT:[ "leva", "leve", "le leve sono rappresentate", "tirare", "tirare almeno", "a tirare tutte le", "tirando" ],
+                                                        EN:[ "lever", "levers", "the levers are represented", "pull", "pull at least", "to pull all the", "pulling" ]
                                                     }
                                                 ],
                                                 escapeTo:[
@@ -604,6 +661,18 @@ ModManager.modules.push(function(){
                                                     },{
                                                         IT:[ "Ci &egrave; stato detto che qui intorno" ],
                                                         EN:[ "We've been told that around here" ]
+                                                    }
+                                                ],
+                                                actionSameTime:[
+                                                    {
+                                                        IT:[ "{label.unblock:capital@4} 2 {label.unblock@1}" ],
+                                                        EN:[ "{label.unblock:capital@4} 2 {label.unblock@1}" ]
+                                                    }
+                                                ],
+                                                collectOptionalItems:[
+                                                    {
+                                                        IT:[ "{label.unblock@5} {label.unblock@1}", "{label.unblock@6} {label.collectOptionalItems@3} {label.unblock@1}", "{tokensCount.objective}" ],
+                                                        EN:[ "{label.unblock@5} {label.unblock@1}", "{label.unblock@6} {label.collectOptionalItems@3} {label.unblock@1}", "{tokensCount.objective}"]
                                                     }
                                                 ]
                                             }
@@ -648,8 +717,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 summary:[
                                                     {
-                                                        IT:"{label.unblock:capital@3} {tokensCount.objective} {label.unblock@1}",
-                                                        EN:"{label.unblock:capital@3} {tokensCount.objective} {label.unblock@1}"
+                                                        IT:"{label.unblock:capital@3} {label.collectOptionalItems@2} {label.unblock@1}",
+                                                        EN:"{label.unblock:capital@3} {label.collectOptionalItems@2} {label.unblock@1}"
                                                     }
                                                 ]
                                             }
@@ -678,8 +747,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"{label.block:capital} (la porta con il bordo rosso) consente ai Nemici di passare: i Nemici possono muoversi liberamente attraverso questa porta. Al fine di aprire {label.block}, gli Eroi devono {label.unblock@3} {tokensCount.objective} {label.unblock@1}. {label.block:capital} blocca la Linea di Vista.",
-                                                        EN:"{label.block:capital} (the door with the red outline) allows the Enemies to pass through: Enemies can move freely through this door. To open {label.block}, Heroes must {label.unblock@3} {tokensCount.objective} {label.unblock@1}. {label.block:capital} blocks the Line of Sight.",
+                                                        IT:"{label.block:capital} (la porta con il bordo rosso) consente ai Nemici di passare: i Nemici possono muoversi liberamente attraverso questa porta. Al fine di aprire {label.block}, gli Eroi devono {label.unblock@3} {label.collectOptionalItems@2} {label.unblock@1}. {label.block:capital} blocca la Linea di Vista.",
+                                                        EN:"{label.block:capital} (the door with the red outline) allows the Enemies to pass through: Enemies can move freely through this door. To open {label.block}, Heroes must {label.unblock@3} {label.collectOptionalItems@2} {label.unblock@1}. {label.block:capital} blocks the Line of Sight.",
                                                     }
                                                 ]
                                             }
@@ -695,7 +764,13 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"{label.unblock:capital@2} dai segnalini Obiettivo con il lato colorato a faccia in su. Un qualsiasi Eroe che si trovi in una Zona con uno di questi segnalini Obiettivo pu&ograve; spendere 1 PM per interagire con il segnalino Obiettivo e rimuoverlo dal Dungeon. L'Eroe che lo fa ottiene 3 PE.",
-                                                        EN:"{label.unblock:capital@2} by Objective tokens with the colored side up. Any Hero who is in a Zone with one of these Objective tokens can spend 1 MP to interact with the Objective token and remove it from the Dungeon. The Hero who does so gains 3 XP."
+                                                        EN:"{label.unblock:capital@2} by Objective tokens with the colored side up. Any Hero in a Zone with one of these Objective tokens can spend 1 MP to interact with the Objective token and remove it from the Dungeon. The Hero who does so gains 3 XP."
+                                                    }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"{label.unblock:capital@2} dai segnalini Obiettivo con il lato colorato a faccia in su. Un qualsiasi Eroe che si trovi in una Zona con uno di questi segnalini Obiettivo pu&ograve; spendere 1 PM per interagire con il segnalino Obiettivo e rimuoverlo dal Dungeon.",
+                                                        EN:"{label.unblock:capital@2} by Objective tokens with the colored side up. Any Hero in a Zone with one of these Objective tokens can spend 1 MP to interact with the Objective token and remove it from the Dungeon."
                                                     }
                                                 ]
                                             }
@@ -709,8 +784,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Non appena i {tokensCount.objective} segnalini Obiettivo con il lato colorato a faccia in su vengono rimossi, {label.block} si apre. Girare il segnalino Porta evidenziato con il bordo rosso sul lato aperto e rivelare la Camera come di consueto.",
-                                                        EN:"As soon as the {tokensCount.objective} Objective tokens with the colored side up are removed, {label.block} opens. Flip the Door token highlighted with the red outline to its open side and reveal the Chamber as normal."
+                                                        IT:"Non appena {label.collectOptionalItems@2} segnalini Obiettivo con il lato colorato a faccia in su vengono rimossi, {label.block} si apre. Girare il segnalino Porta evidenziato con il bordo rosso sul lato aperto e rivelare la Camera come di consueto.",
+                                                        EN:"As soon as {label.collectOptionalItems@2} Objective tokens with the colored side up are removed, {label.block} opens. Flip the Door token highlighted with the red outline to its open side and reveal the Chamber as normal."
                                                     }
                                                 ]
                                             }
@@ -744,12 +819,24 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ]
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms", "collectOptionalItems", "actionSameTime" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         },
                         {
+                            forActs:[1,2],
+                            forMaps:[2],
                             type:"tyrant",
+                            objective:{
+                                EN:"Use an item to make a Roaming Monster vulnerable and eliminate it to win."
+                            },
                             by:{
                                 IT:"Ispirato all'avventura di Hellscape \"La Bestia dell'Orrore\"",
                                 EN:"Inspired by the Hellscape quest \"The Horror Beast\""
@@ -867,6 +954,12 @@ ModManager.modules.push(function(){
                                                         IT:[ "I ranger, per&ograve;, hanno scoperto uno strano comportamento:" ],
                                                         EN:[ "The rangers, however, discovered strange behavior:" ]
                                                     }
+                                                ],
+                                                collectLessItems:[
+                                                    {
+                                                        IT:[ "a usare meno {label.item@1}", "collocando solo {label.collectLessItems@2} {label.item@1}" ],
+                                                        EN:[ "to place less {label.item@1}", "placing {label.collectLessItems@2} {label.item@1} only" ],
+                                                    }
                                                 ]
                                             }
                                         ]
@@ -923,6 +1016,12 @@ ModManager.modules.push(function(){
                                                         IT:"Durante la preparazione, generate un Mostro Errante casuale di Livello 5 nella Zona indicata: si tratta {label.enemy@4} {label.enemy@3}. {label.enemy:capital@2} {label.enemy@3} viene attivata normalmente durante ogni Fase dei Nemici, ma &egrave; invulnerabile: non pu&ograve; essere bersagliata da nessun attacco, abilit&agrave; o capacit&agrave; e non pu&ograve; subire Ferite.",
                                                         EN:"During setup, spawn a random Level 5 Roaming Monster in the indicated Area: it is {label.enemy@4} {label.enemy@3}. {label.enemy:capital@2} {label.enemy@3} is activated normally during each Enemy Phase, but is invulnerable: it cannot be targeted by any attack, ability, or capability and cannot suffer Wounds."
                                                     }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"Durante la preparazione, generate {label.campaignBoss@0} nella Zona indicata: si tratta {label.enemy@4} {label.enemy@3}. {label.enemy:capital@2} {label.enemy@3} viene attivata normalmente durante ogni Fase dei Nemici, ma &egrave; invulnerabile: non pu&ograve; essere bersagliata da nessun attacco, abilit&agrave; o capacit&agrave; e non pu&ograve; subire Ferite.",
+                                                        EN:"During setup, spawn {label.campaignBoss@0} in the indicated Area: it is {label.enemy@4} {label.enemy@3}. {label.enemy:capital@2} {label.enemy@3} is activated normally during each Enemy Phase, but is invulnerable: it cannot be targeted by any attack, ability, or capability and cannot suffer Wounds."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -936,7 +1035,7 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"{label.item:capital@2} {label.item:capital@1} sono rappresentate dai segnalini Obiettivo. Qualsiasi Eroe che si trovi in una Zona con un segnalino Obiettivo pu&ograve; spendere 1 PM per interagire con quel segnalino e raccoglierlo (un Eroe pu&ograve; trasportarne pi&ugrave; di 1). Un Eroe che trasporta {label.item@3} {label.item@0} mentre si trova nella Zona {label.enemy@4} {label.enemy@3} pu&ograve; spendere 1 PM per collocare 1 {label.item@0} {label.enemy@5} {label.enemy@3}. {label.enemy:capital@2} {label.enemy@3} &egrave; vulnerabile fintanto che su di essa c'&egrave; {label.item@3} {label.item@0}: gli Eroi possono attaccarla, usare le abilit&agrave; e le capacit&agrave; e infliggere Ferite {label.enemy@6} {label.enemy@3}. All'inizio di ogni round, rimuovete tutte {label.item@2} {label.item:capital@1} {label.enemy@5} {label.enemy@3}, che diventa di nuovo invulnerabile.",
-                                                        EN:"{label.item:capital@2} {label.item:capital@1} are represented by Objective tokens. Any Hero who is in a Zone with an Objective token can spend 1 MP to interact with that token and collect it (a Hero can carry more than 1). A Hero carrying {label.item@3} {label.item@0} while in {label.enemy@4} {label.enemy@3} Zone can spend 1 MP to place 1 {label.item@0} {label.enemy@5} {label.enemy@3}. {label.enemy:capital@2} {label.enemy@3} is vulnerable as long as there is {label.item@3} {label.item@0}: Heroes can attack it, use skills and abilities, and inflict Wounds {label.enemy@6} {label.enemy@3}. At the start of each round, remove all {label.item@2} {label.item:capital@1} {label.enemy@5} {label.enemy@3}, which becomes invulnerable again."
+                                                        EN:"{label.item:capital@2} {label.item:capital@1} are represented by Objective tokens. Any Hero in a Zone with an Objective token can spend 1 MP to interact with that token and collect it (a Hero can carry more than 1). A Hero carrying {label.item@3} {label.item@0} while in {label.enemy@4} {label.enemy@3} Zone can spend 1 MP to place 1 {label.item@0} {label.enemy@5} {label.enemy@3}. {label.enemy:capital@2} {label.enemy@3} is vulnerable as long as there is {label.item@3} {label.item@0}: Heroes can attack it, use skills and abilities, and inflict Wounds {label.enemy@6} {label.enemy@3}. At the start of each round, remove all {label.item@2} {label.item:capital@1} {label.enemy@5} {label.enemy@3}, which becomes invulnerable again."
                                                     }
                                                 ]
                                             }
@@ -971,12 +1070,23 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "tyrant" ]
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms", "collectLessItems" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         },
                         {
+                            forMaps:[1],
                             type:"hunt",
+                            objective:{
+                                EN:"Eliminate all special Roaming Monsters to win."
+                            },
                             by:{
                                 IT:"Ispirato all'avventura di Hellscape \"Il Labirinto Infernale\"",
                                 EN:"Inspired by the Hellscape quest \"Hellish Maze\""
@@ -1082,6 +1192,12 @@ ModManager.modules.push(function(){
                                                         IT:[ "I Piani", "le scale", "Il Palazzo", "Scale" ],
                                                         EN:[ "The Floors", "the stairs", "The Palace", "Stairs" ]
                                                     }
+                                                ],
+                                                eliminateEnemy:[
+                                                    {
+                                                        IT:[ "2 o pi&ugrave; {label.monsters@1}" ],
+                                                        EN:[ "2 or more {label.monsters@1}" ]
+                                                    }
                                                 ]
                                             }
                                         ]
@@ -1183,12 +1299,24 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "magicMaze" ]
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms", "eliminateEnemy" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         },
                         {
-                            type:"relay",                            
+                            forActs:[0,1],
+                            forMaps:[0,1],
+                            type:"relay",
+                            objective:{
+                                EN:"Use a cursed weapon to break some elements to win."
+                            },
                             by:{
                                 IT:"Ispirato all'avventura di Hellscape \"La Spada Maledetta\"",
                                 EN:"Inspired by the Hellscape quest \"The Cursed Sword\""
@@ -1201,8 +1329,8 @@ ModManager.modules.push(function(){
                                             {
                                                 weapon:[
                                                     {
-                                                        IT:[ "la Spada Maledetta", "alla Spada Maledetta", "nel mazzo dei Tesori Comuni", "lo Spadone Davvero Enorme", "la Spada", "Arma Maledetta" ],
-                                                        EN:[ "the Cursed Sword", "the Cursed Sword", "in the Common Treasure deck", "the Big Freakin' Greatsword", "the Sword", "Cursed Weapon" ]
+                                                        IT:[ "la Spada Maledetta", "alla Spada Maledetta", "nel mazzo dei Tesori Comuni", "lo Spadone Davvero Enorme", "la Spada", "Arma Maledetta", "la tiene per s&eacute;" ],
+                                                        EN:[ "the Cursed Sword", "the Cursed Sword", "in the Common Treasure deck", "the Big Freakin' Greatsword", "the Sword", "Cursed Weapon", "keeps it to himself" ]
                                                     }
                                                 ],
                                                 toBreak:[
@@ -1249,8 +1377,14 @@ ModManager.modules.push(function(){
                                                         IT:[ "chiunque ne faccia uso per troppo tempo perder&agrave; la sua anima!", "l'arma reclamer&agrave; l'anima dell'Eroe" ],
                                                         EN:[ "anyone who uses it for too long will lose their soul!", "the weapon will claim the Hero's soul" ]
                                                     },{
-                                                        IT:[ "di chi ne abbia fatto uso per per troppo tempo si dice rimanga soltanto un mucchio di cenere!", "il corpo dell'Eroe verr&agrave; ridotto in polvere" ],
+                                                        IT:[ "di chi ne abbia fatto uso per troppo tempo si dice rimanga soltanto un mucchio di cenere!", "il corpo dell'Eroe verr&agrave; ridotto in polvere" ],
                                                         EN:[ "of those who have held it for too long, it is said that only a pile of ashes remains!", "the Hero's body will be reduced to dust" ]
+                                                    }
+                                                ],
+                                                keepItem:[
+                                                    {
+                                                        IT:[ "{label.weapon@0} {label.weapon@6}", "{label.weapon@0}" ],
+                                                        EN:[ "{label.weapon@0} {label.weapon@6}", "{label.weapon@0}" ]
                                                     }
                                                 ]
                                             }
@@ -1326,6 +1460,12 @@ ModManager.modules.push(function(){
                                                         IT:"Durante la preparazione, cercate {label.weapon@2} {label.weapon@3} e scegliete un Eroe che prenda questo oggetto come sua arma di partenza al posto di un'arma regolare: questa &egrave; {label.weapon@0}.",
                                                         EN:"During setup, look for {label.weapon@2} {label.weapon@3} and choose a Hero to take this item as his starting weapon instead of a regular weapon: this is {label.weapon@0}."
                                                     }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"Durante la preparazione, pescate la carta Campagna 20 di Heavenfall e scegliete un Eroe che prenda questo oggetto come sua arma: questa &egrave; {label.weapon@0}.",
+                                                        EN:"During setup, draw the Heavenfall Campaign card 20 and choose a Hero to take this item as his weapon: this is {label.weapon@0}."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -1368,6 +1508,12 @@ ModManager.modules.push(function(){
                                                         IT:"{label.toBreak:capital@0} {label.toBreak@1} sono rappresentati dai segnalini Obiettivo. Un Eroe che abbia equipaggiato {label.weapon@0} e si trovi nella stessa Zona di un segnalino Obiettivo pu&ograve; spendere 1 azione per distruggere {label.toBreak@2} {label.toBreak@3}, {label.toBreak@5} dal Dungeon e ottenendo 5 PE. Una volta che tutti i segnalini sono stati rimossi, la Missione termina con una vittoria.",
                                                         EN:"{label.toBreak:capital@0} {label.toBreak@1} are represented by Objective tokens. A Hero who has {label.weapon@0} equipped and is in the same Zone as an Objective token can spend 1 action to destroy {label.toBreak@2} {label.toBreak@3}, removing it from the Dungeon and gaining 5 XP. Once all tokens have been removed, the Mission ends in victory."
                                                     }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"{label.toBreak:capital@0} {label.toBreak@1} sono rappresentati dai segnalini Obiettivo. Un Eroe che abbia equipaggiato {label.weapon@0} e si trovi nella stessa Zona di un segnalino Obiettivo pu&ograve; spendere 1 azione per distruggere {label.toBreak@2} {label.toBreak@3}, {label.toBreak@5} dal Dungeon. Una volta che tutti i segnalini sono stati rimossi, la Missione termina con una vittoria.",
+                                                        EN:"{label.toBreak:capital@0} {label.toBreak@1} are represented by Objective tokens. A Hero who has {label.weapon@0} equipped and is in the same Zone as an Objective token can spend 1 action to destroy {label.toBreak@2} {label.toBreak@3}, removing it from the Dungeon. Once all tokens have been removed, the Mission ends in victory."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -1394,7 +1540,8 @@ ModManager.modules.push(function(){
                                                         "<li>4 Tokens: +2{symbol.yellowDie} +2{symbol.orangeDie}</li>"+
                                                         "</ul>"
                                                     }
-                                                ]
+                                                ],
+                                                campaignExplanation:[]
                                             }
                                         ],[
                                             {
@@ -1410,7 +1557,8 @@ ModManager.modules.push(function(){
                                                         IT:"L'Eroe non subisce Ferite cumulative (subisce invece 1 Ferita per round). L'Eroe non viene sconfitto se impugna {label.weapon@0} per 4 round consecutivi e pu&ograve; scegliere di usare qualsiasi arma di partenza come \"{label.weapon@5}\".",
                                                         EN:"The Hero suffers no cumulative Wounds (instead he suffers 1 Wound per round). The Hero is not defeated if he holds {label.weapon@0} for 4 consecutive rounds and can choose to use any starting weapon as a \"{label.weapon@5}\"."
                                                     }
-                                                ]
+                                                ],
+                                                campaignExplanation:[]
                                             }
                                         ]
                                     ],
@@ -1427,12 +1575,29 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ]
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        rewards:[
+                                            {
+                                                IT:"Rimettere la carta Campagna 20 di Heavenfall con le altre carte Missione e pescare 1 carta dal mazzo dei Tesori Epici.",
+                                                EN:"Put the Heavenfall Campaign card 20 back with the other Mission cards and draw 1 card from the Epic Treasures deck."
+                                            }
+                                        ],
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms", "noLifebringer", "keepItem" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         },
                         {
+                            forMaps:[1],
                             type:"escort",
+                            objective:{
+                                EN:"Escort an NPC to a zone to win."
+                            },
                             by:{
                                 IT:"Ispirato all'avventura di Hellscape \"Il Passaggio\"",
                                 EN:"Inspired by the Hellscape quest \"The Passage\""
@@ -1523,6 +1688,12 @@ ModManager.modules.push(function(){
                                                     },{
                                                         IT:[ "per condurci alla nostra destinazione finale" ],
                                                         EN:[ "to lead us to our final destination" ]
+                                                    }
+                                                ],
+                                                noDamage:[
+                                                    {
+                                                        IT:[ "{label.escorting@2}", "{label.escorting:capital@2}" ],
+                                                        EN:[ "{label.escorting@2}", "{label.escorting:capital@2}" ]
                                                     }
                                                 ]
                                             }
@@ -1682,12 +1853,23 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ]
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms", "noDamage" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         },
                         {
+                            forMaps:[0],
                             type:"collect",
+                            objective:{
+                                EN:"Collect items and bring them to a zone to win."
+                            },
                             by:{
                                 IT:"Ispirato all'avventura di Hellscape \"L'Artefatto Demoniaco\"",
                                 EN:"Inspired by the Hellscape quest \"The Demon Artifact\""
@@ -1817,6 +1999,12 @@ ModManager.modules.push(function(){
                                                         IT: [ "{label.object@4} {label.object@0} nella Pressa Dorata", "Zona della Pressa Dorata", "Ricomporli nella Pressa Dorata" ],
                                                         EN: [ "{label.object@4} {label.object@0} in the Golden Press", "Golden Press Zone", "Reassemble them in the Golden Press" ]
                                                     }
+                                                ],
+                                                collectOptionalItems:[
+                                                    {
+                                                        IT:[ "a raccogliere {label.part@1} {label.part@2} {label.part@3}", "raccogliendo {label.collectOptionalItems@3} {label.part@3}", "{tokensCount.objective}" ],
+                                                        EN:[ "to collect all the {label.part@5}", "collecting {label.collectOptionalItems@3} {label.part@5}", "{tokensCount.objective}"]
+                                                    }
                                                 ]
                                             }
                                         ]
@@ -1861,14 +2049,26 @@ ModManager.modules.push(function(){
                                                 ],
                                                 summary:[
                                                     {
-                                                        IT:"Raccogliere {label.part@1} e {tokensCount.objective} {label.part@2} {label.part:capital@3} nel Dungeon",
-                                                        EN:"Collect all the {tokensCount.objective} {label.part:capital@5} in the Dungeon",
+                                                        IT:"Raccogliere {label.part@1} e {label.collectOptionalItems@2} {label.part@2} {label.part:capital@3} nel Dungeon",
+                                                        EN:"Collect all the {label.collectOptionalItems@2} {label.part:capital@5} in the Dungeon",
+                                                    }
+                                                ],
+                                                campaignSummary:[
+                                                    {
+                                                        IT:"Raccogliere {label.collectOptionalItems@2} {label.part:capital@3} nel Dungeon",
+                                                        EN:"Collect {label.collectOptionalItems@2} {label.part:capital@5} in the Dungeon",
                                                     }
                                                 ],
                                                 explanation:[
                                                     {
                                                         IT:"{label.part:capital@2} {label.part:capital@3} sono {label.part@4} dai segnalini Obiettivo con il lato colorato a faccia in su. Qualsiasi Eroe in una {label.part@6} pu&ograve; interagire con un segnalino Obiettivo con il lato colorato a faccia in su per raccoglierlo. L'Eroe che lo fa ottiene 5 PE.",
                                                         EN:"The Objective tokens represent the {label.part:capital@5}. Any Hero standing in the {label.part@6} may interact with it to pick it up and immediately gain 5 XP."
+                                                    }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"{label.part:capital@2} {label.part:capital@3} sono {label.part@4} dai segnalini Obiettivo con il lato colorato a faccia in su. Qualsiasi Eroe in una {label.part@6} pu&ograve; interagire con un segnalino Obiettivo con il lato colorato a faccia in su per raccoglierlo.",
+                                                        EN:"The Objective tokens represent the {label.part:capital@5}. Any Hero standing in the {label.part@6} may interact with it to pick it up."
                                                     }
                                                 ]
                                             }
@@ -1883,14 +2083,26 @@ ModManager.modules.push(function(){
                                                 ],
                                                 summary:[
                                                     {
-                                                        IT:"Usare {label.part@1} e {tokensCount.objective} {label.part@2} {label.part:capital@3} per {label.destination@0}",
-                                                        EN:"Use the {tokensCount.objective} {label.part:capital@5} to {label.destination@0}",
+                                                        IT:"Usare {label.part@1} e {label.collectOptionalItems@2} {label.part@2} {label.part:capital@3} per {label.destination@0}",
+                                                        EN:"Use the {label.collectOptionalItems@2} {label.part:capital@5} to {label.destination@0}",
+                                                    }
+                                                ],
+                                                campaignSummary:[
+                                                    {
+                                                        IT:"Usare {label.part@2} {label.collectOptionalItems@2} {label.part:capital@3} per {label.destination@0}",
+                                                        EN:"Use the {label.collectOptionalItems@2} {label.part:capital@5} to {label.destination@0}",
                                                     }
                                                 ],
                                                 explanation:[
                                                     {
                                                         IT:"Quando {label.part@1} {label.part@2} {label.part:capital@3} sono {label.part@5}, se tutti gli Eroi che possiedono almeno 1 {label.part:capital@0} si trovano nella {label.destination@1} (rappresentata dal segnalino Obiettivo grigio), un qualsiasi Eroe nella stessa Zona pu&ograve; spendere 1 azione per {label.object@4} {label.object@1}.",
                                                         EN:"When all of the {label.part:capital@5} have been collected, if all the Heroes with at least 1 {label.part:capital@0} are in the {label.destination@1} (the gray side-up Objective token), any Hero in that Zone may spend 1 action to {label.object@4} {label.object@0}."
+                                                    }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"Quando {label.part@2} {label.collectOptionalItems@2} {label.part:capital@3} sono {label.part@5}, se tutti gli Eroi che possiedono almeno 1 {label.part:capital@0} si trovano nella {label.destination@1} (rappresentata dal segnalino Obiettivo grigio), un qualsiasi Eroe nella stessa Zona pu&ograve; spendere 1 azione per {label.object@4} {label.object@1}.",
+                                                        EN:"When the {label.collectOptionalItems@2} {label.part:capital@5} have been collected, if all the Heroes with at least 1 {label.part:capital@0} are in the {label.destination@1} (the gray side-up Objective token), any Hero in that Zone may spend 1 action to {label.object@4} {label.object@0}."
                                                     }
                                                 ]
                                             }
@@ -1909,7 +2121,318 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ],
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms", "collectOptionalItems" ]
+                                            ] }
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            forActs:[2,3],
+                            forMaps:[0,1],
+                            type:"collecttimed",
+                            objective:{
+                                EN:"Collect items within the time limit and reach a zone to win."
+                            },
+                            by:{
+                                IT:"Ispirato all'avventura di Hellscape \"Le Chiavi delle Anime\"",
+                                EN:"Inspired by the Hellscape quest \"The Soul Keys\""
+                            },
+                            suggestedTilesCount:3,
+                            versions:[
+                                {
+                                    labels:[
+                                        [
+                                            {
+                                                intro:[
+                                                    {
+                                                        IT:[ "A quanto pare, &egrave;" ],
+                                                        EN:[ "Apparently, it is" ]
+                                                    },{
+                                                        IT:[ "Non ci sono dubbi: &egrave;" ],
+                                                        EN:[ "There is no doubt about it: it is" ],
+                                                    },{
+                                                        IT:[ "Finalmente lo abbiamo scoperto. &Egrave;" ],
+                                                        EN:[ "We finally found out. It is" ]
+                                                    }
+                                                ],
+                                                culprit:[
+                                                    {
+                                                        IT:[ "la Morte", "la", "l'", "incarnata" ],
+                                                        EN:[ "the Death", "the", "the", "embodied" ]
+                                                    },{
+                                                        IT:[ "il Male", "il", "l'", "incarnato" ],
+                                                        EN:[ "the Evil", "the", "the", "embodied" ]
+                                                    },{
+                                                        IT:[ "la Pestilenza", "la", "l'", "incarnata" ],
+                                                        EN:[ "the Pestilence", "the", "the", "embodied" ]
+                                                    }
+                                                ],
+                                                culpritBody:[
+                                                    {
+                                                        IT:[ "in persona" ],
+                                                        EN:[ "in person" ]
+                                                    },{
+                                                        IT:[ "in carne ed ossa" ],
+                                                        EN:[ "in flesh and blood" ]
+                                                    },{
+                                                        IT:[ "{label.culprit@3}" ],
+                                                        EN:[ "{label.culprit@3}" ]
+                                                    }
+                                                ],
+                                                culpritOf:[
+                                                    {
+                                                        IT:[ "{label.culprit@1} responsabile" ],
+                                                        EN:[ "responsible for" ]
+                                                    },{
+                                                        IT:[ "{label.culprit@2}origine" ],
+                                                        EN:[ "the origin of" ]
+                                                    },{
+                                                        IT:[ "{label.culprit@1} causa" ],
+                                                        EN:[ "the cause of" ]
+                                                    }
+                                                ],
+                                                event:[
+                                                    {
+                                                        IT:[ "di questa nuova Oscurit&agrave;" ],
+                                                        EN:[ "this new Darkness" ]
+                                                    },{
+                                                        IT:[ "di questa ondata di omicidi" ],
+                                                        EN:[ "this wave of murders" ]
+                                                    },{
+                                                        IT:[ "di queste recenti sparizioni" ],
+                                                        EN:[ "these recent kidnappings" ]
+                                                    }
+                                                ],
+                                                chance:[
+                                                    {
+                                                        IT:[ "Ma &egrave; possibile raggiungere" ],
+                                                        EN:[ "But is it possible to reach" ]
+                                                    },{
+                                                        IT:[ "&Egrave; davvero possibile incontrare" ],
+                                                        EN:[ "It is truly possible to meet" ]
+                                                    },{
+                                                        IT:[ "Ma dove si sta nascondendo" ],
+                                                        EN:[ "But where is it hiding" ]
+                                                    }
+                                                ],
+                                                discover:[
+                                                    {
+                                                        IT:[ "C'&egrave; solo un modo per scoprirlo." ],
+                                                        EN:[ "There's only one way to find out." ]
+                                                    },{
+                                                        IT:[ "Qualcuno dice di aver scoperto un modo..." ],
+                                                        EN:[ "Someone says they've discovered a way..." ]
+                                                    },{
+                                                        IT:[ "Esiste un modo..." ],
+                                                        EN:[ "There is a way..." ]
+                                                    }
+                                                ],
+                                                item:[
+                                                    {
+                                                        IT:[ "le", "Chiavi", "una", "Chiave", "1 sola Chiave" ],
+                                                        EN:[ "the", "Keys", "one", "Key", "1 single Key"]
+                                                    },{
+                                                        IT:[ "le", "Schegge", "una", "Scheggia", "1 sola Scheggia" ],
+                                                        EN:[ "the", "Shards", "one", "Shard", "1 single Shard"]
+                                                    },{
+                                                        IT:[ "i", "Frammenti", "un", "Frammento", "1 solo Frammento" ],
+                                                        EN:[ "the", "Fragments", "one", "Fragment", "1 single Fragment"]
+                                                    }
+                                                ],
+                                                itemOf:[
+                                                    {
+                                                        IT:[ "delle Anime", "dell'Anima" ],
+                                                        EN:[ "Soul", "of Soul"]
+                                                    },{
+                                                        IT:[ "della Luce", "della Luce" ],
+                                                        EN:[ "Light", "of Light"]
+                                                    },{
+                                                        IT:[ "delle Ombre", "dell'Ombra" ],
+                                                        EN:[ "Shadow", "of Shadow"]
+                                                    }
+                                                ],
+                                                exit:[
+                                                    {
+                                                        IT:[ "il Passaggio", "del Passaggio", "dal Passaggio" ],
+                                                        EN:[ "the Passage", "Passage", "from the Passage" ]
+                                                    },{
+                                                        IT:[ "il Portale", "del Portale", "dal Portale" ],
+                                                        EN:[ "the Portal", "Portal", "from the Portal" ]
+                                                    },{
+                                                        IT:[ "il Cancello", "del Cancello", "dal Cancello" ],
+                                                        EN:[ "the Gate", "Gate", "from the Gate" ]
+                                                    }
+                                                ],
+                                                collectTime:[
+                                                    {
+                                                        IT:[ "risparmiare tempo", "raccogliendo collettivamente 3 segnalini Tempo o pi&ugrave;" ],
+                                                        EN:[ "spare some time", "collectively collecting 3 Time tokens or more" ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    title:[
+                                        {
+                                            IT: "{label.item:capital@0} {label.item@1} {label.itemOf@0}",
+                                            EN: "{label.item:capital@0} {label.itemOf@0} {label.item@1}"
+                                        },{
+                                            IT: "{label.culprit:capital@0} {label.culpritBody@0}",
+                                            EN: "{label.culprit:capital@0} {label.culpritBody@0}"
+                                        },{
+                                            IT: "{label.item:capital@0} {label.item:capital@1} e {label.exit@0}",
+                                            EN: "{label.item:capital@0} {label.item:capital@1} and {label.exit@0}"
+                                        }
+                                    ],
+                                    story:[
+                                        {
+                                            IT:"{label.intro@0} {label.culprit@0} {label.culpritBody@0} {label.culpritOf@0} {label.event@0}. {label.chance@0} {label.culprit@0}? {label.discover@0}",
+                                            EN:"{label.intro@0} {label.culprit@0} {label.culpritBody@0} {label.culpritOf@0} {label.event@0}. {label.chance@0} {label.culprit@0}? {label.discover@0}"
+                                        }
+                                    ],
+                                    objectivesHeader:[
+                                        {
+                                            IT:"Completate gli obiettivi nell'ordine indicato:",
+                                            EN:"Complete the objectives in order:"
+                                        }
+                                    ],
+                                    challenges:[
+                                        { intensity:1, tag:"default" },
+                                        { intensity:2, tag:"default" },
+                                        { intensity:3, tag:"default" },
+                                    ],
+                                    rules:[
+                                        [
+                                            {
+                                                type:"objective",
+                                                name:[
+                                                    {
+                                                        IT:"Raccogliere {label.item@0} {label.item@1} {label.itemOf@0}",
+                                                        EN:"Collect {label.item@0} {label.itemOf@0} {label.item@1}",
+                                                    }
+                                                ],
+                                                summary:[
+                                                    {
+                                                        IT:"Raccogliere {label.item@0} {label.item@1} prima che svaniscano",
+                                                        EN:"Collect {label.item@0} {label.item@1} before they vanish",
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"objective",
+                                                name:[
+                                                    {
+                                                        IT:"Fuggire {label.exit@2}",
+                                                        EN:"Escape {label.exit@2}"
+                                                    }
+                                                ],
+                                                summary:[
+                                                    {
+                                                        IT:"Uscire dal Dungeon attraverso {label.exit@0}",
+                                                        EN:"Exit the Dungeon via {label.exit@0}"
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        IT:"{label.exit:capital@0}",
+                                                        EN:"{label.exit:capital@0}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"La Camera {label.exit@1} &egrave; accessibile soltanto attraverso la porta dal bordo rosso. Questa porta &egrave; chiusa a chiave e pu&ograve; essere aperta solo quando gli Eroi possiedono collettivamente {label.item@0} {tokensCount.objective} {label.item@1} {label.itemOf@0} per accedere alla Camera. Un Eroe che si trova nella zona {label.exit@1} (il segnalino Obiettivo grigio) pu&ograve; spendere 1 PM per uscire dal Dungeon. Non appena tutti gli Eroi sono usciti dal Dungeon, la Missione termina con una vittoria.",
+                                                        EN:"The {label.exit@1} Chamber is only accessible through the red-bordered door. This door is locked and can only be opened when the Heroes collectively own {label.item@0} {tokensCount.objective} {label.itemOf@0} {label.item@1} to access the Chamber. A Hero in the {label.exit@1} area (the gray Objective token) can spend 1 MP to exit the Dungeon. As soon as all Heroes have exited the Dungeon, the Mission ends with a victory."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        IT:"Il Tempo Stringe",
+                                                        EN:"Time is Running Out"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Durante la preparazione, collocate i segnalini Tempo su ogni segnalino Obiettivo nella stessa Zona. Durante ogni Fase dell'Oscurit&agrave;, rimuovete 1 segnalino Tempo da ogni segnalino Obiettivo. Se in un qualsiasi momento i giocatori devono rimuovere un segnalino da un segnalino Obiettivo e non ne rimane nessuno, esso scompare e la Missione termina con una sconfitta.",
+                                                        EN:"During setup, place Time tokens on each Objective token in the same Zone. During each Darkness Phase, remove 1 Time token from each Objective token. If at any time players must remove a token from an Objective token and none remains, it disappears and the Mission ends in defeat."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        IT:"Raccogliere {label.item@0} {label.item@1} {label.itemOf@0}",
+                                                        EN:"Collect {label.item@0} {label.itemOf@0} {label.item@1}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Ogni segnalino Obiettivo rappresenta {label.item@2} {label.item@3} {label.itemOf@1}. Un qualsiasi Eroe che si trovi nella stessa Zona di {label.item@2} {label.item@3} {label.itemOf@1} pu&ograve; spendere 1 azione per raccoglierla. Ogni volta che {label.item@2} {label.item@3} {label.itemOf@1} viene raccolta, i segnalini Tempo su di esso vengono rimossi e ogni Eroe ottiene 8 PE. Ricordate che {label.item@0} {label.item@1} {label.itemOf@0} stanno scomparendo: se anche {label.item@4} scompare, la Missione termina con una sconfitta.",
+                                                        EN:"Each Objective token represents {label.item@2} {label.itemOf@0} {label.item@3}. Any Hero in the same Zone as {label.item@2} {label.itemOf@0} {label.item@3} can spend 1 action to pick it up. Each time {label.item@2} {label.itemOf@0} {label.item@3} is picked up, the Time tokens are removed and all Heros gain 8 XP. Remember that {label.item@0} {label.itemOf@0} {label.item@1} are disappearing: if {label.item@4} disappears, the Mission ends in defeat."
+                                                    }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"Ogni segnalino Obiettivo rappresenta {label.item@2} {label.item@3} {label.itemOf@1}. Un qualsiasi Eroe che si trovi nella stessa Zona di {label.item@2} {label.item@3} {label.itemOf@1} pu&ograve; spendere 1 azione per raccoglierla insieme ai suoi segnalini Tempo rimasti. Ricordate che {label.item@0} {label.item@1} {label.itemOf@0} stanno scomparendo: se anche {label.item@4} scompare, la Missione termina con una sconfitta.",
+                                                        EN:"Each Objective token represents {label.item@2} {label.itemOf@0} {label.item@3}. Any Hero in the same Zone as {label.item@2} {label.itemOf@0} {label.item@3} can spend 1 action to pick it up with its remaining Time tokens. Remember that {label.item@0} {label.itemOf@0} {label.item@1} are disappearing: if {label.item@4} disappears, the Mission ends in defeat."
+                                                    }
+                                                ]
+                                            }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        IT:"Piani Eterei",
+                                                        EN:"Ethereal Planes"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"I nemici possono liberamente muoversi attraverso le porte anche se sono chiuse. Le porte chiuse bloccano comunque la Linea di Vista.",
+                                                        EN:"Enemies can freely move through doors even if they are closed. Closed doors still block the Line of Sight."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    ],
+                                    map:[
+                                        {
+                                            structure:[ "pathToRoom-small" ],
+                                            gameMode: [ "collectTimed" ],
+                                            difficulty:[ "default" ],
+                                            roomLimits:[ "default" ],
+                                            roomsMerges:[ "default" ],
+                                            skin:[ "default" ],
+                                            size: [ "default" ],
+                                            bridges:[ "default" ],
+                                            lootRatio: [ "default" ],
+                                            corridors: [ "default" ],
+                                        }
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms", "collectTime" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         }

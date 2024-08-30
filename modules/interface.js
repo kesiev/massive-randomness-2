@@ -37,13 +37,14 @@ ModManager.modules.push(function(){
                                         tags:[ "md2-hellscape" ]
                                     },{
                                         code:"C",
+                                        idOption:"md2-heavenfall",
                                         label:{
                                             IT:"Massive Darkness 2: Heavenfall",
                                             EN:"Massive Darkness 2: Heavenfall"
                                         },
                                         description:{
-                                            IT:"4 tessere paradiso",
-                                            EN:"4 heaven tiles"
+                                            IT:"4 tessere paradiso e modalit&agrave; campagna",
+                                            EN:"4 heaven tiles and campaign mode"
                                         },
                                         tags:[ "md2-heavenfall" ]
                                     },{
@@ -141,7 +142,7 @@ ModManager.modules.push(function(){
                                     }
                                 ]
                             },{
-                                type:"includeSelected",
+                                type:"includeExclude",
                                 isSingleOption:true,
                                 isMandatory:true,
                                 title:{
@@ -176,6 +177,44 @@ ModManager.modules.push(function(){
                                 ]
                             },{
                                 type:"includeSelected",
+                                ifMenuOptionSelected:"md2-heavenfall",
+                                isSingleOption:true,
+                                isMandatory:true,
+                                title:{
+                                    IT:"Generatore",
+                                    EN:"Generator"
+                                },
+                                entries:[
+                                    {
+                                        idOption:"generator-oneshot",
+                                        code:"V",
+                                        isDefault:true,
+                                        label:{
+                                            IT:"Avventura one-shot",
+                                            EN:"One-shot quest"
+                                        },
+                                        description:{
+                                            IT:"Genera un'avventura one-shot.",
+                                            EN:"Generate a one-shot quest."
+                                        },
+                                        tags:[ "generator-oneshot" ]
+                                    },{
+                                        idOption:"generator-campaign",
+                                        code:"v",
+                                        label:{
+                                            IT:"Campagna",
+                                            EN:"Campaign"
+                                        },
+                                        description:{
+                                            IT:"Genera una serie di avventure da giocare in sequenza seguendo le regole di Massive Darkness 2: Heavenfall.",
+                                            EN:"Generate a series of adventures to be played in sequence following the rules of Massive Darkness 2: Heavenfall."
+                                        },
+                                        tags:[ "generator-campaign" ]
+                                    }
+                                ]
+                            },{
+                                type:"includeSelected",
+                                ifMenuOptionSelected:"generator-oneshot",
                                 isSingleOption:true,
                                 isMandatory:true,
                                 title:{
@@ -221,6 +260,7 @@ ModManager.modules.push(function(){
                                 ]
                             },{
                                 type:"includeSelected",
+                                ifMenuOptionSelected:"generator-oneshot",
                                 isSingleOption:true,
                                 isMandatory:true,
                                 title:{
@@ -261,7 +301,20 @@ ModManager.modules.push(function(){
                                 },
                                 entries:[
                                     {
+                                        code:"O",
+                                        ifMenuOptionSelected:"generator-campaign",
+                                        label:{
+                                            IT:"Nascondi gli spoiler",
+                                            EN:"Hide spoilers"
+                                        },
+                                        description:{
+                                            IT:"Le ricompense e le parti narrative vengono nascoste.",
+                                            EN:"The rewards and the narrative parts are hidden.",
+                                        },
+                                        tags:[ "campaign-hidespoilers" ]
+                                    },{
                                         code:"X",
+                                        ifMenuOptionSelected:"generator-oneshot",
                                         label:{
                                             IT:"Sfide",
                                             EN:"Challenges"
@@ -273,6 +326,7 @@ ModManager.modules.push(function(){
                                         tags:[ "challenges-default" ]
                                     },{
                                         code:"Y",
+                                        ifMenuOptionSelected:"generator-oneshot",
                                         label:{
                                             IT:"Modalit&agrave; Esplorazione",
                                             EN:"Dungeon Crawling Mode"
@@ -363,14 +417,14 @@ ModManager.modules.push(function(){
                             IT:"Italiano",
                             FR:"Fran&#xE7;ais"
                         },
-                        labels:{
+                        labels:{                            
                             toolName:{
                                 IT:"Massive Randomness 2",
                                 EN:"Massive Randomness 2"
                             },
                             toolDescription:{
-                                IT:"Un generatore casuale di avventure one-shot per Massive Darkness 2",
-                                EN:"A Massive Darkness 2 one-shot quest random generator"
+                                IT:"Un generatore casuale di avventure per Massive Darkness 2",
+                                EN:"A Massive Darkness 2 random quest generator"
                             },
                             footer:{
                                 IT:"Meglio su Firefox/Chrome - {toolName} - {toolVersion} - &copy; 2024 by KesieV - Sorgenti su <a target=_blank href='{sourcesAtFull}'>{sourcesAtShort}</a>",

@@ -37,13 +37,17 @@ QuestGenerator=(function() {
         })
     }
 
-    function createRuleFromVersion(version,intensity) {
+    function createRuleFromVersion(campaign,version,intensity) {
+        let
+            summary = (campaign ? version.campaignSummary : 0) || version.summary,
+            explanation = (campaign ? version.campaignExplanation : 0) || version.explanation;
+
         return {
             type:version.type,
             intensity: intensity || 0,
             name:pickRandomElementValue(version.name),
-            summary:version.summary ? pickRandomElementValue(version.summary) : 0,
-            explanation:version.explanation ? pickRandomElementValue(version.explanation) : 0
+            summary:summary ? pickRandomElementValue(summary) : 0,
+            explanation:explanation ? pickRandomElementValue(explanation) : 0
         };
     }
 
@@ -66,6 +70,7 @@ QuestGenerator=(function() {
                     }
                 },
                 quest = { languages:[], rules:[], challenges:[] },
+                campaign = result.campaign && result.campaign.currentPage.generator ? result.campaign.currentPage.generator : false,
                 mapConfig = {},
                 questModel,
                 questVersion,
@@ -77,18 +82,28 @@ QuestGenerator=(function() {
 
             if (flags.quest)
                 questModel = flags.quest;
+            else if (campaign && campaign.questModel)
+                questModel = campaign.questModel;
             else if (flags.debugQuest)
                 resources.quests.forEach(quest=>{
                     if (quest._debug)
                         questModel = quest;
                 });
+            
+            if (campaign && campaign.questVersion)
+                questVersion = campaign.questVersion;
+
             if (!questModel)
                 questModel = pickRandomElementValue(resources.quests);
-            questVersion = pickRandomElementValue(questModel.versions);
+            if (!questVersion)
+                questVersion = pickRandomElementValue(questModel.versions);
+
             questLabels = pickRandomElementValue(questVersion.labels);
             mapModel = pickRandomElementValue(questVersion.map);
 
             // Prepare quest contents
+
+            if (questModel.versions.indexOf(questVersion) == -1) debugger;
 
             quest.by = questModel.by;
             quest.suggestedTilesCount = questModel.suggestedTilesCount;
@@ -105,7 +120,7 @@ QuestGenerator=(function() {
             questVersion.rules.forEach(rule=>{
                 let
                     ruleVersion = pickRandomElementValue(rule);
-                quest.rules.push(createRuleFromVersion(ruleVersion))
+                quest.rules.push(createRuleFromVersion(campaign,ruleVersion))
             });
 
             // Add special rules
@@ -152,7 +167,7 @@ QuestGenerator=(function() {
                                 setPosition = challengesSet.indexOf(challenge);
 
                             challenge.rules.forEach(rule=>{
-                                quest.challenges.push(createRuleFromVersion(rule,challenge.intensity));    
+                                quest.challenges.push(createRuleFromVersion(campaign,rule,challenge.intensity));
                             });
                             challengesSet.splice(setPosition,1);
                         }

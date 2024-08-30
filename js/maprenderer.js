@@ -60,16 +60,44 @@ MapRenderer=(function(){
     }
 
     function renderCellTokens(resources,cellNode,hideHidden) {
+        let
+            groups = {},
+            order = [];
+
         cellNode.cellData.tokens.forEach(token=>{
             if (!hideHidden || !token.isHidden) {
                 let
-                    tokenMetadata=resources.tokensMetadata[token.id],
-                    className = tokenMetadata.className.map;
-                if (token.flipped)
-                    className+=" flipped";
-                cellNode.content.innerHTML+="<span class=\""+className+"\"></span> ";
+                    tokenId = token.id + "_" + (token.flipped ? "flip" : "normal");
+
+                if (!groups[tokenId]) {
+                    groups[tokenId]={
+                        token:token,
+                        count:0
+                    };
+                    order.push(tokenId);
+                }
+                groups[tokenId].count++;
             }
-        });
+        })
+        
+        order.forEach(id=>{
+            let
+                token = groups[id].token,
+                count = groups[id].count,
+                tokenMetadata=resources.tokensMetadata[token.id],
+                className = tokenMetadata.className.map,
+                doGroup = tokenMetadata.groupWhen && (count >= tokenMetadata.groupWhen);
+                
+            if (token.flipped)
+                className+=" flipped";
+
+            if (doGroup)
+                cellNode.content.innerHTML+="<span class=\""+className+"\"><span class=\"count\">&times;"+count+"</span></span> ";
+            else
+                for (let i=0;i<count;i++)
+                    cellNode.content.innerHTML+="<span class=\""+className+"\"></span> ";
+            
+        })
     }
 
     function renderCellDoors(resources,cellNode,hideHidden,hiddenOnly) {
@@ -241,7 +269,7 @@ MapRenderer=(function(){
                     mapNode.style.height = (mapHeight/2)+"px";
 
                     window.onbeforeprint = () => {
-                        document.title = result.printTitlePrefix+" - "+result.printTitleSuffix;    
+                        document.title = result.printTitlePrefix+" - "+result.printTitleSuffix+(result.printTitleCoords ? " "+result.printTitleCoords : "");
                     };
 
                     window.onafterprint = () => {

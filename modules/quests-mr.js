@@ -23,7 +23,7 @@ ModManager.modules.push(function(){
                                 },
                                 explanation:{
                                     IT:"Questa Missione contiene delle informazioni segrete che non devono essere conosciute dai giocatori, per cui dovrebbe essere letta da qualcuno che non partecipa alla partita: il Master.",
-                                    EN:"This Mission contains secret information that must not be known to the players, so it should be read by someone who is not participating in the game: the Master."
+                                    EN:"This Mission contains secret information that must not be known to the players, so it should be read by someone not participating in the game: the Master."
                                 }
                             }
                         ]
@@ -32,7 +32,17 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
+                            forMaps:[2],
                             type:"investigation",
+                            objective:{
+                                EN:"Talk with enemies and eliminate the culprit to win."
+                            },
+                            variants:{
+                                EN:"With randomized culprit."
+                            },
+                            name:{
+                                EN:"The Investigation"
+                            },
                             by:{
                                 IT:"Di KesieV",
                                 EN:"By KesieV"
@@ -43,6 +53,7 @@ ModManager.modules.push(function(){
                                 
                                     let
                                         labels = questLabels[0],
+                                        badEnding = result.campaign ? labels.campaignBadEnding : labels.badEnding,
                                         culprit = Math.floor(questGenerator.random(2)),
                                         culpritLabels = labels.suspected[culprit],
                                         culpritId = culpritLabels.EN[0],
@@ -122,7 +133,7 @@ ModManager.modules.push(function(){
                                     }
 
                                     result.labels["ending."+culpritId]=questGenerator.pickRandomElementValue(labels.goodEnding);
-                                    result.labels["ending."+testimonyId]=questGenerator.pickRandomElementValue(labels.badEnding);
+                                    result.labels["ending."+testimonyId]=questGenerator.pickRandomElementValue(badEnding);
 
                                 },
                             },
@@ -193,6 +204,10 @@ ModManager.modules.push(function(){
                                                     { IT:"Il Lord si accascia a terra con un grande tonfo ma, dentro di voi, sentite che qualcosa non non va. La Missione termina con la sconfitta.", EN: "The Lord collapses to the ground with a great thud but, inside, you feel that something is wrong. The Mission ends in defeat." },
                                                     { IT:"Avete preso una decisione e affrontato eroicamente le conseguenze. Ma sar&agrave; stata davvero quella giusta? La Missione termina con la sconfitta.", EN: "You made a decision and heroically faced the consequences. But was it the right one? The Mission ends in defeat." },
                                                     { IT:"{label.goodEnding}.. o forse no?", EN: "{label.goodEnding}.. or maybe not?" },
+                                                ],
+                                                campaignBadEnding:[
+                                                    { IT:"Il Lord si accascia a terra con un grande tonfo ma, dentro di voi, sentite che qualcosa non non va. La Missione termina con la sconfitta.", EN: "The Lord collapses to the ground with a great thud but, inside, you feel that something is wrong. The Mission ends in defeat." },
+                                                    { IT:"Avete preso una decisione e affrontato eroicamente le conseguenze. Ma sar&agrave; stata davvero quella giusta? La Missione termina con la sconfitta.", EN: "You made a decision and heroically faced the consequences. But was it the right one? The Mission ends in defeat." },
                                                 ],
                                                 crime:[
                                                     {
@@ -289,8 +304,12 @@ ModManager.modules.push(function(){
                                                         IT:[ "Non abbiamo scelta. Dobbiamo risolvere la questione velocemente." ],
                                                         EN:[ "We have no choice. We need to resolve this issue quickly." ]
                                                     }
+                                                ],
+                                                riskyInvestigation:[
+                                                    {
+                                                        EN:[ 3 ]
+                                                    }
                                                 ]
-
                                             }
                                         ]
                                     ],
@@ -384,6 +403,12 @@ ModManager.modules.push(function(){
                                                     {
                                                         IT:"Sulla mappa, sposta i segnalini Tempo {symbol.timeToken} e i segnalini Corruzione {symbol.corruptionToken} sopra i segnalini Obiettivo nella stessa Zona.<p>Pesca 1 Mostro Errante di Livello 5, mettilo da parte e aggiungi un segnalino Corruzione {symbol.corruptionToken} su di esso: questo &egrave; il Signore della Corruzione. Pesca un altro Mostro Errante di livello 5, mettilo da parte e aggiungi un segnalino Tempo {symbol.timeToken} su di esso: questo &egrave; il Signore del Tempo. Quindi, rimuovi dal gioco tutte le carte corrispondenti ai 2 Signori nei mazzi dei Mostri Erranti.</p>",
                                                         EN:"On the map, move the Time tokens {symbol.timeToken} and the Corruption tokens {symbol.corruptionToken} on top of the Objective tokens in the same Zone.<p>Draw 1 Level 5 Roaming Monster, set it apart, and add a Corruption token {symbol.corruptionToken} on it: this is the Corruption Lord. Draw another Level 5 Roaming Monster, set it apart, and add a Time token {symbol.timeToken} on it: this is the Time Lord. Then, remove from the game all of the cards matching the 2 Lords from the Roaming Monster decks.</p>"
+                                                    }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"Sulla mappa, sposta i segnalini Tempo {symbol.timeToken} e i segnalini Corruzione {symbol.corruptionToken} sopra i segnalini Obiettivo nella stessa Zona.<p>Pesca {label.campaignBoss@0}, mettilo da parte e aggiungi un segnalino Corruzione {symbol.corruptionToken} su di esso: questo &egrave; il Signore della Corruzione. Pesca un altro Mostro Errante dallo stesso mazzo, mettilo da parte e aggiungi un segnalino Tempo {symbol.timeToken} su di esso: questo &egrave; il Signore del Tempo. Quindi, rimuovi dalla partita tutte le carte corrispondenti ai 2 Signori nei mazzi dei Mostri Erranti.</p>",
+                                                        EN:"On the map, move the Time tokens {symbol.timeToken} and the Corruption tokens {symbol.corruptionToken} on top of the Objective tokens in the same Zone.<p>Draw {label.campaignBoss@0}, set it apart, and add a Corruption token {symbol.corruptionToken} on it: this is the Corruption Lord. Draw another Roaming Monster from the same deck, set it apart, and add a Time token {symbol.timeToken} on it: this is the Time Lord. Then, remove from the game all of the cards matching the 2 Lords from the Roaming Monster decks.</p>"
                                                     }
                                                 ]
                                             }
@@ -494,7 +519,14 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ],
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms", "riskyInvestigation" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         }
@@ -524,7 +556,7 @@ ModManager.modules.push(function(){
                                 },
                                 explanation:{
                                     IT:"Questa Missione &egrave; stata pensata per essere giocata unicamente nella sua versione digitale. Puoi comunque giocarla nella sua versione cartacea ma assicurati che sia letta via via da qualcuno che non partecipa alla partita e che ne mantenga i segreti.",
-                                    EN:"This Mission is was designed to be played only in its digital version. You can still play it in its paper version but make sure it is read gradually by someone who is not participating in the game and who keeps its secrets."
+                                    EN:"This Mission is was designed to be played only in its digital version. You can still play it in its paper version but make sure it is read gradually by someone not participating in the game and who keeps its secrets."
                                 }
                             }
                         ]
@@ -533,7 +565,18 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
+                            forActs:[2],
+                            forMaps:[2],
                             type:"massiveRandomness",
+                            objective:{
+                                EN:"Fight the Massive Randomness."
+                            },
+                            variants:{
+                                EN:"With randomized objectives."
+                            },
+                            name:{
+                                EN:"The Massive Randomness"
+                            },
                             by:{
                                 IT:"Di KesieV",
                                 EN:"By KesieV"
@@ -591,7 +634,8 @@ ModManager.modules.push(function(){
                                                         "<a target=_blank href='https://boardgamegeek.com/user/GrandKhan44'>GrandKhan44</a>, "+
                                                         "<a target=_blank href='https://boardgamegeek.com/user/Joabqm'>Joabqm</a>, "+
                                                         "<a target=_blank href='https://boardgamegeek.com/user/Metalzoic'>Metalzoic</a>, "+
-                                                        "<a target=_blank href='https://boardgamegeek.com/user/spinal3000'>spinal3000</a>"
+                                                        "<a target=_blank href='https://boardgamegeek.com/user/spinal3000'>spinal3000</a>, "+
+                                                        "<a target=_blank href='https://boardgamegeek.com/user/Rough_neck'>Rough_neck</a>"
                                                 } ],
                                                 welcome:[
                                                     {
@@ -685,7 +729,51 @@ ModManager.modules.push(function(){
                                                         IT:[ "<i>Ora puoi andare, piccoletto.</i>" ],
                                                         EN:[ "<i>You can go now, little guy.</i>" ]
                                                     }
-                                                ]
+                                                ],
+                                                massiveRandomnessExplanation:[
+                                                     {
+                                                        IT:"<ul>"+
+                                                        "<li><b>Se esce 1-2:</b> evoca il primo Mostro Errante tra le Incarnazioni del Caos {token.order4@1} e lascia il dado sulla sua carta</li>"+
+                                                        "<li><b>Se esce 3-4:</b> evoca il secondo Mostro Errante tra le Incarnazioni del Caos {token.order4@1} e lascia il dado sulla sua carta</li>"+
+                                                        "<li><b>Se esce 5-6:</b> evoca il terzo Mostro Errante tra le Incarnazioni del Caos {token.order4@1} e lascia il dado sulla sua carta</li>"+
+                                                        "</ul>"+
+                                                        "Rimuovi infine {token.order4@0}.<p>Il dado a 6 facce indica sempre la carta dell'Incarnazione del Caos attualmente in gioco che pu&ograve; essere affrontata dagli Eroi. Le Incarnazioni del Caos considerano un giocatore in meno per il calcolo della loro Salute totale (con un minimo di 1 giocatore) e accumulano e risolvono ogni segnalino sulla propria carta individualmente (inclusi i segnalini Gelo {symbol.frostToken}, Fuoco {symbol.fireToken} e Salute).</p>"+
+                                                        "<p>Prima dell'inizio di ogni Fase degli Eroi, se la miniatura dell'attuale Incarnazione del Caos &egrave; sulla mappa, tira il dado a 6 facce:</p><ul>"+
+                                                        "<li><b>Se esce 1-2:</b> rimuovi dalla mappa la miniatura dell'attuale Incarnazione del Caos, sostituiscila con quella del primo Mostro Errante tra le Incarnazioni del Caos e lascia il dado sulla sua carta</li>"+
+                                                        "<li><b>Se esce 3-4:</b> rimuovi dalla mappa la miniatura dell'attuale Incarnazione del Caos, sostituiscila con quella del secondo Mostro Errante tra le Incarnazioni del Caos e lascia il dado sulla sua carta</li>"+
+                                                        "<li><b>Se esce 5-6:</b> rimuovi dalla mappa la miniatura dell'attuale Incarnazione del Caos, sostituiscila con quella del terzo Mostro Errante tra le Incarnazioni del Caos e lascia il dado sulla sua carta</li>"+
+                                                        "</ul>"+
+                                                        "Quando una qualsiasi delle Incarnazioni del Caos viene sconfitta, svela e leggi L'Epilogo.</span>",
+                                                        EN:"<ul>"+
+                                                        "<li><b>If 1-2 is rolled:</b> summon the first Roaming Monster among the Incarnations of Chaos {token.order4@1} and leave the die on its card</li>"+
+                                                        "<li><b>If 3-4 is rolled:</b> summon the second Roaming Monster among the Incarnations of Chaos {token.order4@1} and leave the die on its card</li>"+
+                                                        "<li><b>If 5-6 is rolled:</b> summon the third Roaming Monster among the Incarnations of Chaos {token.order4@1} and leave the die on its card</li>"+
+                                                        "</ul>"+
+                                                        "Finally, remove {token.order4@0}.<p>The 6-sided die always indicates the current Incarnation of Chaos in play that can be faced by the Heroes. The Incarnations of Chaos consider one less player for their total Health (with a minimum of 1 player) and collect and resolve each token on their card individually (including Frost {symbol.frostToken}, Fire {symbol.fireToken}, and Health tokens).</p>"+
+                                                        "<p>Before the start of each Hero Phase, if the current Incarnation of Chaos miniature is on the map, roll the 6-sided die:</p><ul>"+
+                                                        "<li><b>If 1-2 is rolled:</b> remove the current Incarnation of Chaos miniature from the map, replace it with that of the first Roaming Monster among the Incarnations of Chaos, and leave the die on its card</b></li>"+
+                                                        "<li><b>If 3-4 is rolled:</b> remove the current Incarnation of Chaos miniature from the map, replace it with that of the second Roaming Monster among the Incarnations of Chaos, and leave the die on its card</b></li>"+
+                                                        "<li><b>If 5-6 is rolled:</b> remove the current Incarnation of Chaos miniature from the map, replace it with that of the third Roaming Monster among the Incarnations of Chaos, and leave the die on its card</b></li>"+
+                                                        "</ul>"+
+                                                        "When one of the Incarnations of Chaos is defeated, reveal and read the Epilogue.</span>",
+                                                     }
+                                                ],
+                                                credits:[
+                                                     {
+                                                         IT:"<p class='credits'>Grazie per aver giocato a <b>Massive Randomness 2</b><br>Un generatore casuale di avventure per Massive Darkness 2!</p>"+
+                                                         "<p class='credits'><b>Di:</b> {label.creditsBy}</p>"+
+                                                         "<p class='credits'>Grazie a Alex Olteanu e Marco Portugal per aver progettato quell'esperienza alla Diablo della quale avevo bisogno da tanto tempo!</p>"+
+                                                         "<p class='credits'>Grazie a {label.thankDungeonSkills} per aver creato il modulo <a target=_blank href='https://boardgamegeek.com/filepage/245223/dungeon-skills-challenge'>Dungeon Skills Challenge</a>.</p>"+
+                                                         "<p class='credits'><b>Grazie per aver condiviso le loro idee a:</b> {label.thankIdeas}</p>"+
+                                                         "<p class='credits'><b>Grazie a:</b> {label.thank}</p>",
+                                                         EN:"<p class='credits'>Thank you for playing <b>Massive Randomness 2</b><br>A Massive Darkness 2 random quest generator!</p>"+
+                                                         "<p class='credits'><b>By:</b> {label.creditsBy}</p>"+
+                                                         "<p class='credits'>Thanks to Alex Olteanu and Marco Portugal for designing that tabletop Diablo-esque experience I needed for long time!</p>"+
+                                                         "<p class='credits'>Thanks to {label.thankDungeonSkills} for creating the <a target=_blank href='https://boardgamegeek.com/filepage/245223/dungeon-skills-challenge'>Dungeon Skills Challenge</a> module.</p>"+
+                                                         "<p class='credits'><b>Thanks for sharing their ideas to:</b> {label.thankIdeas}</p>"+
+                                                         "<p class='credits'><b>Thanks to:</b> {label.thank}</p>"
+                                                     }
+                                                 ]
                                             }
                                         ]
                                     ],
@@ -775,6 +863,12 @@ ModManager.modules.push(function(){
                                                         IT:"Pesca 3 Mostri Erranti di Livello 5 a faccia in gi&ugrave;, fanne un mazzo e mettilo da parte. Poi metti sul mazzo un classico dado a 6 facce, <i>l'Emblema del mio Essere Eterno e Caotico.</i></p><p><i>Sono la Casualit&agrave; Massiccia e questo &egrave; il mio mondo.</i></p><p><i>Da ora in poi ti piegherai ai miei ordini senza fare domande. Leggerai solo se ti dar&ograve; il permesso di farlo.</i></p>",
                                                         EN:"Draw 3 Level 5 Roaming Monsters face down, make a deck, and set it aside. Then, place a classic 6-sided die on the deck, <i>the Emblem of my Eternal and Chaotic Being.</i></p><p><i>I am the Massive Randomness and this is my world.</i></p><p><i>From now on you will bend to my orders without asking questions. You will only read if I permit you to do so.</i></p>"
                                                     }
+                                                ],
+                                                campaignExplanation:[
+                                                    {
+                                                        IT:"Pesca 3 {label.campaignBoss@1} 3 {label.campaignBoss@2} tenendoli a faccia in gi&ugrave;, fanne un mazzo e mettilo da parte. Poi metti sul mazzo un classico dado a 6 facce, <i>l'Emblema del mio Essere Eterno e Caotico.</i></p><p><i>Sono la Casualit&agrave; Massiccia e questo &egrave; il mio mondo.</i></p><p><i>Da ora in poi ti piegherai ai miei ordini senza fare domande. Leggerai solo se ti dar&ograve; il permesso di farlo.</i></p>",
+                                                        EN:"Draw 3 {label.campaignBoss@1} 3 {label.campaignBoss@2} keeping them face down, make a deck, and set it aside. Then, place a classic 6-sided die on the deck, <i>the Emblem of my Eternal and Chaotic Being.</i></p><p><i>I am the Massive Randomness and this is my world.</i></p><p><i>From now on you will bend to my orders without asking questions. You will only read if I permit you to do so.</i></p>"
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -852,30 +946,14 @@ ModManager.modules.push(function(){
                                                  ],
                                                  explanation:[
                                                      {
-                                                        IT:"<span class='hiddentext'>Scopri e metti in fila le 3 carte Mostri Erranti tenute da parte: queste sono le Incarnazioni del Caos. Rimuovi dal gioco i Mostri Erranti corrispondenti alle Incarnazioni del Caos senza guadagnare PE, se presenti. Cerca nel mazzo dei Mostri Erranti e nei suoi scarti le carte corrispondenti alle Incarnazioni del Caos e rimettile nella scatola. Infine, tira il dado a 6 facce:<ul>"+
-                                                        "<li><b>Se esce 1-2:</b> evoca il primo Mostro Errante tra le Incarnazioni del Caos {token.order4@1} e lascia il dado sulla sua carta</li>"+
-                                                        "<li><b>Se esce 3-4:</b> evoca il secondo Mostro Errante tra le Incarnazioni del Caos {token.order4@1} e lascia il dado sulla sua carta</li>"+
-                                                        "<li><b>Se esce 5-6:</b> evoca il terzo Mostro Errante tra le Incarnazioni del Caos {token.order4@1} e lascia il dado sulla sua carta</li>"+
-                                                        "</ul>"+
-                                                        "Rimuovi infine {token.order4@0}.<p>Il dado a 6 facce indica sempre la carta dell'Incarnazione del Caos attualmente in gioco che pu&ograve; essere affrontata dagli Eroi. Le Incarnazioni del Caos considerano un giocatore in meno per il calcolo della loro Salute totale (con un minimo di 1 giocatore) e accumulano e risolvono ogni segnalino sulla propria carta individualmente (inclusi i segnalini Gelo {symbol.frostToken}, Fuoco {symbol.fireToken} e Salute).</p>"+
-                                                        "<p>Prima dell'inizio di ogni Fase degli Eroi, se la miniatura dell'attuale Incarnazione del Caos &egrave; sulla mappa, tira il dado a 6 facce:</p><ul>"+
-                                                        "<li><b>Se esce 1-2:</b> rimuovi dalla mappa la miniatura dell'attuale Incarnazione del Caos, sostituiscila con quella del primo Mostro Errante tra le Incarnazioni del Caos e lascia il dado sulla sua carta</li>"+
-                                                        "<li><b>Se esce 3-4:</b> rimuovi dalla mappa la miniatura dell'attuale Incarnazione del Caos, sostituiscila con quella del secondo Mostro Errante tra le Incarnazioni del Caos e lascia il dado sulla sua carta</li>"+
-                                                        "<li><b>Se esce 5-6:</b> rimuovi dalla mappa la miniatura dell'attuale Incarnazione del Caos, sostituiscila con quella del terzo Mostro Errante tra le Incarnazioni del Caos e lascia il dado sulla sua carta</li>"+
-                                                        "</ul>"+
-                                                        "Quando una qualsiasi delle Incarnazioni del Caos viene sconfitta, svela e leggi L'Epilogo.</span>",
-                                                        EN:"<span class='hiddentext'>Unveil and line up the 3 Roaming Monster cards kept aside: these are the Incarnations of Chaos. Remove the Roaming Monsters corresponding to the Incarnations of Chaos from the game without gaining XP, if any. Search the Roaming Monsters deck and its discard pile for the cards matching the Incarnations of Chaos and return them to the box. Finally, roll the 6-sided die:<ul>"+
-                                                        "<li><b>If 1-2 is rolled:</b> summon the first Roaming Monster among the Incarnations of Chaos {token.order4@1} and leave the die on its card</li>"+
-                                                        "<li><b>If 3-4 is rolled:</b> summon the second Roaming Monster among the Incarnations of Chaos {token.order4@1} and leave the die on its card</li>"+
-                                                        "<li><b>If 5-6 is rolled:</b> summon the third Roaming Monster among the Incarnations of Chaos {token.order4@1} and leave the die on its card</li>"+
-                                                        "</ul>"+
-                                                        "Finally, remove {token.order4@0}.<p>The 6-sided die always indicates the current Incarnation of Chaos in play that can be faced by the Heroes. The Incarnations of Chaos consider one less player for their total Health (with a minimum of 1 player) and collect and resolve each token on their card individually (including Frost {symbol.frostToken}, Fire {symbol.fireToken}, and Health tokens).</p>"+
-                                                        "<p>Before the start of each Hero Phase, if the current Incarnation of Chaos miniature is on the map, roll the 6-sided die:</p><ul>"+
-                                                        "<li><b>If 1-2 is rolled:</b> remove the current Incarnation of Chaos miniature from the map, replace it with that of the first Roaming Monster among the Incarnations of Chaos, and leave the die on its card</b></li>"+
-                                                        "<li><b>If 3-4 is rolled:</b> remove the current Incarnation of Chaos miniature from the map, replace it with that of the second Roaming Monster among the Incarnations of Chaos, and leave the die on its card</b></li>"+
-                                                        "<li><b>If 5-6 is rolled:</b> remove the current Incarnation of Chaos miniature from the map, replace it with that of the third Roaming Monster among the Incarnations of Chaos, and leave the die on its card</b></li>"+
-                                                        "</ul>"+
-                                                        "When one of the Incarnations of Chaos is defeated, reveal and read the Epilogue.</span>",
+                                                        IT:"<span class='hiddentext'>Scopri e metti in fila le 3 carte Mostri Erranti tenute da parte: queste sono le Incarnazioni del Caos. Rimuovi dal gioco i Mostri Erranti corrispondenti alle Incarnazioni del Caos senza guadagnare PE, se presenti. Cerca nel mazzo dei Mostri Erranti e nei suoi scarti le carte corrispondenti alle Incarnazioni del Caos e rimettile nella scatola. Infine, tira il dado a 6 facce:{label.massiveRandomnessExplanation}",
+                                                        EN:"<span class='hiddentext'>Unveil and line up the 3 Roaming Monster cards kept aside: these are the Incarnations of Chaos. Remove the Roaming Monsters corresponding to the Incarnations of Chaos from the game without gaining XP, if any. Search the Roaming Monsters deck and its discard pile for the cards matching the Incarnations of Chaos and return them to the box. Finally, roll the 6-sided die:{label.massiveRandomnessExplanation}"
+                                                     }
+                                                 ],
+                                                 campaignExplanation:[
+                                                     {
+                                                        IT:"<span class='hiddentext'>Scopri e metti in fila le 3 carte Mostri Erranti tenute da parte: queste sono le Incarnazioni del Caos. Rimuovi i Mostri Erranti corrispondenti alle Incarnazioni del Caos senza guadagnare PE, se presenti. Cerca nel mazzo dei Mostri Erranti e nei suoi scarti le carte corrispondenti alle Incarnazioni del Caos e rimuovetele. Infine, tira il dado a 6 facce:{label.massiveRandomnessExplanation}",
+                                                        EN:"<span class='hiddentext'>Unveil and line up the 3 Roaming Monster cards kept aside: these are the Incarnations of Chaos. Remove the Roaming Monsters corresponding to the Incarnations of Chaos without gaining XP, if any. Search the Roaming Monsters deck and its discard pile for the cards matching the Incarnations of Chaos and remove them. Finally, roll the 6-sided die:{label.massiveRandomnessExplanation}"
                                                      }
                                                  ]
                                              }
@@ -894,23 +972,27 @@ ModManager.modules.push(function(){
                                                          "<li><b>Se esce 1-3:</b> <span class='hiddentext'>la Missione termina con una vittoria</li>"+
                                                          "<li><b>Se esce 4-6:</b> <span class='hiddentext'>la Missione termina con una vittoria</li>"+
                                                          "</ul>Poi svela questo testo: <span class='hiddentext'>Gli eroi si svegliano d'improvviso, distesi sul duro letto di una familiare e buia locanda. Si guardano l'un l'altro, confusi e allarmati. E' stato tutto un brutto sogno... oppure no?"+
-                                                         "<p class='credits'>Grazie per aver giocato a <b>Massive Randomness 2</b><br>Un generatore casuale di avventure one-shot per Massive Darkness 2!</p>"+
-                                                         "<p class='credits'><b>Di:</b> {label.creditsBy}</p>"+
-                                                         "<p class='credits'>Grazie a Alex Olteanu e Marco Portugal per aver progettato quell'esperienza alla Diablo della quale avevo bisogno da tanto tempo!</p>"+
-                                                         "<p class='credits'>Grazie a {label.thankDungeonSkills} per aver creato il modulo <a target=_blank href='https://boardgamegeek.com/filepage/245223/dungeon-skills-challenge'>Dungeon Skills Challenge</a>.</p>"+
-                                                         "<p class='credits'><b>Grazie per aver condiviso le loro idee a:</b> {label.thankIdeas}</p>"+
-                                                         "<p class='credits'><b>Grazie a:</b> {label.thank}</p>"+
+                                                         "{label.credits}"+
                                                          "</span></span></span>",
                                                          EN:"<span class='hiddentext'>The world crumbles around the heroes. Put all the game components back in the box, leaving the 6-sided die aside. Then reveal this text: <span class='hiddentext'><p>Roll the 6-sided die one last time. <i>I won't let you get away that easily.</i></p><ul>"+
                                                          "<li><b>If 1-3 is rolled:</b> <span class='hiddentext'>the Mission ends in victory</li>"+
                                                          "<li><b>If 4-6 is rolled:</b> <span class='hiddentext'>the Mission ends in victory</li>"+
                                                          "</ul>Then reveal this text: <span class='hiddentext'>The heroes suddenly wake up, lying on the hard bed of a familiar, dark inn. They look at each other, confused and alarmed. Was it all a bad dream... or wasn't it?"+
-                                                         "<p class='credits'>Thank you for playing <b>Massive Randomness 2</b><br>A Massive Darkness 2 one-shot quest random generator!</p>"+
-                                                         "<p class='credits'><b>By:</b> {label.creditsBy}</p>"+
-                                                         "<p class='credits'>Thanks to Alex Olteanu and Marco Portugal for designing that tabletop Diablo-esque experience I needed for long time!</p>"+
-                                                         "<p class='credits'>Thanks to {label.thankDungeonSkills} for creating the <a target=_blank href='https://boardgamegeek.com/filepage/245223/dungeon-skills-challenge'>Dungeon Skills Challenge</a> module.</p>"+
-                                                         "<p class='credits'><b>Thanks for sharing their ideas to:</b> {label.thankIdeas}</p>"+
-                                                         "<p class='credits'><b>Thanks to:</b> {label.thank}</p>"+
+                                                         "{label.credits}"+
+                                                         "</span></span></span>"
+                                                     }
+                                                 ],
+                                                 campaignExplanation:[
+                                                     {
+                                                         IT:"<span class='hiddentext'>Il mondo si sgretola attorno agli eroi. Rimetti nella scatola tutti i componenti di gioco, lasciando da parte il dado a 6 facce. Poi svela questo testo: <span class='hiddentext'><p>Tira il dado a 6 facce un'ultima volta. <i>Non ti lascer&ograve; scappare cos&igrave; facilmente.</i></p><ul>"+
+                                                         "<li><b>Se esce 1-3:</b> <span class='hiddentext'>la Missione termina con una vittoria</li>"+
+                                                         "<li><b>Se esce 4-6:</b> <span class='hiddentext'>la Missione termina con una vittoria</li>"+
+                                                         "</ul>Poi svela questo testo: <span class='hiddentext'>Gli eroi si svegliano d'improvviso, distesi sul duro letto di una familiare e buia locanda. Si guardano l'un l'altro, confusi e allarmati. E' stato tutto un brutto sogno... oppure no?"+
+                                                         "</span></span></span>",
+                                                         EN:"<span class='hiddentext'>The world crumbles around the heroes. Put all the game components back in the box, leaving the 6-sided die aside. Then reveal this text: <span class='hiddentext'><p>Roll the 6-sided die one last time. <i>I won't let you get away that easily.</i></p><ul>"+
+                                                         "<li><b>If 1-3 is rolled:</b> <span class='hiddentext'>the Mission ends in victory</li>"+
+                                                         "<li><b>If 4-6 is rolled:</b> <span class='hiddentext'>the Mission ends in victory</li>"+
+                                                         "</ul>Then reveal this text: <span class='hiddentext'>The heroes suddenly wake up, lying on the hard bed of a familiar, dark inn. They look at each other, confused and alarmed. Was it all a bad dream... or wasn't it?"+
                                                          "</span></span></span>"
                                                      }
                                                  ]
@@ -930,7 +1012,14 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "default" ],
                                         }
-                                    ]
+                                    ],
+                                    campaign:{
+                                        sideQuests:[
+                                            { tags:[
+                                                [ "visitAllRooms" ]
+                                            ] }
+                                        ]
+                                    }
                                 }
                             ]
                         }

@@ -3,8 +3,9 @@ Interface=(function() {
     const
         DEBUG_RENDER = false,
         DEBUG_QUEST = false,
+        DEBUG_CAMPAIGN = false,
         DEBUG_HIDDENTEXT = false,
-        VERSION = "0.1b",
+        VERSION = "0.2b",
         SOURCES_AT = {
             short:"github.com/kesiev/massive-randomness-2",
             full:"https://github.com/kesiev/massive-randomness-2"
@@ -136,7 +137,13 @@ Interface=(function() {
             QuestRenderer.render(lastResources,lastResult,language,bodyNode,{
                 debugRender:DEBUG_RENDER,
                 debugHiddenText:DEBUG_HIDDENTEXT,
-                questUnavailableLabel:INTERFACE.labels.questUnavailable
+                questUnavailableLabel:INTERFACE.labels.questUnavailable,
+                gotoPageCallback:(page)=>{
+                    if (!generating) {
+                        lastResult.campaign.page = page;
+                        generate();
+                    }
+                }
             });
             if (lastResult.quest && (lastResult.quest.languages.indexOf(language) == -1)) {
                 noticebarNode.innerHTML=getLabel(language,INTERFACE.labels.languageUnavailable);
@@ -145,7 +152,17 @@ Interface=(function() {
                 noticebarNode.innerHTML="";
                 noticebarNode.style.display="none";
             }
+            headerNode.scrollIntoView();
         }
+    }
+
+    function isMenuOptionSelected(settings,option) {
+        for (let i=0;i<INTERFACE.settings.length;i++)
+            if (settings[i])
+                for (let j=0;j<settings[i].length;j++)
+                    if (INTERFACE.settings[i].entries[settings[i][j]].idOption == option)
+                        return true;
+        return false;
     }
 
     function isOptionSelected(selected,entry,id) {
@@ -157,74 +174,94 @@ Interface=(function() {
             return selected.indexOf(id) != -1;
     }
 
-    function generate() {
+    function generate(fromscratch) {
         if (!generating) {
+
             let
+                requirements;
+
+            if (fromscratch) {
+
                 requirements = {};
+            
+                for (let k in SETTINGS_DEFAULT)
+                    requirements[k] = SETTINGS_DEFAULT[k].slice();
 
-            for (let k in SETTINGS_DEFAULT)
-                requirements[k] = SETTINGS_DEFAULT[k].slice();
+                INTERFACE.settings.forEach((setting,sid)=>{
 
-            INTERFACE.settings.forEach((setting,sid)=>{
+                    if (
+                        (!setting.ifMenuOptionSelected || isMenuOptionSelected(settings,setting.ifMenuOptionSelected))
+                    ) {
 
-                let
-                    picked = [],
-                    notPicked = [],
-                    selected = settings[sid];
-                
-                setting.entries.forEach((entry,id)=>{
-                    if (entry.languageExcludeTags && entry.languageExcludeTags[language]) {
-                        if (isOptionSelected(selected,entry,id))
-                            entry.languageExcludeTags[language].forEach(tag=>{
-                                if (notPicked.indexOf(tag) == -1)
-                                    notPicked.push(tag)
-                            });
-                    }
-                    if (entry.tags)
-                        if (isOptionSelected(selected,entry,id))
-                            entry.tags.forEach(tag=>{
-                                if (picked.indexOf(tag) == -1)
-                                    picked.push(tag)
-                            });
-                        else
-                            entry.tags.forEach(tag=>{
-                                if (notPicked.indexOf(tag) == -1)
-                                notPicked.push(tag)
-                            });
-                    if (entry.excludeTags)
-                        if (isOptionSelected(selected,entry,id))
-                            entry.excludeTags.forEach(tag=>{
-                                if (notPicked.indexOf(tag) == -1)
-                                    notPicked.push(tag)
-                            });
-                });
+                        let
+                            picked = [],
+                            notPicked = [],
+                            selected = settings[sid];
 
-                switch (setting.type) {
-                    case "includeExclude":{
-                        notPicked.forEach(item=>{
-                            if (requirements.excludes.indexOf(item) == -1)
-                                requirements.excludes.push(item)
+                        setting.entries.forEach((entry,id)=>{
+                            if (entry.languageExcludeTags && entry.languageExcludeTags[language]) {
+                                if (isOptionSelected(selected,entry,id))
+                                    entry.languageExcludeTags[language].forEach(tag=>{
+                                        if (notPicked.indexOf(tag) == -1)
+                                            notPicked.push(tag)
+                                    });
+                            }
+                            if (entry.tags)
+                                if (isOptionSelected(selected,entry,id))
+                                    entry.tags.forEach(tag=>{
+                                        if (picked.indexOf(tag) == -1)
+                                            picked.push(tag)
+                                    });
+                                else
+                                    entry.tags.forEach(tag=>{
+                                        if (notPicked.indexOf(tag) == -1)
+                                        notPicked.push(tag)
+                                    });
+                            if (entry.excludeTags)
+                                if (isOptionSelected(selected,entry,id))
+                                    entry.excludeTags.forEach(tag=>{
+                                        if (notPicked.indexOf(tag) == -1)
+                                            notPicked.push(tag)
+                                    });
                         });
-                        break;
-                    }
-                }
 
-                picked.forEach(item=>{
-                    if (requirements.needs.indexOf(item) == -1)
-                        requirements.needs.push(item)
+                        switch (setting.type) {
+                            case "includeExclude":{
+                                notPicked.forEach(item=>{
+                                    if (requirements.excludes.indexOf(item) == -1)
+                                        requirements.excludes.push(item)
+                                });
+                                break;
+                            }
+                        }
+
+                        picked.forEach(item=>{
+                            if (requirements.needs.indexOf(item) == -1)
+                                requirements.needs.push(item)
+                        });
+
+                    }
+
                 });
 
-            });
+                generating = true;
+                bodyNode.innerHTML = "<div class='generating'>"+getLabel(language,INTERFACE.labels.wait)+"</div>";
+                if (!seed) increaseCounter();
 
-            generating = true;
-            bodyNode.innerHTML = "<div class='generating'>"+getLabel(language,INTERFACE.labels.wait)+"</div>";
-            if (!seed) increaseCounter();
+            }
 
             Generator.generate(requirements,seed,{
-                debugQuest:DEBUG_QUEST
-            },(resources,result)=>{
+                debugQuest:DEBUG_QUEST,
+                campaignDebugQuest:DEBUG_CAMPAIGN && DEBUG_QUEST
+            },
+            fromscratch ? false : lastResult.campaign,
+            (resources,result)=>{
+                let
+                    hash;
                 seed = result.seed;
-                saveId(settingsToHash());
+                hash = settingsToHash();
+                saveId(hash);
+                result.hash = hash;
                 generating = false;
                 lastResources = resources;
                 lastResult = result;
@@ -279,26 +316,58 @@ Interface=(function() {
             id = 0;
         settingsNode.innerHTML = "";
         INTERFACE.settings.forEach((setting,sid)=>{
-            let
-                panelNode = createNode(settingsNode,"div","panel"),
-                sectionNode = createNode(panelNode,"div","section"),
-                itemsNode = createNode(panelNode,"div","items");
+            if (
+                (setting.ifMenuOptionSelected && !isMenuOptionSelected(settings,setting.ifMenuOptionSelected))
+            ) {
+                // Hide entry
+            } else {
 
-            sectionNode.innerHTML = getLabel(language,setting.title);
+                let
+                    panelNode = createNode(settingsNode,"div","panel"),
+                    sectionNode = createNode(panelNode,"div","section"),
+                    itemsNode = createNode(panelNode,"div","items");
 
-            setting.entries.forEach((entry,eid)=>{
+                sectionNode.innerHTML = getLabel(language,setting.title);
 
-                id++;
+                setting.entries.forEach((entry,eid)=>{
 
-                if (
-                    entry.isHidden ||
-                    (entry.ifFlag && !isFlag(entry.ifFlag)) ||
-                    (entry.ifNotFlag && isFlag(entry.ifNotFlag))
-                ) {
-                    // Hide entry
-                } else if (entry.isButton) {
+                    id++;
 
-                    if (!entry.isInstallerButton || showInstaller) {
+                    if (
+                        entry.isHidden ||
+                        (entry.ifFlag && !isFlag(entry.ifFlag)) ||
+                        (entry.ifNotFlag && isFlag(entry.ifNotFlag)) ||
+                        (entry.ifMenuOptionSelected && !isMenuOptionSelected(settings,entry.ifMenuOptionSelected))
+                    ) {
+                        // Hide entry
+                    } else if (entry.isButton) {
+
+                        if (!entry.isInstallerButton || showInstaller) {
+
+                            let
+                                itemNode = createNode(itemsNode,"div","item"),
+                                selectorNode = createNode(itemNode,"div","selector"),
+                                labelNode = createNode(itemNode,"label","label"),
+                                entryId = "selector"+id;
+
+                            entry._selector = createNode(selectorNode,"div","optionbutton");
+                            entry._selector.id = entryId;
+                            entry._selector.innerHTML = getLabel(language,entry.label);
+                            if (entry.isInstallerButton)
+                                entry._selector.onclick=()=>{
+                                    Installer.install(()=>{
+                                        showInstaller = false;
+                                        drawSettings();
+                                    })
+                                }
+                            else if (entry.isFlagButton)
+                                entry._selector.onclick=()=>{
+                                    showFlagPopup(entry);
+                                }
+                            labelNode.innerHTML = "<span class='description'>"+getLabel(language,entry.description)+"</span>";
+                        }
+
+                    } else {
 
                         let
                             itemNode = createNode(itemsNode,"div","item"),
@@ -306,72 +375,50 @@ Interface=(function() {
                             labelNode = createNode(itemNode,"label","label"),
                             entryId = "selector"+id;
 
-                        entry._selector = createNode(selectorNode,"div","optionbutton");
-                        entry._selector.id = entryId;
-                        entry._selector.innerHTML = getLabel(language,entry.label);
-                        if (entry.isInstallerButton)
+                        labelNode.setAttribute("for",entryId);
+
+                        if (setting.isSingleOption) {
+                            entry._selector = createNode(selectorNode,"input","control");
+                            entry._selector.id = entryId;
+                            entry._selector.type = "radio";
                             entry._selector.onclick=()=>{
-                                Installer.install(()=>{
-                                    showInstaller = false;
-                                    drawSettings();
-                                })
-                            }
-                        else if (entry.isFlagButton)
-                            entry._selector.onclick=()=>{
-                                showFlagPopup(entry);
-                            }
-                        labelNode.innerHTML = "<span class='description'>"+getLabel(language,entry.description)+"</span>";
-                    }
-
-                } else {
-
-                    let
-                        itemNode = createNode(itemsNode,"div","item"),
-                        selectorNode = createNode(itemNode,"div","selector"),
-                        labelNode = createNode(itemNode,"label","label"),
-                        entryId = "selector"+id;
-
-                    labelNode.setAttribute("for",entryId);
-
-                    if (setting.isSingleOption) {
-                        entry._selector = createNode(selectorNode,"input","control");
-                        entry._selector.id = entryId;
-                        entry._selector.type = "radio";
-                        entry._selector.onclick=()=>{
-                            settings[sid]=[eid];
-                            loadSettingsFrom(SETTINGS_SOURCES.MEMORY);
-                            showSettings();
-                        }
-                    } else {
-                        entry._selector = createNode(selectorNode,"input","control");
-                        entry._selector.id = entryId;
-                        entry._selector.type = "checkbox";
-                        if (entry.isMandatory)
-                            entry._selector.disabled = "disabled";
-                        else
-                            entry._selector.onclick=()=>{
-                                if (entry.isFlag) {
-                                    if (isFlag(entry.isFlag))
-                                        unsetFlag(entry.isFlag);
-                                    else
-                                        setFlag(entry.isFlag);
-                                } else {
-                                    let
-                                        pos = settings[sid].indexOf(eid);
-                                    if (pos == -1)
-                                        settings[sid].push(eid);
-                                    else
-                                        settings[sid].splice(pos,1);
-                                }
+                                settings[sid]=[eid];
                                 loadSettingsFrom(SETTINGS_SOURCES.MEMORY);
+                                if (entry.idOption) drawSettings();
                                 showSettings();
                             }
-                    }
-                
-                    labelNode.innerHTML = "<span class='name'>"+getLabel(language,entry.label)+"</span><span class='description'> - "+getLabel(language,entry.description)+"</span>";
+                        } else {
+                            entry._selector = createNode(selectorNode,"input","control");
+                            entry._selector.id = entryId;
+                            entry._selector.type = "checkbox";
+                            if (entry.isMandatory)
+                                entry._selector.disabled = "disabled";
+                            else
+                                entry._selector.onclick=()=>{
+                                    if (entry.isFlag) {
+                                        if (isFlag(entry.isFlag))
+                                            unsetFlag(entry.isFlag);
+                                        else
+                                            setFlag(entry.isFlag);
+                                    } else {
+                                        let
+                                            pos = settings[sid].indexOf(eid);
+                                        if (pos == -1)
+                                            settings[sid].push(eid);
+                                        else
+                                            settings[sid].splice(pos,1);
+                                    }
+                                    loadSettingsFrom(SETTINGS_SOURCES.MEMORY);
+                                    if (entry.idOption) drawSettings();
+                                    showSettings();
+                                }
+                        }
+                    
+                        labelNode.innerHTML = "<span class='name'>"+getLabel(language,entry.label)+"</span><span class='description'> - "+getLabel(language,entry.description)+"</span>";
 
-                }
-            })
+                    }
+                })
+            }
         })
     }
 
@@ -384,7 +431,15 @@ Interface=(function() {
             let
                 defaults = [],
                 mandatory = [],
-                selected = source == SETTINGS_SOURCES.MEMORY ? settings[sid] : [];
+                selected;
+
+            if (
+                (source == SETTINGS_SOURCES.MEMORY) &&
+                (!setting.ifMenuOptionSelected || isMenuOptionSelected(newSettings,setting.ifMenuOptionSelected))
+            )
+                selected = settings[sid];
+            else
+                selected = [];
 
             setting.entries.forEach((entry,id)=>{
                 if (entry.isDefault)
@@ -442,12 +497,16 @@ Interface=(function() {
             let
                 selected = settings[sid];
            
-            setting.entries.forEach((entry,id)=>{
+            if (
+                (!setting.ifMenuOptionSelected || isMenuOptionSelected(settings,setting.ifMenuOptionSelected))
+            ) setting.entries.forEach((entry,id)=>{
                 if (
+                    entry._selector &&
                     !entry.isButton &&
                     !entry.isHidden &&
                     (!entry.ifFlag || isFlag(entry.ifFlag)) &&
-                    (!entry.ifNotFlag || !isFlag(entry.ifNotFlag))
+                    (!entry.ifNotFlag || !isFlag(entry.ifNotFlag)) &&
+                    (!entry.ifMenuOptionSelected || isMenuOptionSelected(settings,entry.ifMenuOptionSelected))
                 )
                     entry._selector.checked = isOptionSelected(selected,entry,id);
             });
@@ -560,7 +619,7 @@ Interface=(function() {
 
             newQuestNode.onclick=()=>{
                 seed = 0;
-                generate()
+                generate(true)
             }
 
             settingsButtonNode.onclick=()=>{
@@ -577,7 +636,7 @@ Interface=(function() {
             setSettingsMode(settingsMode);
             showSettings();
 
-            generate();
+            generate(true);
 
             if (window.Installer)
                 Installer.check(()=>{
@@ -590,7 +649,7 @@ Interface=(function() {
                 if (loadId()) {
                     loadSettingsFrom(SETTINGS_SOURCES.SESSION);
                     showSettings();
-                    generate();
+                    generate(true);
                 }
             }
         }
