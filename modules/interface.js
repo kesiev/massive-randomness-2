@@ -43,8 +43,8 @@ ModManager.modules.push(function(){
                                             EN:"Massive Darkness 2: Heavenfall"
                                         },
                                         description:{
-                                            IT:"4 tessere paradiso e modalit&agrave; campagna",
-                                            EN:"4 heaven tiles and campaign mode"
+                                            IT:"4 tessere paradiso, Modalit&agrave; Campagna e boss",
+                                            EN:"4 heaven tiles, Campaign Mode, and bosses"
                                         },
                                         tags:[ "md2-heavenfall" ]
                                     },{
@@ -58,6 +58,17 @@ ModManager.modules.push(function(){
                                             EN:"4 rainbow tiles"
                                         },
                                         tags:[ "md2-rainbowcrossing" ]
+                                    },{
+                                        code:"H",
+                                        label:{
+                                            IT:"Massive Darkness 2: Pack di Aggiornamento",
+                                            EN:"Massive Darkness 2: Upgrade Pack"
+                                        },
+                                        description:{
+                                            IT:"Carte della Campagna Prologo",
+                                            EN:"Prologue Campaign cards"
+                                        },
+                                        tags:[ "campaign-upgradepack" ]
                                     },{
                                         code:"D",
                                         label:{
@@ -209,7 +220,7 @@ ModManager.modules.push(function(){
                                             IT:"Genera una serie di avventure da giocare in sequenza seguendo le regole di Massive Darkness 2: Heavenfall.",
                                             EN:"Generate a series of adventures to be played in sequence following the rules of Massive Darkness 2: Heavenfall."
                                         },
-                                        tags:[ "generator-campaign" ]
+                                        tags:[ "generator-campaign", "boss" ]
                                     }
                                 ]
                             },{
@@ -324,6 +335,18 @@ ModManager.modules.push(function(){
                                             EN:"It adds extra challenges to the adventure, you can decide whether to accept or not.",
                                         },
                                         tags:[ "challenges-default" ]
+                                    },{
+                                        code:"N",
+                                        ifMenuOptionSelected:"generator-oneshot",
+                                        label:{
+                                            IT:"Scontri con i Boss",
+                                            EN:"Boss fights"
+                                        },
+                                        description:{
+                                            IT:"Aggiunge al termine di alcune avventure uno scontro con il boss.",
+                                            EN:"It adds a boss fight at the end of some quests.",
+                                        },
+                                        tags:[ "boss" ]
                                     },{
                                         code:"Y",
                                         ifMenuOptionSelected:"generator-oneshot",

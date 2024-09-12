@@ -143,10 +143,10 @@ ModManager.modules.push(function(){
                                 explanation:{
                                     IT:"Le tessere delle torri contengono sia Zone degli edifici che Zone di strada, delimitate dai bastioni:<ul>"+
                                         "<li>I bastioni non possono essere attraversati, ma non bloccano le Linee di Vista.</li>"+
-                                        "<li>È possibile tirare attraverso i bastioni.</li>"+
-                                        "<li>Un Eroe o un Nemico nella Zona di una torre può vedere al di sopra di un edificio, fino alle Zone oltre di esso. Analogamente, qualsiasi Eroe o Nemico in una di quelle Zone possiede Linea di Vista fino all'Eroe o al Nemico sulla torre.</li>"+
-                                        "<li>Un Eroe pu&ograve; tirare dalla Zona di una torre al di sopra di una Zona di un edificio. La Zona dell'edificio attraversata dal tiro conta ai fini di determinare la gittata dell'arma o dell'incantesimo, ma non è raggiunta da una Linea di Vista.</li>"+
-                                        "<li>Non è possibile tracciare Linee di Vista tra le Zone delle torri delimitate dai bastioni e le zone degli edifici adiacenti a esse, nemmeno se c'&egrave; una porta aperta.</li>"+
+                                        "<li>&Egrave; possibile tirare attraverso i bastioni.</li>"+
+                                        "<li>Un Eroe o un Nemico nella Zona di una torre pu&ograve; vedere al di sopra di un edificio, fino alle Zone oltre di esso. Analogamente, qualsiasi Eroe o Nemico in una di quelle Zone possiede Linea di Vista fino all'Eroe o al Nemico sulla torre.</li>"+
+                                        "<li>Un Eroe pu&ograve; tirare dalla Zona di una torre al di sopra di una Zona di un edificio. La Zona dell'edificio attraversata dal tiro conta ai fini di determinare la gittata dell'arma o dell'incantesimo, ma non &egrave; raggiunta da una Linea di Vista.</li>"+
+                                        "<li>Non &egrave; possibile tracciare Linee di Vista tra le Zone delle torri delimitate dai bastioni e le zone degli edifici adiacenti a esse, nemmeno se c'&egrave; una porta aperta.</li>"+
                                         "</ul>",
                                     EN:"Tower tiles feature both building and street Zones, bordered by ramparts:<ul>"+
                                         "<li>Ramparts can't be crossed but don't block Lines of Sight</li>"+
