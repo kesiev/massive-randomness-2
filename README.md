@@ -44,6 +44,41 @@ Avoiding spoilers, the _load_ on these systems has been cleverly spread around t
 
 The Heavenfall campaign uses a lot of extra game material that can't be used in one-shots (i.e., the city, some special items, and Level 6-10 enemies/heroes) so I've attempted a _random campaign generator_ for Massive Randomness 2 to give them some kind of _second life_. I did my best to _squeeze_ the material I've got and wrap it with a story that goes deeper into _The Massive Randomness_ lore. I hope you'll like it!
 
+#### Boss fights
+
+In most of the _Diablo-like_ action-RPG videogames I've played, while the enemies are designed to be as _intimidating_ as possible in any possible way (character design, size on the screen, stats, horde size, etc.), they rarely are there to _create a direct challenge_ to the players as it happens on many games. They feel more like _character build gates_ and ways to give the players _more elements to improve their build_. If the players can push their carefully crafted builds enough to beat the enemies, there are two prizes to them: an _adrenaline_ burst for winning as an outnumbered hero and a _dopamine_ burst from the spray of loot that comes from their corpses, to be used to improve that build even more.
+
+<div align="center" style="margin:60px 0">
+    <p><img src="markdown/d3.png"></p>
+    <p>Diablo 3 screenshots summarizing two key ingredients of the genre: adrenaline bursts by eliminating huge enemy hordes and dopamine bursts from loop sprays.</p>
+</div>
+
+I've found this _enemy as gates_ principle in many cooperative/solitaire board games. In one of my favorite boss battlers [Aeon's End](https://boardgamegeek.com/boardgame/191189/aeons-end), bosses mostly challenge the players to create and manage _strong enough_ builds _by the end of the game_. Even the cute trick-taking game [For Northwood!](https://boardgamegeek.com/boardgame/334590/for-northwood-a-solo-trick-taking-game) uses a similar approach, even if more subtle: "enemies" are _a goal_ the player must reach by evaluating their hand of cards and their _allies set_.
+
+What's hard to bring to the board are the rewards' _adrenaline_ and _dopamine_ bursts. Strictly both.
+
+Massive Darkness 2 attempts to implement them with tons of plastic and cards. Hordes mostly behave like single enemies but they are made by _multiple miniatures with a scary general miniature_ and bosses are _huge sculptures scaringly moving in a tight room_, so taking them down in a few hits provides that _adrenaline_ effect. Getting rid of enemies often gives you _multiple_ random and valuable item cards you can use _right away_ to improve your character - and that fixes the _dopamine_ part.
+
+<div align="center" style="margin:60px 0">
+    <p><img src="markdown/md2-room.png"></p>
+    <p>Opening a single regular room door in a 2-player Massive Darkness 2 game may spawn 6 enemies near the players that will attack them right after the end of the round, mimicking the ARPG hordes. This room also provides 6 item cards (2 weapons wielded by the enemies, 2 extra rewards from beating them, and 2 by picking the loot tokens on the ground), providing the loot spray feeling.</p>
+</div>
+
+But there is a price to pay for that. In this case, _literally_. Players have to purchase all of this plastic and these cards to play the game. All of this plastic and cards are destined to randomly appear on the table, to be consumed in a flash, and not to be seen for many quests. Board game designers usually attempt to maximize their components reuse instead, creating synergies between elements, reusing them for multiple purposes, or changing their behavior with the context.
+
+So Massive Darkness 2 probably decided not to do that _to create a very specific experience and pace_ and maybe this decision has been the game's blessing to be so good to people looking for this specific kind of game, and the game's curse to require designing and producing a lot of stuff to add something impactful to the game.
+
+<div align="center" style="margin:60px 0">
+    <p><img src="markdown/md2.png"></p>
+    <p>On the left, an organizer with some of the Massive Darkness 2 base game cards: when a horde or a Roaming Monster is eliminated one or more of the the small cards on the front row are gained. On the right, the Fallen Angels enemies set: a horde is composed by 1 Leader plus a number of Minions equal to the number of Heroes in the game, always outnumbering them.</p>
+</div>
+
+Looking for Massive Randomness 2 feedback on the internet I discovered that the tool is mostly used to _give more life to a good but abandoned game_ and a recurring feature request is to add _Boss Fights_ to the generated quests. I think that some people want to _squeeze_ a little more _adrenaline and dopamine_ from their favorite game's components.
+
+Massive Randomness 2 was missing bosses since they do not scale with the player's level as the other enemies and are tied to specific scenarios, so some adaptation was needed to add them. Moreover, they take little time to be taken down and give no loot.
+
+But they are the _character build gates_ of Massive Darkness 2: huge miniatures to be fight in a tight space ready to give one last _adrenaline burst_ to the players. So I've kicked some data on a spreadsheet and attempted to adapt them to almost all the generated quests. I hope it will do the job!
+
 ### Technical notes
 
  * If your browser supports PWA and Service Worker, you should be able to install MR2 on your device from the browser options menu and use it offline. Offline support for web applications has been a bit esoteric in the past and still is, so it may not work for you. If you intend to self-host MR2 and do not want this functionality, please remove/comment out the inclusion of the `js/installer.js` script in `index.html`.
