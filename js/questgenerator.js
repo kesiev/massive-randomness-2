@@ -111,6 +111,7 @@ QuestGenerator=(function() {
             quest.specialClass = questVersion.specialClass;
             quest.title = pickRandomElementValue(questVersion.title);
             quest.story = pickRandomElementValue(questVersion.story);
+            quest.boss = questVersion.boss;
             
             if (questVersion.objectivesHeader)
                 quest.objectivesHeader = pickRandomElementValue(questVersion.objectivesHeader);
@@ -193,6 +194,7 @@ QuestGenerator=(function() {
                 mergeMapConfig(resources,k,pickRandomElementValue(mapModel[k]),mapConfig);
         
             // Apply the game mode (if any)
+            
             if (resources.gameMode) {
 
                 if (resources.gameMode.specialRules)

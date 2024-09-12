@@ -1,5 +1,19 @@
 ModManager.modules.push(function(){
 
+    const
+        QUESTVICTORY = [
+            {
+                IT:[ "la Missione termina con una vittoria", "terminare la Missione con una vittoria" ],
+                EN:[ "the Mission ends with a victory", "end the Mission with a victory" ]
+            }
+        ],
+        BOSSBEAT = [
+            {
+                IT:[ "viene eliminato", "viene eliminata" ],
+                EN:[ "it is eliminated", "it is eliminated" ]
+            }
+        ];
+
     return [
         {
             id:"quests-hellscape",
@@ -124,6 +138,8 @@ ModManager.modules.push(function(){
                                                         EN:[ "The Last Challenge" ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 noDoor:[
                                                     {
                                                         IT:[ "{label.gate@5}" ],
@@ -252,14 +268,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Quando aprite la porte con il bordo rosso sulla Tessera {tileLabel.center} non risolvete carte Porta, rimuovete il segnalino Corruzione {symbol.corruptionToken} e generate un Mostro Errante di Livello 5 nella sua zona.<p>Pescate carte dal mazzo degli Oggetti dell'Orda di Livello 5 finch&eacute; non rivelate un'arma con lo stesso tipo di attacco del Mostro Errante. Assegnate quell'arma al Mostro Errante, aggiungendo i dadi dell'arma alla riserva di dadi di Attacco del Mostro Errante.</p>",
-                                                        EN:"When you open the door with the red outline on the {tileLabel.center} tile, do not resolve Door cards, remove the Corruption token {symbol.corruptionToken}, and generate a Level 5 Roaming Monster in its area.<p>Draw cards from the Level 5 Horde Items deck until you reveal a weapon with the same attack type as the Roaming Monster. Equip that weapon to the Roaming Monster, adding the weapon's dice to the Roaming Monster's Attack dice pool.</p>"
+                                                        IT:"Quando aprite la porte con il bordo rosso sulla Tessera {tileLabel.center} non risolvete carte Porta, rimuovete il segnalino Corruzione {symbol.corruptionToken} e generate un Mostro Errante di Livello 5 nella sua zona.<p>Pescate carte dal mazzo degli Oggetti dell'Orda di Livello 5 finch&eacute; non rivelate un'arma con lo stesso tipo di attacco del Mostro Errante. Assegnate quell'arma al Mostro Errante, aggiungendo i dadi dell'arma alla riserva di dadi di Attacco del Mostro Errante.</p><p>Quando il Mostro Errante viene sconfitto {label.questVictory@0}.</p>",
+                                                        EN:"When you open the door with the red outline on the {tileLabel.center} tile, do not resolve Door cards, remove the Corruption token {symbol.corruptionToken}, and generate a Level 5 Roaming Monster in its area.<p>Draw cards from the Level 5 Horde Items deck until you reveal a weapon with the same attack type as the Roaming Monster. Equip that weapon to the Roaming Monster, adding the weapon's dice to the Roaming Monster's Attack dice pool.</p><p>When the Roaming Monster is defeated {label.questVictory@0}.</p>"
                                                     }
                                                 ],
                                                 campaignExplanation:[
                                                     {
-                                                        IT:"Quando aprite la porte con il bordo rosso sulla Tessera {tileLabel.center} non risolvete carte Porta, rimuovete il segnalino Corruzione {symbol.corruptionToken} e generate {label.campaignBoss@0} nella sua zona.<p>Pescate carte dal mazzo degli Oggetti dell'Orda corrispondente al suo rango finch&eacute; non rivelate un'arma con lo stesso tipo di attacco del Mostro Errante. Assegnate quell'arma al Mostro Errante, aggiungendo i dadi dell'arma alla riserva di dadi di Attacco del Mostro Errante.</p>",
-                                                        EN:"When you open the door with the red outline on the {tileLabel.center} tile, do not resolve Door cards, remove the Corruption token {symbol.corruptionToken}, and generate {label.campaignBoss@0} in its area.<p>Draw cards from the Horde Items deck matching its rank until you reveal a weapon with the same attack type as the Roaming Monster. Equip that weapon to the Roaming Monster, adding the weapon's dice to the Roaming Monster's Attack dice pool.</p>"
+                                                        IT:"Quando aprite la porte con il bordo rosso sulla Tessera {tileLabel.center} non risolvete carte Porta, rimuovete il segnalino Corruzione {symbol.corruptionToken} e generate {label.campaignBoss@0} nella sua zona.<p>Pescate carte dal mazzo degli Oggetti dell'Orda corrispondente al suo rango finch&eacute; non rivelate un'arma con lo stesso tipo di attacco del Mostro Errante. Assegnate quell'arma al Mostro Errante, aggiungendo i dadi dell'arma alla riserva di dadi di Attacco del Mostro Errante.</p><p>Quando il Mostro Errante viene sconfitto {label.questVictory@0}.</p>",
+                                                        EN:"When you open the door with the red outline on the {tileLabel.center} tile, do not resolve Door cards, remove the Corruption token {symbol.corruptionToken}, and generate {label.campaignBoss@0} in its area.<p>Draw cards from the Horde Items deck matching its rank until you reveal a weapon with the same attack type as the Roaming Monster. Equip that weapon to the Roaming Monster, adding the weapon's dice to the Roaming Monster's Attack dice pool.</p><p>When the Roaming Monster is defeated {label.questVictory@0}.</p>"
                                                     }
                                                 ]
                                             }
@@ -284,6 +300,27 @@ ModManager.modules.push(function(){
                                                 [ "visitAllRooms", "noDoor" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Finire il combattimento in sospeso contro {boss.bossBadName@0}",
+                                                    EN:"Finish the pending fight against {boss.bossBadName@0}"
+                                                }
+                                            }
+                                        ],
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]
@@ -319,14 +356,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 destination:[
                                                     {
-                                                        IT:[ "alla", "Valle degli Spiriti", "entrare nella" ],
-                                                        EN:[ "to the", "Spirit Valley", "enter into" ]
+                                                        IT:[ "alla", "Valle degli Spiriti", "entrare nella", "nella" ],
+                                                        EN:[ "to the", "Spirit Valley", "enter into", "in the" ]
                                                     },{
-                                                        IT:[ "verso la", "Capitale degli Antichi", "entrare nella" ],
-                                                        EN:[ "towards the", "Capital of the Ancients", "enter the" ],
+                                                        IT:[ "verso la", "Capitale degli Antichi", "entrare nella", "nella" ],
+                                                        EN:[ "towards the", "Capital of the Ancients", "enter the", "in the" ],
                                                     },{
-                                                        IT:[ "verso le", "Scogliere Tempestose", "raggiungere le" ],
-                                                        EN:[ "toward the", "Stormy Cliffs", "reach the" ],
+                                                        IT:[ "verso le", "Scogliere Tempestose", "raggiungere le", "sulle" ],
+                                                        EN:[ "toward the", "Stormy Cliffs", "reach the", "on the" ],
                                                     }
                                                 ],
                                                 block:[
@@ -353,6 +390,8 @@ ModManager.modules.push(function(){
                                                         EN:[ "If we want to continue our journey" ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 collectMoreItems:[
                                                     {
                                                         IT:[ 15, "{label.block:capital@5}", "{label.block:capital@5} per ogni Eroe" ],
@@ -471,8 +510,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Non appena gli Eroi possiedono un totale di 10 {label.block:capital@5} per Eroe, possono uscire dal Dungeon attraverso {label.gate@4} {label.gate:capital@5}: un Eroe che si trova nella {label.gate@6} pu&ograve; spendere 1 PM per uscire dal Dungeon. Non appena tutti gli Eroi sono usciti dal Dungeon, la Missione termina con una vittoria.",
-                                                        EN:"As soon as the Heroes have a total of 10 {label.block:capital@5} per Hero, they can exit the Dungeon through {label.gate@4} {label.gate:capital@5}: a Hero in the {label.gate@6} can spend 1 MP to exit the Dungeon. As soon as all Heroes have exited the Dungeon, the Mission ends with a victory."
+                                                        IT:"Non appena gli Eroi possiedono un totale di 10 {label.block:capital@5} per Eroe, possono uscire dal Dungeon attraverso {label.gate@4} {label.gate:capital@5}: un Eroe che si trova nella {label.gate@6} pu&ograve; spendere 1 PM per uscire dal Dungeon. Non appena tutti gli Eroi sono usciti dal Dungeon, {label.questVictory@0}.",
+                                                        EN:"As soon as the Heroes have a total of 10 {label.block:capital@5} per Hero, they can exit the Dungeon through {label.gate@4} {label.gate:capital@5}: a Hero in the {label.gate@6} can spend 1 MP to exit the Dungeon. As soon as all Heroes have exited the Dungeon, {label.questVictory@0}."
                                                     }
                                                 ]
                                             }
@@ -498,6 +537,27 @@ ModManager.modules.push(function(){
                                                 [ "visitAllRooms", "collectMoreItems", "collectAllItems" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Eliminare {boss.bossBadName@0}, che attende gli Eroi {label.destination@3} {label.destination@1}",
+                                                    EN:"Eliminate {boss.bossBadName@0}, waiting the Heroes {label.destination@3} {label.destination@1}",
+                                                }
+                                            }
+                                        ],
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]
@@ -629,14 +689,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 escapeTo:[
                                                     {
-                                                        IT:[ "il portale" ],
-                                                        EN:[ "the portal" ]
+                                                        IT:[ "il portale", "Il Portale" ],
+                                                        EN:[ "the portal", "The Portal" ]
                                                     },{
-                                                        IT:[ "la botola" ],
-                                                        EN:[ "the trapdoor" ]
+                                                        IT:[ "la botola", "Il Passaggio" ],
+                                                        EN:[ "the trapdoor", "The Passage" ]
                                                     },{
-                                                        IT:[ "la galleria" ],
-                                                        EN:[ "the tunnel" ]
+                                                        IT:[ "la galleria", "La Galleria" ],
+                                                        EN:[ "the tunnel", "The Tunnel" ]
                                                     }
                                                 ],
                                                 crazy:[
@@ -663,6 +723,8 @@ ModManager.modules.push(function(){
                                                         EN:[ "We've been told that around here" ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 actionSameTime:[
                                                     {
                                                         IT:[ "{label.unblock:capital@4} 2 {label.unblock@1}" ],
@@ -799,8 +861,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Qualsiasi Eroe sulla Zona contrassegnata dal segnalino Obiettivo grigio pu&ograve; spendere 1 PM per uscire dal Dungeon. Una volta che tutti gli Eroi sono usciti, la Missione si conclude con la vittoria.",
-                                                        EN:"Any Hero in the Area marked with the gray Objective token can spend 1 MP to exit the Dungeon. Once all the Heroes have exited, the Mission ends in victory."
+                                                        IT:"Qualsiasi Eroe sulla Zona contrassegnata dal segnalino Obiettivo grigio pu&ograve; spendere 1 PM per uscire dal Dungeon. Una volta che tutti gli Eroi sono usciti, {label.questVictory@0}.",
+                                                        EN:"Any Hero in the Area marked with the gray Objective token can spend 1 MP to exit the Dungeon. Once all the Heroes have exited, {label.questVictory@0}."
                                                     }
                                                 ]
                                             }
@@ -826,6 +888,27 @@ ModManager.modules.push(function(){
                                                 [ "visitAllRooms", "collectOptionalItems", "actionSameTime" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Eliminare Colui Che Attende Oltre {label.escapeTo@1}",
+                                                    EN:"Eliminate The One Who Waits Beyond {label.escapeTo@1}",
+                                                }
+                                            }
+                                        ],
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]
@@ -955,6 +1038,8 @@ ModManager.modules.push(function(){
                                                         EN:[ "The rangers, however, discovered strange behavior:" ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 collectLessItems:[
                                                     {
                                                         IT:[ "a usare meno {label.item@1}", "collocando solo {label.collectLessItems@2} {label.item@1}" ],
@@ -1050,8 +1135,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Non appena {label.enemy@2} {label.enemy@3} viene {label.enemy@9}, la Missione termina con una vittoria.",
-                                                        EN:"As soon as {label.enemy@2} {label.enemy@3} is {label.enemy@9}, the Mission ends in victory."
+                                                        IT:"Non appena {label.enemy@2} {label.enemy@3} viene {label.enemy@9}, {label.questVictory@0}.",
+                                                        EN:"As soon as {label.enemy@2} {label.enemy@3} is {label.enemy@9}, {label.questVictory@0}."
                                                     }
                                                 ]
                                             }
@@ -1077,6 +1162,31 @@ ModManager.modules.push(function(){
                                                 [ "visitAllRooms", "collectLessItems" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Eliminare {boss.bossBadName@0}, mandante {label.enemy@4} {label.enemy@3}",
+                                                    EN:"Eliminate {boss.bossBadName@0}, {label.enemy@4} {label.enemy@3} instigator",
+                                                }
+                                            }
+                                        ],
+                                        preparation:{
+                                            IT:"<p>Rimuovere tutti i segnalini Obiettivo dall'inventario degli Eroi.</p>",
+                                            EN:"<p>Remove all Objective tokens from the Heroes' inventories.</p>"
+                                        },
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]
@@ -1111,14 +1221,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 monsters:[
                                                     {
-                                                        IT:[ "le", "Bestie Oscure", "delle", "le" ],
-                                                        EN:[ "the", "Dark Beasts", "of the", "the" ]
+                                                        IT:[ "le", "Bestie Oscure", "delle", "le", "delle" ],
+                                                        EN:[ "the", "Dark Beasts", "of the", "the", "of the" ]
                                                     },{
-                                                        IT:[ "gli", "Esseri Corrotti", "degli", "i" ],
-                                                        EN:[ "the", "Corrupted Ones", "of the", "the" ]
+                                                        IT:[ "gli", "Esseri Corrotti", "degli", "i", "dei" ],
+                                                        EN:[ "the", "Corrupted Ones", "of the", "the", "of the" ]
                                                     },{
-                                                        IT:[ "gli", "Eroi Caduti", "degli", "i" ],
-                                                        EN:[ "the", "Fallen Heroes", "of the", "the" ]
+                                                        IT:[ "gli", "Eroi Caduti", "degli", "i", "dei" ],
+                                                        EN:[ "the", "Fallen Heroes", "of the", "the", "of the" ]
                                                     }
                                                 ],
                                                 roamingWay:[
@@ -1193,6 +1303,8 @@ ModManager.modules.push(function(){
                                                         EN:[ "The Floors", "the stairs", "The Palace", "Stairs" ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 eliminateEnemy:[
                                                     {
                                                         IT:[ "2 o pi&ugrave; {label.monsters@1}" ],
@@ -1248,8 +1360,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Ogni volta che una delle Camere con un segnalino Corruzione {symbol.corruptionToken} viene rivelata, in aggiunta ai consueti passi di rivelazione di una Camera, generate anche un Mostro Errante nella Zona indicata dal segnalino Corruzione in quella Camera. Questo Mostro Errante &egrave; 1 {label.monsters@2} {label.monsters@1}. Una volta che tutte e {tokensCount.corruption} {label.monsters@0} {label.monsters@1} sono state uccise, la Missione termina con una vittoria.",
-                                                        EN:"Whenever one of the Chambers with a Corruption token {symbol.corruptionToken} is revealed, in addition to the usual steps of revealing a Chamber, you also spawn a Roaming Monster in the Zone indicated by the Corruption token in that Chamber. This Roaming Monster is 1 {label.monsters@2} {label.monsters@1}. Once all {tokensCount.corruption} {label.monsters@1} have been killed, the Mission ends in victory."
+                                                        IT:"Ogni volta che una delle Camere con un segnalino Corruzione {symbol.corruptionToken} viene rivelata, in aggiunta ai consueti passi di rivelazione di una Camera, generate anche un Mostro Errante nella Zona indicata dal segnalino Corruzione in quella Camera. Questo Mostro Errante &egrave; 1 {label.monsters@2} {label.monsters@1}. Una volta che tutte e {tokensCount.corruption} {label.monsters@0} {label.monsters@1} sono state uccise, {label.questVictory@0}.",
+                                                        EN:"Whenever one of the Chambers with a Corruption token {symbol.corruptionToken} is revealed, in addition to the usual steps of revealing a Chamber, you also spawn a Roaming Monster in the Zone indicated by the Corruption token in that Chamber. This Roaming Monster is 1 {label.monsters@2} {label.monsters@1}. Once all {tokensCount.corruption} {label.monsters@1} have been killed, {label.questVictory@0}."
                                                     }
                                                 ]
                                             }
@@ -1306,6 +1418,27 @@ ModManager.modules.push(function(){
                                                 [ "visitAllRooms", "eliminateEnemy" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Eliminare {boss.bossBadName@0}, Signore {label.monsters@4} {tokensCount.corruption} {label.monsters@1}",
+                                                    EN:"Eliminate {boss.bossBadName@0}, Master {label.monsters@4} {tokensCount.corruption} {label.monsters@1}",
+                                                }
+                                            }
+                                        ],
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]
@@ -1381,6 +1514,8 @@ ModManager.modules.push(function(){
                                                         EN:[ "of those who have held it for too long, it is said that only a pile of ashes remains!", "the Hero's body will be reduced to dust" ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 keepItem:[
                                                     {
                                                         IT:[ "{label.weapon@0} {label.weapon@6}", "{label.weapon@0}" ],
@@ -1505,14 +1640,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"{label.toBreak:capital@0} {label.toBreak@1} sono rappresentati dai segnalini Obiettivo. Un Eroe che abbia equipaggiato {label.weapon@0} e si trovi nella stessa Zona di un segnalino Obiettivo pu&ograve; spendere 1 azione per distruggere {label.toBreak@2} {label.toBreak@3}, {label.toBreak@5} dal Dungeon e ottenendo 5 PE. Una volta che tutti i segnalini sono stati rimossi, la Missione termina con una vittoria.",
-                                                        EN:"{label.toBreak:capital@0} {label.toBreak@1} are represented by Objective tokens. A Hero who has {label.weapon@0} equipped and is in the same Zone as an Objective token can spend 1 action to destroy {label.toBreak@2} {label.toBreak@3}, removing it from the Dungeon and gaining 5 XP. Once all tokens have been removed, the Mission ends in victory."
+                                                        IT:"{label.toBreak:capital@0} {label.toBreak@1} sono rappresentati dai segnalini Obiettivo. Un Eroe che abbia equipaggiato {label.weapon@0} e si trovi nella stessa Zona di un segnalino Obiettivo pu&ograve; spendere 1 azione per distruggere {label.toBreak@2} {label.toBreak@3}, {label.toBreak@5} dal Dungeon e ottenendo 5 PE. Una volta che tutti i segnalini sono stati rimossi, {label.questVictory@0}.",
+                                                        EN:"{label.toBreak:capital@0} {label.toBreak@1} are represented by Objective tokens. A Hero who has {label.weapon@0} equipped and is in the same Zone as an Objective token can spend 1 action to destroy {label.toBreak@2} {label.toBreak@3}, removing it from the Dungeon and gaining 5 XP. Once all tokens have been removed, {label.questVictory@0}."
                                                     }
                                                 ],
                                                 campaignExplanation:[
                                                     {
-                                                        IT:"{label.toBreak:capital@0} {label.toBreak@1} sono rappresentati dai segnalini Obiettivo. Un Eroe che abbia equipaggiato {label.weapon@0} e si trovi nella stessa Zona di un segnalino Obiettivo pu&ograve; spendere 1 azione per distruggere {label.toBreak@2} {label.toBreak@3}, {label.toBreak@5} dal Dungeon. Una volta che tutti i segnalini sono stati rimossi, la Missione termina con una vittoria.",
-                                                        EN:"{label.toBreak:capital@0} {label.toBreak@1} are represented by Objective tokens. A Hero who has {label.weapon@0} equipped and is in the same Zone as an Objective token can spend 1 action to destroy {label.toBreak@2} {label.toBreak@3}, removing it from the Dungeon. Once all tokens have been removed, the Mission ends in victory."
+                                                        IT:"{label.toBreak:capital@0} {label.toBreak@1} sono rappresentati dai segnalini Obiettivo. Un Eroe che abbia equipaggiato {label.weapon@0} e si trovi nella stessa Zona di un segnalino Obiettivo pu&ograve; spendere 1 azione per distruggere {label.toBreak@2} {label.toBreak@3}, {label.toBreak@5} dal Dungeon. Una volta che tutti i segnalini sono stati rimossi, {label.questVictory@0}.",
+                                                        EN:"{label.toBreak:capital@0} {label.toBreak@1} are represented by Objective tokens. A Hero who has {label.weapon@0} equipped and is in the same Zone as an Objective token can spend 1 action to destroy {label.toBreak@2} {label.toBreak@3}, removing it from the Dungeon. Once all tokens have been removed, {label.questVictory@0}."
                                                     }
                                                 ]
                                             }
@@ -1528,16 +1663,16 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"{label.weapon:capital@0} si fa pi&ugrave; forte man mano che {label.toBreak@0} {label.toBreak@1} vengono distrutti. {label.weapon:capital@0} ottiene i dadi di Attacco seguenti in base al numero di segnalini Obiettivo che sono stati rimossi dal Dungeon:<ul>"+
-                                                        "<li>1 Segnalino: +1{symbol.yellowDie}</li>"+
-                                                        "<li>2 Segnalino: +2{symbol.yellowDie}</li>"+
-                                                        "<li>3 Segnalino: +2{symbol.yellowDie} +1{symbol.orangeDie}</li>"+
-                                                        "<li>4 Segnalino: +2{symbol.yellowDie} +2{symbol.orangeDie}</li>"+
+                                                        "<li>1 Segnalino: +1 {symbol.yellowDie}</li>"+
+                                                        "<li>2 Segnalino: +2 {symbol.yellowDie}</li>"+
+                                                        "<li>3 Segnalino: +2 {symbol.yellowDie} +1 {symbol.orangeDie}</li>"+
+                                                        "<li>4 Segnalino: +2 {symbol.yellowDie} +2 {symbol.orangeDie}</li>"+
                                                         "</ul>",
                                                         EN:"{label.weapon:capital@0} grows stronger as {label.toBreak@0} {label.toBreak@1} are destroyed. {label.weapon:capital@0} gains the following Attack dice based on the number of Objective tokens that were removed from the Dungeon:<ul>"+
-                                                        "<li>1 Token: +1{symbol.yellowDie}</li>"+
-                                                        "<li>2 Tokens: +2{symbol.yellowDie}</li>"+
-                                                        "<li>3 Tokens: +2{symbol.yellowDie} +1{symbol.orangeDie}</li>"+
-                                                        "<li>4 Tokens: +2{symbol.yellowDie} +2{symbol.orangeDie}</li>"+
+                                                        "<li>1 Token: +1 {symbol.yellowDie}</li>"+
+                                                        "<li>2 Tokens: +2 {symbol.yellowDie}</li>"+
+                                                        "<li>3 Tokens: +2 {symbol.yellowDie} +1 {symbol.orangeDie}</li>"+
+                                                        "<li>4 Tokens: +2 {symbol.yellowDie} +2 {symbol.orangeDie}</li>"+
                                                         "</ul>"
                                                     }
                                                 ],
@@ -1588,6 +1723,31 @@ ModManager.modules.push(function(){
                                                 [ "visitAllRooms", "noLifebringer", "keepItem" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        preparation:{
+                                            IT:"<p>Da adesso in poi {label.weapon@0} si comporta come un'arma regolare. L'Eroe che la impugna pu&ograve; rimuoverla o sostituirla con un'altra arma nel proprio inventario prima dello Scontro con il Boss.</p>",
+                                            EN:"<p>From now on {label.weapon@0} behaves like a regular weapon. The Hero who wields it can remove it or replace it with another weapon in their inventory before the Boss Fight.</p>"
+                                        },
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Eliminare {boss.bossBadName@0}, che ha creato {label.weapon@0}",
+                                                    EN:"Eliminate {boss.bossBadName@0}, creator of {label.weapon@0}",
+                                                }
+                                            }
+                                        ],
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]
@@ -1690,6 +1850,8 @@ ModManager.modules.push(function(){
                                                         EN:[ "to lead us to our final destination" ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 noDamage:[
                                                     {
                                                         IT:[ "{label.escorting@2}", "{label.escorting:capital@2}" ],
@@ -1818,8 +1980,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Non appena {label.escorting:capital@2} raggiunge la {label.door@2}, {label.door@5}. Girate il segnalino Obiettivo e rimuovete {label.escorting@2} dal Dungeon. Fatto questo, qualsiasi Eroe pu&ograve; spendere 1 PM nella {label.door@2} per uscire dal Dungeon. Non appena tutti gli Eroi sono entrati {label.door@4}, la Missione termina con una vittoria.",
-                                                        EN:"As soon as {label.escorting:capital@2} reaches the {label.door@2}, {label.door@5}. Flip the Objective token and remove {label.escorting@2} from the Dungeon. Once this is done, any Hero can spend 1 MP in the {label.door@2} to exit the Dungeon. As soon as all Heroes have entered {label.door@4}, the Mission ends in victory."
+                                                        IT:"Non appena {label.escorting:capital@2} raggiunge la {label.door@2}, {label.door@5}. Girate il segnalino Obiettivo e rimuovete {label.escorting@2} dal Dungeon. Fatto questo, qualsiasi Eroe pu&ograve; spendere 1 PM nella {label.door@2} per uscire dal Dungeon. Non appena tutti gli Eroi sono entrati {label.door@4}, {label.questVictory@0}.",
+                                                        EN:"As soon as {label.escorting:capital@2} reaches the {label.door@2}, {label.door@5}. Flip the Objective token and remove {label.escorting@2} from the Dungeon. Once this is done, any Hero can spend 1 MP in the {label.door@2} to exit the Dungeon. As soon as all Heroes have entered {label.door@4}, {label.questVictory@0}."
                                                     }
                                                 ]
                                             }
@@ -1833,8 +1995,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Salute 8, Difesa: 2{symbol.blueDie}",
-                                                        EN:"Health 8, Defense: 2{symbol.blueDie}"
+                                                        IT:"Salute 8, Difesa: 2 {symbol.blueDie}",
+                                                        EN:"Health 8, Defense: 2 {symbol.blueDie}"
                                                     }
                                                 ]
                                             }
@@ -1860,6 +2022,27 @@ ModManager.modules.push(function(){
                                                 [ "visitAllRooms", "noDamage" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Eliminare {boss.bossBadName@0}, in attesa oltre {label.door@1}",
+                                                    EN:"Eliminate {boss.bossBadName@0}, waiting beyond {label.door@1}",
+                                                }
+                                            }
+                                        ],
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]
@@ -1882,14 +2065,14 @@ ModManager.modules.push(function(){
                                             {
                                                 object:[
                                                     {
-                                                        IT: [ "l'artefatto", "gli artefatti", "artefatti", "artefatto", "forgiare" ],
-                                                        EN: [ "the artifact", "the artifacts", "artifacts", "artifact", "forge" ]
+                                                        IT: [ "l'artefatto", "gli artefatti", "artefatti", "artefatto", "forgiare", "degli artefatti" ],
+                                                        EN: [ "the artifact", "the artifacts", "artifacts", "artifact", "forge", "of the artifacts" ]
                                                     },{
-                                                        IT: [ "il cristallo", "i cristalli", "cristalli", "cristallo", "ricomporre" ],
-                                                        EN: [ "the crystal", "the crystals", "crystals", "crystal", "recompose" ]
+                                                        IT: [ "il cristallo", "i cristalli", "cristalli", "cristallo", "ricomporre", "dei cristallo" ],
+                                                        EN: [ "the crystal", "the crystals", "crystals", "crystal", "recompose", "of the crystals" ]
                                                     },{
-                                                        IT: [ "il sigillo", "i sigilli", "sigilli", "sigillo", "comporre" ],
-                                                        EN: [ "the seal", "the seals", "seals", "seal", "compose" ]
+                                                        IT: [ "il sigillo", "i sigilli", "sigilli", "sigillo", "comporre", "dei sigilli" ],
+                                                        EN: [ "the seal", "the seals", "seals", "seal", "compose", "of the seals" ]
                                                     }
                                                 ],
                                                 objectCategory:[
@@ -2000,6 +2183,8 @@ ModManager.modules.push(function(){
                                                         EN: [ "{label.object@4} {label.object@0} in the Golden Press", "Golden Press Zone", "Reassemble them in the Golden Press" ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 collectOptionalItems:[
                                                     {
                                                         IT:[ "a raccogliere {label.part@1} {label.part@2} {label.part@3}", "raccogliendo {label.collectOptionalItems@3} {label.part@3}", "{tokensCount.objective}" ],
@@ -2095,14 +2280,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Quando {label.part@1} {label.part@2} {label.part:capital@3} sono {label.part@5}, se tutti gli Eroi che possiedono almeno 1 {label.part:capital@0} si trovano nella {label.destination@1} (rappresentata dal segnalino Obiettivo grigio), un qualsiasi Eroe nella stessa Zona pu&ograve; spendere 1 azione per {label.object@4} {label.object@1}.",
-                                                        EN:"When all of the {label.part:capital@5} have been collected, if all the Heroes with at least 1 {label.part:capital@0} are in the {label.destination@1} (the gray side-up Objective token), any Hero in that Zone may spend 1 action to {label.object@4} {label.object@0}."
+                                                        IT:"Quando {label.part@1} {label.part@2} {label.part:capital@3} sono {label.part@5}, se tutti gli Eroi che possiedono almeno 1 {label.part:capital@0} si trovano nella {label.destination@1} (rappresentata dal segnalino Obiettivo grigio), un qualsiasi Eroe nella stessa Zona pu&ograve; spendere 1 azione per {label.object@4} {label.object@1} e {label.questVictory@1}.",
+                                                        EN:"When all of the {label.part:capital@5} have been collected, if all the Heroes with at least 1 {label.part:capital@0} are in the {label.destination@1} (the gray side-up Objective token), any Hero in that Zone may spend 1 action to {label.object@4} {label.object@0} and {label.questVictory@1}."
                                                     }
                                                 ],
                                                 campaignExplanation:[
                                                     {
-                                                        IT:"Quando {label.part@2} {label.collectOptionalItems@2} {label.part:capital@3} sono {label.part@5}, se tutti gli Eroi che possiedono almeno 1 {label.part:capital@0} si trovano nella {label.destination@1} (rappresentata dal segnalino Obiettivo grigio), un qualsiasi Eroe nella stessa Zona pu&ograve; spendere 1 azione per {label.object@4} {label.object@1}.",
-                                                        EN:"When the {label.collectOptionalItems@2} {label.part:capital@5} have been collected, if all the Heroes with at least 1 {label.part:capital@0} are in the {label.destination@1} (the gray side-up Objective token), any Hero in that Zone may spend 1 action to {label.object@4} {label.object@0}."
+                                                        IT:"Quando {label.part@2} {label.collectOptionalItems@2} {label.part:capital@3} sono {label.part@5}, se tutti gli Eroi che possiedono almeno 1 {label.part:capital@0} si trovano nella {label.destination@1} (rappresentata dal segnalino Obiettivo grigio), un qualsiasi Eroe nella stessa Zona pu&ograve; spendere 1 azione per {label.object@4} {label.object@1} e {label.questVictory@1}.",
+                                                        EN:"When the {label.collectOptionalItems@2} {label.part:capital@5} have been collected, if all the Heroes with at least 1 {label.part:capital@0} are in the {label.destination@1} (the gray side-up Objective token), any Hero in that Zone may spend 1 action to {label.object@4} {label.object@0} and {label.questVictory@1}."
                                                     }
                                                 ]
                                             }
@@ -2128,6 +2313,31 @@ ModManager.modules.push(function(){
                                                 [ "visitAllRooms", "collectOptionalItems" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Eliminare {boss.bossBadName@0}, guardiano del potere {label.object@5}",
+                                                    EN:"Eliminate {boss.bossBadName@0}, guardian {label.object@5} power",
+                                                }
+                                            }
+                                        ],
+                                        preparation:{
+                                            IT:"<p>Rimuovere tutti i segnalini Obiettivo dall'inventario degli Eroi.</p>",
+                                            EN:"<p>Remove all Objective tokens from the Heroes' inventories.</p>"
+                                        },
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]
@@ -2269,6 +2479,8 @@ ModManager.modules.push(function(){
                                                         EN:[ "the Gate", "Gate", "from the Gate" ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 collectTime:[
                                                     {
                                                         IT:[ "risparmiare tempo", "raccogliendo collettivamente 3 segnalini Tempo o pi&ugrave;" ],
@@ -2292,8 +2504,8 @@ ModManager.modules.push(function(){
                                     ],
                                     story:[
                                         {
-                                            IT:"{label.intro@0} {label.culprit@0} {label.culpritBody@0} {label.culpritOf@0} {label.event@0}. {label.chance@0} {label.culprit@0}? {label.discover@0}",
-                                            EN:"{label.intro@0} {label.culprit@0} {label.culpritBody@0} {label.culpritOf@0} {label.event@0}. {label.chance@0} {label.culprit@0}? {label.discover@0}"
+                                            IT:"{label.intro@0} {label.culprit@0} {label.culpritBody@0}, {label.culpritOf@0} {label.event@0}. {label.chance@0} {label.culprit@0}? {label.discover@0}",
+                                            EN:"{label.intro@0} {label.culprit@0} {label.culpritBody@0}, {label.culpritOf@0} {label.event@0}. {label.chance@0} {label.culprit@0}? {label.discover@0}"
                                         }
                                     ],
                                     objectivesHeader:[
@@ -2351,8 +2563,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"La Camera {label.exit@1} &egrave; accessibile soltanto attraverso la porta dal bordo rosso. Questa porta &egrave; chiusa a chiave e pu&ograve; essere aperta solo quando gli Eroi possiedono collettivamente {label.item@0} {tokensCount.objective} {label.item@1} {label.itemOf@0} per accedere alla Camera. Un Eroe che si trova nella zona {label.exit@1} (il segnalino Obiettivo grigio) pu&ograve; spendere 1 PM per uscire dal Dungeon. Non appena tutti gli Eroi sono usciti dal Dungeon, la Missione termina con una vittoria.",
-                                                        EN:"The {label.exit@1} Chamber is only accessible through the red-bordered door. This door is locked and can only be opened when the Heroes collectively own {label.item@0} {tokensCount.objective} {label.itemOf@0} {label.item@1} to access the Chamber. A Hero in the {label.exit@1} area (the gray Objective token) can spend 1 MP to exit the Dungeon. As soon as all Heroes have exited the Dungeon, the Mission ends with a victory."
+                                                        IT:"La Camera {label.exit@1} &egrave; accessibile soltanto attraverso la porta dal bordo rosso. Questa porta &egrave; chiusa a chiave e pu&ograve; essere aperta solo quando gli Eroi possiedono collettivamente {label.item@0} {tokensCount.objective} {label.item@1} {label.itemOf@0} per accedere alla Camera. Un Eroe che si trova nella zona {label.exit@1} (il segnalino Obiettivo grigio) pu&ograve; spendere 1 PM per uscire dal Dungeon. Non appena tutti gli Eroi sono usciti dal Dungeon, {label.questVictory@0}.",
+                                                        EN:"The {label.exit@1} Chamber is only accessible through the red-bordered door. This door is locked and can only be opened when the Heroes collectively own {label.item@0} {tokensCount.objective} {label.itemOf@0} {label.item@1} to access the Chamber. A Hero in the {label.exit@1} area (the gray Objective token) can spend 1 MP to exit the Dungeon. As soon as all Heroes have exited the Dungeon, {label.questVictory@0}."
                                                     }
                                                 ]
                                             }
@@ -2432,6 +2644,35 @@ ModManager.modules.push(function(){
                                                 [ "visitAllRooms", "collectTime" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Eliminare {boss.bossBadName@0}, {label.culprit@0} {label.culpritBody@0}",
+                                                    EN:"Eliminate {boss.bossBadName@0}, {label.culprit@0} {label.culpritBody@0}",
+                                                }
+                                            }
+                                        ],
+                                        preparation:{
+                                            IT:"<p>Rimuovere tutti i segnalini Obiettivo dall'inventario degli Eroi.</p>",
+                                            EN:"<p>Remove all Objective tokens from the Heroes' inventories.</p>"
+                                        },
+                                        campaignPreparation:{
+                                            IT:"<p>Rimuovere tutti i segnalini Obiettivo e Tempo dall'inventario degli Eroi.</p>",
+                                            EN:"<p>Remove all Objective and Time tokens from the Heroes' inventories.</p>"
+                                        },
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]

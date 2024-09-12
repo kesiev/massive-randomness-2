@@ -779,6 +779,18 @@ ModManager.modules.push(function(){
                             }
                         },
                         {
+                            id:"bossFight",
+                            default:"no",
+                            values:{
+                                yes:{
+                                    needs:[ "boss" ]
+                                },
+                                no:{
+                                    notNeeds:[ "boss" ]
+                                }
+                            }
+                        },
+                        {
                             id:"defaults",
                             values:{
                                 yes:{
@@ -2015,6 +2027,105 @@ ModManager.modules.push(function(){
                                     ],
                                     flags:[
                                         { questRewardTags:[ [ "placeImprovement" ], [ "relicQuality2" ] ] }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },{
+                    type:"campaignBossFightModels",
+                    data:[
+                        {
+                            label:{
+                                EN:"No boss fights."
+                            },
+                            words:[
+                                [
+                                    "blank",
+                                    "void",
+                                    "hollow"
+                                ],[
+                                    "blanker",
+                                    "voider",
+                                    "null"
+                                ]
+                            ],
+                            models:[]
+                        },{
+                            label:{
+                                EN:"Boss fights in the middle of acts 2 and the beginning of 3."
+                            },
+                            words:[
+                                [
+                                    "spike",
+                                    "lance",
+                                    "spear"
+                                ],[
+                                    "sting",
+                                    "hurt",
+                                    "bite"
+                                ]
+                            ],
+                            models:[
+                                {
+                                    at:[
+                                        { act:1, map:1 },
+                                        { act:2, map:0 }
+                                    ],
+                                    flags:[
+                                        { bossFight:"yes", bossFightRewardTags:[ [ "relicQuality2", "relicQuality3", "skillQuality2", "skillQuality3" ] ] }
+                                    ]
+                                }
+                            ]
+                        },{
+                            label:{
+                                EN:"Boss fights in the middle of acts 2 and 3."
+                            },
+                            words:[
+                                [
+                                    "hill",
+                                    "center",
+                                    "half"
+                                ],[
+                                    "strike",
+                                    "split",
+                                    "break"
+                                ]
+                            ],
+                            models:[
+                                {
+                                    at:[
+                                        { act:1, map:1 },
+                                        { act:2, map:1 }
+                                    ],
+                                    flags:[
+                                        { bossFight:"yes", bossFightRewardTags:[ [ "relicQuality2", "relicQuality3", "skillQuality2", "skillQuality3" ] ] }
+                                    ]
+                                }
+                            ]
+                        },{
+                            label:{
+                                EN:"Boss fights at the end of act 2 and in the middle of act 3."
+                            },
+                            words:[
+                                [
+                                    "ending",
+                                    "final",
+                                    "edge"
+                                ],[
+                                    "end",
+                                    "close",
+                                    "cut"
+                                ]
+                            ],
+                            models:[
+                                {
+                                    at:[
+                                        { act:1, map:2 },
+                                        { act:2, map:1 }
+                                    ],
+                                    flags:[
+                                        { bossFight:"yes", bossFightRewardTags:[ [ "relicQuality2", "relicQuality3", "skillQuality2", "skillQuality3" ] ] }
                                     ]
                                 }
                             ]

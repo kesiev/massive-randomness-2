@@ -236,6 +236,10 @@ QuestRenderer=(function(){
 
             }
 
+            if (result.bossData)
+                for (let k in result.bossData.labels)
+                    result.labels[k] = result.bossData.labels[k];
+
             if (renderQuest) {
 
                 if (result.quest) {
@@ -268,6 +272,7 @@ QuestRenderer=(function(){
                         printMiniMapNode = createNode(questNode,"div","miniMap"),
                         mapNode = createNode(questNode,"div","map"),
                         printMapNode = createNode(questNode,"div","map"),
+                        rules,
                         sideQuestChallenge,
                         footerNode,
                         objectivesList,
@@ -325,7 +330,12 @@ QuestRenderer=(function(){
                     for (let k in tilesGroups)
                         tilesList+="<i>("+Labels.getLabel(flags,resources,result,language,resources.globalLabels[k])+")</i> <b>"+tilesGroups[k].sort().join(", ")+"</b>, ";
                     
-                    tilesNode.innerHTML = tilesList.substr(0,tilesList.length-2)+".";
+                    tilesList = tilesList.substr(0,tilesList.length-2)+".";
+
+                    if (result.bossData && result.bossData.data.tilesNeeded)
+                        tilesList += " "+Labels.getLabel(flags,resources,result,language,result.bossData.data.tilesNeeded);
+
+                    tilesNode.innerHTML = tilesList;
 
                     // Prepare the tokens list
 
@@ -339,24 +349,31 @@ QuestRenderer=(function(){
 
                     // Add challenge as rule
 
+                    rules = quest.rules.slice();
+
                     if (campaignChallenge && campaignChallenge.asRule)
-                        quest.rules.push({
+                        rules.push({
                             priority:5,
                             type:"rule",
                             name:sideQuestChallenge.name,
                             explanation:sideQuestChallenge.explanation
+                        });
+
+                    if (result.bossData && quest.boss && quest.boss.rules)
+                        quest.boss.rules.forEach(rule=>{
+                            rules.push(rule);
                         })
 
                     objectivesList = createNode(objectivesNode,"ol");
                     specialRulesList = createNode(specialRulesNode,"ul");
-                    quest.rules.sort((a,b)=>{
+                    rules.sort((a,b)=>{
                         if (a.priority && !b.priority) return -1;
                         else if (!a.priority && b.priority) return 1;
                         else if (a.priority > b.priority) return -1;
                         else if (a.priority < b.priority) return 1;
                         else return 0;
                     });
-                    quest.rules.forEach(rule=>{
+                    rules.forEach(rule=>{
 
                         if (rule.type == "objective") {
                             let
@@ -379,6 +396,30 @@ QuestRenderer=(function(){
                         }
 
                     });
+
+                    // Add boss battle rules
+
+                    if (result.bossData) {
+                        let
+                            preparation = "";
+
+                        createNode(specialRulesNode,"div","bossBattleTitle").innerHTML = Labels.getLabel(flags,resources,result,language,result.bossData.data.title);
+
+                        if (sideQuestTitleNode)
+                            preparation += Labels.getLabel(flags,resources,result,language,"{boss.bossSideQuestValidation}");
+
+                        if (campaignChallengeTitleNode)
+                            preparation += Labels.getLabel(flags,resources,result,language,"{boss.bossChallengeValidation}");
+
+                        if (campaign && quest.boss.campaignPreparation)
+                            preparation += Labels.getLabel(flags,resources,result,language,quest.boss.campaignPreparation);
+                        else if (quest.boss.preparation)
+                            preparation += Labels.getLabel(flags,resources,result,language,quest.boss.preparation);
+
+                        preparation += Labels.getLabel(flags,resources,result,language,result.bossData.data.preparation);
+
+                        createNode(specialRulesNode,"div","bossBattleText").innerHTML = preparation;
+                    }
 
                     // Prepare the challenges list
 
@@ -445,8 +486,7 @@ QuestRenderer=(function(){
                         createNode(campaignChallengeList,"li").innerHTML = Labels.getLabel(flags,resources,result,language,resources.globalLabels.campaignChallengeReward)+
                             " "+renderRewards(hideSpoilers,flags,resources,result,language,campaignChallenge.challengeReward);
 
-                   }
-
+                    }
 
                     createNode(questHeadNode,"div","mapSeparator displayonly");
 

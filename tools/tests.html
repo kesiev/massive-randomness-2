@@ -34,16 +34,20 @@
     <script src="../modules/quests-mr.js"></script>
     <script src="../modules/challenges-default.js"></script>
     <script src="../modules/campaign.js"></script>
+	<script src="../modules/campaign-upgradepack.js"></script>
+    <script src="../modules/boss.js"></script>
 
 </head><body onload="onl()">
 	<input type="button" value="Summary" onclick="doGenerateSummary()">
+	<input type="button" value="Boss" onclick="doTestBoss()">
 	<input type="button" value="Campaign" onclick="doTestCampaign()">
 	<input type="button" value="Campaign Text" onclick="doTestCampaignText()">
 	<input type="button" value="Campaign modules" onclick="doTestCampaignModules()">
-	<input type="button" value="Test Campaigns" onclick="doTestCampaigns()">
+	<input type="button" value="Campaigns" onclick="doTestCampaigns()">
 	<input type="button" value="Tiles" onclick="doTestTiles()">
-	<input type="button" value="Quests" onclick="doCheckQuests()">
-	<input type="button" value="Test Quests" onclick="doTestQuests()">
+	<input type="button" value="Quests data" onclick="doCheckQuests()">
+	<input type="button" value="Quest Boss" onclick="doQuestTestBoss()">
+	<input type="button" value="Quests" onclick="doTestQuests()">
 	<input type="button" value="Map Configs" onclick="doTestMapConfigs()">
 	<input type="button" value="Map Elements Index" onclick="doMapElementsIndex()">
 	<hr>
@@ -55,6 +59,10 @@ function getNodeBody(title) {
 		node = document.getElementById('nodeBody');
 	node.innerHTML = "<h2>"+title+"</h2>";
 	return node;
+}
+
+function doTestBoss() {
+	Tools.testBoss(getNodeBody("Boss"));
 }
 
 function doTestCampaignText() {
@@ -70,11 +78,11 @@ function doTestCampaign() {
 }
 
 function doTestCampaigns() {
-	Tools.testCampaigns(getNodeBody("Test Campaigns"));
+	Tools.testCampaigns(getNodeBody("Campaigns"));
 }
 
 function doTestCampaignModules() {
-	Tools.testCampaignModules(getNodeBody("Test Campaign Modules"));
+	Tools.testCampaignModules(getNodeBody("Campaign Modules"));
 }
 
 function doTestTiles() {
@@ -82,11 +90,11 @@ function doTestTiles() {
 }
 
 function doCheckQuests() {
-	Tools.checkQuests(getNodeBody("Quests"));
+	Tools.checkQuests(getNodeBody("Quests Data"));
 }
 
 function doTestQuests() {
-	Tools.testQuests(getNodeBody("Test Quests"));
+	Tools.testQuests(getNodeBody("Quests"));
 }
 
 function doTestMapConfigs() {
@@ -95,6 +103,10 @@ function doTestMapConfigs() {
 
 function doMapElementsIndex() {
 	Tools.mapElementsIndex(getNodeBody("Map Elements Index"));
+}
+
+function doQuestTestBoss() {
+	Tools.testQuestsBoss(getNodeBody("Quest Boss"));
 }
 
 function onl() {

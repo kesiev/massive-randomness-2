@@ -1,5 +1,19 @@
 ModManager.modules.push(function(){
 
+    const
+        QUESTVICTORY = [
+            {
+                IT:[ "la Missione termina con una vittoria", "terminare la Missione con una vittoria" ],
+                EN:[ "the Mission ends with a victory", "end the Mission with a victory" ]
+            }
+        ],
+        BOSSBEAT = [
+            {
+                IT:[ "viene eliminato", "viene eliminata" ],
+                EN:[ "it is eliminated", "it is eliminated" ]
+            }
+        ];
+
     return [
         {
 
@@ -118,7 +132,9 @@ ModManager.modules.push(function(){
                                                         IT:[ "il leggendario equipaggiamento del Flagello delle Ombre", "l'equipaggiamento", "del set del Flagello delle Ombre", "dal set del Flagello delle Ombre", "il set del Flagello delle Ombre", "parte dell'equipaggiamento" ],
                                                         EN:[ "the legendary Shadowbane equipment", "the equipment", "of the Shadowbane Set", "from the Shadowbane Set", "the Shadowbane Set", "piece of equipment" ]
                                                     }
-                                                ]
+                                                ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY
                                             }
                                         ]
                                     ],
@@ -205,8 +221,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"I Comandanti tirano anche un {symbol.blackDie} quando attaccano o difendono. I Mostri Erranti guadagnano +1{symbol.blackDie} in attacco o in difesa ogni 2 giocatori. (1-2 giocatori: +1{symbol.blackDie} , 3-4 giocatori: +2{symbol.blackDie} , 5-6 giocatori: +3{symbol.blackDie})",
-                                                        EN:"Leaders also roll a {symbol.blackDie} when attacking or defending. Roaming Monsters gain +1{symbol.blackDie} on attacking or defending for every 2 players. (1-2 Players: +1{symbol.blackDie} , 3-4 players: +2{symbol.blackDie} , 5-6 players: +3{symbol.blackDie})"
+                                                        IT:"I Comandanti tirano anche un {symbol.blackDie} quando attaccano o difendono. I Mostri Erranti guadagnano +1 {symbol.blackDie} in attacco o in difesa ogni 2 giocatori. (1-2 giocatori: +1 {symbol.blackDie} , 3-4 giocatori: +2 {symbol.blackDie} , 5-6 giocatori: +3 {symbol.blackDie})",
+                                                        EN:"Leaders also roll a {symbol.blackDie} when attacking or defending. Roaming Monsters gain +1 {symbol.blackDie} on attacking or defending for every 2 players. (1-2 Players: +1 {symbol.blackDie} , 3-4 players: +2 {symbol.blackDie} , 5-6 players: +3 {symbol.blackDie})"
                                                     }
                                                 ]
                                             }
@@ -253,8 +269,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Un Eroe con la chiave pu&ograve; aprire la porta contrassegnata da un contorno rosso utilizzando 1 PM. Non pescare una carta Porta per quella Camera. Una volta aperta la porta, sostituisci il segnalino Corruzione {symbol.corruptionToken} con un Mostro Errante di livello 5 e gira il segnalino Obiettivo grigio sulla Tessera {tileLabel.fourth} sul suo lato colorato. Inoltre, tutti gli eroi ricevono immediatamente 2{symbol.frostToken}.",
-                                                        EN:"A Hero with the key may open the door marked with a red outline using 1 MP. Do not draw a door card for that Chamber. Once that door is opened, replace the Corruption token {symbol.corruptionToken} for a level 5 Roaming Monster and flip the grayed Objective token on the {tileLabel.fourth} Tile to the color side up. Also, all heroes immediately receive 2{symbol.frostToken}."
+                                                        IT:"Un Eroe con la chiave pu&ograve; aprire la porta contrassegnata da un contorno rosso utilizzando 1 PM. Non pescare una carta Porta per quella Camera. Una volta aperta la porta, sostituisci il segnalino Corruzione {symbol.corruptionToken} con un Mostro Errante di livello 5 e gira il segnalino Obiettivo grigio sulla Tessera {tileLabel.fourth} sul suo lato colorato. Inoltre, tutti gli eroi ricevono immediatamente 2 {symbol.frostToken}.",
+                                                        EN:"A Hero with the key may open the door marked with a red outline using 1 MP. Do not draw a door card for that Chamber. Once that door is opened, replace the Corruption token {symbol.corruptionToken} for a level 5 Roaming Monster and flip the grayed Objective token on the {tileLabel.fourth} Tile to the color side up. Also, all heroes immediately receive 2 {symbol.frostToken}."
                                                     }
                                                 ]
                                             }
@@ -283,8 +299,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Dopo che {label.chosenOne@0} ha ricevuto {label.equipment@4}, gira il rimanente segnalino Obiettivo in grigio sulla Tessera {tileLabel.fifth} sul suo lato colorato e genera un Mostro Errante nella sua Zona: questo &egrave; {label.badGuy@0}.<p>{label.badGuy:capital@0} &egrave; un Mostro Errante di livello 5 con +15 Punti Vita. Ottiene anche +2{symbol.sword} quando attacca e +3{symbol.shield} quando difende. Inoltre, {label.badGuy@0} si attiva due volte nella Fase dei Nemici.</p>",
-                                                        EN:"After {label.chosenOne@0} receives {label.equipment@4}, flip the remaining grayed Objective token on {tileLabel.fifth} Tile to the color side up and spawn a Roaming Monster in its Zone: this is {label.badGuy@0}.<p>{label.badGuy:capital@0} is a level 5 Roaming Monster with +15 Life Points. It also receives a +2{symbol.sword} when Attacking and a +3{symbol.shield} when defending. {label.badGuy:capital@0} also activates twice at the Enemy Phase.</p>"
+                                                        IT:"Dopo che {label.chosenOne@0} ha ricevuto {label.equipment@4}, gira il rimanente segnalino Obiettivo in grigio sulla Tessera {tileLabel.fifth} sul suo lato colorato e genera un Mostro Errante nella sua Zona: questo &egrave; {label.badGuy@0}.<p>{label.badGuy:capital@0} &egrave; un Mostro Errante di livello 5 con +15 Punti Vita. Ottiene anche +2 {symbol.sword} quando attacca e +3 {symbol.shield} quando difende. Inoltre, {label.badGuy@0} si attiva due volte nella Fase dei Nemici.</p>",
+                                                        EN:"After {label.chosenOne@0} receives {label.equipment@4}, flip the remaining grayed Objective token on {tileLabel.fifth} Tile to the color side up and spawn a Roaming Monster in its Zone: this is {label.badGuy@0}.<p>{label.badGuy:capital@0} is a level 5 Roaming Monster with +15 Life Points. It also receives a +2 {symbol.sword} when Attacking and a +3 {symbol.shield} when defending. {label.badGuy:capital@0} also activates twice at the Enemy Phase.</p>"
                                                     }
                                                 ]
                                             }
@@ -299,8 +315,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Una volta che {label.badGuy@0} {label.badGuy@2} e ogni Eroe si trova nella zona del segnalino Obiettivo con il lato colorato rivolto verso l'alto della Tessera {tileLabel.fifth} senza che ci siano nemici in quella zona, la Missione termina con la vittoria.",
-                                                        EN:"Once {label.badGuy@0} {label.badGuy@2} and every hero is at the color-side-up Objective token zone on the {tileLabel.fifth} Tile and with no enemies in that zone, the Mission ends in victory."
+                                                        IT:"Una volta che {label.badGuy@0} {label.badGuy@2} e ogni Eroe si trova nella zona del segnalino Obiettivo con il lato colorato rivolto verso l'alto della Tessera {tileLabel.fifth} senza che ci siano nemici in quella zona, {label.questVictory@0}.",
+                                                        EN:"Once {label.badGuy@0} {label.badGuy@2} and every hero is at the color-side-up Objective token zone on the {tileLabel.fifth} Tile and with no enemies in that zone, {label.questVictory@0}."
                                                     }
                                                 ]
                                             }
@@ -319,7 +335,32 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "armorToBoss" ],
                                         }
-                                    ]
+                                    ],
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Elimina {boss.bossBadName@0}, custode {label.equipment@2}",
+                                                    EN:"Eliminate {boss.bossBadName@0}, keeper {label.equipment@2}"
+                                                }
+                                            }
+                                        ],
+                                        preparation:{
+                                            IT:"<p>Rimuovere tutti i segnalini Obiettivo dall'inventario degli Eroi.</p>",
+                                            EN:"<p>Remove all Objective tokens from the Heroes' inventories.</p>"
+                                        },
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
+                                    }
                                 }
                             ]
                         },{
@@ -376,14 +417,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 mud:[
                                                     {
-                                                        IT:[ "la Melma", "{label.poison@0}" ],
-                                                        EN:[ "the Slime", "{label.poison@0}", "has" ]
+                                                        IT:[ "la Melma", "{label.poison@0}", "", "della Melma" ],
+                                                        EN:[ "the Slime", "{label.poison@0}", "has", "the Slime" ]
                                                     },{
-                                                        IT:[ "le Spore", "{label.poison@1}" ],
-                                                        EN:[ "the Spores", "{label.poison@1}", "have" ]
+                                                        IT:[ "le Spore", "{label.poison@1}", "", "delle Spore" ],
+                                                        EN:[ "the Spores", "{label.poison@1}", "have", "the Spores" ]
                                                     },{
-                                                        IT:[ "l'Oscurit&agrave;", "{label.poison@0}" ],
-                                                        EN:[ "the Darkness", "{label.poison@0}", "have" ]
+                                                        IT:[ "l'Oscurit&agrave;", "{label.poison@0}", "", "dell'Oscurit&agrave;" ],
+                                                        EN:[ "the Darkness", "{label.poison@0}", "have", "the Darkness" ]
                                                     }
                                                 ],
                                                 poison:[
@@ -491,6 +532,8 @@ ModManager.modules.push(function(){
                                                         EN:[ "is waiting for them for a long time..." ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 teamwork:[
                                                     {
                                                         IT:[ "dividersi il lavoro", "assicurandosi che ogni Eroe abbia posseduto {label.mirror@1} almeno una volta" ],
@@ -611,14 +654,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"La porta con il bordo rosso pu&ograve; essere aperta solo se tutti i segnalini Tempo {symbol.timeToken} sono stati rimossi. Quando aprite la porte con il bordo rosso, rimuovete il segnalino Corruzione {symbol.corruptionToken} e generate un Mostro Errante di Livello 5 nella sua zona: &egrave; {label.enemy@0}. Non appena {label.enemy@0} viene eliminato, la Missione termina con una vittoria.",
-                                                        EN:"The door with the red border can only be opened if all Time tokens {symbol.timeToken} have been removed. When you open the door with the red border, remove the Corruption token {symbol.corruptionToken} and spawn a Level 5 Roaming Monster in its zone: it is {label.enemy@0}. As soon as {label.enemy@0} is eliminated, the Mission ends with a victory."
+                                                        IT:"La porta con il bordo rosso pu&ograve; essere aperta solo se tutti i segnalini Tempo {symbol.timeToken} sono stati rimossi. Quando aprite la porte con il bordo rosso, rimuovete il segnalino Corruzione {symbol.corruptionToken} e generate un Mostro Errante di Livello 5 nella sua zona: &egrave; {label.enemy@0}. Non appena {label.enemy@0} viene eliminato, {label.questVictory@0}.",
+                                                        EN:"The door with the red border can only be opened if all Time tokens {symbol.timeToken} have been removed. When you open the door with the red border, remove the Corruption token {symbol.corruptionToken} and spawn a Level 5 Roaming Monster in its zone: it is {label.enemy@0}. As soon as {label.enemy@0} is eliminated, {label.questVictory@0}."
                                                     }
                                                 ],
                                                 campaignExplanation:[
                                                     {
-                                                        IT:"La porta con il bordo rosso pu&ograve; essere aperta solo se tutti i segnalini Tempo {symbol.timeToken} sono stati rimossi. Quando aprite la porte con il bordo rosso, rimuovete il segnalino Corruzione {symbol.corruptionToken} e generate {label.campaignBoss@0} nella sua zona: &egrave; {label.enemy@0}. Non appena {label.enemy@0} viene eliminato, la Missione termina con una vittoria.",
-                                                        EN:"The door with the red border can only be opened if all Time tokens {symbol.timeToken} have been removed. When you open the door with the red border, remove the Corruption token {symbol.corruptionToken} and spawn {label.campaignBoss@0} in its zone: it is {label.enemy@0}. As soon as {label.enemy@0} is eliminated, the Mission ends with a victory."
+                                                        IT:"La porta con il bordo rosso pu&ograve; essere aperta solo se tutti i segnalini Tempo {symbol.timeToken} sono stati rimossi. Quando aprite la porte con il bordo rosso, rimuovete il segnalino Corruzione {symbol.corruptionToken} e generate {label.campaignBoss@0} nella sua zona: &egrave; {label.enemy@0}. Non appena {label.enemy@0} viene eliminato, {label.questVictory@0}.",
+                                                        EN:"The door with the red border can only be opened if all Time tokens {symbol.timeToken} have been removed. When you open the door with the red border, remove the Corruption token {symbol.corruptionToken} and spawn {label.campaignBoss@0} in its zone: it is {label.enemy@0}. As soon as {label.enemy@0} is eliminated, {label.questVictory@0}."
                                                     }
                                                 ]
                                             }
@@ -644,6 +687,31 @@ ModManager.modules.push(function(){
                                                 [ "visitAllRooms", "teamwork" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Elimina {boss.bossBadName@0}, la fonte {label.mud@3}",
+                                                    EN:"Eliminate {boss.bossBadName@0}, the source of {label.mud@3}"
+                                                }
+                                            }
+                                        ],
+                                        preparation:{
+                                            IT:"<p>Rimuovere tutti i segnalini Obiettivo dall'inventario degli Eroi.</p>",
+                                            EN:"<p>Remove all Objective tokens from the Heroes' inventories.</p>"
+                                        },
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]

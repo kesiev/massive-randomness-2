@@ -882,6 +882,12 @@ HTML,BODY {
     cursor: pointer;
 }
 
+.quest .bossBattleTitle {
+    font-variant: small-caps;
+    font-weight: bold;
+    margin-bottom:20px;
+}
+
 @media screen and (max-width: 980px) {
 
     .quest .questFooter {
@@ -1606,6 +1612,10 @@ HTML,BODY {
     .coverCampaign .cover {
         padding:10px 0 10px 0;
         margin-bottom:20px;
+    }
+
+    .quest .bossBattleTitle {
+        margin-bottom:5px;
     }
 
 }

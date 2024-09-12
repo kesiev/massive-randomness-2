@@ -115,11 +115,13 @@ CampaignGenerator=(function() {
             mapModel = pickRandomElementValue(resources.campaignMapModels),
             rewardModel = pickRandomElementValue(resources.campaignRewardModels),
             crawlingModel = pickRandomElementValue(resources.campaignCrawlingModels),
+            bossFightModel = pickRandomElementValue(resources.campaignBossFightModels),
             sideQuestsBag = newBag(resources.campaignSideQuests),
             rewardsBag = newBag(resources.campaignRewards),
             campaignName = "",
             words = [],
             flagsMap = [],
+            flagsBoss = [],
             questsDone = [];
 
         result.pages = [];
@@ -134,7 +136,8 @@ CampaignGenerator=(function() {
             actModel,
             crawlingModel,
             mapModel,
-            rewardModel
+            rewardModel,
+            bossFightModel
         ].forEach(modelSet=>{
             if (modelSet.words)
                 words.push(modelSet.words);
@@ -336,7 +339,6 @@ CampaignGenerator=(function() {
                                                 if (mods.indexOf(mod) == -1)
                                                     mods.push(mod);
                                             });
-
                                             
                                         pageData.generator.sideQuest = {
                                             if:ifCodeName ? questModel.code && questModel.code[ifCodeName] ? questModel.code[ifCodeName] : resources.campaignCode[0].code[ifCodeName] : 0,
@@ -382,6 +384,82 @@ CampaignGenerator=(function() {
                                         pageData.generator.progression.rewards.unshift(model.description);
                                     })
                                     
+                                }
+
+                            }
+
+                            // Add boss fight specific rewards if any
+
+                            let
+                                addBoss = false,
+                                selectedReward,
+                                selectedBoss;
+
+                            if (questFlags.bossFight == "yes") {
+
+                                let
+                                    bosses = [];
+
+                                resources.bossList.forEach(boss=>{
+                                    if (!selectedBoss && boss.campaign) {
+                                        let
+                                            add = true;
+
+                                        flagsBoss.forEach(flag=>{
+                                            if (boss.tags.indexOf(flag) != -1)
+                                                add = false;
+                                        })
+
+                                        if (add) {
+
+                                            boss.campaign.forEach(version=>{
+                                                let
+                                                    add = false;
+                                                version.at.forEach(at=>{
+                                                    if ((at.act == page.act) && (at.map == page.map))
+                                                        add = true;
+                                                });
+                                                if (add)
+                                                    bosses.push({ mods:version.mods, data:boss });
+                                            });
+
+                                            if (bosses.length) {
+                                                selectedBoss = pickRandomElementValue(bosses);
+                                                addBoss = true;
+                                            }
+                                        
+                                        }
+                                    }
+
+                                })
+
+                            }
+
+                            if (addBoss && questFlags.bossFightRewardTags) {
+
+                                selectedReward = pickRewards(rewardsBag,questFlags.bossFightRewardTags);
+                                addBoss = !!selectedReward.length;
+
+                            }
+
+                            if (addBoss) {
+
+                                // Add boss
+
+                                pageData.generator.boss = selectedBoss;
+                                pageData.generator.bossPreparation = "";
+
+                                selectedBoss.data.tags.forEach(tag =>{
+                                    flagsBoss.push(tag);
+                                })
+
+                                // Add reward
+
+                                if (selectedReward) {
+                                    if (!pageData.generator.progression.rewards) pageData.generator.progression.rewards = [];
+                                    selectedReward.forEach(model=>{
+                                        pageData.generator.progression.rewards.unshift(model.description);
+                                    });
                                 }
 
                             }

@@ -1,5 +1,19 @@
 ModManager.modules.push(function(){
 
+    const
+        QUESTVICTORY = [
+            {
+                IT:[ "la Missione termina con una vittoria", "terminare la Missione con una vittoria" ],
+                EN:[ "the Mission ends with a victory", "end the Mission with a victory" ]
+            }
+        ],
+        BOSSBEAT = [
+            {
+                IT:[ "viene eliminato", "viene eliminata" ],
+                EN:[ "it is eliminated", "it is eliminated" ]
+            }
+        ];
+        
     return [
         {
             id:"quests-mr",
@@ -196,9 +210,9 @@ ModManager.modules.push(function(){
                                                     { IT:"{who:capital@1} non dice bugie.", EN: "{who:capital@1} is not telling lies." }
                                                 ],
                                                 goodEnding:[
-                                                    { IT:"Gli dei della Giustizia vi sorridono. Avete agito bene. La Missione termina con la vittoria.", EN: "The gods of Justice smile upon you. You did well. The Mission ends in victory." },
-                                                    { IT:"Ben fatto, eroi. Anche questa volta avete trionfato e, con voi, la giustizia. La Missione termina con la vittoria.", EN: "Well done, heroes. You triumphed again and the justice with you. The Mission ends in victory." },
-                                                    { IT:"Il sacrificio &egrave; stato inevitabile, ma giustizia &egrave; stata fatta. La Missione termina con la vittoria.", EN: "The sacrifice was inevitable, but justice has been done. The Mission ends in victory." },
+                                                    { IT:"Gli dei della Giustizia vi sorridono. Avete agito bene. {label.questVictory:capital@0}.", EN: "The gods of Justice smile upon you. You did well. The Mission ends in victory." },
+                                                    { IT:"Ben fatto, eroi. Anche questa volta avete trionfato e, con voi, la giustizia. {label.questVictory:capital@0}.", EN: "Well done, heroes. You triumphed again and the justice with you. The Mission ends in victory." },
+                                                    { IT:"Il sacrificio &egrave; stato inevitabile, ma giustizia &egrave; stata fatta. {label.questVictory:capital@0}.", EN: "The sacrifice was inevitable, but justice has been done. The Mission ends in victory." },
                                                 ],
                                                 badEnding:[
                                                     { IT:"Il Lord si accascia a terra con un grande tonfo ma, dentro di voi, sentite che qualcosa non non va. La Missione termina con la sconfitta.", EN: "The Lord collapses to the ground with a great thud but, inside, you feel that something is wrong. The Mission ends in defeat." },
@@ -305,6 +319,8 @@ ModManager.modules.push(function(){
                                                         EN:[ "We have no choice. We need to resolve this issue quickly." ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 riskyInvestigation:[
                                                     {
                                                         EN:[ 3 ]
@@ -526,6 +542,27 @@ ModManager.modules.push(function(){
                                                 [ "visitAllRooms", "riskyInvestigation" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Elimina {boss.bossBadName@0}, il mandante",
+                                                    EN:"Eliminate {boss.bossBadName@0}, the instigator"
+                                                }
+                                            }
+                                        ],
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]
@@ -669,14 +706,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 ordersElemental:[
                                                     {
-                                                        IT:[ "Tutti gli Eroi ricevono 1{symbol.frostToken}." ],
-                                                        EN:[ "All Heroes receive 1{symbol.frostToken}." ]
+                                                        IT:[ "Tutti gli Eroi ricevono 1 {symbol.frostToken}." ],
+                                                        EN:[ "All Heroes receive 1 {symbol.frostToken}." ]
                                                     },{
-                                                        IT:[ "Tutti gli Eroi ricevono 1{symbol.fireToken}." ],
-                                                        EN:[ "All Heroes receive 1{symbol.fireToken}." ]
+                                                        IT:[ "Tutti gli Eroi ricevono 1 {symbol.fireToken}." ],
+                                                        EN:[ "All Heroes receive 1 {symbol.fireToken}." ]
                                                     },{
-                                                        IT:[ "Tira il dado a 6 facce.<ul><li><b>Se esce 1-3:</b> tutti gli Eroi ricevono 1{symbol.frostToken}.</li><li><b>Se esce 4-6:</b> tutti gli Eroi ricevono 1{symbol.fireToken}.</li></ul>" ],
-                                                        EN:[ "Roll the 6-sided dice.<ul><li><b>If 1-3 is rolled:</b> all Heroes receive 1{symbol.frostToken}.</li><li><b>If 4-6 is rolled:</b> all Heroes receive 1{symbol.fireToken}.</li></ul>"]
+                                                        IT:[ "Tira il dado a 6 facce.<ul><li><b>Se esce 1-3:</b> tutti gli Eroi ricevono 1 {symbol.frostToken}.</li><li><b>Se esce 4-6:</b> tutti gli Eroi ricevono 1 {symbol.fireToken}.</li></ul>" ],
+                                                        EN:[ "Roll the 6-sided dice.<ul><li><b>If 1-3 is rolled:</b> all Heroes receive 1 {symbol.frostToken}.</li><li><b>If 4-6 is rolled:</b> all Heroes receive 1 {symbol.fireToken}.</li></ul>"]
                                                     }
                                                 ],
                                                 ordersSpawners:[

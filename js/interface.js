@@ -5,7 +5,7 @@ Interface=(function() {
         DEBUG_QUEST = false,
         DEBUG_CAMPAIGN = false,
         DEBUG_HIDDENTEXT = false,
-        VERSION = "0.2b",
+        VERSION = "0.3b",
         SOURCES_AT = {
             short:"github.com/kesiev/massive-randomness-2",
             full:"https://github.com/kesiev/massive-randomness-2"
@@ -228,7 +228,7 @@ Interface=(function() {
                         switch (setting.type) {
                             case "includeExclude":{
                                 notPicked.forEach(item=>{
-                                    if (requirements.excludes.indexOf(item) == -1)
+                                    if ((requirements.excludes.indexOf(item) == -1) && (requirements.needs.indexOf(item) == -1))
                                         requirements.excludes.push(item)
                                 });
                                 break;

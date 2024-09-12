@@ -4,6 +4,7 @@ Tools=(function(){
         DEBUG_QUEST = false,
         ACTS = 3,
         ACT_MAPS = 3,
+        BOSS_LEVELS = 4,
         TESTQUESTS_ITERATIONS = 400,
         TESTCAMPAIGNS_ITERATIONS = 50,
         CAMPAIGN_SIDEQUEST_COUNT = [ "red", "yellow" ],
@@ -1541,6 +1542,260 @@ Tools=(function(){
             console.log(resources);
         },
 
+        testCampaign:(into)=>{
+            let
+                resources = ModManager.load({
+                    needs:[ "quests", "generator-campaign" ]
+                }),
+                html = "",
+                errorsNode = createErrorsNode(into),
+                resultsNode = createNode(into,"div"),
+                errors = [],
+                acts = [];
+
+            for (let act=0;act<ACTS;act++) {
+                acts[act] = [];
+                for (let map=0;map<ACT_MAPS;map++) {
+                    acts[act][map] = [];
+                    resources.quests.forEach(quest=>{
+                        let
+                            ok = true,
+                            entry = {
+                                score:0,
+                                quest:quest
+                            };
+
+                        if (!quest._tested) {
+                            quest._tested = true;
+                            quest._noCampaignData = false;
+                            quest._sideQuests = [];
+                            quest._campaignSpecificRules = false;
+                            quest._endingOnly = quest.forActs && quest.forActs.length == 1 && quest.forActs[0] == 2 && quest.forMaps && quest.forMaps.length == 1 && quest.forMaps[0] == 2;
+                            quest._rulesToFix = [];
+                            quest.versions.forEach(version=>{
+                                if (!version.campaign)
+                                    quest._noCampaignData = true;
+                                else if (version.campaign.sideQuests)
+                                    version.campaign.sideQuests.forEach(sidequest=>{
+                                        sidequest.tags.forEach(tagset=>{
+                                            tagset.forEach(tag=>{
+                                                if (quest._sideQuests.indexOf(tag) == -1)
+                                                    quest._sideQuests.push(tag);
+                                            })
+                                        })
+                                    });
+                                version.rules.forEach(ruleset=>{
+                                    ruleset.forEach(rule=>{
+                                        
+                                        if (rule.campaignExplanation || rule.campaignSummary)
+                                            quest._campaignSpecificRules = true;
+
+                                        if (
+                                            rule.explanation && rule.explanation[0].EN.match(/level 5/i) ||
+                                            (rule.campaignExplanation && rule.campaignExplanation.length && rule.campaignExplanation[0].EN.match(/label\.campaign[a-zA-Z]*Boss@/))
+                                        )
+                                            quest._isBoss = true;
+
+                                        if (
+                                            (
+                                                rule.explanation &&
+                                                (rule.explanation[0].EN.indexOf("XP") != -1)) &&
+                                                !rule.explanation[0].EN.match(/expected XP/) &&
+                                                (!rule.campaignExplanation || (
+                                                    (rule.campaignExplanation[0].EN.indexOf("XP") != -1) &&
+                                                    !rule.campaignExplanation[0].EN.match(/[aA]ll Heroes gets[0-9 ]+XP/) &&
+                                                    !rule.campaignExplanation[0].EN.match(/without gaining XP/)
+                                                )
+                                            )
+                                        )
+                                            quest._rulesToFix.push([ rule.explanation[0].EN, rule.campaignExplanation ? rule.campaignExplanation[0].EN : 0 ]);
+
+                                        if (
+                                            (rule.explanation && rule.explanation[0].EN.match(/level 5/i)) &&
+                                            (!rule.campaignExplanation || (
+                                                rule.campaignExplanation[0].EN.match(/level 5/i) ||
+                                                (
+                                                    !rule.campaignExplanation[0].EN.match(/label\.campaignBoss@/) &&
+                                                    !rule.campaignExplanation[0].EN.match(/label\.campaignEasyBoss@/)
+                                                )
+                                            ))
+                                        )
+                                            quest._rulesToFix.push([ rule.explanation[0].EN, rule.campaignExplanation ? rule.campaignExplanation[0].EN : 0 ]);
+
+                                        if (
+                                            (rule.summary && (rule.summary[0].EN.indexOf("XP") != -1)) &&
+                                            (!rule.campaignSummary || (
+                                                (rule.campaignSummary[0].EN.indexOf("XP") != -1)
+                                            ))
+                                        )
+                                            quest._rulesToFix.push([ rule.summary[0].EN, rule.campaignSummary ? rule.campaignSummary[0].EN : 0 ]);
+
+                                        if (
+                                            (rule.summary && rule.summary[0].EN.match(/level 5/i)) &&
+                                            (!rule.campaignSummary || (
+                                                rule.campaignSummary[0].EN.match(/level 5/i) ||
+                                                (
+                                                    !rule.campaignSummary[0].EN.match(/label\.campaignBoss@/) &&
+                                                    !rule.campaignSummary[0].EN.match(/label\.campaignEasyBoss@/)
+                                                )
+                                            ))
+                                        )
+                                            quest._rulesToFix.push([ rule.summary[0].EN, rule.campaignSummary ? rule.campaignSummary[0].EN : 0 ]);
+                                    })
+                                })
+
+                            })
+                        }
+
+                        if (!quest._matches)
+                            quest._matches = 0;
+
+                        if (quest.forActs)
+                            if (quest.forActs.indexOf(act) != -1) {
+                                entry.matchAct = true;
+                                entry.score++;
+                            }
+                            else
+                                ok = false;
+
+                        if (quest.forMaps)
+                            if (quest.forMaps.indexOf(map) != -1) {
+                                entry.matchMap = true;
+                                entry.score++;
+                            } else
+                                ok = false;
+
+                        if (ok) {
+                            let
+                                label = "";
+                            if (entry.matchAct)
+                                label+="<span style='color:green'>A</span> ";
+                            else
+                                label+="<span style='color:red'>A</span> ";
+                            if (entry.matchMap)
+                                label+="<span style='color:green'>M</span> ";
+                            else
+                                label+="<span style='color:red'>M</span> ";
+                            entry.label = label;
+                            acts[act][map].push(entry);
+                            quest._matches++;
+                        }
+                    })
+                };
+            };
+
+            for (let act=0;act<ACTS;act++) {
+                html+="<h2>Act "+(act+1)+"</h2>";
+                for (let map=0;map<ACT_MAPS;map++) {
+                    acts[act][map].sort((a,b)=>{
+                        if (a.score < b.score) return 1;
+                        else if (a.score > b.score) return -1;
+                        else if (a.label < b.label) return -1;
+                        else if (a.label > b.label) return 1;
+                        else return 0;
+                    });
+                    
+                    html+="<h3>Map "+(map+1)+" ("+acts[act][map].length+")</h3><ul>";
+                    acts[act][map].forEach(quest=>{
+                        let
+                            label = quest.label+" "+quest.quest.type+" - "+quest.quest.by.EN;
+                        html+="<li>";
+                        switch (quest.score) {
+                            case 0:{
+                                html+=label;
+                                break;
+                            }
+                            case 1:{
+                                html+="<u>"+label+"</u>";
+                                break;
+                            }
+                            case 2:{
+                                html+="<b>"+label+"</b>";
+                                break;
+                            }
+                        }
+
+                        if (quest.quest._isBoss)
+                            html+=" <span style='background-color:purple;color:white'>BOSS</span>";
+
+                        if (quest.quest._endingOnly)
+                            html+=" <span style='background-color:cyan;color:white'>Ending</span>";
+
+                        if (quest.quest._campaignSpecificRules)
+                            html+=" <span style='background-color:blue;color:white'>Campaign rules</span>";
+
+                        if (quest.quest._noCampaignData)
+                            html += " <span style='color:red'>(No campaign data)</span>";
+                        else
+                            html += " <span style='color:white;background-color:"+(quest.quest._endingOnly ? "gray" : CAMPAIGN_SIDEQUEST_COUNT[quest.quest._sideQuests.length] || "green")+"'>"+quest.quest._sideQuests.length+" side quests ("+(quest.quest._sideQuests.join(", "))+")</span>";
+                        
+                        html+="</li>";
+                    })
+
+                    html+="</ul>";
+                };
+
+            };
+
+            html+="<h2>Unused</h2><ul>";
+
+            resources.quests.forEach(quest=>{
+                if (!quest._matches)
+                    html+="<li>"+quest.type+" - "+quest.by.EN+"</li>";
+            });
+
+            html+="</ul>";
+
+            resources.quests.forEach(quest=>{
+                let
+                    questLabel = quest.type+" - "+quest.by.EN;
+
+
+                if (quest._matches) {
+
+                    let
+                        isMap3Only = quest.forMaps && (quest.forMaps.length ==1) && (quest.forMaps[0] == 2),
+                        isMap3 = !quest.forMaps || (quest.forMaps.indexOf(2) != -1);
+
+                    if (quest._noCampaignData)
+                        errors.push("Used quest <b>"+questLabel+"</b> is missing campaign data");
+                    else {
+                        
+                        if (CAMPAIGN_SIDEQUEST_COUNT[quest._sideQuests.length] && !quest._endingOnly)
+                            errors.push("Used quest <b>"+questLabel+"</b> has not enough side quests ("+quest._sideQuests.length+")");
+
+                        if (!quest._noCampaignData && quest._rulesToFix.length) {
+                            let
+                                line="Quest <b>"+questLabel+"</b> rules may not have fixed for campaign.";
+                            quest._rulesToFix.forEach(rule=>{
+                                line+="<ul><li><b>Original:</b> "+rule[0]+"</li><li><b>Changed:</b> "+(rule[1] || "(Missing)")+"</li></ul>";
+                            });
+                            errors.push(line);
+                        }
+                        
+                        if (quest._isBoss && !isMap3Only)
+                            errors.push("Quest <b>"+questLabel+"</b> is BOSS, so it should be for map 3 only");
+                        if (!quest._isBoss && isMap3)
+                            errors.push("Quest <b>"+questLabel+"</b> is not BOSS, so it should avoid map 3");
+
+                    }
+
+                } else {
+                    
+                    if (!quest._noCampaignData)
+                        errors.push("Unused quest <b>"+questLabel+"</b> has campaign data.");    
+    
+                }
+
+            });
+
+            resultsNode.innerHTML=html;
+            dumpErrors(errorsNode,errors);
+
+            console.log(acts);
+            console.log(resources);
+        },
+
         testCampaignModules:(into)=>{
             let
                 errorsNode = createErrorsNode(into),
@@ -1666,6 +1921,18 @@ Tools=(function(){
                                     yes:"<span style='color:green'>[Unform]</span>",
                                     no:"<span style='color:red'>[Multi]</span>"
                                 }
+                            }
+                        }
+                    ]
+                },{
+                    name:"Boss fight models",
+                    list:resources.campaignBossFightModels,
+                    tables:[
+                        {
+                            name:"Boss fight",
+                            symbols:{
+                                bossFight:"<span style='font-weight:bold'>Boss</span>",
+                                bossFightRewardTags:"[R]",
                             }
                         }
                     ]
@@ -1883,6 +2150,532 @@ Tools=(function(){
             resultsNode.innerHTML = text;
         },
 
+        testBoss:(into)=>{
+            
+            let
+                resources = ModManager.load({
+                    needs:[ "boss" ]
+                }),
+                summaryHtml = "",
+                oneshotHtml = "",
+                campaignHtml = "",
+                errorsNode = createErrorsNode(into),
+                resultsNode = createNode(into,"div"),
+                errors = [],
+                bossMap = [];
+
+            oneshotHtml+="<h2>One-shot boss</h2>";
+            campaignHtml = "<h2>Campaign boss</h2>";
+
+            function numberToColor(number) {
+                let
+                    byte = Math.floor((number/100)*255);
+
+                return "rgb("+byte+","+(255-byte)+",0)";
+            }
+
+            function summarizer(text) {
+                let
+                    tags = [];
+
+                text.forEach(line=>{
+                    line.replace(/\{([^}]+)\}/g,(m,m1)=>{
+                        m1 = m1.replace(/@.*/,"").replace(/^[^.]+\./,"");
+                        switch (m1) {
+                            case "bossName":{
+                                m1="(N)";
+                                break;
+                            }
+                            case "bossHealth":{
+                                m1="(H)";
+                                break;
+                            }
+                            case "bossPhase2Health":{
+                                m1="(H2)";
+                                break;
+                            }
+                        }
+                        tags.push(m1);
+                    })
+                })
+            
+                return tags;
+            }
+
+            // One-shot
+
+            resources.bossList.forEach(boss=>{
+                let
+                    row = {
+                        name:boss.title.EN,
+                        health:{}
+                    };
+                oneshotHtml+="<h3>"+boss.title.EN+"</h3>"
+                oneshotHtml+="<table border=1><tr><th>Level</th><th>Prep</th><th>Ph.1 HP</th><th>Prep</th><th>Ph.2 HP</th><th>Total</th></tr>";
+                for (let k in boss.levels) {
+                    let
+                        totalHealth = 0,
+                        label = "<b>"+boss.title.EN+"</b> Lv. <b>"+k+"</b>",
+                        bossMode = boss.labels.bossMode;
+
+                    oneshotHtml+="<tr><td>"+k+"</td><td>";
+                    
+                    if (!boss.levels[k].labels.bossModifier)
+                        errors.push("Boss "+label+" is missing modifier text");
+                    else {
+                        let
+                            summary = summarizer(boss.levels[k].labels.bossModifier.EN);
+                        if (summary.indexOf("(H2)") != -1)
+                            errors.push("Boss "+label+" has phase 2 health on phase 1 modifier text");
+                        oneshotHtml+=summary.join(", ")+(bossMode ? " + "+bossMode.EN : "");
+                    }
+                    
+                    oneshotHtml+="</td><td>";
+
+                    if (boss.levels[k].labels.bossHealth) {
+                        oneshotHtml+=boss.levels[k].labels.bossHealth.EN;
+                        totalHealth += boss.levels[k].labels.bossHealth.EN;
+                    } else {
+                        oneshotHtml+="[!!]";
+                        errors.push("Boss "+label+" is missing base health (bossHealth)");
+                    }
+                    oneshotHtml+="</td>";
+                    if (boss.levels[k].labels.bossPhase2Health) {
+                        if (!boss.levels[k].labels.bossPhase2Modifier) {
+                            errors.push("Boss "+label+" is missing phase 2 modifier text (bossPhase2Modifier)");
+                            oneshotHtml+="<td>[!!!]</td>";
+                        } else {
+                            let
+                                summary = summarizer(boss.levels[k].labels.bossPhase2Modifier.EN);
+                            if (summary.indexOf("(H)") != -1)
+                                errors.push("Boss "+label+" has phase 1 health on phase 2 modifier text");
+                            oneshotHtml+="<td>"+summary.join(", ")+"</td>";
+                        }
+                        if (boss.levels[k].labels.bossPhase2Health.EN < boss.levels[k].labels.bossHealth.EN)
+                            errors.push("Boss "+label+" has phase 2 health less than phase 1 health");
+                        oneshotHtml+="<td>"+boss.levels[k].labels.bossPhase2Health.EN+"</td>";
+                        totalHealth += boss.levels[k].labels.bossPhase2Health.EN;
+                    } else {
+                        if (boss.levels[k].labels.bossPhase2Modifier)
+                            errors.push("Boss "+label+" is missing phase 2 health (bossPhase2Health)");
+                        oneshotHtml+="<td>-</td><td>-</td>";
+                    }
+                    oneshotHtml+="</td><td>"+totalHealth+"</td></tr>";
+                    row.health[k]=totalHealth;
+                }
+                oneshotHtml+="</table>";
+                bossMap.push(row);
+            });
+
+            // Campaign
+            let
+                globalStats = [];
+
+            resources.bossList.forEach(boss=>{
+                campaignHtml+="<h3>"+boss.title.EN+"</h3>";
+                if (boss.campaign) {
+
+                    campaignHtml+="<table border=1><tr><th>Act</th><th>Map</th><th>Level</th><th>HP</hp><th>Bonus HP</th><th>Total HP</th><th>Prep</th><th>Prep Ph.2</th></tr>";
+                    let
+                        stats = [];
+                    for (let a=0;a<ACTS;a++)
+                        for (let m=0;m<ACT_MAPS;m++) {
+                            let
+                                found = 0,
+                                label = "<b>"+boss.title.EN+"</b> Act <b>"+a+"</b> Map <b>"+m+"</b>";
+                            boss.campaign.forEach(row=>{
+                                row.at.forEach(at=>{
+                                    if ((at.act == a) && (at.map == m)) {
+                                        found++;
+                                        if (!stats[a]) stats[a]=[];
+                                        if (!stats[a][m]) stats[a][m]=[];
+
+                                        if (!globalStats[a]) globalStats[a]=[];
+                                        if (!globalStats[a][m]) globalStats[a][m]=[];
+
+                                        for (let l=1;l<=BOSS_LEVELS;l++) {
+                                            if (boss.levels[l]) {
+                                                let
+                                                    total = 0,
+                                                    bonus = 0,
+                                                    prep1 = boss.levels[l].labels.bossModifier,
+                                                    prep2 = boss.levels[l].labels.bossPhase2Modifier,
+                                                    bossMode = boss.labels.bossMode;
+                                                campaignHtml+="<tr><td>"+a+"</td><td>"+m+"</td><td>"+l+"</td>";
+                                                if (boss.levels[l].labels.bossHealth)
+                                                    total+=boss.levels[l].labels.bossHealth.EN;
+                                                if (boss.levels[l].labels.bossPhase2Health)
+                                                    total+=boss.levels[l].labels.bossPhase2Health.EN;
+                                                campaignHtml+="<td>"+total+"</td>";
+                                                if (row.mods) {
+                                                    if (row.mods.labels) {
+                                                        if (row.mods.labels.bossModifier)
+                                                            if (prep1)
+                                                                prep1 = row.mods.labels.bossModifier;
+                                                            else
+                                                                errors.push("Boss "+label+" is changing preparation but it has no preparation text");
+                                                        if (row.mods.labels.bossPhase2Modifier)
+                                                            if (prep2)
+                                                                prep2 = row.mods.labels.bossPhase2Modifier;
+                                                            else
+                                                                errors.push("Boss "+label+" is changing phase 2 preparation but it has no preparation text");
+                                                        if (row.mods.labels.bossMode)
+                                                            bossMode = row.mods.labels.bossMode;
+                                                    }
+                                                    if (row.mods.labelsBonus) {
+                                                        if (row.mods.labelsBonus.bossHealth)
+                                                            bonus += row.mods.labelsBonus.bossHealth.EN;
+                                                        if (row.mods.labelsBonus.bossPhase2Health) {
+                                                            if (!boss.levels[l].labels.bossPhase2Health)
+                                                                errors.push("Boss "+label+" is giving phase 2 bonus without phase 2 base health");
+                                                            bonus += row.mods.labelsBonus.bossPhase2Health.EN;
+                                                        }
+                                                    }
+                                                }
+                                                campaignHtml+="<td>"+bonus+"</td>";
+                                                total+=bonus;
+                                                campaignHtml+="<td>"+total+"</td>";
+                                                
+                                                if (prep1)
+                                                    campaignHtml+="<td>"+summarizer(prep1.EN).join(", ")+(bossMode ? " + "+bossMode.EN : "")+"</td>";
+                                                else
+                                                    campaignHtml+="<td></td>";
+
+                                                if (prep2)
+                                                    campaignHtml+="<td>"+summarizer(prep2.EN).join(", ")+"</td>";
+                                                else
+                                                    campaignHtml+="<td></td>";
+
+                                                if (!stats[a][m][l]) stats[a][m][l]={};
+                                                if (!globalStats[a][m][l]) globalStats[a][m][l]={};
+
+                                                if ((stats[a][m][l].min === undefined) || (total < stats[a][m][l].min))
+                                                    stats[a][m][l].min = total;
+                                                if ((stats[a][m][l].max === undefined) || (total > stats[a][m][l].max))
+                                                    stats[a][m][l].max = total;
+                                                if ((globalStats[a][m][l].min === undefined) || (total < globalStats[a][m][l].min))
+                                                    globalStats[a][m][l].min = total;
+                                                if ((globalStats[a][m][l].max === undefined) || (total > globalStats[a][m][l].max))
+                                                    globalStats[a][m][l].max = total;
+
+
+                                            }
+                                        }
+
+                                        campaignHtml+="</tr>";
+                                    }
+                                });
+                            });
+                            if (found == 0)
+                                errors.push("Boss "+label+" not found");
+                            else if (found > 1)
+                                errors.push("Boss "+label+" found too many times ("+found+")");
+                        }
+                    
+                    campaignHtml+="</table>";
+
+                    campaignHtml+="<table border=1><tr><th>Act</th><th>Map</th><th>Lv.1</th><th>Lv.2</th><th>Lv.3</th><th>Lv.4</th></tr>";
+
+                    for (let a=0;a<ACTS;a++)
+                        for (let m=0;m<ACT_MAPS;m++) {
+                            campaignHtml+="<tr><td>"+a+"</td><td>"+m+"</td>";
+                            for (let l=1;l<=BOSS_LEVELS;l++) {
+                                campaignHtml+="<td>";
+                                if (stats[a] && stats[a][m] && stats[a][m][l])
+                                    if (stats[a][m][l].min == stats[a][m][l].max)
+                                        campaignHtml+=stats[a][m][l].min;
+                                    else
+                                        campaignHtml+=stats[a][m][l].min+" - "+stats[a][m][l].max;
+                                else
+                                    campaignHtml+="&nbsp;"
+                                campaignHtml+="</td>";
+                            }
+                            campaignHtml+="</tr>";
+                        }
+                    campaignHtml+="</table>";
+                
+                } else
+                    errors.push("Boss <b>"+boss.title.EN+"</b> is missing campaign data");
+
+            });
+
+            summaryHtml+="<h2>One-shot boss summary</h2>";
+            summaryHtml+="<table border=1><tr><th>Level</th><th>Lv.1</th><th>Lv.2</th><th>Lv.3</th><th>Lv.4</th></tr>";
+            bossMap.forEach(row=>{
+                summaryHtml+="<tr><td>"+row.name+"</td>";
+                for (let k=1;k<=BOSS_LEVELS;k++)
+                    if (row.health[k])
+                        summaryHtml+="<td style='background-color:"+numberToColor(row.health[k])+"'>"+row.health[k]+"</td>";
+                    else
+                        summaryHtml+="<td>-</td>";
+                summaryHtml+="</tr>";
+            })
+            summaryHtml+="</table>";
+
+
+            summaryHtml+="<h2>Campaign boss summary</h2>";
+            summaryHtml+="<table border=1><tr><th>Act</th><th>Map</th><th>Lv.1</th><th>Lv.2</th><th>Lv.3</th><th>Lv.4</th></tr>";
+            for (let a=0;a<ACTS;a++)
+                for (let m=0;m<ACT_MAPS;m++) {
+                    summaryHtml+="<tr><td>"+a+"</td><td>"+m+"</td>";
+                    for (let l=1;l<=BOSS_LEVELS;l++) {
+                        summaryHtml+="<td";
+                        if (globalStats[a] && globalStats[a][m] && globalStats[a][m][l]) {
+                            summaryHtml+=" style='background-color:"+numberToColor(globalStats[a][m][l].max)+"'>";
+                            if (globalStats[a][m][l].min == globalStats[a][m][l].max)
+                                summaryHtml+=globalStats[a][m][l].min;
+                            else
+                                summaryHtml+=globalStats[a][m][l].min+" - "+globalStats[a][m][l].max;
+                        } else
+                            summaryHtml+=">&nbsp;"
+                        summaryHtml+="</td>";
+                    }
+                    summaryHtml+="</tr>";
+                }
+            summaryHtml+="</table>";
+            
+            resultsNode.innerHTML=summaryHtml+oneshotHtml+campaignHtml;
+            dumpErrors(errorsNode,errors);
+
+        },
+
+        testQuestsBoss:(into)=>{
+            
+            let
+                resources = ModManager.load({
+                    needs:[ "quests", "generator-campaign" ]
+                }),
+                keepHtml = "",
+                notKeepHtml = "",
+                noPickHtml = "",
+                errorsNode = createErrorsNode(into),
+                resultsNode = createNode(into,"div"),
+                errors = [],
+                mapmodQuests = {},
+                requiresCampaignRule={
+                    collectTime:true
+                };
+
+            function checkRegExps(str,reg) {
+                for (let i=0;i<reg.length;i++) {
+                    let
+                        done = false,
+                        newstr = str.replace(reg[i],(m,m1)=>{
+                            done = true;
+                            return "<span style='background-color:#ff0;margin:0 5px'>"+m1+"</span>";
+                        })
+                    if (done)
+                        return newstr;
+                }
+                return false;
+            }
+
+            resources.campaignSideQuests.forEach(sidequest=>{
+                if (sidequest.mods)
+                    sidequest.tags.forEach(tag=>{
+                        mapmodQuests[tag] = true;
+                    })
+            });
+
+            resources.quests.forEach(quest=>{
+                let
+                    questLabel = quest.type+" - "+quest.by.EN;
+
+                quest.versions.forEach(version=>{
+
+                    let
+                        questResult = {
+                            mapModOnCampaign:false,
+                            missingVictoryCondition:true,
+                            requiresCampaignRule:false,
+                            hasWrongEndCondition:[],
+                            missingBoss:false,
+                            bossPreparation:false,
+                            campaignBossPreparation:false,
+                            tokenRemoved:false,
+                            isCollecting:false,
+                            collectCounter:0
+                        };
+
+                    if (version.boss) {
+                        questResult.bossPreparation = version.boss.preparation ? version.boss.preparation.EN : 0;
+                        questResult.campaignBossPreparation = version.boss.campaignPreparation ? version.boss.campaignPreparation.EN : 0;
+                    } else
+                        questResult.missingBoss = true;
+
+                    if (version.campaign && version.campaign.sideQuests)
+                        version.campaign.sideQuests.forEach(quest=>{
+                            if (quest.mods) {
+                                questResult.isCollecting = "(due to sidequest map modifier)";
+                                questResult.mapModOnCampaign = true;
+                            }
+                                
+                            quest.tags.forEach(tagset=>{
+                                tagset.forEach(tag=>{
+                                    if (mapmodQuests[tag]) {
+                                        questResult.isCollecting = "(due to related sidequest map modifier)";
+                                        questResult.mapModOnCampaign = true;
+                                    }
+                                    if (requiresCampaignRule[tag])
+                                        questResult.requiresCampaignRule = true;
+                                })
+                            })
+                        })
+
+                    version.rules.forEach(ruleset=>{
+                        ruleset.forEach(rule=>{
+                            
+                            if (
+                                rule.explanation &&
+                                (
+                                    (rule.explanation[0].EN.match(/questVictory/i)) &&
+                                    (rule.explanation[0].IT.match(/questVictory/i))
+                                )
+                            )
+                                questResult.missingVictoryCondition = false;
+
+                            if (
+                                rule.summary &&
+                                (
+                                    (rule.summary[0].EN.match(/questVictory/i)) &&
+                                    (rule.summary[0].IT.match(/questVictory/i))
+                                )
+                            )
+                                questResult.missingVictoryCondition = false;
+
+                            if (
+                                rule.explanation &&
+                                (
+                                    (rule.explanation[0].EN.match(/(?:^|\W)victory(?:$|\W)/i)) ||
+                                    (rule.explanation[0].IT && rule.explanation[0].IT.match(/(?:^|\W)vittoria(?:$|\W)/i))
+                                )
+                            )
+                                questResult.hasWrongEndCondition.push(rule.explanation[0].EN);
+
+                            if (
+                                rule.campaignExplanation &&
+                                rule.campaignExplanation[0] &&
+                                (
+                                    (rule.campaignExplanation[0].EN.match(/(?:^|\W)victory(?:$|\W)/i)) ||
+                                    (rule.campaignExplanation[0].IT && rule.campaignExplanation[0].IT.match(/(?:^|\W)vittoria(?:$|\W)/i))
+                                )
+                            )
+                                questResult.hasWrongEndCondition.push(rule.campaignExplanation[0].EN);
+                            
+                            if (
+                                rule.summary &&
+                                (
+                                    (rule.summary[0].EN.match(/(?:^|\W)victory(?:$|\W)/i)) ||
+                                    (rule.summary[0].IT && rule.summary[0].IT.match(/(?:^|\W)vittoria(?:$|\W)/i))
+                                )
+                            )
+                                questResult.hasWrongEndCondition.push(rule.summary[0].EN);
+
+                            if (
+                                rule.campaignSummary &&
+                                rule.campaignSummary[0] &&
+                                (
+                                    (rule.campaignSummary[0].EN.match(/(?:^|\W)victory(?:$|\W)/i)) ||
+                                    (rule.campaignSummary[0].IT && rule.campaignSummary[0].IT.match(/(?:^|\W)vittoria(?:$|\W)/i))
+                                )
+                            )
+                                questResult.hasWrongEndCondition.push(rule.campaignSummary[0].EN);
+
+                            if (rule.explanation) {
+
+                                let
+                                    match;
+                                    
+                                match = checkRegExps(rule.explanation[0].EN,[
+                                    /(?:^|\W)(collect)(?:$|\W)/i,
+                                    /(?:^|\W)(pick it up)(?:$|\W)/i,
+                                    /(?:^|\W)(as an equipment card)(?:$|\W)/i,
+                                    /(?:^|\W)(take this item)(?:$|\W)/i,
+                                    /(?:^|\W)(token on [a-zA-Z]+ Hero Card)(?:$|\W)/i,
+                                    /(?:^|\W)(Hero [a-zA-Z ]+ owns)(?:$|\W)/i
+                                ]);
+
+                                if (match) {
+                                    console.log(questLabel,"++",rule.explanation[0].EN);
+                                    questResult.collectCounter++;
+                                    questResult.isCollecting = match;
+                                }
+
+                                match = checkRegExps(rule.explanation[0].EN,[
+                                    /(?:^|\W)(remove the token)(?:$|\W)/i,
+                                    /(?:^|\W)(removing the token)(?:$|\W)/i,
+                                    /(?:^|\W)(remove it from the dungeon)(?:$|\W)/i,
+                                    /(?:^|\W)(discards? the[a-zA-Z ]+token)(?:$|\W)/i,
+                                    /(?:^|\W)(removes? the[a-zA-Z ]+token)(?:$|\W)/i,
+                                    /(?:^|\W)(place [a-zA-Z ]+ tokens on the)(?:$|\W)/i,
+                                    /(?:^|\W)(drop it)(?:$|\W)/i
+                                ]);
+
+                                if (match) {
+                                    console.log(questLabel,"--",rule.explanation[0].EN);
+                                    questResult.collectCounter--;
+                                    questResult.tokenRemoved = match;
+                                }
+                            }
+
+                        })
+                    });
+
+                    let
+                        html="<h3>"+questLabel+"</h3>"+
+                        "<li><b>Is Collecting:</b> "+questResult.isCollecting+"<ul>"+
+                        "<li><b>Token removed:</b> "+(questResult.tokenRemoved || "NO")+"</li>"+
+                        "<li><b>Pre-boss preparation:</b> "+(questResult.bossPreparation || "N/A")+"</li>"+
+                        "<li><b>Campaign pre-boss preparation:</b> "+(questResult.campaignBossPreparation || "N/A")+"</li>"+
+                        "</ul></li>";
+
+                    if (questResult.isCollecting)
+                        if (questResult.collectCounter>0)
+                            keepHtml+=html;
+                        else
+                            notKeepHtml+=html;
+                    else
+                        noPickHtml += html;
+
+                    if ((questResult.collectCounter>0) && !questResult.bossPreparation)
+                        errors.push("Quest <b>"+questLabel+"</b> spawn collectible tokens that are not removed before boss");
+
+                    if ((questResult.collectCounter<=0) && questResult.bossPreparation)
+                        errors.push("Quest <b>"+questLabel+"</b> has collectible tokens that don't need to be removed before boss");
+
+                    if (questResult.requiresCampaignRule && !questResult.campaignBossPreparation)
+                        errors.push("Quest <b>"+questLabel+"</b> requires campaign-specific preparation");
+
+                    if (questResult.missingBoss)
+                        errors.push("Quest <b>"+questLabel+"</b> is missing one-shot boss data");
+                    else {
+
+                        if (questResult.missingVictoryCondition)
+                            errors.push("Quest <b>"+questLabel+"</b> has no explicit victory conditions");
+
+                        if (questResult.hasWrongEndCondition.length) {
+                            let
+                                line = "Quest <b>"+questLabel+"</b> has victory condition as text<ul>";
+                            questResult.hasWrongEndCondition.forEach(subline=>{
+                                line+="<li>"+subline+"</li>";
+                            })
+                            errors.push(line+"</ul>");
+                        }
+
+                    }
+
+                })
+
+            });
+
+            resultsNode.innerHTML="<h2>Keep tokens</h2>"+keepHtml+"<hr><h2>Not keep tokens</h2>"+notKeepHtml+"<hr><h2>No pick</h2>"+noPickHtml;
+
+            // This validator is quite approximative.
+            // Enable errors dumping for debug purpose only.
+            // dumpErrors(errorsNode,errors);
+
+        },
+
         testQuests:(into)=>{
 
             let
@@ -2075,7 +2868,7 @@ Tools=(function(){
                 errors = [],
                 errorsNode = createErrorsNode(into),
                 resultsNode = createNode(into,"div"),
-                resources = getAllResourcesTypes([ "quests", "interface", "campaignSideQuests", "campaignRewards", "campaignModels", "campaignActModels", "campaignMapModels", "campaignCrawlingModels", "campaignRewardModels" ]),
+                resources = getAllResourcesTypes([ "quests", "interface", "campaignSideQuests", "campaignRewards", "campaignModels", "campaignActModels", "campaignMapModels", "campaignCrawlingModels", "campaignRewardModels", "campaignBossFightModels", "bossList" ]),
                 questPackages = {},
                 componentsList = [],
                 components = {};
@@ -2109,6 +2902,10 @@ Tools=(function(){
                 questData.sideQuests = [];
 
                 quest.versions.forEach(version=>{
+
+                    if (version.boss)
+                        questData.boss = true;
+
                     if (version.campaign) {
                         questData.inCampaign = true;
                         if (version.campaign.sideQuests)
@@ -2146,6 +2943,7 @@ Tools=(function(){
 
                             // if (quest.objective) row+="     *  "+quest.objective+"\n";
                             if (quest.variants) row+="     *  "+quest.variants+"\n";
+                            if (quest.boss) row+="     *  Can include a boss fight.\n";
                             if (quest.inCampaign) {
                                 if (quest.campaignSpecificRules)
                                     row+="     *  Includes campaign-specific rules variant.\n";
@@ -2186,6 +2984,19 @@ Tools=(function(){
                 text+=" * "+component+" _("+components[component].join(", ")+")_\n";
             })
 
+            text+="\n## Boss fights\n\n";
+            resources.bossList.forEach(boss=>{
+                let
+                    levels = 0;
+                text+=" * "+boss.title.EN.replace(/^[^:]+: /,"")+"\n";
+                /*
+                for (let k in boss.levels)
+                    levels++;
+                if (levels > 1)
+                    text+="   * "+levels+" levels\n"
+                */
+            });
+
             text+="\n## Map modifiers\n\n";
             text+=" * Bridge tile rules\n";
             text+=" * Small maps\n";
@@ -2202,6 +3013,7 @@ Tools=(function(){
             text+=" * "+resources.campaignActModels.length+" campaign acts models.\n";
             text+=" * "+resources.campaignMapModels.length+" campaign map models.\n";
             text+=" * "+resources.campaignCrawlingModels.length+" campaign dungeon crawling models.\n";
+            text+=" * "+resources.campaignBossFightModels.length+" campaign boss fight models.\n";
             text+=" * "+resources.campaignRewardModels.length+" campaign rewards models.\n";
             text+="   * "+resources.campaignRewards.length+" rewards.\n";
             

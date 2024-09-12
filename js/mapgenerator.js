@@ -2057,26 +2057,100 @@ MapGenerator=(function() {
                     result.labels["tileLabel."+tile.tileId]={ EN: tile.tile.sides[tile.side].label };
                 })
 
+                map.specialRules.forEach(rule=>{
+                    if (resources.specialRules[rule])
+                        resources.specialRules[rule].forEach(rule=>{
+                            result.quest.rules.push(rule);
+                        })
+                })
+
+                result.map = map;
+
+                // Validate side quest
+
+                if (campaign.sideQuest) {
+
+                    campaign.sideQuest.isValid = true;
+
+                    if (campaign.sideQuest.if)
+                        campaign.sideQuest.isValid = campaign.sideQuest.if(result);
+
+                }
+
+                // Add boss battle
+
+                if (
+                    result.quest.boss && (
+                        (campaign && campaign.boss) ||
+                        (!campaign && resources.bossList)
+                    )
+                ) {
+
+                    let
+                        bossLevel = result.quest.boss.levelByTilesCount[map.placedTiles];
+
+                    if (bossLevel !== undefined) {
+
+                        let
+                            boss,
+                            mods;
+                        
+                        if (campaign && campaign.boss) {
+                            boss = campaign.boss.data;
+                            mods = campaign.boss.mods;
+                        } else {
+                            let
+                                bosses = resources.bossList.filter(boss=>!!boss.levels[bossLevel]);
+                                if (bosses.length)
+                                    boss = pickRandomElementValue(bosses);
+                        }
+
+                        if (boss) {
+
+                            let
+                                labels = {},
+                                bossLevelData = boss.levels[bossLevel];
+
+                            for (let k in resources.bossLabels)
+                                labels["boss."+k] = resources.bossLabels[k];
+                            for (let k in boss.questLabels)
+                                labels["label."+k] = boss.questLabels[k];
+                            if (boss.labels)
+                                for (let k in boss.labels)
+                                    labels["boss."+k] = boss.labels[k];
+                            if (boss.randomLabels)
+                                for (let k in boss.randomLabels)
+                                    labels["boss."+k] = pickRandomElementValue(boss.randomLabels[k]);
+                            if (bossLevelData.labels)
+                                for (let k in bossLevelData.labels)
+                                    labels["boss."+k] = bossLevelData.labels[k];
+                            if (bossLevelData.randomLabels)
+                                for (let k in bossLevelData.randomLabels)
+                                    labels["boss."+k] = pickRandomElementValue(bossLevelData.randomLabels[k]);
+                            if (mods && mods.labels) {
+                                if (mods.labels)
+                                    for (let k in mods.labels)
+                                        labels["boss."+k] = mods.labels[k];
+                                if (mods.labelsBonus)
+                                    for (let k in mods.labelsBonus)
+                                        if (labels["boss."+k])
+                                            for (let l in mods.labelsBonus[k])
+                                                labels["boss."+k][l] += mods.labelsBonus[k][l];
+                            }
+
+                            result.bossData = {
+                                level:bossLevel,
+                                labels:labels,
+                                data:boss
+                            };
+
+                        }
+
+                    }
+
+                }
+
             }
-
-            map.specialRules.forEach(rule=>{
-                if (resources.specialRules[rule])
-                    resources.specialRules[rule].forEach(rule=>{
-                        result.quest.rules.push(rule);
-                    })
-            })
-
-            result.map = map;
-
-            if (campaign.sideQuest) {
-
-                campaign.sideQuest.isValid = true;
-
-                if (campaign.sideQuest.if)
-                    campaign.sideQuest.isValid = campaign.sideQuest.if(result);
-
-            }
-
 
         }
 

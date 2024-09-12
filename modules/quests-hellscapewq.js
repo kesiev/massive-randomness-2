@@ -1,7 +1,21 @@
 ModManager.modules.push(function(){
 
-    return [
+    const
+        QUESTVICTORY = [
             {
+                IT:[ "la Missione termina con una vittoria", "terminare la Missione con una vittoria" ],
+                EN:[ "the Mission ends with a victory", "end the Mission with a victory" ]
+            }
+        ],
+        BOSSBEAT = [
+            {
+                IT:[ "viene eliminato", "viene eliminata" ],
+                EN:[ "it is eliminated", "it is eliminated" ]
+            }
+        ];
+
+    return [
+        {
 
             id:"quests-hellscapewq",
             needs:[ "quests-default", "md2-hellscape" ],
@@ -126,6 +140,8 @@ ModManager.modules.push(function(){
                                                         EN:[ "reach the exit of the Dungeon with {label.cure@2} {label.cure@4} in hand and in one piece!" ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 noInfection:[
                                                     {
                                                         IT:[ "ridurre l'infezione {label.problem@6} {label.problem@7}", "con 1 solo Eroe infettato {label.problem@3} {label.problem@4}" ],
@@ -220,8 +236,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Alla fine del turno di qualsiasi Eroe, se c'&egrave; almeno un Eroe infetto che condivide una Zona con Eroi non infetti, anche quegli Eroi non infetti vengono infettati {label.problem@3} {label.problem@4} (posizionare 1 gettone {symbol.corruptionToken} sulla loro Plancia dell'Eroe per indicarlo), e da ora in poi subiscono anche loro gli effetti {label.problem@6} {label.problem@7}.",
-                                                        EN:"At the end of any Hero's turn, if there is at least one infected Hero sharing a Zone with non-infected Heroes, those non-infected Heroes also become infected {label.problem@3} {label.problem@4} (place 1{symbol.corruptionToken} token on their Hero's Dashboard to mark this), and from now on they suffer the Plague's effects as well."
+                                                        IT:"Alla fine del turno di qualsiasi Eroe, se c'&egrave; almeno un Eroe infetto che condivide una Zona con Eroi non infetti, anche quegli Eroi non infetti vengono infettati {label.problem@3} {label.problem@4} (posizionare 1 segnalino {symbol.corruptionToken} sulla loro Plancia dell'Eroe per indicarlo), e da ora in poi subiscono anche loro gli effetti {label.problem@6} {label.problem@7}.",
+                                                        EN:"At the end of any Hero's turn, if there is at least one infected Hero sharing a Zone with non-infected Heroes, those non-infected Heroes also become infected {label.problem@3} {label.problem@4} (place 1 {symbol.corruptionToken} token on their Hero's Dashboard to mark this), and from now on they suffer the Plague's effects as well."
                                                     }
                                                 ]
                                             }
@@ -274,8 +290,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Dopo che {label.cure@2} {label.cure@1} &egrave; stata raccolta, qualsiasi Eroe pu&ograve; spendere 1 PM nella Zona del segnalini Obiettivo grigio per lasciare il Dungeon. Non appena tutti gli Eroi hanno lasciato il Dungeon, la Missione termina con la vittoria.",
-                                                        EN:"After {label.cure@2} {label.cure@1} has been picked up, any Hero may spend 1 MP in the gray Objective token Zone to leave the Dungeon. As soon as all Heroes have left the Dungeon, the Mission ends in victory."
+                                                        IT:"Dopo che {label.cure@2} {label.cure@1} &egrave; stata raccolta, qualsiasi Eroe pu&ograve; spendere 1 PM nella Zona del segnalini Obiettivo grigio per lasciare il Dungeon. Non appena tutti gli Eroi hanno lasciato il Dungeon, {label.questVictory@0}.",
+                                                        EN:"After {label.cure@2} {label.cure@1} has been picked up, any Hero may spend 1 MP in the gray Objective token Zone to leave the Dungeon. As soon as all Heroes have left the Dungeon, {label.questVictory@0}."
                                                     }
                                                 ]
                                             }
@@ -301,13 +317,38 @@ ModManager.modules.push(function(){
                                                 [ "visitAllRooms", "noInfection" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Eliminare {boss.bossBadName@0}, che blocca la fuga degli Eroi",
+                                                    EN:"Eliminate {boss.bossBadName@0}, which blocks the Heroes escape",
+                                                }
+                                            }
+                                        ],
+                                        preparation:{
+                                            IT:"<p>Rimuovere tutti i segnalini Obiettivo e {symbol.corruptionToken} dall'inventario degli Eroi. {label.problem:capital@2} non ha pi&ugrave; effetto.</p>",
+                                            EN:"<p>Remove all Objective and {symbol.corruptionToken} tokens from the Heroes' inventories. {label.problem:capital@2} has no longer effect.</p>"
+                                        },
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]
                         },
                         {
                             forActs:[], // Uses specific level mobs
-                            type:"collect",
+                            type:"grind",
                             objective:{
                                 EN:"Eliminate very strong Mob Leaders to win."
                             },
@@ -323,14 +364,14 @@ ModManager.modules.push(function(){
                                             {
                                                 cause:[
                                                     {
-                                                        IT:[ "Sappiamo che l'Oscurit&agrave;", "Oscura", "Oscuri" ],
-                                                        EN:[ "We know that the Darkness", "Dark", "Dark" ]
+                                                        IT:[ "Sappiamo che l'Oscurit&agrave;", "Oscura", "Oscuri", "il Signore dell'Oscurit&agrave;" ],
+                                                        EN:[ "We know that the Darkness", "Dark", "Dark", "the Lord of the Darkness" ]
                                                     },{
-                                                        IT:[ "I Sacerdoti raccontano che l'Antico Monolite", "Arcana", "Arcani" ],
-                                                        EN:[ "The Priests say that the Ancient Monolith", "Arcane", "Arcane" ]
+                                                        IT:[ "I Sacerdoti raccontano che l'Antico Monolite", "Arcana", "Arcani", "il Custode del Monolite" ],
+                                                        EN:[ "The Priests say that the Ancient Monolith", "Arcane", "Arcane", "the Monolith Keeper" ]
                                                     },{
-                                                        IT:[ "Lo abbiamo visto troppe volte. La Piaga Nera", "Corrotta", "Corrotti" ],
-                                                        EN:[ "We've seen it too many times. The Black Plague", "Corrupted", "Corrupted" ]
+                                                        IT:[ "Lo abbiamo visto troppe volte. La Piaga Nera", "Corrotta", "Corrotti", "la Genesi della Piaga Nera" ],
+                                                        EN:[ "We've seen it too many times. The Black Plague", "Corrupted", "Corrupted", "the Black Plague Genesis" ]
                                                     }
                                                 ],
                                                 effect:[
@@ -393,6 +434,8 @@ ModManager.modules.push(function(){
                                                         EN:[ "They seem difficult to eliminate," ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 come:[
                                                     {
                                                         IT:[ "ma arriveremo preparati ad affrontarli." ],
@@ -471,8 +514,10 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"I Comandanti di questo Dungeon sono pi&ugrave; brutali del solito. Invece del normale ammontare di Salute, i Comandanti ne hanno il doppio. Inoltre, se possibile, i Comandanti tirano sempre +1{symbol.blackDie} in difesa e in attacco. Quando un Comandante viene ucciso, ogni Eroe guadagna 4 PE, invece dei soliti 2 PE.",
-                                                        EN:"The Leaders of this Dungeon are more brutal than usual. Instead of their regular Health, Leaders have twice the amount of Health. Also, if possible, Leaders always roll +1{symbol.blackDie} to defense and attack. When a Leader is killed, each Hero gains 4 XP, instead of the usual 2 XP."
+                                                        IT:"I Comandanti di questo Dungeon sono pi&ugrave; brutali del solito. Invece del normale ammontare di Salute, i Comandanti ne hanno il doppio. Inoltre, se possibile, i Comandanti tirano sempre +1 {symbol.blackDie} in difesa e in attacco. Quando un Comandante viene ucciso, ogni Eroe guadagna 4 PE, invece dei soliti 2 PE. "+
+                                                            "Una volta uccisi 2 Comandanti di livello 5, {label.questVictory@0}",
+                                                        EN:"The Leaders of this Dungeon are more brutal than usual. Instead of their regular Health, Leaders have twice the amount of Health. Also, if possible, Leaders always roll +1 {symbol.blackDie} to defense and attack. When a Leader is killed, each Hero gains 4 XP, instead of the usual 2 XP. "+
+                                                            "When 2 Level 5 Leaders have been killed, {label.questVictory@0}"
                                                     }
                                                 ]
                                             }
@@ -491,7 +536,28 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "noBridges" ],
                                         }
-                                    ]
+                                    ],
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {label.cause@3}",
+                                                    EN:"Defeat {label.cause@3}",
+                                                },
+                                                summary:{
+                                                    IT:"Elimina {boss.bossBadName@0}",
+                                                    EN:"Eliminate {boss.bossBadName@0}"
+                                                }
+                                            }
+                                        ],
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
+                                    }
                                 }
                             ]
                         },
@@ -654,6 +720,8 @@ ModManager.modules.push(function(){
                                                         EN:[ "{label.hazard@20} Pits", "{label.hazard@20} Pit", "the", "the", "all", "{label.hazard@27}", "that" ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 collectOptionalItems:[
                                                     {
                                                         IT:[ "a {label.hazard@25} {label.target@4} {label.target@0}", "{label.hazard@27} {label.collectOptionalItems@3} {label.target@0}", "{tokensCount.objective}" ],
@@ -753,8 +821,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"{label.enemy:capital@0} non si attiva e non pu&ograve; essere bersaglio di alcun attacco, capacit&agrave; o abilit&agrave; e n&eacute; subire Ferite finch&eacute; la sua Camera non viene rivelata.",
-                                                        EN:"{label.enemy:capital@0} does not activate and cannot be the target of any attack, skill, or ability, nor take Wounds until its Chamber has been revealed."
+                                                        IT:"{label.enemy:capital@0} non si attiva e non pu&ograve; essere bersaglio di alcun attacco, capacit&agrave; o abilit&agrave; e n&eacute; subire Ferite finch&eacute; la sua Camera non viene rivelata. Quando {label.enemy@0} viene sconfitto {label.questVictory@0}.",
+                                                        EN:"{label.enemy:capital@0} does not activate and cannot be the target of any attack, skill, or ability, nor take Wounds until its Chamber has been revealed. When {label.enemy@0} is defeated, {label.questVictory@0}."
                                                     }
                                                 ]
                                             }
@@ -827,6 +895,27 @@ ModManager.modules.push(function(){
                                                 [ "visitAllRooms", "collectOptionalItems" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Eliminare {boss.bossBadName@0} e porre fine al suo piano",
+                                                    EN:"Eliminate {boss.bossBadName@0} and put an end to its plan"
+                                                }
+                                            }
+                                        ],
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]
@@ -924,7 +1013,9 @@ ModManager.modules.push(function(){
                                                         IT:[ "spazzando via chiunque ci sia dietro!" ],
                                                         EN:[ "wiping out whoever is behind it!" ],
                                                     }
-                                                ]
+                                                ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY
                                             }
                                         ]
                                     ],
@@ -979,6 +1070,22 @@ ModManager.modules.push(function(){
                                                     }
                                                 ]
                                             }
+                                        ],[
+                                            {
+                                                type:"rule",
+                                                name:[
+                                                    {
+                                                        IT:"{label.event:capital@1} {label.event@2}",
+                                                        EN:"{label.event:capital@1} {label.event@2}"
+                                                    }
+                                                ],
+                                                explanation:[
+                                                    {
+                                                        IT:"Una volta eliminati i 2 {label.event@2}, {label.questVictory@0}.",
+                                                        EN:"When the 2 {label.event@2}, {label.questVictory@0}."
+                                                    }
+                                                ]
+                                            }
                                         ]
                                     ],
                                     map:[
@@ -994,7 +1101,28 @@ ModManager.modules.push(function(){
                                             lootRatio: [ "default" ],
                                             corridors: [ "largeMaze" ],
                                         }
-                                    ]
+                                    ],
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Elimina il Signore del Labirinto, {boss.bossBadName@0}",
+                                                    EN:"Eliminate the Lord of the Maze, {boss.bossBadName@0}"
+                                                }
+                                            }
+                                        ],
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
+                                    }
                                 }
                             ]
                         },
@@ -1041,14 +1169,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 blocked1:[
                                                     {
-                                                        IT:[ "Siamo bloccati qui, nel profondo di questo luogo infernale," ],
-                                                        EN:[ "We're stuck here, deep down in this infernal place," ]
+                                                        IT:[ "Siamo bloccati qui, nel profondo di questo luogo infernale,", "il domatore delle fiamme" ],
+                                                        EN:[ "We're stuck here, deep down in this infernal place,", "the flame tamer" ]
                                                     },{
-                                                        IT:[ "Ci siamo persi in queste segrete," ],
-                                                        EN:[ "We got lost in these dungeons," ]
+                                                        IT:[ "Ci siamo persi in queste segrete,", "il Signore delle Segrete" ],
+                                                        EN:[ "We got lost in these dungeons,", "the Lord of the Dungeons" ]
                                                     },{
-                                                        IT:[ "Eccoci nel freddo e nel buio," ],
-                                                        EN:[ "Here we are in the cold and in the dark," ]
+                                                        IT:[ "Eccoci nel freddo e nel buio,", "che riposa nelle tenebre" ],
+                                                        EN:[ "Here we are in the cold and in the dark,", "that rests in the darkness" ]
                                                     }
                                                 ],
                                                 blocked2:[
@@ -1114,15 +1242,17 @@ ModManager.modules.push(function(){
                                                 key:[
                                                     {
                                                         IT:[ "Chiave di Pietra", "Chiavi di Pietra", "la", "le", "in una zona con una Chiave di Pietra", "di una", "per usarla", "per raccoglierla", "tutte" ],
-                                                        EN:[ "Keystone", "Keystones", "the", "the", "in a Zone with a Keystone", "a", "to use it", "to pick it up", "all" ]
+                                                        EN:[ "Keystone", "Keystones", "the", "the", "in a Zone with a Keystone", "a", "to use it", "", "all" ]
                                                     },{
                                                         IT:[ "Gemma Cromata", "Gemme Cromate", "la", "le", "in una zona con una Gemma Cromata", "di una", "per usarla", "per raccoglierla", "tutte" ],
-                                                        EN:[ "Chrome Gem", "Chrome Gems", "the", "the", "in a Zone with a Chrome Gem", "a", "to use it", "to pick it up", "all" ]
+                                                        EN:[ "Chrome Gem", "Chrome Gems", "the", "the", "in a Zone with a Chrome Gem", "a", "to use it", "", "all" ]
                                                     },{
                                                         IT:[ "Pezzo del Puzzle", "Pezzi del Puzzle", "il", "i", "in una zona con un Pezzo del Puzzle", "di un", "per usarlo", "per raccoglierlo", "tutti" ],
-                                                        EN:[ "Puzzle Piece", "Puzzle Pieces", "the", "the", "in a Zone with a Puzzle Piece", "a", "to use it", "to pick it up", "all" ]
+                                                        EN:[ "Puzzle Piece", "Puzzle Pieces", "the", "the", "in a Zone with a Puzzle Piece", "a", "to use it", "", "all" ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 collectOptionalItems:[
                                                     {
                                                         IT:[ "a raccoggliere {label.key@8} {label.key@3} {label.key@1}", "raccogliendo {label.collectOptionalItems@3} {label.key@1}", "{tokensCount.objective}" ],
@@ -1233,7 +1363,7 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Ogni segnalino Corruzione {symbol.corruptionToken} rappresenta una Zona di generazione dei Mostri Erranti e non &egrave; influenzato dalle carte Porta. Quando la sua Camera viene rivelata, oltre alla generazione regolare, generare un Mostro Errante nella Zona dei gettoni Corruzione, quindi scartare il segnalino.",
+                                                        IT:"Ogni segnalino Corruzione {symbol.corruptionToken} rappresenta una Zona di generazione dei Mostri Erranti e non &egrave; influenzato dalle carte Porta. Quando la sua Camera viene rivelata, oltre alla generazione regolare, generare un Mostro Errante nella Zona dei segnalini Corruzione, quindi scartare il segnalino.",
                                                         EN:"Each Corruption token {symbol.corruptionToken} represents a Roaming Monster spawn Zone and is not affected by Door cards. When its Chamber is revealed, in addition to the regular spawn, spawn a Roaming Monster in the Corruption token Zone, then discard the token."
                                                     }
                                                 ]
@@ -1264,7 +1394,7 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"I segnalini Obiettivo con il lato colorato a faccia in su rappresentano {label.key@3} {label.key@1}. Qualsiasi Eroe che si trova {label.key@4} pu&ograve; spendere 1 PM {label.key@7}.",
-                                                        EN:"The color-side-up Objective tokens represent {label.key@3} {label.key@1}. Any Hero standing {label.key@4} may spend 1 MP {label.key@7}."
+                                                        EN:"The color-side-up Objective tokens represent {label.key@3} {label.key@1}. Any Hero standing {label.key@4} may spend 1 MP to pick it up."
                                                     }
                                                 ]
                                             }
@@ -1294,8 +1424,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Una volta che {label.passage@4} {label.passage@3} {label.passage@10}, qualsiasi Eroe che si trova {label.passage@6} pu&ograve; fuggire {label.passage@8} spendendo 1 PM. Una volta che tutti gli Eroi sono fuggiti, la Missione termina con una vittoria.",
-                                                        EN:"Once {label.passage@4} {label.passage@3} {label.passage@10}, any Hero standing {label.passage@6} may escape {label.passage@8} by spending 1 MP. Once all Heroes have escaped, the Mission ends in victory."
+                                                        IT:"Una volta che {label.passage@4} {label.passage@3} {label.passage@10}, qualsiasi Eroe che si trova {label.passage@6} pu&ograve; fuggire {label.passage@8} spendendo 1 PM. Una volta che tutti gli Eroi sono fuggiti, {label.questVictory@0}.",
+                                                        EN:"Once {label.passage@4} {label.passage@3} {label.passage@10}, any Hero standing {label.passage@6} may escape {label.passage@8} by spending 1 MP. Once all Heroes have escaped, {label.questVictory@0}."
                                                     }
                                                 ]
                                             }
@@ -1321,6 +1451,31 @@ ModManager.modules.push(function(){
                                                 [ "visitAllRooms", "collectOptionalItems" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Elimina {boss.bossBadName@0}, {label.blocked1@1}",
+                                                    EN:"Eliminate {boss.bossBadName@0}, {label.blocked1@1}"
+                                                }
+                                            }
+                                        ],
+                                        preparation:{
+                                            IT:"<p>Rimuovere tutti i segnalini Obiettivo dall'inventario degli Eroi.</p>",
+                                            EN:"<p>Remove all Objective tokens from the Heroes' inventories.</p>"
+                                        },
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]
@@ -1367,14 +1522,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 placeLeave:[
                                                     {
-                                                        IT:[ "gli Eroi devono abbandonare l'Inferno", "Inferno", "Inferno", "dall'Inferno" ],
-                                                        EN:[ "the Heroes now must leave Hell", "Hell", "Inferno", "the Hell" ]
+                                                        IT:[ "gli Eroi devono abbandonare l'Inferno", "Inferno", "Inferno", "dall'Inferno", "dell'Inferno" ],
+                                                        EN:[ "the Heroes now must leave Hell", "Hell", "Inferno", "the Hell", "of the Hell" ]
                                                     },{
-                                                        IT:[ "gli Eroi devono fuggire dal Labirinto", "Labirinto", "Dedalo", "dal Labirinto" ],
-                                                        EN:[ "the Heroes must escape from the Maze", "Maze", "Labyrinth", "the Labyrinth" ]
+                                                        IT:[ "gli Eroi devono fuggire dal Labirinto", "Labirinto", "Dedalo", "dal Labirinto", "del Labirinto" ],
+                                                        EN:[ "the Heroes must escape from the Maze", "Maze", "Labyrinth", "the Labyrinth", "of the Labyrinth" ]
                                                     },{
-                                                        IT:[ "gli Eroi devono svignarsela dal Tempio", "Tempio", "Cattetrale", "dal Tempio" ],
-                                                        EN:[ "the Heroes must escape from the Temple", "Temple", "Cathedral", "the Temple" ]
+                                                        IT:[ "gli Eroi devono svignarsela dal Tempio", "Tempio", "Cattetrale", "dal Tempio", "del Tempio" ],
+                                                        EN:[ "the Heroes must escape from the Temple", "Temple", "Cathedral", "the Temple", "of the Temple" ]
                                                     }
                                                 ],
                                                 placeThrough:[
@@ -1425,6 +1580,8 @@ ModManager.modules.push(function(){
                                                         EN:[ "the Lever", "levers", "the Lever", "a Lever" ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 noTraps:[
                                                     {
                                                         IT:[ "eliminare tutte le {label.hazard@5}", "rimuovendo tutte le Trappole con Spuntoni" ],
@@ -1505,7 +1662,7 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"Durante la preparazione, posiziona 1 segnalino {label.hazard@1} su ciascuna Trappola con Spuntoni nel Dungeon. Oltre all'effetto della Trappola con Spuntoni, l'Eroe che l'ha attivata prende il segnalino {label.hazard@1} (anche non ha subito alcuna ferita).",
-                                                        EN:"During Setup, place 1{label.hazard@1} token on each Spike Trap in the Dungeon. In addition to the Spike Trap effect, the Hero who activated it takes the {label.hazard@1} token (even if they took no Wounds)."
+                                                        EN:"During Setup, place 1 {label.hazard@1} token on each Spike Trap in the Dungeon. In addition to the Spike Trap effect, the Hero who activated it takes the {label.hazard@1} token (even if they took no Wounds)."
                                                     }
                                                 ]
                                             }
@@ -1564,7 +1721,7 @@ ModManager.modules.push(function(){
                                                         "</ul>",
                                                         EN:"Monsters seem to have adapted themselves to this {label.hazard@6}. During this Mission, follow these special rules for Enemies:<ul>"+
                                                         "<li>Enemies can't take {label.hazard@1} tokens.</li>"+
-                                                        "<li>When spawning an Enemy, place 1{label.hazard@1} token on its weapon or Attack dice stat. The first time an Enemy deals 1 or more Wounds to a Hero, that Hero takes this Enemy's {label.hazard@1} token.</li>"+
+                                                        "<li>When spawning an Enemy, place 1 {label.hazard@1} token on its weapon or Attack dice stat. The first time an Enemy deals 1 or more Wounds to a Hero, that Hero takes this Enemy's {label.hazard@1} token.</li>"+
                                                         "</ul>"
                                                     }
                                                 ]
@@ -1595,8 +1752,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Qualsiasi Eroe nella Zona del segnalino Obiettivo grigio pu&ograve; spendere 1 PM per uscire dal Dungeon. Una volta che tutti gli Eroi sono usciti, la Missione termina con la vittoria.",
-                                                        EN:"Any Hero on the gray Objective token Zone may spend 1 MP to exit the Dungeon. Once all Heroes have exited, the Mission ends in victory."
+                                                        IT:"Qualsiasi Eroe nella Zona del segnalino Obiettivo grigio pu&ograve; spendere 1 PM per uscire dal Dungeon. Una volta che tutti gli Eroi sono usciti, {label.questVictory@0}.",
+                                                        EN:"Any Hero on the gray Objective token Zone may spend 1 MP to exit the Dungeon. Once all Heroes have exited, {label.questVictory@0}."
                                                     }
                                                 ]
                                             }
@@ -1622,6 +1779,27 @@ ModManager.modules.push(function(){
                                                 [ "visitAllRooms", "noTraps" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Elimina {boss.bossBadName@0}, guardia {label.placeLeave@4}",
+                                                    EN:"Eliminate {boss.bossBadName@0}, {label.placeLeave@3} guardian"
+                                                }
+                                            }
+                                        ],
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]
@@ -1630,7 +1808,7 @@ ModManager.modules.push(function(){
                             forMaps:[0,1],
                             type:"shards",
                             objective:{
-                                EN:"One hero takes wounds and gains a token for every Leader or Roaming Monster killed. Reach a token quota to win."
+                                EN:"Heroes gain resources for every Leader or Roaming Monster killed or collecting tokens. Reach a resource quota to win."
                             },
                             by:{
                                 IT:"Ispirato alla Web Quest \"Heaven's Secret Door\"",
@@ -1760,7 +1938,9 @@ ModManager.modules.push(function(){
                                                         IT:[ "Forgia Dimenticata", "la Zona della Forgia Dimenticata", "la Forgia Dimenticata", "Forgia del Fuoco Dimenticato", "sulla Zona della Forgia Dimenticata", "sulla Forgia Dimenticata" ],
                                                         EN:[ "Forgotten Forge", "the Forgotten Forge Zone", "the Forgotten Forge", "Forge with the Forgotten Fire", "on the Forgotten Forge Zone", "on the Forgotten Forge" ]
                                                     }
-                                                ]
+                                                ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY
                                             }
                                         ]
                                     ],
@@ -1836,8 +2016,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"{label.shard:capital@1} {label.shard@7} dai nemici. Ogni volta che un Eroe uccide un Mostro Errante o un Generale, lancia 2{symbol.blackDie}. Per ogni {symbol.fang} risultante, gli Eroi guadagnano {label.shard@2}. Posiziona dei segnalini Salute {label.forge@5} per tenere traccia dei frammenti raccolti.",
-                                                        EN:"{label.shard:capital@1} {label.shard@7} from the Enemies. Every time a Hero kills a Roaming Monster or a Leader, they roll 2{symbol.blackDie}. For each {symbol.fang} rolled, the Heroes gain {label.shard@2}. Place Health tokens {label.forge@5} to keep track of the collected Shards."
+                                                        IT:"{label.shard:capital@1} {label.shard@7} dai nemici. Ogni volta che un Eroe uccide un Mostro Errante o un Generale, lancia 2 {symbol.blackDie}. Per ogni {symbol.fang} risultante, gli Eroi guadagnano {label.shard@2}. Posiziona dei segnalini Salute {label.forge@5} per tenere traccia dei frammenti raccolti.",
+                                                        EN:"{label.shard:capital@1} {label.shard@7} from the Enemies. Every time a Hero kills a Roaming Monster or a Leader, they roll 2 {symbol.blackDie}. For each {symbol.fang} rolled, the Heroes gain {label.shard@2}. Place Health tokens {label.forge@5} to keep track of the collected Shards."
                                                     }
                                                 ]
                                             }
@@ -1866,14 +2046,14 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"La Zona con un gettone Obiettivo grigio &egrave; {label.forge@1}. Una volta che gli Eroi hanno raccolto collettivamente almeno 10 {label.shard@3}, qualsiasi Eroe {label.forge@4} pu&ograve; spendere 1 azione per Forgiare {label.artifact@1}. Non appena {label.artifact@2} {label.artifact@4}, la Missione termina con la vittoria.",
-                                                        EN:"The Zone with a gray Objective token is {label.forge@1}. Once the Heroes collectively gathered at least 10 {label.shard@3}, any Hero standing {label.forge@4} may spend 1 action to Forge {label.artifact@1}. As soon as {label.artifact@2} {label.artifact@4}, the Mission ends in victory."
+                                                        IT:"La Zona con un segnalino Obiettivo grigio &egrave; {label.forge@1}. Una volta che gli Eroi hanno raccolto collettivamente almeno 10 {label.shard@3}, qualsiasi Eroe {label.forge@4} pu&ograve; spendere 1 azione per Forgiare {label.artifact@1}. Non appena {label.artifact@2} {label.artifact@4}, {label.questVictory@0}.",
+                                                        EN:"The Zone with a gray Objective token is {label.forge@1}. Once the Heroes collectively gathered at least 10 {label.shard@3}, any Hero standing {label.forge@4} may spend 1 action to Forge {label.artifact@1}. As soon as {label.artifact@2} {label.artifact@4}, {label.questVictory@0}."
                                                     }
                                                 ],
                                                 campaignExplanation:[
                                                     {
-                                                        IT:"La Zona con un gettone Obiettivo grigio &egrave; {label.forge@1}. Una volta che gli Eroi hanno raccolto collettivamente almeno 7 {label.shard@3}, qualsiasi Eroe {label.forge@4} pu&ograve; spendere 1 azione per Forgiare {label.artifact@1}. Non appena {label.artifact@2} {label.artifact@4}, la Missione termina con la vittoria.",
-                                                        EN:"The Zone with a gray Objective token is {label.forge@1}. Once the Heroes collectively gathered at least 7 {label.shard@3}, any Hero standing {label.forge@4} may spend 1 action to Forge {label.artifact@1}. As soon as {label.artifact@2} {label.artifact@4}, the Mission ends in victory."
+                                                        IT:"La Zona con un segnalino Obiettivo grigio &egrave; {label.forge@1}. Una volta che gli Eroi hanno raccolto collettivamente almeno 7 {label.shard@3}, qualsiasi Eroe {label.forge@4} pu&ograve; spendere 1 azione per Forgiare {label.artifact@1}. Non appena {label.artifact@2} {label.artifact@4}, {label.questVictory@0}.",
+                                                        EN:"The Zone with a gray Objective token is {label.forge@1}. Once the Heroes collectively gathered at least 7 {label.shard@3}, any Hero standing {label.forge@4} may spend 1 action to Forge {label.artifact@1}. As soon as {label.artifact@2} {label.artifact@4}, {label.questVictory@0}."
                                                     }
                                                 ]
                                             }
@@ -1899,6 +2079,27 @@ ModManager.modules.push(function(){
                                                 [ "collectMoreItems", "visitAllRooms" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Elimina {boss.bossBadName@0}, cacciatore di Eroi",
+                                                    EN:"Eliminate {boss.bossBadName@0}, the Heroes hunter"
+                                                }
+                                            }
+                                        ],
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]
@@ -1907,7 +2108,7 @@ ModManager.modules.push(function(){
                             forMaps:[1],
                             type:"corruption",
                             objective:{
-                                EN:"Collect resources from map tokens or a random amount eliminating enemies. Reach a resource quota and perform an action on a zone to win."
+                                EN:"One hero takes wounds and gains a token for every Leader or Roaming Monster killed. Reach a token quota to win."
                             },
                             by:{
                                 IT:"Ispirato alla Web Quest \"Hello, Darkness!\"",
@@ -1993,16 +2194,18 @@ ModManager.modules.push(function(){
                                                 ],
                                                 specialOne:[
                                                     {
-                                                        IT:[ "i Mezzi Demoni", "un Mezzo Demone", "l'Eroe Mezzo Demone", "Assorbire l'Oscurit&agrave;", "Portare a {label.tokensCount} il Potere Oscuro", "Potere Oscuro", "il \"Mezzo Demone\"", "dall'oscurit&agrave;", "il suo Potere Oscuro", "le fonti di Energia Oscura", "", "distruggerlo", "Assorbire l'Oscurit&agrave;", "Cumuli di Oscurit&agrave;", "il suo Potere Oscuro arriva a {label.tokensCount}", "rappresentate" ],
-                                                        EN:[ "Half-Demons", "a Half-Demon", "the Half-Demon Hero", "Absorb Darkness", "Reach {label.tokensCount} Darkness Power", "Darkness Power", "the \"Half-Demon\"", "from the Darkness", "their Darkness Power", "sources of Dark Energy", "", "destroy it", "Absorbing Darkness", "Beacons of Darkness", "Darkness Power reaches {label.tokensCount}", "represented" ]
+                                                        IT:[ "i Mezzi Demoni", "un Mezzo Demone", "l'Eroe Mezzo Demone", "Assorbire l'Oscurit&agrave;", "Portare a {label.tokensCount} il Potere Oscuro", "Potere Oscuro", "il \"Mezzo Demone\"", "dall'oscurit&agrave;", "il suo Potere Oscuro", "le fonti di Energia Oscura", "", "distruggerlo", "Assorbire l'Oscurit&agrave;", "Cumuli di Oscurit&agrave;", "il suo Potere Oscuro arriva a {label.tokensCount}", "rappresentate", "di Mezzi Demoni" ],
+                                                        EN:[ "Half-Demons", "a Half-Demon", "the Half-Demon Hero", "Absorb Darkness", "Reach {label.tokensCount} Darkness Power", "Darkness Power", "the \"Half-Demon\"", "from the Darkness", "their Darkness Power", "sources of Dark Energy", "", "destroy it", "Absorbing Darkness", "Beacons of Darkness", "Darkness Power reaches {label.tokensCount}", "represented", "the Half-Demons" ]
                                                     },{
-                                                        IT:[ "i Figli del Bosco", "un Figlio del Bosco", "l'Eroe Figlio del Bosco", "Assorbire lo Spirito", "Portare a {label.tokensCount} lo Spirito Arboreo", "Spirito Arboreo", "il \"Figlio del Bosco\"", "dalle ombre", "il suo Spirito Arboreo", "le radici dello Spirito Arboreo", "", "raccoglierla", "Assorbire lo Spirito", "Radici dello Spirito", "il suo Spirito Arboreo arriva a {label.tokensCount}", "rappresentate" ],
-                                                        EN:[ "the Children of the Woods", "a Child of the Woods", "the Child of the Woods Hero", "Absorb the Spirit", "Reach {label.tokensCount} Arboreal Spirit", "Arboreal Spirit", "the \"Child of the Woods \"", "from the shadows", "his Arboreal Spirit", "the roots of the Arboreal Spirit", "", "harvest it", "Absorb the Spirit", "Roots of the Spirit", "his Arboreal Spirit reaches {label.tokensCount}", "represented" ]
+                                                        IT:[ "i Figli del Bosco", "un Figlio del Bosco", "l'Eroe Figlio del Bosco", "Assorbire lo Spirito", "Portare a {label.tokensCount} lo Spirito Arboreo", "Spirito Arboreo", "il \"Figlio del Bosco\"", "dalle ombre", "il suo Spirito Arboreo", "le radici dello Spirito Arboreo", "", "raccoglierla", "Assorbire lo Spirito", "Radici dello Spirito", "il suo Spirito Arboreo arriva a {label.tokensCount}", "rappresentate", "dei Figli del Bosco" ],
+                                                        EN:[ "the Children of the Woods", "a Child of the Woods", "the Child of the Woods Hero", "Absorb the Spirit", "Reach {label.tokensCount} Arboreal Spirit", "Arboreal Spirit", "the \"Child of the Woods \"", "from the shadows", "his Arboreal Spirit", "the roots of the Arboreal Spirit", "", "harvest it", "Absorb the Spirit", "Roots of the Spirit", "his Arboreal Spirit reaches {label.tokensCount}", "represented", "the Children of the Woods" ]
                                                     },{
-                                                        IT:[ "gli Adepti del Cielo", "un Adepto del Cielo", "l'Eroe Adepto del Cielo", "Assorbire l'Essenza", "Portare a {label.tokensCount} l'Essenza Notturna", "Essenza Notturna", "l'\"Adepto del Cielo\"", "della notte", "la sua Essenza Notturna", "i globi di Essenza Notturna", "", "frantumarlo", "Assorbire l'Essenza Notturna", "Globi di Essenza Notturna", "la sua Essenza Notturna arriva a {label.tokensCount}", "rappresentati" ],
-                                                        EN:[ "the Sky Adepts", "a Sky Adept", "the Sky Adept Hero", "Absorb the Essence", "Reach {label.tokensCount} Night Essence", "Night Essence", "the \"Sky Adept\"", "from the night", "his Night Essence", "the orbs of Night Essence", "", "shatter it", "Absorb the Night Essence", "Orbs of Night Essence", "Night Essence reaches {label.tokensCount}", "represented" ]
+                                                        IT:[ "gli Adepti del Cielo", "un Adepto del Cielo", "l'Eroe Adepto del Cielo", "Assorbire l'Essenza", "Portare a {label.tokensCount} l'Essenza Notturna", "Essenza Notturna", "l'\"Adepto del Cielo\"", "della notte", "la sua Essenza Notturna", "i globi di Essenza Notturna", "", "frantumarlo", "Assorbire l'Essenza Notturna", "Globi di Essenza Notturna", "la sua Essenza Notturna arriva a {label.tokensCount}", "rappresentati", "degli Adepti del Cielo" ],
+                                                        EN:[ "the Sky Adepts", "a Sky Adept", "the Sky Adept Hero", "Absorb the Essence", "Reach {label.tokensCount} Night Essence", "Night Essence", "the \"Sky Adept\"", "from the night", "his Night Essence", "the orbs of Night Essence", "", "shatter it", "Absorb the Night Essence", "Orbs of Night Essence", "Night Essence reaches {label.tokensCount}", "represented", "the Sky Adepts" ]
                                                     }
                                                 ],
+                                                bossBeat:BOSSBEAT,
+                                                questVictory:QUESTVICTORY,
                                                 tokensCount:[
                                                     {
                                                         EN:[ 7 ]
@@ -2061,7 +2264,7 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"Scegli un Eroe che sia {label.specialOne@6}. Sar&agrave; in grado di assorbire l'energia {label.specialOne@7}. Ogni volta che un Eroe elimina un Generale o un Mostro Errante che si trova in una Zona di Ombra, {label.specialOne@2} subisce 1 ferita e fa avanzare di 1 {label.specialOne@8} (posiziona 1 segnalino {symbol.corruptionToken} sulla sua carta Eroe).",
-                                                        EN:"Choose a Hero to be {label.specialOne@6}. They can absorb the energy {label.specialOne@7}. Every time any Hero kills a Leader or a Roaming Monster that is in a Shadow Zone, {label.specialOne@2} takes 1 Wound and advances {label.specialOne@8} by 1 (place 1{symbol.corruptionToken} token on their Hero Card)."
+                                                        EN:"Choose a Hero to be {label.specialOne@6}. They can absorb the energy {label.specialOne@7}. Every time any Hero kills a Leader or a Roaming Monster that is in a Shadow Zone, {label.specialOne@2} takes 1 Wound and advances {label.specialOne@8} by 1 (place 1 {symbol.corruptionToken} token on their Hero Card)."
                                                     }
                                                 ]
                                             }
@@ -2075,8 +2278,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"{label.specialOne:capital@9} sono {label.specialOne@15} dai gettoni Obiettivo. Quando si trova in una Zona con un segnalino Obiettivo, {label.specialOne@2} pu&ograve; spendere 1 azione per {label.specialOne@11}. Subisce 1 Ferita e aumenta {label.specialOne@8} di 1 (posiziona 1 segnalino {symbol.corruptionToken} sulla sua Carta Eroe).",
-                                                        EN:"{label.specialOne:capital@9} are {label.specialOne@15} by Objective tokens. When standing in a Zone with an Objective token, {label.specialOne@2} may spend 1 action to {label.specialOne@11}. They take 1 Wound and advance {label.specialOne@8} by 1 (place 1{symbol.corruptionToken} token on their Hero Card)."
+                                                        IT:"{label.specialOne:capital@9} sono {label.specialOne@15} dai segnalini Obiettivo. Quando si trova in una Zona con un segnalino Obiettivo, {label.specialOne@2} pu&ograve; spendere 1 azione per {label.specialOne@11}. Rimuove il segnalino Obiettivo dal Dungeon, subisce 1 Ferita e aumenta {label.specialOne@8} di 1 (posiziona 1 segnalino {symbol.corruptionToken} sulla sua Carta Eroe).",
+                                                        EN:"{label.specialOne:capital@9} are {label.specialOne@15} by Objective tokens. When standing in a Zone with an Objective token, {label.specialOne@2} may spend 1 action to {label.specialOne@11}. It removes the Objective token from the Dungeon, takes 1 Wound, and advances {label.specialOne@8} by 1 (place 1 {symbol.corruptionToken} token on their Hero Card)."
                                                     }
                                                 ]
                                             }
@@ -2090,8 +2293,8 @@ ModManager.modules.push(function(){
                                                 ],
                                                 explanation:[
                                                     {
-                                                        IT:"Non appena {label.specialOne@2} ha {label.tokensCount@0} gettoni Corruzione ({label.specialOne@14}), la Missione termina con la vittoria.",
-                                                        EN:"As soon as {label.specialOne@2} has {label.tokensCount@0} Corruption tokens ({label.specialOne@14}), the Mission ends in victory."
+                                                        IT:"Non appena {label.specialOne@2} ha {label.tokensCount@0} segnalini {symbol.corruptionToken} ({label.specialOne@14}), {label.questVictory@0}.",
+                                                        EN:"As soon as {label.specialOne@2} has {label.tokensCount@0} {symbol.corruptionToken} tokens ({label.specialOne@14}), {label.questVictory@0}."
                                                     }
                                                 ]
                                             }
@@ -2117,10 +2320,35 @@ ModManager.modules.push(function(){
                                                 [ "roundLimit", "visitAllRooms" ]
                                             ] }
                                         ]
+                                    },
+                                    boss:{
+                                        rules:[
+                                            {
+                                                type:"objective",
+                                                name:{
+                                                    IT:"Sconfiggere {boss.bossBadName@0}",
+                                                    EN:"Defeat {boss.bossBadName@0}",
+                                                },
+                                                summary:{
+                                                    IT:"Elimina {boss.bossBadName@0}, a caccia {label.specialOne@16}",
+                                                    EN:"Eliminate {boss.bossBadName@0}, {label.specialOne@16} hunter"
+                                                }
+                                            }
+                                        ],
+                                        preparation:{
+                                            IT:"<p>{label.specialOne:capital@2} scarta tutti i segnalini {symbol.corruptionToken} e non assorbe pi&ugrave; l'energia {label.specialOne@7}.</p>",
+                                            EN:"<p>{label.specialOne:capital@2} discards all the {symbol.corruptionToken} tokens  and no longer absorb the energy {label.specialOne@7}.</p>"
+                                        },
+                                        levelByTilesCount:{
+                                            3:1,
+                                            4:2,
+                                            5:3,
+                                            6:4
+                                        }
                                     }
                                 }
                             ]
-                        },
+                        }
                     ]
                 }
             ]
