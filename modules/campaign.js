@@ -2129,6 +2129,32 @@ ModManager.modules.push(function(){
                                     ]
                                 }
                             ]
+                        },{
+                            label:{
+                                EN:"Boss fights at the end of all acts."
+                            },
+                            words:[
+                                [
+                                    "battle",
+                                    "apex",
+                                    "war"
+                                ],[
+                                    "slay",
+                                    "drop",
+                                    "out"
+                                ]
+                            ],
+                            models:[
+                                {
+                                    at:[
+                                        { act:1, map:2 },
+                                        { act:2, map:2 }
+                                    ],
+                                    flags:[
+                                        { bossFight:"yes", bossFightRewardTags:[ [ "relicQuality2", "relicQuality3", "skillQuality2", "skillQuality3" ] ] }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 }
