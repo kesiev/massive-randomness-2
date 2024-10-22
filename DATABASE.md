@@ -115,12 +115,14 @@ This is the list of what's into _Massive Randomness 2_.
      *  Includes campaign-specific rules variant.
      *  1 campaign mode side quest.
 
-## Components (10 boxes)
+## Components (12 boxes)
 
  * Massive Darkness 2: Hellscape _(The game core box)_
  * Massive Darkness 2: Heavenfall _(4 heaven tiles, Campaign Mode, and bosses)_
  * Massive Darkness 2: Rainbow Crossing _(4 rainbow tiles)_
- * Massive Darkness 2: Upgrade Pack _(Prologue Campaign cards)_
+ * Massive Darkness 2: Upgrade Pack _(Prologue Campaign cards and boss)_
+ * Massive Darkness: Spearmaiden Cyclops and Cliffbreaker Cyclops _(Boss)_
+ * Massive Darkness: Hellephant _(Boss)_
  * Massive Darkness _(9 dungeon tiles)_
  * Massive Darkness: A Quest of Crystal & Lava _(6 crystal/lava tiles, 9 dungeon tiles replicating Massive Darkness 1 tiles)_
  * Zombicide: Black Plague _(9 outdoor tiles)_
@@ -137,6 +139,11 @@ This is the list of what's into _Massive Randomness 2_.
  * Baalberith Alpha
  * Enraged Baalberith
  * Baalberith
+ * Cyclops Duo
+ * Hellephant
+ * Enraged Hellephant
+ * Abyssal Demon
+ * Enraged Abyssal Demon
 
 ## Map modifiers
 
@@ -157,6 +164,6 @@ This is the list of what's into _Massive Randomness 2_.
  * 2 campaign acts models.
  * 4 campaign map models.
  * 3 campaign dungeon crawling models.
- * 4 campaign boss fight models.
+ * 5 campaign boss fight models.
  * 4 campaign rewards models.
    * 31 rewards.
