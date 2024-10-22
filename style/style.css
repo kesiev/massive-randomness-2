@@ -825,6 +825,18 @@ HTML,BODY {
     border-color:#3d2978;
 }
 
+.quest .symbol.dice.red {
+    color:#fff;
+    background-color: #f00;
+    border-color:#f00;
+}
+
+.quest .symbol.dice.green {
+    color:#fff;
+    background-color: #00bc00;
+    border-color:#00bc00;
+}
+
 .quest .phase {
     font:serif;
     font-weight: bold;
