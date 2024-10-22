@@ -422,16 +422,16 @@ CampaignGenerator=(function() {
                                                 if (add)
                                                     bosses.push({ mods:version.mods, data:boss });
                                             });
-
-                                            if (bosses.length) {
-                                                selectedBoss = pickRandomElementValue(bosses);
-                                                addBoss = true;
-                                            }
                                         
                                         }
                                     }
 
                                 })
+
+                                if (bosses.length) {
+                                    selectedBoss = pickRandomElementValue(bosses);
+                                    addBoss = true;
+                                }
 
                             }
 

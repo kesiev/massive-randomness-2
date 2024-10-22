@@ -1,6 +1,7 @@
 MapGenerator=(function() {
 
     const
+        BOSS_RANGE = 2,
         BRIDGE_ATTEMPTS = 5,
         MAPCENTER_X=3*50,
         MAPCENTER_Y=3*50,
@@ -2101,48 +2102,61 @@ MapGenerator=(function() {
                         } else {
                             let
                                 bosses = resources.bossList.filter(boss=>!!boss.levels[bossLevel]);
-                                if (bosses.length)
-                                    boss = pickRandomElementValue(bosses);
+                            if (bosses.length)
+                                boss = pickRandomElementValue(bosses);
                         }
 
                         if (boss) {
 
                             let
                                 labels = {},
-                                bossLevelData = boss.levels[bossLevel];
+                                bossLevelData;
 
-                            for (let k in resources.bossLabels)
-                                labels["boss."+k] = resources.bossLabels[k];
-                            for (let k in boss.questLabels)
-                                labels["label."+k] = boss.questLabels[k];
-                            if (boss.labels)
-                                for (let k in boss.labels)
-                                    labels["boss."+k] = boss.labels[k];
-                            if (boss.randomLabels)
-                                for (let k in boss.randomLabels)
-                                    labels["boss."+k] = pickRandomElementValue(boss.randomLabels[k]);
-                            if (bossLevelData.labels)
-                                for (let k in bossLevelData.labels)
-                                    labels["boss."+k] = bossLevelData.labels[k];
-                            if (bossLevelData.randomLabels)
-                                for (let k in bossLevelData.randomLabels)
-                                    labels["boss."+k] = pickRandomElementValue(bossLevelData.randomLabels[k]);
-                            if (mods && mods.labels) {
-                                if (mods.labels)
-                                    for (let k in mods.labels)
-                                        labels["boss."+k] = mods.labels[k];
-                                if (mods.labelsBonus)
-                                    for (let k in mods.labelsBonus)
-                                        if (labels["boss."+k])
-                                            for (let l in mods.labelsBonus[k])
-                                                labels["boss."+k][l] += mods.labelsBonus[k][l];
+                            for (let i=0;i<BOSS_RANGE;i++) {
+                                bossLevelData = boss.levels[bossLevel];
+                                if (bossLevelData)
+                                    break;
+                                else
+                                    bossLevel++;
                             }
 
-                            result.bossData = {
-                                level:bossLevel,
-                                labels:labels,
-                                data:boss
-                            };
+                            if (bossLevelData) {
+                                    
+                                for (let k in resources.bossLabels)
+                                    labels["boss."+k] = resources.bossLabels[k];
+                                for (let k in boss.questLabels)
+                                    labels["label."+k] = boss.questLabels[k];
+                                if (boss.labels)
+                                    for (let k in boss.labels)
+                                        labels["boss."+k] = boss.labels[k];
+                                if (boss.randomLabels)
+                                    for (let k in boss.randomLabels)
+                                        labels["boss."+k] = pickRandomElementValue(boss.randomLabels[k]);
+                                if (bossLevelData.labels)
+                                    for (let k in bossLevelData.labels)
+                                        labels["boss."+k] = bossLevelData.labels[k];
+                                if (bossLevelData.randomLabels)
+                                    for (let k in bossLevelData.randomLabels)
+                                        labels["boss."+k] = pickRandomElementValue(bossLevelData.randomLabels[k]);
+                                if (mods && mods.labels) {
+                                    if (mods.labels)
+                                        for (let k in mods.labels)
+                                            labels["boss."+k] = mods.labels[k];
+                                    if (mods.labelsBonus)
+                                        for (let k in mods.labelsBonus)
+                                            if (labels["boss."+k])
+                                                for (let l in mods.labelsBonus[k])
+                                                    labels["boss."+k][l] += mods.labelsBonus[k][l];
+
+                                }
+                                
+                                result.bossData = {
+                                    level:bossLevel,
+                                    labels:labels,
+                                    data:boss
+                                };
+                            
+                            }
 
                         }
 
