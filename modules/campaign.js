@@ -795,7 +795,7 @@ ModManager.modules.push(function(){
                             values:{
                                 yes:{
                                     needs:[  "md2-hellscape", "quests", "maps-default", "campaign-default" ],
-                                    notExclude:[ "generator-campaign" ]
+                                    notExclude:[ "generator-campaign", "campaign-upgradepack-cyclopsduo", "campaign-upgradepack-hellephant" ]
                                 }
                             }
                         }

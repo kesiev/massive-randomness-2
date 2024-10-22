@@ -59,16 +59,41 @@ ModManager.modules.push(function(){
                                         },
                                         tags:[ "md2-rainbowcrossing" ]
                                     },{
+                                        idOption:"campaign-upgradepack",
                                         code:"H",
                                         label:{
                                             IT:"Massive Darkness 2: Pack di Aggiornamento",
                                             EN:"Massive Darkness 2: Upgrade Pack"
                                         },
                                         description:{
-                                            IT:"Carte della Campagna Prologo",
-                                            EN:"Prologue Campaign cards"
+                                            IT:"Carte della Campagna Prologo e boss",
+                                            EN:"Prologue Campaign cards and boss"
                                         },
                                         tags:[ "campaign-upgradepack" ]
+                                    },{
+                                        ifMenuOptionSelected:"campaign-upgradepack",
+                                        code:"I",
+                                        label:{
+                                            IT:"Massive Darkness: Ciclope Scudiera e Ciclope Spaccarupi",
+                                            EN:"Massive Darkness: Spearmaiden Cyclops and Cliffbreaker Cyclops"
+                                        },
+                                        description:{
+                                            IT:"Boss",
+                                            EN:"Boss"
+                                        },
+                                        tags:[ "campaign-upgradepack-cyclopsduo" ]
+                                    },{
+                                        ifMenuOptionSelected:"campaign-upgradepack",
+                                        code:"J",
+                                        label:{
+                                            IT:"Massive Darkness: Hellephant",
+                                            EN:"Massive Darkness: Hellephant"
+                                        },
+                                        description:{
+                                            IT:"Boss",
+                                            EN:"Boss"
+                                        },
+                                        tags:[ "campaign-upgradepack-hellephant" ]
                                     },{
                                         code:"D",
                                         label:{
@@ -451,7 +476,7 @@ ModManager.modules.push(function(){
                             },
                             footer:{
                                 IT:"Meglio su Firefox/Chrome - {toolName} - {toolVersion} - &copy; 2024 by KesieV - Sorgenti su <a target=_blank href='{sourcesAtFull}'>{sourcesAtShort}</a>",
-                                EN:"Best on Firefox/Chrome - {toolName} - {toolVersion} - &copy; 2024 by KesieV - Sources at <a target=_blank href='{sourcesAtFull}'>{sourcesAtShort}</a>"
+                                EN:"Best on Firefox/Chrome - {toolName} - {toolVersion} - &copy; 2024 by KesieV - <a target=_blank href='{discordAt}'>Discord</a> - Sources at <a target=_blank href='{sourcesAtFull}'>{sourcesAtShort}</a>"
                             },
                             notice:{
                                 EN:"Massive Darkness, Zombicide, and all related properties are owned by CMON Global Limited",

@@ -9,6 +9,10 @@ ModManager.modules.push(function(){
             IT:[ " (da MD2: Hellscape)"],
             EN:[ " (from MD2: Hellscape)"]
         },
+        ONESHOTMODE={
+            IT:[ " (Partita Autoconclusiva)"],
+            EN:[ " (One-Shot)"]
+        },
         CAMPAIGNMODE={
             IT:[ " (Modalit&agrave; campagna)"],
             EN:[ " (Campaign mode)"]
@@ -80,6 +84,58 @@ ModManager.modules.push(function(){
             4:{
                 labels:{
                     bossHealth:{ EN:45 },
+                    bossModifier:BOSSMODIFIER
+                }
+            }
+        },
+        WEAKERBOSSLEVELS={
+            1:{
+                labels:{
+                    bossHealth:{ EN:12 },
+                    bossModifier:BOSSMODIFIER
+                }
+            },
+            2:{
+                labels:{
+                    bossHealth:{ EN:22 },
+                    bossModifier:BOSSMODIFIER
+                }
+            },
+            3:{
+                labels:{
+                    bossHealth:{ EN:32 },
+                    bossModifier:BOSSMODIFIER
+                }
+            },
+            4:{
+                labels:{
+                    bossHealth:{ EN:42 },
+                    bossModifier:BOSSMODIFIER
+                }
+            }
+        },
+        STRONGERBOSSLEVELS={
+            1:{
+                labels:{
+                    bossHealth:{ EN:20 },
+                    bossModifier:BOSSMODIFIER
+                }
+            },
+            2:{
+                labels:{
+                    bossHealth:{ EN:30 },
+                    bossModifier:BOSSMODIFIER
+                }
+            },
+            3:{
+                labels:{
+                    bossHealth:{ EN:40 },
+                    bossModifier:BOSSMODIFIER
+                }
+            },
+            4:{
+                labels:{
+                    bossHealth:{ EN:50 },
                     bossModifier:BOSSMODIFIER
                 }
             }
@@ -190,7 +246,7 @@ ModManager.modules.push(function(){
                     }
                 }
             }
-        ]
+        ],
         ADVANCEDSINGLEPHASEBOSSCAMPAIGN=[
             {
                 at:PLAINAT
@@ -390,11 +446,72 @@ ModManager.modules.push(function(){
                             EN:[
                                 "it defends with 4 {symbol.blueDie} 2 {symbol.blackDie}, and it attacks with 2 {symbol.yellowDie} 2 {symbol.orangeDie} 2 {symbol.blackDie}"
                             ]
-                        }
+                        },
+                        bossAbyssalDemonPreparation:{
+                            IT:[
+                                "<p>Questo Boss segue le regole descritte nella sezione Scontro con il Boss della missione <b>Cuore di Tenebra</b> nel manuale di Massive Darkness 2: Pack di Aggiornamento.</p>"
+                            ],
+                            EN:[
+                                "<p>This Boss follows the rules described in the Boss Fight section of the <b>The Heart of Darkness</b> quest in the Massive Darkness 2: Upgrade Pack rulebook.</p>"
+                            ]
+                        },
+                        bossAbyssalDemonOneShotMod:{
+                            IT:[
+                                "prelevare le carte Mostro Errante da far assimilare all'Emissario Oscuro dal mazzo di 2 ranghi al di sopra dell'attuale Livello del Dungeon o dal mazzo di Livello 5 se non disponibile"
+                            ],
+                            EN:[
+                                "take the Roaming Monster cards to be assimilated by the Abyssal Demon from the deck 2 ranks above the current Dungeon Level or from the Level 5 deck if unavailable"
+                            ]
+                        },
+                        bossAbyssalDemonCampaignMod:{
+                            IT:[
+                                "prelevare le carte Mostro Errante da far assimilare all'Emissario Oscuro dal mazzo di 2 ranghi al di sopra dell'attuale Livello del Dungeon o dal mazzo di Livello 10 se non disponibile"
+                            ],
+                            EN:[
+                                "take the Roaming Monster cards to be assimilated by the Abyssal Demon from the deck 2 ranks above the current Dungeon Level or from the Level 10 deck if unavailable"
+                            ]
+                        },
+                        heroHellephantPreparation:{
+                            IT:"Gli Eroi recuperano tutta la Salute fino al valore massimo ma <b>scartano tutto il Mana</b>.",
+                            EN:"Heroes recover all Health returning to its maximum value but <b>discard all Mana</b>."
+                        },
+                        bossHellephantPreparation:{
+                            IT:[
+                                "<p>Questo Boss segue le regole descritte nella sezione Scontro con il Boss della missione <b>La Desolazione dell'Hellephant</b> nel manuale di Massive Darkness 2: Pack di Aggiornamento.</p>"
+                            ],
+                            EN:[
+                                "<p>This Boss follows the rules described in the Boss Fight section of the <b>The Desolation of the Hellephant</b> quest in the Massive Darkness 2: Upgrade Pack rulebook.</p>"
+                            ]
+                        },
+                        bossHellephantHardMods:{
+                            IT:[
+                                "si difende con 3 {symbol.blueDie} 3 {symbol.greenDie} 1 {symbol.blackDie} e attacca con 1 {symbol.yellowDie} 3 {symbol.orangeDie} 2 {symbol.redDie} 2 {symbol.blackDie}"
+                            ],
+                            EN:[
+                                "it defends with 3 {symbol.blueDie} 3 {symbol.greenDie} 1 {symbol.blackDie}, and it attacks with 1 {symbol.yellowDie} 3 {symbol.orangeDie} 2 {symbol.redDie} 2 {symbol.blackDie}"
+                            ]
+                        },
+                        bossCyclopsDuoPreparation:{
+                            IT:[
+                                "<p>Questo Boss segue le regole descritte nella sezione Scontro con il Boss della missione <b>Doppio Problema</b> nel manuale di Massive Darkness 2: Pack di Aggiornamento.</p>"
+                            ],
+                            EN:[
+                                "<p>This Boss follows the rules described in the Boss Fight section of the <b>Double Trouble</b> quest in the Massive Darkness 2: Upgrade Pack rulebook.</p>"
+                            ]
+                        },
+                        bossCyclopsDuoHardMods:{
+                            IT:[
+                                "si difende con 4 {symbol.blueDie} 4 {symbol.greenDie} 1 {symbol.blackDie} e attacca con 3 {symbol.yellowDie} 2 {symbol.orangeDie} 2 {symbol.redDie} 1 {symbol.blackDie}"
+                            ],
+                            EN:[
+                                "it defends with 4 {symbol.blueDie} 4 {symbol.greenDie} 1 {symbol.blackDie}, and it attacks with 3 {symbol.yellowDie} 2 {symbol.orangeDie} 2 {symbol.redDie} 1 {symbol.blackDie}"
+                            ]
+                        },
                     }
                 }
             ]
-        },{
+        },
+        {
             id:"boss",
             needs:[ "md2-hellscape" ],
             provides:[ "boss" ],
@@ -879,6 +996,734 @@ ModManager.modules.push(function(){
                                 EN:"{boss.bossPreparation}{boss.bossModifier@0} {boss.heroPreparation}{boss.bossBaalberithPreparation@0}"+
                                     "<p>If the Heroes deal enough Wounds to kill Baalberith it is flipped on the Enraged side following the rules described in the Boss Fight section of the <b>Duke of Hell</b> quest in the Heavenfall rulebook.{boss.bossPhase2Modifier@0}</p>"+
                                     "<p>If the Heroes manage to defeat Baalberith, {label.bossBeat@0} and the Quest ends with a victory.</p>"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            id:"boss",
+            needs:[ "campaign-upgradepack", "campaign-upgradepack-cyclopsduo" ],
+            provides:[ "boss" ],
+            label:{
+                EN:"Add MD2: Upgrade pack Cyclops Duo boss fight."
+            },
+            content:[
+                {
+                    type:"bossList",
+                    data:[
+                        {
+                            levels:WEAKERBOSSLEVELS,
+                            campaign:[
+                                { at:PLAINAT },
+                                {
+                                    at:WEAKAT,
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSWEAK[0]
+                                    }
+                                },
+                                {
+                                    at:BOSSAT[0],
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSBONUS[0],
+                                        labels:{
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossCyclopsDuoHardMods@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossCyclopsDuoHardMods@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[1],
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSBONUS[1],
+                                        labels:{
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossCyclopsDuoHardMods@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossCyclopsDuoHardMods@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[2],
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSBONUS[2],
+                                        labels:{
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossCyclopsDuoHardMods@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossCyclopsDuoHardMods@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[3],
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSBONUS[3],
+                                        labels:{
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossCyclopsDuoHardMods@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossCyclopsDuoHardMods@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[4],
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSBONUS[4],
+                                        labels:{
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossCyclopsDuoHardMods@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossCyclopsDuoHardMods@0}." ]
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            tags:[ "cyclopsduo" ],
+                            title:{
+                                IT:"Scontro con il Boss: Duo di Ciclopi",
+                                EN:"Boss Fight: Cyclops Duo",
+                            },
+                            randomLabels:{
+                                bossBadName:[
+                                    {
+                                        IT:[ "il Duo di Ciclopi" ],
+                                        EN:[ "the Cyclops Duo"]
+                                    }
+                                ]
+                            },
+                            questLabels:{
+                                questVictory:QUESTVICTORY
+                            },
+                            tilesNeeded:{
+                                IT:"Tenere da parte: <i>(da MD1)</i> <b>2V</b> e <b>4V</b>.",
+                                EN:"Keep aside: <i>(from MD1)</i> <b>2V</b> and <b>4V</b>."
+                            },
+                            labels:{
+
+                                IT:[
+                                    "<p>Questo Boss segue le regole descritte nella sezione Scontro con il Boss della missione <b>Doppio Problema</b> del manuale di Massive Darkness 2: Pack di Aggiornamento.</p>"
+                                ],
+                                EN:[
+                                    "<p>This Boss follows the rules described in the Boss Fight section of the <b>Double Trouble</b> quest of the Massive Darkness 2: Upgrade Pack rulebook.</p>"
+                                ],
+                                bossTiles:{
+                                    IT:[ "Posizionate le Tessere 2V e 4V di Massive Darkness 1 ed i segnalini su di esse seguendo le indicazioni della missione <b>Doppio Problema</b> nel manuale di Massive Darkness 2: Pack di Aggiornamento", "accanto alla Tessere appena posizionate"],
+                                    EN:[ "Place the Massive Darkness 1 Tiles 2V and 4V and the tokens on them following the instructions in the <b>Double Trouble</b> mission of the Massive Darkness 2: Upgrade Pack manual", "next to the just placed tiles" ]
+                                },
+                                bossDashboardName:{
+                                    IT:[ "Duo di Ciclopi" ],
+                                    EN:[ "Cyclops Duo" ]
+                                },
+                                bossName:{
+                                    IT:[ "il Duo di Ciclopi" ],
+                                    EN:[ "the Cyclops Duo" ]
+                                }
+                            },
+                            preparation:{
+                                IT:"{boss.bossPreparation}{boss.bossModifier@0} {boss.heroPreparation}{boss.bossCyclopsDuoPreparation@0}"+
+                                    "<p>Se gli Eroi riescono a sconfiggerlo, il duo {label.bossBeat@0} e la Missione termina con una vittoria.</p>",
+                                EN:"{boss.bossPreparation}{boss.bossModifier@0} {boss.heroPreparation}{boss.bossCyclopsDuoPreparation@0}"+
+                                    "<p>If the Heroes manage to defeat the duo, {label.bossBeat@0} and the Quest ends with a victory.</p>"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            id:"boss",
+            needs:[ "campaign-upgradepack", "campaign-upgradepack-hellephant" ],
+            provides:[ "boss" ],
+            label:{
+                EN:"Add MD2: Upgrade pack Hellephant boss fight."
+            },
+            content:[
+                {
+                    type:"bossList",
+                    data:[
+                        {
+                            levels:STRONGERBOSSLEVELS,
+                            campaign:[
+                                { at:PLAINAT },
+                                {
+                                    at:WEAKAT,
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSWEAK[0]
+                                    }
+                                },
+                                {
+                                    at:BOSSAT[0],
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSBONUS[0],
+                                        labels:{
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossHellephantHardMods@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossHellephantHardMods@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[1],
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSBONUS[1],
+                                        labels:{
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossHellephantHardMods@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossHellephantHardMods@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[2],
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSBONUS[2],
+                                        labels:{
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossHellephantHardMods@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossHellephantHardMods@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[3],
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSBONUS[3],
+                                        labels:{
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossHellephantHardMods@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossHellephantHardMods@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[4],
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSBONUS[4],
+                                        labels:{
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossHellephantHardMods@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossHellephantHardMods@0}." ]
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            tags:[ "hellephant" ],
+                            title:{
+                                IT:"Scontro con il Boss: Hellephant",
+                                EN:"Boss Fight: Hellephant",
+                            },
+                            randomLabels:{
+                                bossBadName:[
+                                    {
+                                        IT:[ "l'Hellephant" ],
+                                        EN:[ "the Hellephant"]
+                                    }
+                                ]
+                            },
+                            questLabels:{
+                                questVictory:QUESTVICTORY
+                            },
+                            tilesNeeded:{
+                                IT:"Tenere da parte: <i>(da MD2: Hellscape)</i> <b>[A]8A</b>.",
+                                EN:"Keep aside: <i>(from MD2: Hellscape)</i> <b>[A]8A</b>."
+                            },
+                            labels:{
+                                bossTiles:{
+                                    IT:[ "Posizionate la Tessera [A]8A di Hellscape", "accanto alla Tessera appena posizionata"],
+                                    EN:[ "Place the Hellscape Tile [A]8A", "next to the just placed tile" ]
+                                },
+                                bossDashboardName:{
+                                    IT:[ "Hellephant" ],
+                                    EN:[ "Hellephant" ]
+                                },
+                                bossName:{
+                                    IT:[ "Hellephant" ],
+                                    EN:[ "Hellephant" ]
+                                }
+                            },
+                            preparation:{
+                                IT:"{boss.bossPreparation}{boss.bossModifier@0} {boss.heroHellephantPreparation}{boss.bossHellephantPreparation@0}"+
+                                    "<p>Se gli Eroi riescono a sconfiggerlo, l'Hellephant {label.bossBeat@0} e la Missione termina con una vittoria.</p>",
+                                EN:"{boss.bossPreparation}{boss.bossModifier@0} {boss.heroHellephantPreparation}{boss.bossHellephantPreparation@0}"+
+                                    "<p>If the Heroes manage to defeat the Hellephant, {label.bossBeat@0} and the Quest ends with a victory.</p>"
+                            }
+                        },
+                        {
+                            levels:{
+                                3:{
+                                    labels:{
+                                        bossHealth:{ EN:20 },
+                                        bossModifier:BOSSMODIFIER,
+                                        bossPhase2Health:{ EN:25 },
+                                        bossPhase2Modifier:BOSSPHASE2MODIFIER
+                                    }
+                                },
+                                4:{
+                                    labels:{
+                                        bossHealth:{ EN:20 },
+                                        bossModifier:BOSSMODIFIER,
+                                        bossPhase2Health:{ EN:25 },
+                                        bossPhase2Modifier:BOSSPHASE2MODIFIER
+                                    }
+                                }
+                            },
+                            campaign:[
+                                { at:PLAINAT },
+                                {
+                                    at:WEAKAT,
+                                    mods:{
+                                        labelsBonus:DOUBLEPHASEBOSSWEAK[0]
+                                    }
+                                },
+                                {
+                                    at:BOSSAT[0],
+                                    mods:{
+                                        labelsBonus:DOUBLEPHASEBOSSBONUS[0],
+                                        labels:{
+                                            bossPhase2Modifier:BOSSPHASE2MODIFIER,
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossHellephantHardMods@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossHellephantHardMods@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[1],
+                                    mods:{
+                                        labelsBonus:DOUBLEPHASEBOSSBONUS[1],
+                                        labels:{
+                                            bossPhase2Modifier:BOSSPHASE2MODIFIER,
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossHellephantHardMods@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossHellephantHardMods@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[2],
+                                    mods:{
+                                        labelsBonus:DOUBLEPHASEBOSSBONUS[2],
+                                        labels:{
+                                            bossPhase2Modifier:BOSSPHASE2MODIFIER,
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossHellephantHardMods@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossHellephantHardMods@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[3],
+                                    mods:{
+                                        labelsBonus:DOUBLEPHASEBOSSBONUS[3],
+                                        labels:{
+                                            bossPhase2Modifier:BOSSPHASE2MODIFIER,
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossHellephantHardMods@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossHellephantHardMods@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[4],
+                                    mods:{
+                                        labelsBonus:DOUBLEPHASEBOSSBONUS[4],
+                                        labels:{
+                                            bossPhase2Modifier:BOSSPHASE2MODIFIER,
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossHellephantHardMods@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossHellephantHardMods@0}." ]
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            tags:[ "hellephant" ],
+                            title:{
+                                IT:"Scontro con il Boss: Hellephant Infuriato",
+                                EN:"Boss Fight: Enraged Hellephant",
+                            },
+                            randomLabels:{
+                                bossBadName:[
+                                    {
+                                        IT:[ "l'Hellephant" ],
+                                        EN:[ "the Hellephant"]
+                                    }
+                                ]
+                            },
+                            questLabels:{
+                                questVictory:QUESTVICTORY
+                            },
+                            tilesNeeded:{
+                                IT:"Tenere da parte: <i>(da MD2: Hellscape)</i> <b>[A]8A</b>.",
+                                EN:"Keep aside: <i>(from MD2: Hellscape)</i> <b>[A]8A</b>."
+                            },
+                            labels:{
+                                bossTiles:{
+                                    IT:[ "Posizionate la Tessera [A]8A di Hellscape", "accanto alla Tessera appena posizionata"],
+                                    EN:[ "Place the Hellscape Tile [A]8A", "next to the just placed tile" ]
+                                },
+                                bossDashboardName:{
+                                    IT:[ "Hellephant" ],
+                                    EN:[ "Hellephant" ]
+                                },
+                                bossName:{
+                                    IT:[ "Hellephant" ],
+                                    EN:[ "Hellephant" ]
+                                }
+                            },
+                            preparation:{
+                                IT:"{boss.bossPreparation}{boss.bossModifier@0} {boss.heroHellephantPreparation}{boss.bossHellephantPreparation@0}"+
+                                    "<p>Se gli Eroi riescono a sconfiggere l'Hellephant, {boss.bossPhase2Preparation}.{boss.bossPhase2Modifier@0}</p>"+
+                                    "<p>Se gli Eroi riescono a sconfiggerlo una seconda volta, l'Hellephant {label.bossBeat@0} e la Missione termina con una vittoria.</p>",
+                                EN:"{boss.bossPreparation}{boss.bossModifier@0} {boss.heroHellephantPreparation}{boss.bossHellephantPreparation@0}"+
+                                    "<p>If the Heroes manage to defeat the Hellephant, {boss.bossPhase2Preparation}.{boss.bossPhase2Modifier@0}</p>"+
+                                    "<p>If the Heroes manage to defeat the Hellephant a second time, {label.bossBeat@0} and the Quest ends with a victory.</p>"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            id:"boss",
+            needs:[ "campaign-upgradepack" ],
+            provides:[ "boss" ],
+            label:{
+                EN:"Add MD2: Upgrade pack MD1 boss fights."
+            },
+            content:[
+                {
+                    type:"bossList",
+                    data:[
+                        
+                        {
+                            levels:{
+                                1:{
+                                    labels:{
+                                        bossHealth:{ EN:15 },
+                                        bossModifier:{
+                                            IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonOneShotMod@0}." ],
+                                            EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonOneShotMod@0}." ]
+                                        }
+                                    }
+                                },
+                                2:{
+                                    labels:{
+                                        bossHealth:{ EN:25 },
+                                        bossModifier:{
+                                            IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonOneShotMod@0}." ],
+                                            EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonOneShotMod@0}." ]
+                                        }
+                                    }
+                                },
+                                3:{
+                                    labels:{
+                                        bossHealth:{ EN:35 },
+                                        bossModifier:{
+                                            IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonOneShotMod@0}." ],
+                                            EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonOneShotMod@0}." ]
+                                        }
+                                    }
+                                },
+                                4:{
+                                    labels:{
+                                        bossHealth:{ EN:45 },
+                                        bossModifier:{
+                                            IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonOneShotMod@0}." ],
+                                            EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonOneShotMod@0}." ]
+                                        }
+                                    }
+                                }
+                            },
+                            campaign:[
+                                {
+                                    at:PLAINAT,
+                                    mods:{
+                                        labels:{
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonCampaignMod@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonCampaignMod@0}." ]
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    at:WEAKAT,
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSWEAK[0],
+                                        labels:{
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonCampaignMod@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonCampaignMod@0}." ]
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    at:BOSSAT[0],
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSBONUS[0],
+                                        labels:{
+                                            bossMode:CAMPAIGNMODE,
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonCampaignMod@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonCampaignMod@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[1],
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSBONUS[1],
+                                        labels:{
+                                            bossMode:CAMPAIGNMODE,
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonCampaignMod@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonCampaignMod@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[2],
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSBONUS[2],
+                                        labels:{
+                                            bossMode:CAMPAIGNMODE,
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonCampaignMod@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonCampaignMod@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[3],
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSBONUS[3],
+                                        labels:{
+                                            bossMode:CAMPAIGNMODE,
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonCampaignMod@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonCampaignMod@0}." ]
+                                            }
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[4],
+                                    mods:{
+                                        labelsBonus:SINGLEPHASEBOSSBONUS[4],
+                                        labels:{
+                                            bossMode:CAMPAIGNMODE,
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonCampaignMod@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonCampaignMod@0}." ]
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            tags:[ "abyssaldemon" ],
+                            title:{
+                                IT:"Scontro con il Boss: Emissario Oscuro",
+                                EN:"Boss Fight: Abyssal Demon",
+                            },
+                            randomLabels:{
+                                bossBadName:[
+                                    {
+                                        IT:[ "l'Emissario Oscuro" ],
+                                        EN:[ "the Abyssal Demon"]
+                                    }
+                                ]
+                            },
+                            questLabels:{
+                                questVictory:QUESTVICTORY
+                            },
+                            tilesNeeded:{
+                                IT:"Tenere da parte: <i>(da MD2: Hellscape)</i> <b>[A]8A</b>.",
+                                EN:"Keep aside: <i>(from MD2: Hellscape)</i> <b>[A]8A</b>."
+                            },
+                            labels:{
+                                bossTiles:{
+                                    IT:[ "Posizionate la Tessera [A]8A di Hellscape", "accanto alla Tessera appena posizionata"],
+                                    EN:[ "Place the Hellscape Tile [A]8A", "next to the just placed tile" ]
+                                },
+                                bossMode:ONESHOTMODE,
+                                bossDashboardName:{
+                                    IT:[ "Emissario Oscuro" ],
+                                    EN:[ "Abyssal Demon" ]
+                                },
+                                bossName:{
+                                    IT:[ "Emissario Oscuro" ],
+                                    EN:[ "Abyssal Demon" ]
+                                }
+                            },
+                            preparation:{
+                                IT:"{boss.bossPreparation}{boss.bossModifier@0} {boss.heroPreparation}{boss.bossAbyssalDemonPreparation@0}"+
+                                    "<p>Se gli Eroi riescono a scacciarlo, l'Emissario Oscuro {label.bossBeat@0} e la Missione termina con una vittoria.</p>",
+                                EN:"{boss.bossPreparation}{boss.bossModifier@0} {boss.heroPreparation}{boss.bossAbyssalDemonPreparation@0}"+
+                                    "<p>If the Heroes manage to banish the Abyssal Demon, {label.bossBeat@0} and the Quest ends with a victory.</p>"
+                            }
+                        },
+                        {
+                            levels:{
+                                3:{
+                                    labels:{
+                                        bossHealth:{ EN:15 },
+                                        bossModifier:{
+                                            IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonOneShotMod@0}." ],
+                                            EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonOneShotMod@0}." ]
+                                        },
+                                        bossPhase2Health:{ EN:20 },
+                                        bossPhase2Modifier:BOSSPHASE2MODIFIER
+                                    }
+                                },
+                                4:{
+                                    labels:{
+                                        bossHealth:{ EN:15 },
+                                        bossModifier:{
+                                            IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonOneShotMod@0}." ],
+                                            EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonOneShotMod@0}." ]
+                                        },
+                                        bossPhase2Health:{ EN:30 },
+                                        bossPhase2Modifier:BOSSPHASE2MODIFIER
+                                    }
+                                }
+                            },
+                            campaign:[
+                                {
+                                    at:PLAINAT,
+                                    mods:{
+                                        labels:{
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonOneShotMod@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonOneShotMod@0}." ]
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    at:WEAKAT,
+                                    mods:{
+                                        labelsBonus:DOUBLEPHASEBOSSWEAK[0],
+                                        labels:{
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonOneShotMod@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonOneShotMod@0}." ]
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    at:BOSSAT[0],
+                                    mods:{
+                                        labelsBonus:DOUBLEPHASEBOSSBONUS[0],
+                                        labels:{
+                                            bossMode:CAMPAIGNMODE,
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonOneShotMod@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonOneShotMod@0}." ]
+                                            },
+                                            bossPhase2Modifier:BOSSPHASE2MODIFIER
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[1],
+                                    mods:{
+                                        labelsBonus:DOUBLEPHASEBOSSBONUS[1],
+                                        labels:{
+                                            bossMode:CAMPAIGNMODE,
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonOneShotMod@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonOneShotMod@0}." ]
+                                            },
+                                            bossPhase2Modifier:BOSSPHASE2MODIFIER
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[2],
+                                    mods:{
+                                        labelsBonus:DOUBLEPHASEBOSSBONUS[2],
+                                        labels:{
+                                            bossMode:CAMPAIGNMODE,
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonOneShotMod@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonOneShotMod@0}." ]
+                                            },
+                                            bossPhase2Modifier:BOSSPHASE2MODIFIER
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[3],
+                                    mods:{
+                                        labelsBonus:DOUBLEPHASEBOSSBONUS[3],
+                                        labels:{
+                                            bossMode:CAMPAIGNMODE,
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonOneShotMod@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonOneShotMod@0}." ]
+                                            },
+                                            bossPhase2Modifier:BOSSPHASE2MODIFIER
+                                        }
+                                    }
+                                },{
+                                    at:BOSSAT[4],
+                                    mods:{
+                                        labelsBonus:DOUBLEPHASEBOSSBONUS[4],
+                                        labels:{
+                                            bossMode:CAMPAIGNMODE,
+                                            bossModifier:{
+                                                IT:[ " In questo scontro {boss.bossName@0} ha {boss.bossHealth} PV per Eroe, {boss.bossAbyssalDemonOneShotMod@0}." ],
+                                                EN:[ " In this fight, {boss.bossName@0} has {boss.bossHealth} HP per Hero, {boss.bossAbyssalDemonOneShotMod@0}." ]
+                                            },
+                                            bossPhase2Modifier:BOSSPHASE2MODIFIER
+                                        }
+                                    }
+                                }
+                            ],
+                            tags:[ "abyssaldemon" ],
+                            title:{
+                                IT:"Scontro con il Boss: Emissario Oscuro Infuriato",
+                                EN:"Boss Fight: Enraged Abyssal Demon",
+                            },
+                            randomLabels:{
+                                bossBadName:[
+                                    {
+                                        IT:[ "l'Emissario Oscuro" ],
+                                        EN:[ "the Abyssal Demon"]
+                                    }
+                                ]
+                            },
+                            questLabels:{
+                                questVictory:QUESTVICTORY
+                            },
+                            tilesNeeded:{
+                                IT:"Tenere da parte: <i>(da MD2: Hellscape)</i> <b>[A]8A</b>.",
+                                EN:"Keep aside: <i>(from MD2: Hellscape)</i> <b>[A]8A</b>."
+                            },
+                            labels:{
+                                bossTiles:{
+                                    IT:[ "Posizionate la Tessera [A]8A di Hellscape", "accanto alla Tessera appena posizionata"],
+                                    EN:[ "Place the Hellscape Tile [A]8A", "next to the just placed tile" ]
+                                },
+                                bossMode:ONESHOTMODE,
+                                bossDashboardName:{
+                                    IT:[ "Emissario Oscuro" ],
+                                    EN:[ "Abyssal Demon" ]
+                                },
+                                bossName:{
+                                    IT:[ "Emissario Oscuro" ],
+                                    EN:[ "Abyssal Demon" ]
+                                }
+                            },
+                            preparation:{
+                                IT:"{boss.bossPreparation}{boss.bossModifier@0} {boss.heroPreparation}{boss.bossAbyssalDemonPreparation@0}"+
+                                    "<p>Se gli Eroi riescono a scacciare l'Emissario Oscuro, resister&agrave; al Portale: {boss.bossPhase2Preparation}.{boss.bossPhase2Modifier@0}</p>"+
+                                    "<p>Se gli Eroi riescono a scacciarlo una seconda volta, l'Emissario Oscuro {label.bossBeat@0} e la Missione termina con una vittoria.</p>",
+                                EN:"{boss.bossPreparation}{boss.bossModifier@0} {boss.heroPreparation}{boss.bossAbyssalDemonPreparation@0}"+
+                                    "<p>If the Heroes manage to banish the Abyssal Demon, it will resist the Portal: {boss.bossPhase2Preparation}.{boss.bossPhase2Modifier@0}</p>"+
+                                    "<p>If the Heroes manage to banish the Abyssal Demon a second time, {label.bossBeat@0} and the Quest ends with a victory.</p>"
                             }
                         }
                     ]

@@ -5,11 +5,12 @@ Interface=(function() {
         DEBUG_QUEST = false,
         DEBUG_CAMPAIGN = false,
         DEBUG_HIDDENTEXT = false,
-        VERSION = "0.3b",
+        VERSION = "0.31b",
         SOURCES_AT = {
             short:"github.com/kesiev/massive-randomness-2",
             full:"https://github.com/kesiev/massive-randomness-2"
         },
+        DISCORD_AT = "https://discord.gg/TeAWvnuGku",
         LOCALSTORAGE_PREFIX="MARA2_",
         LOCALSTORAGE_FLAG=LOCALSTORAGE_PREFIX+"FLAG_",
         LOCALSTORAGE_LANGUAGE=LOCALSTORAGE_PREFIX+"LANG",
@@ -557,6 +558,10 @@ Interface=(function() {
                 }
                 case "sourcesAtShort":{
                     out = SOURCES_AT.short
+                    break;
+                }
+                case "discordAt":{
+                    out = DISCORD_AT;
                     break;
                 }
             }
