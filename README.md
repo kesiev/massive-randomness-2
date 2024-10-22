@@ -4,7 +4,7 @@
 
 ---
 
-<div align="center"><a href="https://www.kesiev.com/massive-randomness-2/">Generate a quest</a> | <a href="https://boardgamegeek.com/thread/3242331/massive-randomness-2-very-beta-one-shot-quest-rand">BGG discussion thread</a></div>
+<div align="center"><a href="https://www.kesiev.com/massive-randomness-2/">Generate a quest</a> | <a href="https://boardgamegeek.com/thread/3242331/massive-randomness-2-very-beta-one-shot-quest-rand">BGG discussion thread</a> | <a href="https://discord.gg/TeAWvnuGku">Discord</a></div>
 
 ---
 
