@@ -2,7 +2,7 @@
 
 This is the list of what's into _Massive Randomness 2_.
 
-## Quests (27 quests)
+## Quests (31 quests)
 
  * Adapted from **Hellscape**
    * Hellish Maze
@@ -104,6 +104,21 @@ This is the list of what's into _Massive Randomness 2_.
      *  2 campaign mode side quests.
    * The Warrior of Light
      *  Can include a boss fight.
+ * Adapted from **Ravaged Mountains campaign**
+   * Chuchotements Dans la Nuit
+     *  Can include a boss fight.
+     *  Includes campaign-specific rules variant.
+     *  2 campaign mode side quests.
+   * En Marchant Sur Des Œufs
+     *  Can include a boss fight.
+     *  Includes campaign-specific rules variant.
+     *  2 campaign mode side quests.
+   * Les Geôles de Granit
+     *  Can include a boss fight.
+   * Les Piliers Magiques
+     *  Can include a boss fight.
+     *  Includes campaign-specific rules variant.
+     *  2 campaign mode side quests.
  * Massive Randomness 2 **original**
    * The Investigation
      *  With randomized culprit.
@@ -159,7 +174,7 @@ This is the list of what's into _Massive Randomness 2_.
 
 ## Campaign mode
 
- * 18 side quest types.
+ * 19 side quest types.
  * 1 campaign model.
  * 2 campaign acts models.
  * 4 campaign map models.

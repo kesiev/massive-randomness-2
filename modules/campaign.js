@@ -166,6 +166,19 @@ ModManager.modules.push(function(){
                                             return true;
                                         } else return false;
                                     },
+                                    collectOptionalItemsCorruption:(result)=>{
+                                        if (result.map && result.map.usedTokens.corruption && (result.map.usedTokens.corruption>2)) {
+                                            let
+                                                allCollect = result.map.usedTokens.corruption,
+                                                leastCollect = Math.floor(allCollect*0.75),
+                                                labels = result.labels["label.collectOptionalItems"];
+                                            for (let k in labels) {
+                                                labels[k][2] = leastCollect;
+                                                labels[k][3] = allCollect;
+                                            }
+                                            return true;
+                                        } else return false;
+                                    },
                                     collectLessItems:(result)=>{
                                         if (result.map && result.map.usedTokens.objective && (result.map.usedTokens.objective>2)) {
                                             let
@@ -246,6 +259,28 @@ ModManager.modules.push(function(){
                             },{
                                 tags:[ "collectOptionalItems" ],
                                 if:"collectOptionalItems",
+                                mods:[ "extraObjectives" ],
+                                name:[
+                                    {
+                                        IT:"Non lasciare nulla indietro!",
+                                        EN:"Don't leave anything behind!"
+                                    }
+                                ],
+                                story:[
+                                    {
+                                        IT:"Se gli Eroi riescono {label.collectOptionalItems@0} riusciranno ad avvantaggiarsi.",
+                                        EN:"If the Heroes manage {label.collectOptionalItems@0} they will be able to gain an advantage."
+                                    }
+                                ],
+                                condition:[
+                                    {
+                                        IT:"Completare la Missione {label.collectOptionalItems@1}.",
+                                        EN:"Complete the Mission {label.collectOptionalItems@1}."
+                                    }
+                                ]
+                            },{
+                                tags:[ "collectOptionalItemsCorruption" ],
+                                if:"collectOptionalItemsCorruption",
                                 mods:[ "extraObjectives" ],
                                 name:[
                                     {

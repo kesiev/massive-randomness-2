@@ -31,6 +31,7 @@
     <script src="../modules/quests-hellscapewq.js"></script>
     <script src="../modules/quests-upgradepack.js"></script>
     <script src="../modules/quests-internet.js"></script>
+    <script src="../modules/quests-ravaged.js"></script>
     <script src="../modules/quests-mr.js"></script>
     <script src="../modules/challenges-default.js"></script>
     <script src="../modules/campaign.js"></script>
@@ -39,6 +40,7 @@
 
 </head><body onload="onl()">
 	<input type="button" value="Summary" onclick="doGenerateSummary()">
+	<input type="button" value="Summary (full)" onclick="doGenerateSummary(true)">
 	<input type="button" value="Boss" onclick="doTestBoss()">
 	<input type="button" value="Campaign" onclick="doTestCampaign()">
 	<input type="button" value="Campaign Text" onclick="doTestCampaignText()">
@@ -69,8 +71,8 @@ function doTestCampaignText() {
 	Tools.testCampaignText(getNodeBody("Campaign Text"))
 }
 
-function doGenerateSummary() {
-	Tools.generateSummary(getNodeBody("Summary"));
+function doGenerateSummary(full) {
+	Tools.generateSummary(getNodeBody("Summary"),full);
 }
 
 function doTestCampaign() {

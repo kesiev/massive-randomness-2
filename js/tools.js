@@ -15,8 +15,8 @@ Tools=(function(){
             itemQuality3:2
         },
         ALLOWED_ENTITIES={
-            IT:[ "ograve", "agrave", "egrave", "eacute", "ugrave", "igrave", "deg", "amp", "Egrave", "dash" ],
-            EN:[ "amp", "dash" ]
+            IT:[ "ograve", "agrave", "egrave", "eacute", "ugrave", "igrave", "deg", "amp", "Egrave", "dash", "OElig", "ocirc" ],
+            EN:[ "amp", "dash", "OElig", "ocirc" ]
         },
         ALLOWED_TAGS=[ "p", "/p", "ul", "/ul", "ol", "/ol", "li", "/li", "b", "/b", "i", "/i", "span class='phase'", "span class='displayonly'", "span class='printonly'", "span class='hiddentext'",  "/span", "br", "p class='credits'", "/a", /^a target=_blank href='[^']+'$/ ],
         ALLOWED_PLACEHOLDER_MODS=[ "capital" ],
@@ -42,22 +42,22 @@ Tools=(function(){
             {
                 id:"campaign-heavenfall",
                 excludes:[],
-                needs:[ "bridge-default-twoexits", "generator-campaign", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape" ]
             },
             {
                 id:"campaign-rainbowcrossing",
                 excludes:[],
-                needs:[ "bridge-default-twoexits", "generator-campaign", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "md2-rainbowcrossing" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "md2-rainbowcrossing" ]
             },
             {
                 id:"campaign-blackplague",
                 excludes:[],
-                needs:[ "bridge-default-twoexits", "generator-campaign", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-blackplague" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-blackplague" ]
             },
             {
                 id:"campaign-greenhorde",
                 excludes:[],
-                needs:[ "bridge-default-twoexits", "generator-campaign", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-greenhorde" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-greenhorde" ]
             }
         ],
         QUEST_CONFIGS=[
@@ -335,7 +335,7 @@ Tools=(function(){
                         return okTag;
                     }),
                     checkArgument = orgArgument.replace(/([^0-9a-zA-Z() +/\-,.;:'!?_"]+)/g,function(m,m1){
-                        return "<span style='background-color:#000;color:#fff'>"+m1+"</span>";
+                        return "<span style='background-color:#000;color:#fff'>["+m1+"]</span>";
                     });
                 if (orgArgument != checkArgument)
                     errors.push(errorHeader+" L["+lang+"] O["+aid+"]: "+checkArgument);
@@ -2842,7 +2842,7 @@ Tools=(function(){
             resultsNode.innerHTML=html;
         },
 
-        generateSummary:(into)=>{
+        generateSummary:(into,full)=>{
             const
                 QUEST_HEADERS = [
                     {
@@ -2857,6 +2857,9 @@ Tools=(function(){
                     },{
                         id:[ "quests-internet" ],
                         title:"Adapted **fan-made quests**"
+                    },{
+                        id:[ "quests-ravaged", ],
+                        title:"Adapted from **Ravaged Mountains campaign**"
                     },{
                         id:[ "quests-mr", "quests-mr-ending" ],
                         title:"Massive Randomness 2 **original**"
@@ -2941,7 +2944,7 @@ Tools=(function(){
                             let
                                 row = "   * "+(quest.name || quest.inspiredBy)+"\n";
 
-                            // if (quest.objective) row+="     *  "+quest.objective+"\n";
+                            if (full && quest.objective) row+="     *  "+quest.objective+"\n";
                             if (quest.variants) row+="     *  "+quest.variants+"\n";
                             if (quest.boss) row+="     *  Can include a boss fight.\n";
                             if (quest.inCampaign) {
