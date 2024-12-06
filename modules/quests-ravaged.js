@@ -921,8 +921,8 @@ ModManager.modules.push(function(){
                                                 type:"rule",
                                                 name:[
                                                     {
-                                                        IT:"Preparazione",
-                                                        EN:"Preparation"
+                                                        IT:"Preparazione Speciale",
+                                                        EN:"Special Preparation"
                                                     }
                                                 ],
                                                 explanation:[
@@ -1063,7 +1063,6 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
-                            _debug:true,
                             forActs:[], // Uses large maps and one-shot level cap.
                             type:"cleanBuffBoss",
                             objective:{
@@ -1238,8 +1237,8 @@ ModManager.modules.push(function(){
                                                 type:"rule",
                                                 name:[
                                                     {
-                                                        IT:"Preparazione",
-                                                        EN:"Preparation"
+                                                        IT:"Preparazione Speciale",
+                                                        EN:"Special Preparation"
                                                     }
                                                 ],
                                                 explanation:[

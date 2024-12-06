@@ -411,8 +411,8 @@ ModManager.modules.push(function(){
                                                 type:"rule",
                                                 name:[
                                                     {
-                                                        IT:"Preparazione",
-                                                        EN:"Preparation"
+                                                        IT:"Preparazione Speciale",
+                                                        EN:"Special Preparation"
                                                     }
                                                 ],
                                                 explanation:[
@@ -891,8 +891,8 @@ ModManager.modules.push(function(){
                                                 type:"rule",
                                                 name:[
                                                     {
-                                                        IT:"Preparazione",
-                                                        EN:"Preparation"
+                                                        IT:"Preparazione Speciale",
+                                                        EN:"Special Preparation"
                                                     }
                                                 ],
                                                 explanation:[
