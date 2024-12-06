@@ -2,7 +2,7 @@
 
 This is the list of what's into _Massive Randomness 2_.
 
-## Quests (31 quests)
+## Quests (33 quests)
 
  * Adapted from **Hellscape**
    * Hellish Maze
@@ -94,6 +94,16 @@ This is the list of what's into _Massive Randomness 2_.
      *  Includes campaign-specific rules variant.
      *  1 campaign mode side quest.
    * The Fiend's Treasure
+     *  Can include a boss fight.
+     *  Includes campaign-specific rules variant.
+     *  2 campaign mode side quests.
+ * Adapted from **Rainbow Crossing**
+   * Bear Hugs
+     *  Can include a boss fight.
+     *  Includes campaign-specific rules variant.
+     *  2 campaign mode side quests.
+ * Adapted from **Darkbringer Pack**
+   * The Scorpion King
      *  Can include a boss fight.
      *  Includes campaign-specific rules variant.
      *  2 campaign mode side quests.
