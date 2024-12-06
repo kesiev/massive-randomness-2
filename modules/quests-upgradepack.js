@@ -640,7 +640,7 @@ ModManager.modules.push(function(){
                             ]
                         },{
                             forMaps:[2],
-                            type:"collectAndBoss",
+                            type:"collectDebuffAndBoss",
                             objective:{
                                 EN:"Bring tokens to a zone to summon a Roaming Monster. Eliminate it to win."
                             },
