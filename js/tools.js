@@ -2855,6 +2855,12 @@ Tools=(function(){
                         id:[ "quests-upgradepack" ],
                         title:"Adapted from **Upgrade pack**"
                     },{
+                        id:[ "quests-rainbowcrossing", ],
+                        title:"Adapted from **Rainbow Crossing**"
+                    },{
+                        id:[ "quests-darkbringerpack", ],
+                        title:"Adapted from **Darkbringer Pack**"
+                    },{
                         id:[ "quests-internet" ],
                         title:"Adapted **fan-made quests**"
                     },{

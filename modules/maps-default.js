@@ -3614,6 +3614,38 @@ ModManager.modules.push(function(){
                                     ]
                                 ]
                             }
+                        },{
+                            attribute:"corridors",
+                            value:"chase",
+                            config:{
+
+                                corridorsPillarsMinDistance:[ 5 ],
+                                corridorsSpawnPoints:[
+                                    [
+                                        { at:0.6, tokens:[ { id: "portal3", isVisible:true } ], allowBridge:true },
+                                        { at:0.155, tokens:[ { id: "portal5", isVisible:true } ], allowBridge:true },
+                                        { at:0.95, tokens:[ { id: "regularPortal", isVisible:true } ], allowBridge:true },
+                                    ]
+                                ],
+                                corridorsContent:[
+                                    [
+                                        {
+                                            elements:[
+                                                { atCell:0, tokens:[ { id:"corruption", isVisible:true }]},
+                                                { atCell:2, tokens:[ { id:"startPoint", isVisible:true }]},
+                                                { atCell:6, tokens:[ { id:"startMob", isVisible:true } ]},
+                                                { atCell:11, tokens:[ { id:"startMob", isVisible:true } ]}
+                                            ]
+                                        },{
+                                            elements:[
+                                                { at:1, tokens:[ { id:"objective", isVisible:true }]},
+                                                { at:0.9, tokens:[ { id:"objective", isVisible:true }]},
+                                                { at:0.8, tokens:[ { id:"objective", isVisible:true }]}
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
                         },
                         // --- Room limits
                         {
@@ -6439,6 +6471,177 @@ ModManager.modules.push(function(){
                                                         atExposure:-1,
                                                         tokens:[
                                                             { id:"fountain" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        },{
+                            attribute:"gameMode",
+                            value:"chase",
+                            config:{
+                                roomsContent:[
+                                    [
+                                        {
+                                            at:0.8,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"fountain" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0.8,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"forge" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            ifSideQuestMod:[ "extraObjectives" ],
+                                            at:1,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        },{
+                            attribute:"gameMode",
+                            value:"removeCorruption",
+                            config:{
+                                roomsContent:[
+                                    [
+                                        {
+                                            at:1,
+                                            relevance:1,
+                                            doors:[ { id:"door", className:"marked red" } ],
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"objective", flipped:true }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },
+                                        {
+                                            at:0.2,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"corruption" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },
+                                        {
+                                            at:0.4,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"corruption" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },
+                                        {
+                                            at:0.6,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"corruption" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },
+                                        {
+                                            at:0.8,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"corruption" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            ifSideQuestMod:[ "extraObjectives" ],
+                                            at:1,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"corruption" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },
+                                        {
+                                            at:0.8,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"fountain" }
+                                                        ]
+                                                    }
+                                                ]
+                                            ]
+                                        },{
+                                            at:0.8,
+                                            relevance:1,
+                                            add:[
+                                                [
+                                                    {
+                                                        atExposure:-1,
+                                                        tokens:[
+                                                            { id:"forge" }
                                                         ]
                                                     }
                                                 ]
