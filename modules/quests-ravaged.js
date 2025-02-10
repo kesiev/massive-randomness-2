@@ -1221,8 +1221,8 @@ ModManager.modules.push(function(){
                                                 type:"objective",
                                                 name:[
                                                     {
-                                                        EN:"Elimina",
-                                                        IT:"Eliminate"
+                                                        IT:"Elimina",
+                                                        EN:"Eliminate"
                                                     }
                                                 ],
                                                 summary:[
