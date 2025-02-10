@@ -1900,7 +1900,7 @@ ModManager.modules.push(function(){
                                                 artifact:[
                                                     {
                                                         IT:[ "l'Artefatto", "l'Artefatto Etereo", "l'artefatto", "dell'artefatto distrutto", "viene forgiato" ],
-                                                        EN:[ "the Artifact", "the Ethereal Artifact", "the Ethereal Artifact", "the artifact", "of the destroyed artifact", "is forged" ]
+                                                        EN:[ "the Artifact", "the Ethereal Artifact", "the artifact", "of the destroyed artifact", "is forged" ]
                                                     },{
                                                         IT:[ "il Pendente", "il Pendente di Giada", "il pendente", "del pendente distrutto", "viene forgiato" ],
                                                         EN:[ "the Pendant", "the Jade Pendant", "the pendant", "of the destroyed pendant", "is forged" ]
