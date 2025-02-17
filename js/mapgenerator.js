@@ -495,6 +495,43 @@ MapGenerator=(function() {
         return tileStrategy[id] === undefined ? mapStrategy[id] : tileStrategy[id];
     }
 
+    function getSplitSegment(mapStrategy,x,y) {
+        switch (mapStrategy.splitType) {
+            case 0:{
+                return x<mapStrategy.splitOriginX+4 ? 0 : 1;
+                break;
+            }
+            case 1:{
+                return y<mapStrategy.splitOriginY+4 ? 0 : 1;
+                break;
+            }
+            case 2:{
+                return x%2;
+                break;
+            }
+            case 3:{
+                return y%2;
+                break;
+            }
+        }
+       
+    }
+
+    function setMapConfigSplit(mapStrategy,x,y,face) {
+        if (mapStrategy.splitMode) {
+            if (!mapStrategy.splitSkins) {
+                mapStrategy.splitSkins = [];
+                mapStrategy.splitOriginX = x;
+                mapStrategy.splitOriginY = y;
+            }
+            if (face.skins) {
+                let
+                    segment = getSplitSegment(mapStrategy,x,y);
+                mapStrategy.splitSkins[segment] = face.skins[0];
+            }
+        }
+    }
+
     function getBestFittingTile(map,fits,mapStrategy,tileStrategy) {
 
         let
@@ -506,7 +543,9 @@ MapGenerator=(function() {
             noSquares = getStrategyValue("noSquares",mapStrategy,tileStrategy),
             mapAsGrid = getStrategyValue("mapAsGrid",mapStrategy,tileStrategy),
             mapMaxHeight = getStrategyValue("mapMaxHeight",mapStrategy,tileStrategy),
-            mapMaxWidth = getStrategyValue("mapMaxWidth",mapStrategy,tileStrategy);
+            mapMaxWidth = getStrategyValue("mapMaxWidth",mapStrategy,tileStrategy),
+            splitMode = getStrategyValue("splitMode",mapStrategy,tileStrategy),
+            splitSkins = getStrategyValue("splitSkins",mapStrategy,tileStrategy),
             at = getStrategyValue("at",mapStrategy,tileStrategy);
 
         fits.forEach(fit=>{
@@ -560,6 +599,16 @@ MapGenerator=(function() {
                 
             }
 
+            if (splitMode && side.skins) {
+                let
+                    splitSegment = getSplitSegment(mapStrategy,fit.at.x,fit.at.y);
+                if (
+                    (splitSkins[splitSegment] && (side.skins.indexOf(splitSkins[splitSegment])==-1)) ||
+                    (!splitSkins[splitSegment] && (splitSkins.indexOf(side.skins[0]) != -1))
+                )
+                    isOk = false;
+            }
+
             if (mapMaxWidth && (newMapWidth > mapMaxWidth))
                 isOk = false;
 
@@ -593,9 +642,9 @@ MapGenerator=(function() {
             }
         });
 
-        if (subfits.length)
+        if (subfits.length) {
             return pickRandomElementValue(subfits);
-        else {
+        } else {
             return 0;
         }
     }
@@ -712,6 +761,7 @@ MapGenerator=(function() {
 
                     let
                         selectedSide,
+                        selectedFace,
                         selectedAngle,
                         selectedX,
                         selectedY,
@@ -757,10 +807,12 @@ MapGenerator=(function() {
 
                         if (id == 0) {
 
-                            selectedSide = pickRandomElementValue(availableSides),
-                            selectedAngle = pickRandomElementId(selectedSide.tile.sides[selectedSide.side].angles);
+                            selectedSide = pickRandomElementValue(availableSides);
+                            selectedFace = selectedSide.tile.sides[selectedSide.side];
+                            selectedAngle = pickRandomElementId(selectedFace.angles);
                             selectedX = map.ox;
                             selectedY = map.oy;
+                            setMapConfigSplit(mapConfig,selectedX,selectedY,selectedFace);
 
                         } else {
 
@@ -770,9 +822,11 @@ MapGenerator=(function() {
 
                             if (fit) {
                                 selectedSide = fit.side;
+                                selectedFace = selectedSide.tile.sides[selectedSide.side];
                                 selectedAngle = fit.angle;
                                 selectedX = fit.at.x;
                                 selectedY = fit.at.y;
+                                setMapConfigSplit(mapConfig,selectedX,selectedY,selectedFace);
                             }
                         }
 
