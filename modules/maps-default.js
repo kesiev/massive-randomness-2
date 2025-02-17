@@ -2896,7 +2896,7 @@ ModManager.modules.push(function(){
 
         // --- Not uniform skinned maps
         {
-            id:"maps-default-uniform",
+            id:"maps-default-notuniform",
             needs:[ "md2-hellscape" ],
             provides:[ "maps-default-notuniform" ],
             label:{
@@ -2911,6 +2911,32 @@ ModManager.modules.push(function(){
                             value:"default",
                             config:{
                                 mapSameSkin:[ false ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+
+        // --- Split skinned maps
+        {
+            id:"maps-default-split",
+            needs:[ "md2-hellscape" ],
+            provides:[ "maps-default-split" ],
+            label:{
+                EN:"MD2 map generator split skin setting"
+            },
+            content:[
+                {
+                    type:"mapConfigs",
+                    data:[
+                        {
+                            attribute:"skin",
+                            value:"default",
+                            config:{
+                                mapSameSkin:[ false ],
+                                splitMode: [ true ],
+                                splitType: [ 0, 1, 2, 3 ]
                             }
                         }
                     ]

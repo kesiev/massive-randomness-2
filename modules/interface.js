@@ -95,6 +95,28 @@ ModManager.modules.push(function(){
                                         },
                                         tags:[ "campaign-upgradepack-hellephant" ]
                                     },{
+                                        code:"K",
+                                        label:{
+                                            IT:"Massive Darkness 2: Quattro Cavalieri",
+                                            EN:"Massive Darkness 2: Four Horsemen Pack"
+                                        },
+                                        description:{
+                                            IT:"Boss",
+                                            EN:"Boss"
+                                        },
+                                        tags:[ "campaign-fourhorsemen" ]
+                                    },{
+                                        code:"L",
+                                        label:{
+                                            IT:"Massive Darkness 2: Darkbringer",
+                                            EN:"Massive Darkness 2: Darkbringer"
+                                        },
+                                        description:{
+                                            IT:"Boss",
+                                            EN:"Boss"
+                                        },
+                                        tags:[ "campaign-darkbringer" ]
+                                    },{
                                         code:"D",
                                         label:{
                                             IT:"Massive Darkness",
@@ -316,6 +338,17 @@ ModManager.modules.push(function(){
                                             EN:"All tiles on the map show the same setting.",
                                         },
                                         tags:[ "maps-default-uniform" ]
+                                    },{
+                                        code:"y",
+                                        label:{
+                                            IT:"Divisa",
+                                            EN:"Split"
+                                        },
+                                        description:{
+                                            IT:"Le tessere sulla mappa possono mostrare 2 ambientazioni diverse. Migliora la variet&agrave; di struttura cercando di mantenere una buona estetica.",
+                                            EN:"The map tiles can show 2 environments. Improves the variety of structure while trying to maintain good aesthetics.",
+                                        },
+                                        tags:[ "maps-default-split" ]
                                     },{
                                         code:"z",
                                         label:{
