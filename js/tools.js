@@ -2233,8 +2233,13 @@ Tools=(function(){
                     oneshotHtml+="</td><td>";
 
                     if (boss.levels[k].labels.bossHealth) {
-                        oneshotHtml+=boss.levels[k].labels.bossHealth.EN;
-                        totalHealth += boss.levels[k].labels.bossHealth.EN;
+                        if (boss.components) {
+                            oneshotHtml+= (boss.levels[k].labels.bossHealth.EN * boss.components) + "(" + boss.levels[k].labels.bossHealth.EN + "&times;"+boss.components+")"
+                            totalHealth += boss.levels[k].labels.bossHealth.EN * boss.components;
+                        } else {
+                            oneshotHtml+=boss.levels[k].labels.bossHealth.EN;
+                            totalHealth += boss.levels[k].labels.bossHealth.EN;
+                        }
                     } else {
                         oneshotHtml+="[!!]";
                         errors.push("Boss "+label+" is missing base health (bossHealth)");
@@ -2253,8 +2258,13 @@ Tools=(function(){
                         }
                         if (boss.levels[k].labels.bossPhase2Health.EN < boss.levels[k].labels.bossHealth.EN)
                             errors.push("Boss "+label+" has phase 2 health less than phase 1 health");
-                        oneshotHtml+="<td>"+boss.levels[k].labels.bossPhase2Health.EN+"</td>";
-                        totalHealth += boss.levels[k].labels.bossPhase2Health.EN;
+                        if (boss.components) {
+                            oneshotHtml+="<td>"+ (boss.levels[k].labels.bossPhase2Health.EN * boss.components) + "(" + boss.levels[k].labels.bossPhase2Health.EN + "&times;"+boss.components+")</td>";
+                            totalHealth += boss.levels[k].labels.bossPhase2Health.EN * boss.components;
+                        } else {
+                            oneshotHtml+="<td>"+boss.levels[k].labels.bossPhase2Health.EN+"</td>";
+                            totalHealth += boss.levels[k].labels.bossPhase2Health.EN;
+                        }
                     } else {
                         if (boss.levels[k].labels.bossPhase2Modifier)
                             errors.push("Boss "+label+" is missing phase 2 health (bossPhase2Health)");
@@ -2334,7 +2344,12 @@ Tools=(function(){
                                                 }
                                                 campaignHtml+="<td>"+bonus+"</td>";
                                                 total+=bonus;
-                                                campaignHtml+="<td>"+total+"</td>";
+                                                if (boss.components) {
+                                                    campaignHtml+="<td>"+(total*boss.components)+" ("+total+"&times;"+boss.components+")</td>";
+                                                    total*=boss.components;
+                                                } else {
+                                                    campaignHtml+="<td>"+total+"</td>";
+                                                }
                                                 
                                                 if (prep1)
                                                     campaignHtml+="<td>"+summarizer(prep1.EN).join(", ")+(bossMode ? " + "+bossMode.EN : "")+"</td>";
@@ -2385,7 +2400,7 @@ Tools=(function(){
                                     if (stats[a][m][l].min == stats[a][m][l].max)
                                         campaignHtml+=stats[a][m][l].min;
                                     else
-                                        campaignHtml+=stats[a][m][l].min+" - "+stats[a][m][l].max;
+                                        campaignHtml+=stats[a][m][l].min+" - "+stats[a][m][l].max+" (&plusmn;"+(stats[a][m][l].max-stats[a][m][l].min)+")";
                                 else
                                     campaignHtml+="&nbsp;"
                                 campaignHtml+="</td>";
@@ -2425,7 +2440,7 @@ Tools=(function(){
                             if (globalStats[a][m][l].min == globalStats[a][m][l].max)
                                 summaryHtml+=globalStats[a][m][l].min;
                             else
-                                summaryHtml+=globalStats[a][m][l].min+" - "+globalStats[a][m][l].max;
+                                summaryHtml+=globalStats[a][m][l].min+" - "+globalStats[a][m][l].max+" (&plusmn;"+(globalStats[a][m][l].max-globalStats[a][m][l].min)+")";;
                         } else
                             summaryHtml+=">&nbsp;"
                         summaryHtml+="</td>";
@@ -3011,6 +3026,7 @@ Tools=(function(){
             text+=" * Small maps\n";
             text+=" * Large maps\n";
             text+=" * Interdimensional maps\n";
+            text+=" * Split maps\n";
 
             text+="\n## Game variants\n\n";
             text+=" * Challenges _(adapted from anubys [Dungeon Skill Challenge](https://boardgamegeek.com/filepage/245223/dungeon-skills-challenge))_\n";
