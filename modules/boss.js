@@ -2038,7 +2038,7 @@ ModManager.modules.push(function(){
                                     },
                                     explanation:{
                                         IT:"Per questa Missione, non mescolare le carte dei Quattro Cavalieri nei loro mazzi corrispondenti.",
-                                        EN:"For this Mission, fo not shuffle the Four Horsemen Roaming Monsters card into their corresponding decks."
+                                        EN:"For this Mission, do not shuffle the Four Horsemen Roaming Monsters card into their corresponding decks."
                                     }
                                 }
                             ],
