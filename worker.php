@@ -9,7 +9,7 @@ header("Pragma: no-cache");
 
 ?>
 
-var CACHE = 'mr2-cache-v0.33';
+var CACHE = 'mr2-cache-v0.4b';
 var precacheFiles =
 
 <?php
