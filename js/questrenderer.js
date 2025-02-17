@@ -364,6 +364,11 @@ QuestRenderer=(function(){
                             rules.push(rule);
                         })
 
+                    if (result.bossData && result.bossData.data && result.bossData.data.rules)
+                        result.bossData.data.rules.forEach(rule=>{
+                            rules.push(rule);
+                        })
+
                     objectivesList = createNode(objectivesNode,"ol");
                     specialRulesList = createNode(specialRulesNode,"ul");
                     rules.sort((a,b)=>{
