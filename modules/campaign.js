@@ -781,11 +781,16 @@ ModManager.modules.push(function(){
                             default:"yes",
                             values:{
                                 yes:{
-                                    notNeeds:[ "maps-default-notuniform" ],
+                                    notNeeds:[ "maps-default-notuniform", "maps-default-split" ],
                                     needs:[ "maps-default-uniform" ],
                                 },
                                 no:{
+                                    notNeeds:[ "maps-default-uniform", "maps-default-split" ],
                                     needs:[ "maps-default-notuniform" ]
+                                },
+                                split:{
+                                    notNeeds:[ "maps-default-notuniform", "maps-default-uniform" ],
+                                    needs:[ "maps-default-split" ]
                                 }
                             }
                         },
@@ -830,7 +835,7 @@ ModManager.modules.push(function(){
                             values:{
                                 yes:{
                                     needs:[  "md2-hellscape", "quests", "maps-default", "campaign-default" ],
-                                    notExclude:[ "generator-campaign", "campaign-upgradepack-cyclopsduo", "campaign-upgradepack-hellephant" ]
+                                    notExclude:[ "generator-campaign", "campaign-upgradepack-cyclopsduo", "campaign-upgradepack-hellephant", "campaign-fourhorsemen", "campaign-darkbringer" ]
                                 }
                             }
                         }
@@ -1469,7 +1474,7 @@ ModManager.modules.push(function(){
                     data:[
                         {
                             label:{
-                                EN:"From uniform to interdimensional."
+                                EN:"From uniform to split and then interdimensional."
                             },
                             words:[
                                 [
@@ -1502,7 +1507,7 @@ ModManager.modules.push(function(){
                                         { act:1, map:2 }
                                     ],
                                     flags:[
-                                        { uniform:"yes" }
+                                        { uniform:"split" }
                                     ]
                                 },{
                                     at:[
