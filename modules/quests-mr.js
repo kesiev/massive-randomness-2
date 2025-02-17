@@ -210,9 +210,9 @@ ModManager.modules.push(function(){
                                                     { IT:"{who:capital@1} non dice bugie.", EN: "{who:capital@1} is not telling lies." }
                                                 ],
                                                 goodEnding:[
-                                                    { IT:"Gli dei della Giustizia vi sorridono. Avete agito bene. {label.questVictory:capital@0}.", EN: "The gods of Justice smile upon you. You did well. The Mission ends in victory." },
-                                                    { IT:"Ben fatto, eroi. Anche questa volta avete trionfato e, con voi, la giustizia. {label.questVictory:capital@0}.", EN: "Well done, heroes. You triumphed again and the justice with you. The Mission ends in victory." },
-                                                    { IT:"Il sacrificio &egrave; stato inevitabile, ma giustizia &egrave; stata fatta. {label.questVictory:capital@0}.", EN: "The sacrifice was inevitable, but justice has been done. The Mission ends in victory." },
+                                                    { IT:"Gli dei della Giustizia vi sorridono. Avete agito bene. {label.questVictory:capital@0}.", EN: "The gods of Justice smile upon you. You did well. {label.questVictory:capital@0}." },
+                                                    { IT:"Ben fatto, eroi. Anche questa volta avete trionfato e, con voi, la giustizia. {label.questVictory:capital@0}.", EN: "Well done, heroes. You triumphed again and the justice with you. {label.questVictory:capital@0}." },
+                                                    { IT:"Il sacrificio &egrave; stato inevitabile, ma giustizia &egrave; stata fatta. {label.questVictory:capital@0}.", EN: "The sacrifice was inevitable, but justice has been done. {label.questVictory:capital@0}." },
                                                 ],
                                                 badEnding:[
                                                     { IT:"Il Lord si accascia a terra con un grande tonfo ma, dentro di voi, sentite che qualcosa non non va. La Missione termina con la sconfitta.", EN: "The Lord collapses to the ground with a great thud but, inside, you feel that something is wrong. The Mission ends in defeat." },
@@ -672,7 +672,8 @@ ModManager.modules.push(function(){
                                                         "<a target=_blank href='https://boardgamegeek.com/user/Joabqm'>Joabqm</a>, "+
                                                         "<a target=_blank href='https://boardgamegeek.com/user/Metalzoic'>Metalzoic</a>, "+
                                                         "<a target=_blank href='https://boardgamegeek.com/user/spinal3000'>spinal3000</a>, "+
-                                                        "<a target=_blank href='https://boardgamegeek.com/user/Rough_neck'>Rough_neck</a>"
+                                                        "<a target=_blank href='https://boardgamegeek.com/user/Rough_neck'>Rough_neck</a>, "+
+                                                        "<a target=_blank href='https://boardgamegeek.com/user/Jopo'>Jopo</a>"
                                                 } ],
                                                 welcome:[
                                                     {
