@@ -50,7 +50,7 @@ In most of the _Diablo-like_ action-RPG videogames I've played, while the enemie
 
 <div align="center" style="margin:60px 0">
     <p><img src="markdown/d3.png"></p>
-    <p>Diablo 3 screenshots summarizing two key ingredients of the genre: adrenaline bursts by eliminating huge enemy hordes and dopamine bursts from loop sprays.</p>
+    <p>Diablo 3 screenshots summarizing two key ingredients of the genre: adrenaline bursts by eliminating huge enemy hordes and dopamine bursts from loot sprays.</p>
 </div>
 
 I've found this _enemy as gates_ principle in many cooperative/solitaire board games. In one of my favorite boss battlers [Aeon's End](https://boardgamegeek.com/boardgame/191189/aeons-end), bosses mostly challenge the players to create and manage _strong enough_ builds _by the end of the game_. Even the cute trick-taking game [For Northwood!](https://boardgamegeek.com/boardgame/334590/for-northwood-a-solo-trick-taking-game) uses a similar approach, even if more subtle: "enemies" are _a goal_ the player must reach by evaluating their hand of cards and their _allies set_.
