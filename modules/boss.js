@@ -563,6 +563,14 @@ ModManager.modules.push(function(){
                                 " <b>Place 1 Famine token and 1 Plague token on each Hero.</b><p>This Boss follows the rules described in the Boss Fight section of the <b>The Four Horsemen</b> quest of the Massive Darkness 2: Four Horsemen rulebook.</p>"
                             ],
                         },
+                        bossScorpionKingPreparation:{
+                            IT:[
+                                " <b>Ogni Eroe prende 1 segnalino Veleno.</b><p>Questo Boss segue le regole descritte nella sezione Scontro con il Boss della missione <b>Il Re Scorpione</b> del manuale di Massive Darkness 2: Darkbringer.</p>"
+                            ],
+                            EN:[
+                                " <b>Each Hero takes 1 Poison token.</b><p>This Boss follows the rules described in the Boss Fight section of the <b>The Scorpion King</b> quest of the Massive Darkness 2: Darkbringer rulebook.</p>"
+                            ],
+                        },
                         bossScorpionKingHardMods:{
                             IT:[
                                 "si difende con 3 {symbol.blueDie} 3 {symbol.greenDie} 1 {symbol.blackDie} e attacca con 3 {symbol.yellowDie} 2 {symbol.orangeDie} 2 {symbol.redDie} 3 {symbol.blackDie}"
@@ -571,13 +579,13 @@ ModManager.modules.push(function(){
                                 "it defends with 3 {symbol.blueDie} 3 {symbol.greenDie} 1 {symbol.blackDie}, and it attacks with 1 {symbol.yellowDie} 1 {symbol.orangeDie} 2 {symbol.redDie} 3 {symbol.blackDie}"
                             ]
                         },
-                        bossScorpionKingPreparation:{
+                        bossHadesPreparation:{
                             IT:[
-                                " <b>Ogni Eroe prende 1 segnalino Veleno.</b><p>Questo Boss segue le regole descritte nella sezione Scontro con il Boss della missione <b>Il Re Scorpione</b> del manuale di Massive Darkness 2: Darkbringer.</p>"
+                                " <b>Ogni Eroe prende 4 segnalini Giudizio.</b><p>Ogni Eroe tira 1 {symbol.blackDie} per segnalino Giudizio. Per ogni {symbol.fang} ottenuto, l'Eroe subisce 1 Ferita e scarta il gettone. Nota che per ogni {symbol.blackDie} tirato, se non viene ottenuto un {symbol.fang}, l'Eroe tiene il gettone.</p><p>Questo Boss segue le regole descritte nella sezione Scontro con il Boss della missione <b>Hades</b> del manuale di Massive Darkness 2: Darkbringer.</p>"
                             ],
                             EN:[
-                                " <b>Each Hero takes 1 Poison token.</b><p>This Boss follows the rules described in the Boss Fight section of the <b>The Scorpion King</b> quest of the Massive Darkness 2: Darkbringer rulebook.</p>"
-                            ],
+                                " <b>Each Hero takes 4 Judgement tokens.</b><p>Each Hero rolls 1 {symbol.blackDie} per Judgement token. For each {symbol.fang} rolled, the Hero takes 1 Wound and discards the token. Note that for each {symbol.blackDie} rolled, if a {symbol.fang} is not rolled, the Hero keeps the token.</p><p>This Boss follows the rules described in the Boss Fight section of the <b>Hades</b> quest of the Massive Darkness 2: Darkbringer rulebook.</p>"
+                            ]
                         },
                         bossHadesHardMods:{
                             IT:[
