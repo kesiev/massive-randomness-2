@@ -191,11 +191,13 @@ This is the list of what's into _Massive Randomness 2_.
 
 ## Campaign mode
 
+ * 29 full campaign quests.
+ * 19 mini-campaign quests.
  * 19 side quest types.
- * 1 campaign model.
+ * 2 campaign models.
  * 2 campaign acts models.
  * 4 campaign map models.
  * 3 campaign dungeon crawling models.
- * 5 campaign boss fight models.
+ * 6 campaign boss fight models.
  * 4 campaign rewards models.
    * 31 rewards.
