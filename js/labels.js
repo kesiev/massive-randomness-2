@@ -37,6 +37,23 @@ Labels=(function(){
         return out;
     }
 
+    function getLabelNumber(result,language,part) {
+        let
+            parts = part.split("-"),
+            out = part;
+        if (result.labels[parts[0]]) {
+            out = result.labels[parts[0]];
+            if (out[language])
+                out=out[language];
+            else if (out.EN)
+                out=out.EN;
+            if (parts[1])
+                out=out[parts[1]];
+            out=simpleSolve(out+"",language,result.labels);
+        }
+        return parseFloat(out);
+    }
+
     function getLabel(flags,resources,result,language,label,index) {
         let
             out;
@@ -57,10 +74,40 @@ Labels=(function(){
                 if (result.labels[parts[0]] !== undefined) {
                     let
                         subOut = getLabel(flags,resources,result,language,result.labels[parts[0]], text[1]);
-                    if (parts[1] == "capital")
-                        return wrap(flags,m1,subOut[0].toUpperCase()+subOut.substr(1,subOut.length));
-                    else
-                        return wrap(flags,m1,subOut);
+                    switch (parts[1]) {
+                        case "capital":{
+                            return wrap(flags,m1,subOut[0].toUpperCase()+subOut.substr(1,subOut.length));
+                            break;
+                        }
+                        case "split":{
+                            let
+                                debug = String(subOut),
+                                value = parseFloat(subOut),
+                                delta = 0,
+                                add = 0,
+                                by = getLabelNumber(result,language,parts[2]);
+                            debug+=" / ("+by+" ["+parts[2]+"]"
+                            if (parts[3]) {
+                                delta=getLabelNumber(result,language,parts[3]);
+                                debug+=(delta<0?"-":"+")+delta+" ["+parts[3]+"]";
+                            }
+                            debug+=") ";
+                            if (parts[4]) {
+                                add=getLabelNumber(result,language,parts[4]);
+                                debug+=(add<0?"-":"+")+add+" ["+parts[4]+"]";
+                            }
+                            debug+=" = ";
+                            value=Math.floor(value/(by+delta))+add;
+                            debug+=value;
+                            if (value<=1)
+                                value = 1;
+                            return wrap(flags,m1,flags.debugRender ? debug : value);
+                            break;
+                        }
+                        default:{
+                            return wrap(flags,m1,subOut);
+                        }
+                    }
                 } else
                     return wrap(flags,m1,"{???}");
             });
