@@ -5,7 +5,7 @@ Interface=(function() {
         DEBUG_QUEST = false,
         DEBUG_CAMPAIGN = false,
         DEBUG_HIDDENTEXT = false,
-        VERSION = "0.4b",
+        VERSION = "0.41b",
         SOURCES_AT = {
             short:"github.com/kesiev/massive-randomness-2",
             full:"https://github.com/kesiev/massive-randomness-2"
@@ -161,7 +161,7 @@ Interface=(function() {
         for (let i=0;i<INTERFACE.settings.length;i++)
             if (settings[i])
                 for (let j=0;j<settings[i].length;j++)
-                    if (INTERFACE.settings[i].entries[settings[i][j]].idOption == option)
+                    if (option.indexOf(INTERFACE.settings[i].entries[settings[i][j]].idOption) != -1)
                         return true;
         return false;
     }
