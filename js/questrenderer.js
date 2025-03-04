@@ -164,10 +164,12 @@ QuestRenderer=(function(){
                                 preparationNode = createNode(questHeadNode,"div","objectives"),
                                 indexTitleNode = createNode(questHeadNode,"div","objectivesTitle"),
                                 indexNode = createNode(questHeadNode,"div","objectives"),
-                                questPhaseTitleNode = createNode(questHeadNode,"div","objectivesTitle"),
-                                questPhaseNode = createNode(questHeadNode,"div","objectives"),
+                                questPhaseTitleNode = result.campaign.questPhase ? createNode(questHeadNode,"div","objectivesTitle") : 0,
+                                questPhaseNode = result.campaign.questPhase ? createNode(questHeadNode,"div","objectives") : 0,
                                 achievementsTitleNode = result.campaign.achievements ? createNode(questHeadNode,"div","objectivesTitle") : 0,
                                 achievementsNode = result.campaign.achievements ?  createNode(questHeadNode,"div","objectives") : 0,
+                                questTreasureBagTitleNode = result.campaign.treasureBag ? createNode(questHeadNode,"div","objectivesTitle") : 0,
+                                questTreasureBagNode = result.campaign.treasureBag ? createNode(questHeadNode,"div","objectives") : 0,
                                 introductionTitleNode = createNode(questHeadNode,"div","objectivesTitle"),
                                 introductionNode = createNode(questHeadNode,"div","objectives"),
                                 footerNode = createNode(questNode,"div","questfooter displayonly"),
@@ -177,16 +179,22 @@ QuestRenderer=(function(){
 
                             createNode(titleNode,"div","left diamond displayonly");
                             titleNodeText = createNode(titleNode,"div","text");
-                            titleNodeText.innerHTML = simplifyEntities(Labels.getLabel(flags,resources,result,language,resources.globalLabels.campaignMode));
+                            titleNodeText.innerHTML = simplifyEntities(Labels.getLabel(flags,resources,result,language,result.campaign.campaignMode));
                             createNode(titleNode,"div","right diamond displayonly");
 
                             preparationTitleNode.innerHTML = "<div class='diamond displayonly'></div>"+Labels.getLabel(flags,resources,result,language,resources.globalLabels.campaignPreparationTitle);
                             indexTitleNode.innerHTML = "<div class='diamond displayonly'></div>"+Labels.getLabel(flags,resources,result,language,resources.globalLabels.campaignIndex);
                             introductionTitleNode.innerHTML = "<div class='diamond displayonly'></div>"+Labels.getLabel(flags,resources,result,language,resources.globalLabels.campaignIntroductionTitle);
                             footerNode.innerHTML = "<div class='arrow left'></div>"+Labels.getLabel(flags,resources,result,language,resources.globalLabels.campaignIndexFooter)+"<div class='arrow right'></div>";
-                            questPhaseTitleNode.innerHTML = "<div class='diamond displayonly'></div>"+Labels.getLabel(flags,resources,result,language,resources.globalLabels.campaignQuestPhase);
-                            questPhaseNode.innerHTML = Labels.getLabel(flags,resources,result,language,resources.globalLabels.campaignQuestPhaseDescription);
                             campaignNameNode.innerHTML = result.campaign.name;
+                            if (questPhaseNode) {
+                                questPhaseTitleNode.innerHTML = "<div class='diamond displayonly'></div>"+Labels.getLabel(flags,resources,result,language,resources.globalLabels.campaignQuestPhase);
+                                questPhaseNode.innerHTML = Labels.getLabel(flags,resources,result,language,result.campaign.questPhase);
+                            }
+                            if (questTreasureBagNode) {
+                                questTreasureBagTitleNode.innerHTML = "<div class='diamond displayonly'></div>"+Labels.getLabel(flags,resources,result,language,resources.globalLabels.campaignTreasureBag);
+                                questTreasureBagNode.innerHTML = Labels.getLabel(flags,resources,result,language,result.campaign.treasureBag);
+                            }
 
                             createNode(preparationNode,"p").innerHTML = Labels.getLabel(flags,resources,result,language,resources.globalLabels.campaignPreparation);
                     

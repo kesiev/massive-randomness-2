@@ -129,6 +129,11 @@ CampaignGenerator=(function() {
         result.flags = campaignFlags;
         result.achievements = campaign.achievements;
         result.achievementsCondition = campaign.achievementsCondition;
+        result.questPhase = campaign.questPhase;
+        result.treasureBag = campaign.treasureBag;
+        result.campaignMode = campaign.campaignMode;
+        result.explanationKeys = campaign.explanationKeys;
+        result.summaryKeys = campaign.summaryKeys;
         result.story = campaign.story.map(set=>pickRandomElement(set));
         result.introduction = campaign.introduction.map(set=>pickRandomElement(set));
 
@@ -163,6 +168,7 @@ CampaignGenerator=(function() {
                 pageData = {
                     id:id,
                     name:page.name,
+                    actMap:page.actMap ? pickRandomElementValue(page.actMap) : 0,
                     labels:{
                         "campaign.page":id+1,
                         "campaign.pageName":page.name
@@ -200,8 +206,8 @@ CampaignGenerator=(function() {
                             questFlags[flag.id] = flag.default;
                     })
 
-                    if (flagsMap[page.act][page.map])
-                        mergeFlags(flagsMap[page.act][page.map],questFlags);
+                    if (flagsMap[pageData.actMap.act][pageData.actMap.map])
+                        mergeFlags(flagsMap[pageData.actMap.act][pageData.actMap.map],questFlags);
                     mergeFlags(DEFAULT_FLAGS,questFlags);
 
                     resources.campaignFlags.forEach(flag=>{
@@ -289,8 +295,9 @@ CampaignGenerator=(function() {
                             if (
                                 (flags.campaignDebugQuest && quest._debug) ||
                                 (!flags.campaignDebugQuest && 
-                                    (!quest.forActs || (quest.forActs.indexOf(page.act) != -1)) &&
-                                    (!quest.forMaps || (quest.forMaps.indexOf(page.map) != -1))
+                                    (quest.forCampaign && (quest.forCampaign.indexOf(campaign.type) != -1)) &&
+                                    (!quest.forActs || (quest.forActs.indexOf(pageData.actMap.act) != -1)) &&
+                                    (!quest.forMaps || (quest.forMaps.indexOf(pageData.actMap.map) != -1))
                                 )
                             ) {
                                 allQuests.push(quest);
@@ -416,7 +423,7 @@ CampaignGenerator=(function() {
                                                 let
                                                     add = false;
                                                 version.at.forEach(at=>{
-                                                    if ((at.act == page.act) && (at.map == page.map))
+                                                    if ((at.act == pageData.actMap.act) && (at.map == pageData.actMap.map))
                                                         add = true;
                                                 });
                                                 if (add)

@@ -27,6 +27,7 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
+                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
                             forMaps:[2],
                             type:"finalBoss",
                             objective:{
@@ -326,6 +327,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
+                            forCampaign:[ "full", "mini" ],
                             forActs:[2,3],
                             forMaps:[0,1],
                             type:"xpAndDeliver",
@@ -498,6 +500,12 @@ ModManager.modules.push(function(){
                                                         IT:"I segnalini Obiettivo colorati a faccia in su rappresentano {label.block@7} {label.block@8}. Qualsiasi Eroe che si trovi nella stessa Zona di un segnalino Obiettivo pu&ograve; spendere 1 azione per {label.block@15}. Rimuovete il segnalino dal Dungeon. Gli Eroi raccolgono 5 {label.block:capital@5} e ogni Eroe ottiene 5 PE.",
                                                         EN:"The colored face-up Objective tokens represent {label.block@7} {label.block@8}. Any Hero in the same Zone as an Objective token can spend 1 action to {label.block@15}. Remove the token from the Dungeon. The Heroes collect 5 {label.block:capital@5} and all Heroes gets 5 XP."
                                                     }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"I segnalini Obiettivo colorati a faccia in su rappresentano {label.block@7} {label.block@8}. Qualsiasi Eroe che si trovi nella stessa Zona di un segnalino Obiettivo pu&ograve; spendere 1 azione per {label.block@15}. Rimuovete il segnalino dal Dungeon. Gli Eroi raccolgono 5 {label.block:capital@5} e ogni Eroe ottiene {label.miniCampaignObjectivesXp:split:tokensCount.objective::5} PE.",
+                                                        EN:"The colored face-up Objective tokens represent {label.block@7} {label.block@8}. Any Hero in the same Zone as an Objective token can spend 1 action to {label.block@15}. Remove the token from the Dungeon. The Heroes collect 5 {label.block:capital@5} and all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.objective::5} XP."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -563,6 +571,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
+                            forCampaign:[ "full", "mini" ],
                             forActs:[0],
                             forMaps:[0,1],
                             type:"collect",
@@ -834,6 +843,12 @@ ModManager.modules.push(function(){
                                                         IT:"{label.unblock:capital@2} dai segnalini Obiettivo con il lato colorato a faccia in su. Un qualsiasi Eroe che si trovi in una Zona con uno di questi segnalini Obiettivo pu&ograve; spendere 1 PM per interagire con il segnalino Obiettivo e rimuoverlo dal Dungeon.",
                                                         EN:"{label.unblock:capital@2} by Objective tokens with the colored side up. Any Hero in a Zone with one of these Objective tokens can spend 1 MP to interact with the Objective token and remove it from the Dungeon."
                                                     }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"{label.unblock:capital@2} dai segnalini Obiettivo con il lato colorato a faccia in su. Un qualsiasi Eroe che si trovi in una Zona con uno di questi segnalini Obiettivo pu&ograve; spendere 1 PM per interagire con il segnalino Obiettivo per rimuoverlo dal Dungeon e ogni Eroe ottiene {label.miniCampaignObjectivesXp:split:tokensCount.objective} PE.",
+                                                        EN:"{label.unblock:capital@2} by Objective tokens with the colored side up. Any Hero in a Zone with one of these Objective tokens can spend 1 MP to interact with the Objective token, remove it from the Dungeon, and all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.objective} XP"
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -914,6 +929,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
+                            forCampaign:[ "full", "mini" ],
                             forActs:[1,2],
                             forMaps:[2],
                             type:"tyrant",
@@ -1122,6 +1138,12 @@ ModManager.modules.push(function(){
                                                         IT:"{label.item:capital@2} {label.item:capital@1} sono rappresentate dai segnalini Obiettivo. Qualsiasi Eroe che si trovi in una Zona con un segnalino Obiettivo pu&ograve; spendere 1 PM per interagire con quel segnalino e raccoglierlo (un Eroe pu&ograve; trasportarne pi&ugrave; di 1). Un Eroe che trasporta {label.item@3} {label.item@0} mentre si trova nella Zona {label.enemy@4} {label.enemy@3} pu&ograve; spendere 1 PM per collocare 1 {label.item@0} {label.enemy@5} {label.enemy@3}. {label.enemy:capital@2} {label.enemy@3} &egrave; vulnerabile fintanto che su di essa c'&egrave; {label.item@3} {label.item@0}: gli Eroi possono attaccarla, usare le abilit&agrave; e le capacit&agrave; e infliggere Ferite {label.enemy@6} {label.enemy@3}. All'inizio di ogni round, rimuovete tutte {label.item@2} {label.item:capital@1} {label.enemy@5} {label.enemy@3}, che diventa di nuovo invulnerabile.",
                                                         EN:"{label.item:capital@2} {label.item:capital@1} are represented by Objective tokens. Any Hero in a Zone with an Objective token can spend 1 MP to interact with that token and collect it (a Hero can carry more than 1). A Hero carrying {label.item@3} {label.item@0} while in {label.enemy@4} {label.enemy@3} Zone can spend 1 MP to place 1 {label.item@0} {label.enemy@5} {label.enemy@3}. {label.enemy:capital@2} {label.enemy@3} is vulnerable as long as there is {label.item@3} {label.item@0}: Heroes can attack it, use skills and abilities, and inflict Wounds {label.enemy@6} {label.enemy@3}. At the start of each round, remove all {label.item@2} {label.item:capital@1} {label.enemy@5} {label.enemy@3}, which becomes invulnerable again."
                                                     }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"{label.item:capital@2} {label.item:capital@1} sono rappresentate dai segnalini Obiettivo. Qualsiasi Eroe che si trovi in una Zona con un segnalino Obiettivo pu&ograve; spendere 1 PM per interagire con quel segnalino, raccoglierlo (un Eroe pu&ograve; trasportarne pi&ugrave; di 1) e Tutti gli Eroi guadagnano {label.miniCampaignObjectivesXp:split:tokensCount.objective} PE. Un Eroe che trasporta {label.item@3} {label.item@0} mentre si trova nella Zona {label.enemy@4} {label.enemy@3} pu&ograve; spendere 1 PM per collocare 1 {label.item@0} {label.enemy@5} {label.enemy@3}. {label.enemy:capital@2} {label.enemy@3} &egrave; vulnerabile fintanto che su di essa c'&egrave; {label.item@3} {label.item@0}: gli Eroi possono attaccarla, usare le abilit&agrave; e le capacit&agrave; e infliggere Ferite {label.enemy@6} {label.enemy@3}. All'inizio di ogni round, rimuovete tutte {label.item@2} {label.item:capital@1} {label.enemy@5} {label.enemy@3}, che diventa di nuovo invulnerabile.",
+                                                        EN:"{label.item:capital@2} {label.item:capital@1} are represented by Objective tokens. Any Hero in a Zone with an Objective token can spend 1 MP to interact with that token, collect it (a Hero can carry more than 1), and All Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.objective} XP. A Hero carrying {label.item@3} {label.item@0} while in {label.enemy@4} {label.enemy@3} Zone can spend 1 MP to place 1 {label.item@0} {label.enemy@5} {label.enemy@3}. {label.enemy:capital@2} {label.enemy@3} is vulnerable as long as there is {label.item@3} {label.item@0}: Heroes can attack it, use skills and abilities, and inflict Wounds {label.enemy@6} {label.enemy@3}. At the start of each round, remove all {label.item@2} {label.item:capital@1} {label.enemy@5} {label.enemy@3}, which becomes invulnerable again."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -1192,6 +1214,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
+                            forCampaign:[ "full", "mini" ],
                             forMaps:[1],
                             type:"hunt",
                             objective:{
@@ -1363,6 +1386,12 @@ ModManager.modules.push(function(){
                                                         IT:"Ogni volta che una delle Camere con un segnalino Corruzione {symbol.corruptionToken} viene rivelata, in aggiunta ai consueti passi di rivelazione di una Camera, generate anche un Mostro Errante nella Zona indicata dal segnalino Corruzione in quella Camera. Questo Mostro Errante &egrave; 1 {label.monsters@2} {label.monsters@1}. Una volta che tutte e {tokensCount.corruption} {label.monsters@0} {label.monsters@1} sono state uccise, {label.questVictory@0}.",
                                                         EN:"Whenever one of the Chambers with a Corruption token {symbol.corruptionToken} is revealed, in addition to the usual steps of revealing a Chamber, you also spawn a Roaming Monster in the Zone indicated by the Corruption token in that Chamber. This Roaming Monster is 1 {label.monsters@2} {label.monsters@1}. Once all {tokensCount.corruption} {label.monsters@1} have been killed, {label.questVictory@0}."
                                                     }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"Ogni volta che una delle Camere con un segnalino Corruzione {symbol.corruptionToken} viene rivelata, in aggiunta ai consueti passi di rivelazione di una Camera, generate anche un Mostro Errante nella Zona indicata dal segnalino Corruzione in quella Camera. Questo Mostro Errante &egrave; 1 {label.monsters@2} {label.monsters@1} e, quando viene sconfitto, tutti gli Eroi guadagnano {label.miniCampaignObjectivesXp:split:tokensCount.corruption} PE. Una volta che tutte e {tokensCount.corruption} {label.monsters@0} {label.monsters@1} sono state uccise, {label.questVictory@0}.",
+                                                        EN:"Whenever one of the Chambers with a Corruption token {symbol.corruptionToken} is revealed, in addition to the usual steps of revealing a Chamber, you also spawn a Roaming Monster in the Zone indicated by the Corruption token in that Chamber. This Roaming Monster is 1 {label.monsters@2} {label.monsters@1}. When it is defeated all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.corruption} XP. Once all {tokensCount.corruption} {label.monsters@1} have been killed, {label.questVictory@0}."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -1444,6 +1473,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
+                            forCampaign:[ "full", "mini" ],
                             forActs:[0,1],
                             forMaps:[0,1],
                             type:"relay",
@@ -1649,6 +1679,12 @@ ModManager.modules.push(function(){
                                                         IT:"{label.toBreak:capital@0} {label.toBreak@1} sono rappresentati dai segnalini Obiettivo. Un Eroe che abbia equipaggiato {label.weapon@0} e si trovi nella stessa Zona di un segnalino Obiettivo pu&ograve; spendere 1 azione per distruggere {label.toBreak@2} {label.toBreak@3}, {label.toBreak@5} dal Dungeon. Una volta che tutti i segnalini sono stati rimossi, {label.questVictory@0}.",
                                                         EN:"{label.toBreak:capital@0} {label.toBreak@1} are represented by Objective tokens. A Hero who has {label.weapon@0} equipped and is in the same Zone as an Objective token can spend 1 action to destroy {label.toBreak@2} {label.toBreak@3}, removing it from the Dungeon. Once all tokens have been removed, {label.questVictory@0}."
                                                     }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"{label.toBreak:capital@0} {label.toBreak@1} sono rappresentati dai segnalini Obiettivo. Un Eroe che abbia equipaggiato {label.weapon@0} e si trovi nella stessa Zona di un segnalino Obiettivo pu&ograve; spendere 1 azione per distruggere {label.toBreak@2} {label.toBreak@3}, {label.toBreak@5} dal Dungeon e tutti gli Eroi ottengono {label.miniCampaignObjectivesXp:split:tokensCount.objective} PE. Una volta che tutti i segnalini sono stati rimossi, {label.questVictory@0}.",
+                                                        EN:"{label.toBreak:capital@0} {label.toBreak@1} are represented by Objective tokens. A Hero who has {label.weapon@0} equipped and is in the same Zone as an Objective token can spend 1 action to destroy {label.toBreak@2} {label.toBreak@3}, removing it from the Dungeon and all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.objective} XP. Once all tokens have been removed, {label.questVictory@0}."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -1753,6 +1789,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
+                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
                             forMaps:[1],
                             type:"escort",
                             objective:{
@@ -2048,6 +2085,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
+                            forCampaign:[ "full", "mini" ],
                             forMaps:[0],
                             type:"collect",
                             objective:{
@@ -2247,13 +2285,19 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"{label.part:capital@2} {label.part:capital@3} sono {label.part@4} dai segnalini Obiettivo con il lato colorato a faccia in su. Qualsiasi Eroe in una {label.part@6} pu&ograve; interagire con un segnalino Obiettivo con il lato colorato a faccia in su per raccoglierlo. L'Eroe che lo fa ottiene 5 PE.",
-                                                        EN:"The Objective tokens represent the {label.part:capital@5}. Any Hero standing in the {label.part@6} may interact with it to pick it up and immediately gain 5 XP."
+                                                        EN:"The Objective tokens with the colored side up can be exchanged as if they were objects. Any Hero carrying an Objective token with the colored side up represent the {label.part:capital@5}. Any Hero standing in the {label.part@6} may interact with it to pick it up and immediately gain 5 XP."
                                                     }
                                                 ],
                                                 campaignExplanation:[
                                                     {
                                                         IT:"{label.part:capital@2} {label.part:capital@3} sono {label.part@4} dai segnalini Obiettivo con il lato colorato a faccia in su. Qualsiasi Eroe in una {label.part@6} pu&ograve; interagire con un segnalino Obiettivo con il lato colorato a faccia in su per raccoglierlo.",
-                                                        EN:"The Objective tokens represent the {label.part:capital@5}. Any Hero standing in the {label.part@6} may interact with it to pick it up."
+                                                        EN:"The Objective tokens with the colored side up can be exchanged as if they were objects. Any Hero carrying an Objective token with the colored side up represent the {label.part:capital@5}. Any Hero standing in the {label.part@6} may interact with it to pick it up."
+                                                    }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"{label.part:capital@2} {label.part:capital@3} sono {label.part@4} dai segnalini Obiettivo con il lato colorato a faccia in su. Qualsiasi Eroe in una {label.part@6} pu&ograve; interagire con un segnalino Obiettivo con il lato colorato a faccia in su per raccoglierlo e tutti gli Eroi guadagnano {label.miniCampaignObjectivesXp:split:tokensCount.objective} PE.",
+                                                        EN:"The Objective tokens with the colored side up can be exchanged as if they were objects. Any Hero carrying an Objective token with the colored side up represent the {label.part:capital@5}. Any Hero standing in the {label.part@6} may interact with it to pick it up and all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.objective} XP."
                                                     }
                                                 ]
                                             }
@@ -2343,6 +2387,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
+                            forCampaign:[ "full", "mini" ],
                             forActs:[2,3],
                             forMaps:[0,1],
                             type:"collecttimed",
@@ -2596,13 +2641,19 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"Ogni segnalino Obiettivo rappresenta {label.item@2} {label.item@3} {label.itemOf@1}. Un qualsiasi Eroe che si trovi nella stessa Zona di {label.item@2} {label.item@3} {label.itemOf@1} pu&ograve; spendere 1 azione per raccoglierla. Ogni volta che {label.item@2} {label.item@3} {label.itemOf@1} viene raccolta, i segnalini Tempo su di esso vengono rimossi e ogni Eroe ottiene 8 PE. Ricordate che {label.item@0} {label.item@1} {label.itemOf@0} stanno scomparendo: se anche {label.item@4} scompare, la Missione termina con una sconfitta.",
-                                                        EN:"Each Objective token represents {label.item@2} {label.itemOf@0} {label.item@3}. Any Hero in the same Zone as {label.item@2} {label.itemOf@0} {label.item@3} can spend 1 action to pick it up. Each time {label.item@2} {label.itemOf@0} {label.item@3} is picked up, the Time tokens are removed and all Heros gain 8 XP. Remember that {label.item@0} {label.itemOf@0} {label.item@1} are disappearing: if {label.item@4} disappears, the Mission ends in defeat."
+                                                        EN:"Each Objective token represents {label.item@2} {label.itemOf@0} {label.item@3}. Any Hero in the same Zone as {label.item@2} {label.itemOf@0} {label.item@3} can spend 1 action to pick it up. Each time {label.item@2} {label.itemOf@0} {label.item@3} is picked up, the Time tokens are removed and all Heroes gain 8 XP. Remember that {label.item@0} {label.itemOf@0} {label.item@1} are disappearing: if {label.item@4} disappears, the Mission ends in defeat."
                                                     }
                                                 ],
                                                 campaignExplanation:[
                                                     {
                                                         IT:"Ogni segnalino Obiettivo rappresenta {label.item@2} {label.item@3} {label.itemOf@1}. Un qualsiasi Eroe che si trovi nella stessa Zona di {label.item@2} {label.item@3} {label.itemOf@1} pu&ograve; spendere 1 azione per raccoglierla insieme ai suoi segnalini Tempo rimasti. Ricordate che {label.item@0} {label.item@1} {label.itemOf@0} stanno scomparendo: se anche {label.item@4} scompare, la Missione termina con una sconfitta.",
                                                         EN:"Each Objective token represents {label.item@2} {label.itemOf@0} {label.item@3}. Any Hero in the same Zone as {label.item@2} {label.itemOf@0} {label.item@3} can spend 1 action to pick it up with its remaining Time tokens. Remember that {label.item@0} {label.itemOf@0} {label.item@1} are disappearing: if {label.item@4} disappears, the Mission ends in defeat."
+                                                    }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"Ogni segnalino Obiettivo rappresenta {label.item@2} {label.item@3} {label.itemOf@1}. Un qualsiasi Eroe che si trovi nella stessa Zona di {label.item@2} {label.item@3} {label.itemOf@1} pu&ograve; spendere 1 azione per raccoglierla insieme ai suoi segnalini Tempo rimasti e ogni Eroe ottiene {label.miniCampaignObjectivesXp:split:tokensCount.objective} PE. Ricordate che {label.item@0} {label.item@1} {label.itemOf@0} stanno scomparendo: se anche {label.item@4} scompare, la Missione termina con una sconfitta.",
+                                                        EN:"Each Objective token represents {label.item@2} {label.itemOf@0} {label.item@3}. Any Hero in the same Zone as {label.item@2} {label.itemOf@0} {label.item@3} can spend 1 action to pick it up with its remaining Time tokens and all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.objective} XP. Remember that {label.item@0} {label.itemOf@0} {label.item@1} are disappearing: if {label.item@4} disappears, the Mission ends in defeat."
                                                     }
                                                 ]
                                             }

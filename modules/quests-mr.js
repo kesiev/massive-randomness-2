@@ -46,6 +46,7 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
+                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
                             forMaps:[2],
                             type:"investigation",
                             objective:{
@@ -602,6 +603,7 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
+                            forCampaign:[ "full", "mini" ],
                             forActs:[2],
                             forMaps:[2],
                             type:"massiveRandomness",
@@ -923,6 +925,12 @@ ModManager.modules.push(function(){
                                                         IT:"Un Eroe che si trova {token.order1@1} pu&ograve; spendere 1 azione per svelare il seguente testo: <span class='hiddentext'>Rimuovi {token.order1@0}. {action.order1@0} Ora svela il testo del Secondo Ordine.</span>",
                                                         EN:"A Hero standing {token.order1@1} can spend 1 action to reveal the following text: <span class='hiddentext'>Remove {token.order1@0}. {action.order1@0} Now reveal the Second Order text.</span>"
                                                     }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"Un Eroe che si trova {token.order1@1} pu&ograve; spendere 1 azione per svelare il seguente testo: <span class='hiddentext'>Rimuovi {token.order1@0}. Tutti gli Eroi gudagnano {label.miniCampaignObjectivesXp:split:3} PE. {action.order1@0} Ora svela il testo del Secondo Ordine.</span>",
+                                                        EN:"A Hero standing {token.order1@1} can spend 1 action to reveal the following text: <span class='hiddentext'>Remove {token.order1@0}. All Heroes gets {label.miniCampaignObjectivesXp:split:3} XP. {action.order1@0} Now reveal the Second Order text.</span>"
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -939,6 +947,12 @@ ModManager.modules.push(function(){
                                                         IT:"<span class='hiddentext'>Un Eroe che si trova {token.order2@1} pu&ograve; spendere 1 azione per svelare il seguente testo: <span class='hiddentext'>Rimuovi {token.order2@0}. {action.order2@0} Ora svela il testo del Terzo Ordine.</span></span>",
                                                         EN:"<span class='hiddentext'>A Hero standing {token.order2@1} can spend 1 action to reveal the following text: <span class='hiddentext'>Remove {token.order2@0}. {action.order2@0} Now reveal the Third Order text.</span>"
                                                     }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"<span class='hiddentext'>Un Eroe che si trova {token.order2@1} pu&ograve; spendere 1 azione per svelare il seguente testo: <span class='hiddentext'>Rimuovi {token.order2@0}. Tutti gli Eroi gudagnano {label.miniCampaignObjectivesXp:split:3} PE. {action.order2@0} Ora svela il testo del Terzo Ordine.</span></span>",
+                                                        EN:"<span class='hiddentext'>A Hero standing {token.order2@1} can spend 1 action to reveal the following text: <span class='hiddentext'>Remove {token.order2@0}. All Heroes gets {label.miniCampaignObjectivesXp:split:3} XP. {action.order2@0} Now reveal the Third Order text.</span>"
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -954,6 +968,12 @@ ModManager.modules.push(function(){
                                                     {
                                                         IT:"<span class='hiddentext'>Un Eroe che si trova {token.order3@1} pu&ograve; spendere 1 azione per svelare il seguente testo: <span class='hiddentext'>Rimuovi {token.order3@0}. {action.order3@0} Ora svela il testo del Quarto Ordine.</span></span>",
                                                         EN:"<span class='hiddentext'>A Hero standing {token.order3@1} can spend 1 action to reveal the following text: <span class='hiddentext'>Remove {token.order3@0}. {action.order3@0} Now reveal the Fourth Order text.</span>"
+                                                    }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"<span class='hiddentext'>Un Eroe che si trova {token.order3@1} pu&ograve; spendere 1 azione per svelare il seguente testo: <span class='hiddentext'>Rimuovi {token.order3@0}. Tutti gli Eroi gudagnano {label.miniCampaignObjectivesXp:split:3} PE. {action.order3@0} Ora svela il testo del Quarto Ordine.</span></span>",
+                                                        EN:"<span class='hiddentext'>A Hero standing {token.order3@1} can spend 1 action to reveal the following text: <span class='hiddentext'>Remove {token.order3@0}. All Heroes gets {label.miniCampaignObjectivesXp:split:3} XP. {action.order3@0} Now reveal the Fourth Order text.</span>"
                                                     }
                                                 ]
                                             }

@@ -28,7 +28,7 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
-                            forActs:[], // Uses armor sets.
+                            forCampaign:[ ], // Uses armor sets.
                             type:"armorToBoss",
                             objective:{
                                 EN:"Collect an armor set, elimiminate a Roaming Monster, and reach a Zone to win."
@@ -364,6 +364,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
+                            forCampaign:[ "full", "mini" ],
                             forMaps:[2],
                             type:"mirrors",
                             objective:{
@@ -639,6 +640,18 @@ ModManager.modules.push(function(){
                                                         EN:"The Time tokens {symbol.timeToken} represent {label.mud@0}. At the start of each Darkness Phase, {label.energy@1} {label.flow@1} starts from the gray Objective token and moves in a straight line respecting the Line of Sight. Players can interrupt the {label.flow@3} movement at any time."+
                                                         "<p>If {label.flow@0} reaches an Objective token with the colored side up, {label.flow@0} can change direction."+
                                                         "<p>If {label.flow@0} reaches a Time token {symbol.timeToken}, the token is removed and the ray movement is interrupted.</p>"+
+                                                        "<p>If {label.flow@0} reaches an Enemy, the Enemy suffers 1 Wound and the {label.flow@3} movement continues normally. An enemy can only be hit {label.flow@2} once per round.</p>"
+                                                    }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"I segnalini Tempo {symbol.timeToken} rappresentano {label.mud@0}. All'inizio di ogni Fase dell'Oscurit&agrave;, {label.flow@1} {label.energy@1} parte dal segnalino Obiettivo grigio e si muove in linea retta rispettando la Linea di Vista. I giocatori possono interrompere il movimento {label.flow@3} in qualsiasi momento."+
+                                                        "<p>Se {label.flow@0} raggiunge un segnalino Obiettivo con il lato colorato a faccia in su, {label.flow@0} pu&ograve; cambiare direzione."+
+                                                        "<p>Se {label.flow@0} raggiunge un segnalino Tempo {symbol.timeToken}, il segnalino viene rimosso, tutti gli Eroi guadagnano {label.miniCampaignObjectivesXp:split:tokensCount.time} PE ed il percorso del raggio si interrompe.</p>"+
+                                                        "<p>Se {label.flow@0} raggiunge un Nemico, il Nemico subisce 1 Ferita ed il percorso {label.flow@3} prosegue normalmente. Un nemico pu&ograve; essere colpito {label.flow@2} una sola volta per round.</p>",
+                                                        EN:"The Time tokens {symbol.timeToken} represent {label.mud@0}. At the start of each Darkness Phase, {label.energy@1} {label.flow@1} starts from the gray Objective token and moves in a straight line respecting the Line of Sight. Players can interrupt the {label.flow@3} movement at any time."+
+                                                        "<p>If {label.flow@0} reaches an Objective token with the colored side up, {label.flow@0} can change direction."+
+                                                        "<p>If {label.flow@0} reaches a Time token {symbol.timeToken}, the token is removed, all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.time} XP, and the ray movement is interrupted.</p>"+
                                                         "<p>If {label.flow@0} reaches an Enemy, the Enemy suffers 1 Wound and the {label.flow@3} movement continues normally. An enemy can only be hit {label.flow@2} once per round.</p>"
                                                     }
                                                 ]

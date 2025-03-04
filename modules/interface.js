@@ -71,7 +71,7 @@ ModManager.modules.push(function(){
                                         },
                                         tags:[ "campaign-upgradepack" ]
                                     },{
-                                        ifMenuOptionSelected:"campaign-upgradepack",
+                                        ifMenuOptionSelected:[ "campaign-upgradepack" ],
                                         code:"I",
                                         label:{
                                             IT:"Massive Darkness: Ciclope Scudiera e Ciclope Spaccarupi",
@@ -83,7 +83,7 @@ ModManager.modules.push(function(){
                                         },
                                         tags:[ "campaign-upgradepack-cyclopsduo" ]
                                     },{
-                                        ifMenuOptionSelected:"campaign-upgradepack",
+                                        ifMenuOptionSelected:[ "campaign-upgradepack" ],
                                         code:"J",
                                         label:{
                                             IT:"Massive Darkness: Hellephant",
@@ -235,7 +235,7 @@ ModManager.modules.push(function(){
                                 ]
                             },{
                                 type:"includeSelected",
-                                ifMenuOptionSelected:"md2-heavenfall",
+                                ifMenuOptionSelected:[ "md2-heavenfall" ],
                                 isSingleOption:true,
                                 isMandatory:true,
                                 title:{
@@ -267,12 +267,24 @@ ModManager.modules.push(function(){
                                             IT:"Genera una serie di avventure da giocare in sequenza seguendo le regole di Massive Darkness 2: Heavenfall.",
                                             EN:"Generate a series of adventures to be played in sequence following the rules of Massive Darkness 2: Heavenfall."
                                         },
-                                        tags:[ "generator-campaign", "boss" ]
+                                        tags:[ "generator-campaign", "campaign-full",  "boss" ]
+                                    },{
+                                        idOption:"generator-campaign-mini",
+                                        code:"w",
+                                        label:{
+                                            IT:"Mini-campagna",
+                                            EN:"Mini-campaign"
+                                        },
+                                        description:{
+                                            IT:"Genera una breve serie di avventure da giocare in sequenza seguendo le regole delle mini-campagne.",
+                                            EN:"Generate a short series of adventures to be played in sequence following the mini-campaign rules."
+                                        },
+                                        tags:[ "generator-campaign", "campaign-mini",  "boss" ]
                                     }
                                 ]
                             },{
                                 type:"includeSelected",
-                                ifMenuOptionSelected:"generator-oneshot",
+                                ifMenuOptionSelected:[ "generator-oneshot" ],
                                 isSingleOption:true,
                                 isMandatory:true,
                                 title:{
@@ -318,7 +330,7 @@ ModManager.modules.push(function(){
                                 ]
                             },{
                                 type:"includeSelected",
-                                ifMenuOptionSelected:"generator-oneshot",
+                                ifMenuOptionSelected:[ "generator-oneshot" ],
                                 isSingleOption:true,
                                 isMandatory:true,
                                 title:{
@@ -371,7 +383,7 @@ ModManager.modules.push(function(){
                                 entries:[
                                     {
                                         code:"O",
-                                        ifMenuOptionSelected:"generator-campaign",
+                                        ifMenuOptionSelected:[ "generator-campaign", "generator-campaign-mini" ],
                                         label:{
                                             IT:"Nascondi gli spoiler",
                                             EN:"Hide spoilers"
@@ -383,7 +395,7 @@ ModManager.modules.push(function(){
                                         tags:[ "campaign-hidespoilers" ]
                                     },{
                                         code:"X",
-                                        ifMenuOptionSelected:"generator-oneshot",
+                                        ifMenuOptionSelected:[ "generator-oneshot" ],
                                         label:{
                                             IT:"Sfide",
                                             EN:"Challenges"
@@ -395,7 +407,7 @@ ModManager.modules.push(function(){
                                         tags:[ "challenges-default" ]
                                     },{
                                         code:"N",
-                                        ifMenuOptionSelected:"generator-oneshot",
+                                        ifMenuOptionSelected:[ "generator-oneshot" ],
                                         label:{
                                             IT:"Scontri con i Boss",
                                             EN:"Boss fights"
@@ -407,7 +419,7 @@ ModManager.modules.push(function(){
                                         tags:[ "boss" ]
                                     },{
                                         code:"Y",
-                                        ifMenuOptionSelected:"generator-oneshot",
+                                        ifMenuOptionSelected:[ "generator-oneshot" ],
                                         label:{
                                             IT:"Modalit&agrave; Esplorazione",
                                             EN:"Dungeon Crawling Mode"
@@ -418,7 +430,7 @@ ModManager.modules.push(function(){
                                         },
                                         tags:[ "gamemode-dungeoncrawling" ]
                                     },{
-                                        code:"W",
+                                        code:"y",
                                         label:{
                                             IT:"Escludi avventure non tradotte",
                                             EN:"Exclude untranslated quests",

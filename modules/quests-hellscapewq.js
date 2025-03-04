@@ -28,6 +28,7 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
+                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
                             forActs:[1,2],
                             forMaps:[0,1],
                             type:"collect",
@@ -347,7 +348,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
-                            forActs:[], // Uses specific level mobs
+                            forCampaign:[ ], // Uses specific level mobs
                             type:"grind",
                             objective:{
                                 EN:"Eliminate very strong Mob Leaders to win."
@@ -562,6 +563,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
+                            forCampaign:[ "full", "mini" ],
                             forActs:[1,2],
                             forMaps:[2],
                             type:"collect",
@@ -855,6 +857,12 @@ ModManager.modules.push(function(){
                                                         IT:"I segnalini Obiettivo rappresentano {label.target@2} {label.target@0}. Qualsiasi Eroe in una Zona con un segnalino Obiettivo pu&ograve; spendere un'azione per {label.hazard@25} {label.target@6} {label.target@1}, rimuovendo il segnalino dal Dungeon.",
                                                         EN:"Objective tokens represent {label.target@2} {label.target@0}. Any Hero in a Zone with an Objective token can spend one action to {label.hazard@25} {label.target@6} {label.target@1}, removing the token from the Dungeon."
                                                     }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"I segnalini Obiettivo rappresentano {label.target@2} {label.target@0}. Qualsiasi Eroe in una Zona con un segnalino Obiettivo pu&ograve; spendere un'azione per {label.hazard@25} {label.target@6} {label.target@1}, rimuovendo il segnalino dal Dungeon e tutti gli Eroi guadagnano {label.miniCampaignObjectivesXp:split:tokensCount.objective} PE.",
+                                                        EN:"Objective tokens represent {label.target@2} {label.target@0}. Any Hero in a Zone with an Objective token can spend one action to {label.hazard@25} {label.target@6} {label.target@1}, removing the token from the Dungeon and all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.objective} XP."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -921,7 +929,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
-                            forActs:[], // Uses large maps and one-shot level cap.
+                            forCampaign:[ ], // Uses large maps and one-shot level cap.
                             type:"collect",
                             objective:{
                                 EN:"Reach the highest level and eliminate Roaming Monsters to win."
@@ -1127,6 +1135,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
+                            forCampaign:[ "full", "mini" ],
                             forMaps:[0,1],
                             forActs:[1,2],
                             type:"collect",
@@ -1396,6 +1405,12 @@ ModManager.modules.push(function(){
                                                         IT:"I segnalini Obiettivo con il lato colorato a faccia in su rappresentano {label.key@3} {label.key@1}. Qualsiasi Eroe che si trova {label.key@4} pu&ograve; spendere 1 PM {label.key@7}.",
                                                         EN:"The color-side-up Objective tokens represent {label.key@3} {label.key@1}. Any Hero standing {label.key@4} may spend 1 MP to pick it up."
                                                     }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"I segnalini Obiettivo con il lato colorato a faccia in su rappresentano {label.key@3} {label.key@1}. Qualsiasi Eroe che si trova {label.key@4} pu&ograve; spendere 1 PM {label.key@7} e tutti gli Eroi guadagnano {label.miniCampaignObjectivesXp:split:tokensCount.objective} PE.",
+                                                        EN:"The color-side-up Objective tokens represent {label.key@3} {label.key@1}. Any Hero standing {label.key@4} may spend 1 MP to pick it up and all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.objective} XP."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -1481,6 +1496,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
+                            forCampaign:[ "full", "mini" ],
                             forMaps:[1],
                             type:"defuse",
                             objective:{
@@ -1686,6 +1702,12 @@ ModManager.modules.push(function(){
                                                         IT:"I segnalini Obiettivo con il lato colorato verso l'alto rappresentano {label.holes@3} {label.hazard:capital@3}. Qualsiasi Eroe che si trova in una Zona con questi segnalini Obiettivo pu&ograve; spendere 1 azione per {label.hazard@10} e riattivare {label.holes@2}. Quando {label.holes@3} viene {label.holes@6}, rimuovi il segnalino dal Dungeon.",
                                                         EN:"The color-side-up Objective tokens represent {label.hazard:capital@3} {label.holes:capital@1}. Any Hero standing in a Zone with these Objective tokens may spend 1 action to {label.hazard@10} and awake {label.holes@2}. When {label.holes@3} is awakened, remove the token from the Dungeon."
                                                     }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"I segnalini Obiettivo con il lato colorato verso l'alto rappresentano {label.holes@3} {label.hazard:capital@3}. Qualsiasi Eroe che si trova in una Zona con questi segnalini Obiettivo pu&ograve; spendere 1 azione per {label.hazard@10} e riattivare {label.holes@2}. Quando {label.holes@3} viene {label.holes@6}, rimuovi il segnalino dal Dungeon e ogni eroe guadagna {label.miniCampaignObjectivesXp:split:tokensCount.objective} PE.",
+                                                        EN:"The color-side-up Objective tokens represent {label.hazard:capital@3} {label.holes:capital@1}. Any Hero standing in a Zone with these Objective tokens may spend 1 action to {label.hazard@10} and awake {label.holes@2}. When {label.holes@3} is awakened, remove the token from the Dungeon and all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.objective} XP."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -1805,6 +1827,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
+                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
                             forMaps:[0,1],
                             type:"shards",
                             objective:{
@@ -2017,7 +2040,7 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"{label.shard:capital@1} {label.shard@7} dai nemici. Ogni volta che un Eroe uccide un Mostro Errante o un Generale, lancia 2 {symbol.blackDie}. Per ogni {symbol.fang} risultante, gli Eroi guadagnano {label.shard@2}. Posiziona dei segnalini Salute {label.forge@5} per tenere traccia dei frammenti raccolti.",
-                                                        EN:"{label.shard:capital@1} {label.shard@7} from the Enemies. Every time a Hero kills a Roaming Monster or a Leader, they roll 2 {symbol.blackDie}. For each {symbol.fang} rolled, the Heroes gain {label.shard@2}. Place Health tokens {label.forge@5} to keep track of the collected Shards."
+                                                        EN:"{label.shard:capital@1} {label.shard@7} from the Enemies. Every time a Hero kills a Roaming Monster or a Leader, they roll 2 {symbol.blackDie}. For each {symbol.fang} rolled, the Heroes gets {label.shard@2}. Place Health tokens {label.forge@5} to keep track of the collected Shards."
                                                     }
                                                 ]
                                             }
@@ -2105,6 +2128,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
+                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-camapign
                             forMaps:[1],
                             type:"corruption",
                             objective:{

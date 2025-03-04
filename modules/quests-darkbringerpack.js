@@ -27,6 +27,7 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
+                            forCampaign:[ "full", "mini" ],
                             forMaps:[2],
                             type:"poisonousEnemies",
                             objective:{
@@ -221,11 +222,11 @@ ModManager.modules.push(function(){
                                                     {
                                                         IT:
                                                             "I segnalini Corruzione {symbol.corruptionToken} nelle Stanze rappresentano {label.collectOptionalItems@2} Orde che sono state corrotte {label.guardian@1}. Quando un Eroe rivela una Stanza contenente un segnalino Corruzione {symbol.corruptionToken}, dopo aver risolto la carta Porta, genera un'Orda nella Zona del segnalino Corruzione {symbol.corruptionToken} e posiziona quel segnalino sulla carta dell'Orda."+
-                                                            "<p>Un'Orda con un segnalino Corruzione {symbol.corruptionToken} &egrave; un'Orda Corrotta. Possiede la seguente abilit&agrave; in aggiunta a qualsiasi altra: <span class='phase'>Combattimento</span>: +1{symbol.scratch}</p>"+
+                                                            "<p>Un'Orda con un segnalino Corruzione {symbol.corruptionToken} &egrave; un'Orda Corrotta. Possiede la seguente abilit&agrave; in aggiunta a qualsiasi altra: <span class='phase'>Combattimento</span>: +1{symbol.scratch}.</p>"+
                                                             "<p>Quando un'Orda Corrotta viene eliminata, ogni eroe guadagna 8 PE al posto dei soliti 2 PE.</p>",
                                                         EN:
                                                             "Corruption tokens {symbol.corruptionToken} in Rooms represent {label.collectOptionalItems@2} Mobs that have been corrupted {label.guardian@1}. When a Hero reveals a Room containing a Corruption token {symbol.corruptionToken}, after resolving the Door card, spawn a Mob in the Corruption token {symbol.corruptionToken} Zone and place that token on the Mob card."+
-                                                            "<p>A Mob with a Corruption token {symbol.corruptionToken} is a Corrupted Mob. It has the following ability in addition to any others: <span class='phase'>Combat</span>: +1{symbol.scratch}</p>"+
+                                                            "<p>A Mob with a Corruption token {symbol.corruptionToken} is a Corrupted Mob. It has the following ability in addition to any others: <span class='phase'>Combat</span>: +1{symbol.scratch}.</p>"+
                                                             "<p>When a Corrupted Mob is eliminated, each Hero gains 8 XP instead of the usual 2 XP.</p>"
                                                     }
                                                 ],
@@ -233,10 +234,20 @@ ModManager.modules.push(function(){
                                                     {
                                                         IT:
                                                             "I segnalini Corruzione {symbol.corruptionToken} nelle Stanze rappresentano {label.collectOptionalItems@2} Orde che sono state corrotte {label.guardian@1}. Quando un Eroe rivela una Stanza contenente un segnalino Corruzione {symbol.corruptionToken}, dopo aver risolto la carta Porta, genera un'Orda nella Zona del segnalino Corruzione {symbol.corruptionToken} e posiziona quel segnalino sulla carta dell'Orda."+
-                                                            "<p>Un'Orda con un segnalino Corruzione {symbol.corruptionToken} &egrave; un'Orda Corrotta. Possiede la seguente abilit&agrave; in aggiunta a qualsiasi altra: <span class='phase'>Combattimento</span>: +1{symbol.scratch}</p>",
+                                                            "<p>Un'Orda con un segnalino Corruzione {symbol.corruptionToken} &egrave; un'Orda Corrotta. Possiede la seguente abilit&agrave; in aggiunta a qualsiasi altra: <span class='phase'>Combattimento</span>: +1{symbol.scratch}.</p>",
                                                         EN:
                                                             "Corruption tokens {symbol.corruptionToken} in Rooms represent {label.collectOptionalItems@2} Mobs that have been corrupted {label.guardian@1}. When a Hero reveals a Room containing a Corruption token {symbol.corruptionToken}, after resolving the Door card, spawn a Mob in the Zone of the Corruption token {symbol.corruptionToken} and place that token on the Mob card."+
-                                                            "<p>A Mob with a Corruption token {symbol.corruptionToken} is a Corrupted Mob. It has the following ability in addition to any others: <span class='phase'>Combat</span>: +1{symbol.scratch}</p>"
+                                                            "<p>A Mob with a Corruption token {symbol.corruptionToken} is a Corrupted Mob. It has the following ability in addition to any others: <span class='phase'>Combat</span>: +1{symbol.scratch}.</p>"
+                                                    }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:
+                                                            "I segnalini Corruzione {symbol.corruptionToken} nelle Stanze rappresentano {label.collectOptionalItems@2} Orde che sono state corrotte {label.guardian@1}. Quando un Eroe rivela una Stanza contenente un segnalino Corruzione {symbol.corruptionToken}, dopo aver risolto la carta Porta, genera un'Orda nella Zona del segnalino Corruzione {symbol.corruptionToken} e posiziona quel segnalino sulla carta dell'Orda."+
+                                                            "<p>Un'Orda con un segnalino Corruzione {symbol.corruptionToken} &egrave; un'Orda Corrotta. Possiede la seguente abilit&agrave; in aggiunta a qualsiasi altra: <span class='phase'>Combattimento</span>: +1{symbol.scratch}. Quando viene sconfitto, tutti gli Eroi guadagnano {label.miniCampaignObjectivesXp:split:tokensCount.corruption} XP.</p>",
+                                                        EN:
+                                                            "Corruption tokens {symbol.corruptionToken} in Rooms represent {label.collectOptionalItems@2} Mobs that have been corrupted {label.guardian@1}. When a Hero reveals a Room containing a Corruption token {symbol.corruptionToken}, after resolving the Door card, spawn a Mob in the Zone of the Corruption token {symbol.corruptionToken} and place that token on the Mob card."+
+                                                            "<p>A Mob with a Corruption token {symbol.corruptionToken} is a Corrupted Mob. It has the following ability in addition to any others: <span class='phase'>Combat</span>: +1{symbol.scratch}. When it is defeated, all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.corruption} XP.</p>"
                                                     }
                                                 ]
                                             }

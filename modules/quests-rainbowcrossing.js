@@ -27,6 +27,7 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
+                            forCampaign:[ "full", "mini" ],
                             forMaps:[2],
                             type:"collectAndBoss",
                             objective:{
@@ -230,13 +231,19 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"I segnalini Obiettivo sul lato colorato rappresentano {label.spell@3}. Qualsiasi Eroe nella Zona di {label.spell@4} pu&ograve; spendere 1 azione per scartare il segnalino. Ogni volta che un segnalino viene scartato, tutti gli Eroi guadagnano 5 PE. Una volta che {label.collectOptionalItems@2} segnalini Obiettivo sul lato colorato sono stati rimossi, {label.guardian@0} pu&ograve; essere {label.guardian@10}.",
-                                                        EN:"The Objective tokens on the colored side represent {label.spell@3}. Any Hero in {label.spell@4}'s Zone can spend 1 action to discard the token. Each time a token is discarded, all Heroes gain 5 XP. Once {label.collectOptionalItems@2} Objective tokens on the colored side have been removed, {label.guardian@0} can be {label.guardian@10}."
+                                                        EN:"The Objective tokens on the colored side represent {label.spell@3}. Any Hero in {label.spell@4}'s Zone can spend 1 action to discard the token. Each time a token is discarded, all Heroes gets 5 XP. Once {label.collectOptionalItems@2} Objective tokens on the colored side have been removed, {label.guardian@0} can be {label.guardian@10}."
                                                     }
                                                 ],
                                                 campaignExplanation:[
                                                     {
-                                                        IT:"I segnalini Obiettivo sul lato colorato rappresentano {label.spell@3}. Qualsiasi Eroe nella Zona di {label.spell@4} pu&ograve; spendere 1 azione per scartare il segnalino. Ogni volta che un segnalino viene scartato, tutti gli Eroi guadagnano 5 PE. Una volta che {label.collectOptionalItems@2} segnalini Obiettivo sul lato colorato sono stati rimossi, {label.guardian@0} pu&ograve; essere {label.guardian@10}.",
+                                                        IT:"I segnalini Obiettivo sul lato colorato rappresentano {label.spell@3}. Qualsiasi Eroe nella Zona di {label.spell@4} pu&ograve; spendere 1 azione per scartare il segnalino. Una volta che {label.collectOptionalItems@2} segnalini Obiettivo sul lato colorato sono stati rimossi, {label.guardian@0} pu&ograve; essere {label.guardian@10}.",
                                                         EN:"The Objective tokens on the colored side represent {label.spell@3}. Any Hero in {label.spell@4}'s Zone can spend 1 action to discard the token. Once {label.collectOptionalItems@2} Objective tokens on the colored side have been removed, {label.guardian@0} can be {label.guardian@10}."
+                                                    }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"I segnalini Obiettivo sul lato colorato rappresentano {label.spell@3}. Qualsiasi Eroe nella Zona di {label.spell@4} pu&ograve; spendere 1 azione per scartare il segnalino. Ogni volta che un segnalino viene scartato, tutti gli Eroi guadagnano {label.miniCampaignObjectivesXp:split:tokensCount.objective} PE. Una volta che {label.collectOptionalItems@2} segnalini Obiettivo sul lato colorato sono stati rimossi, {label.guardian@0} pu&ograve; essere {label.guardian@10}.",
+                                                        EN:"The Objective tokens on the colored side represent {label.spell@3}. Any Hero in {label.spell@4}'s Zone can spend 1 action to discard the token. Each time a token is discarded, all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.objective} XP. Once {label.collectOptionalItems@2} Objective tokens on the colored side have been removed, {label.guardian@0} can be {label.guardian@10}."
                                                     }
                                                 ]
                                             }

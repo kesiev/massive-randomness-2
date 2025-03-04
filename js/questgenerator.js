@@ -37,10 +37,20 @@ QuestGenerator=(function() {
         })
     }
 
+    function getRelevantKey(set,list,fallback) {
+        if (list) {
+            for (let i=0;i<list.length;i++) {
+                if (set[list[i]])
+                    return set[list[i]];
+            }
+        }
+        return set[fallback];
+    }
+
     function createRuleFromVersion(campaign,version,intensity) {
         let
-            summary = (campaign ? version.campaignSummary : 0) || version.summary,
-            explanation = (campaign ? version.campaignExplanation : 0) || version.explanation;
+            summary = getRelevantKey(version,campaign.summaryKeys,"summary"),
+            explanation = getRelevantKey(version,campaign.explanationKeys,"explanation");
 
         return {
             type:version.type,
@@ -70,7 +80,8 @@ QuestGenerator=(function() {
                     }
                 },
                 quest = { languages:[], rules:[], challenges:[] },
-                campaign = result.campaign && result.campaign.currentPage.generator ? result.campaign.currentPage.generator : false,
+                campaign = result.campaign || false,
+                campaignPageGenerator = result.campaign && result.campaign.currentPage.generator ? result.campaign.currentPage.generator : false,
                 mapConfig = {},
                 questModel,
                 questVersion,
@@ -82,16 +93,16 @@ QuestGenerator=(function() {
 
             if (flags.quest)
                 questModel = flags.quest;
-            else if (campaign && campaign.questModel)
-                questModel = campaign.questModel;
+            else if (campaignPageGenerator && campaignPageGenerator.questModel)
+                questModel = campaignPageGenerator.questModel;
             else if (flags.debugQuest)
                 resources.quests.forEach(quest=>{
                     if (quest._debug)
                         questModel = quest;
                 });
             
-            if (campaign && campaign.questVersion)
-                questVersion = campaign.questVersion;
+            if (campaignPageGenerator && campaignPageGenerator.questVersion)
+                questVersion = campaignPageGenerator.questVersion;
 
             if (!questModel)
                 questModel = pickRandomElementValue(resources.quests);

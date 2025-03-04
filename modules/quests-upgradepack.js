@@ -28,6 +28,7 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
+                            forCampaign:[ "full", "mini" ],
                             forMaps:[2],
                             type:"keyToBoss",
                             objective:{
@@ -257,6 +258,12 @@ ModManager.modules.push(function(){
                                                         IT:"{label.prison:capital@2} {label.prison@1} sono rappresentate dai segnalini Obiettivo. Possono {label.prison@5} spendendo 1 PM. Un Eroe che raccoglie un segnalino Obiettivo lo scarta. Una volta che {label.prison@2} {label.collectOptionalItems@2} {label.prison@1} sono {label.prison@6}, la porta speciale {label.prisoner@4} pu&ograve; essere aperta da qualsiasi Eroe.",
                                                         EN:"{label.prison:capital@2} {label.prison@1} are represented by Objective tokens. They can be {label.prison@5} by spending 1 MP. The Hero who collects an Objective token discards it. Once {label.prison@2} {label.collectOptionalItems@2} {label.prison@1} are {label.prison@6}, the special door {label.prisoner@4} can be opened by any Hero."
                                                     }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"{label.prison:capital@2} {label.prison@1} sono rappresentate dai segnalini Obiettivo. Possono {label.prison@5} spendendo 1 PM. Un Eroe che raccoglie un segnalino Obiettivo lo scarta e tutti gli Eroi ottengono {label.miniCampaignObjectivesXp:split:tokensCount.objective} PE. Una volta che {label.prison@2} {label.collectOptionalItems@2} {label.prison@1} sono {label.prison@6}, la porta speciale {label.prisoner@4} pu&ograve; essere aperta da qualsiasi Eroe.",
+                                                        EN:"{label.prison:capital@2} {label.prison@1} are represented by Objective tokens. They can be {label.prison@5} by spending 1 MP. The Hero who collects an Objective token discards it and all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.objective} XP. Once {label.prison@2} {label.collectOptionalItems@2} {label.prison@1} are {label.prison@6}, the special door {label.prisoner@4} can be opened by any Hero."
+                                                    }
                                                 ]
                                             }
                                         ]
@@ -309,6 +316,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
+                            forCampaign:[ "full", "mini" ],
                             forActs:[1,2],
                             forMaps:[2],
                             type:"fallingDungeon",
@@ -537,6 +545,12 @@ ModManager.modules.push(function(){
                                                         IT:"Ogni volta che il tracciato Oscurit&agrave; raggiunge un numero con un segnalino Clessidra, scartarlo e rimuovere dalla mappa la Tessera pi&ugrave; lontana dal segnalino Obiettivo grigio, uccidendo ogni Nemico, e ogni Eroe che si trovano su di essa. Queste uccisioni non forniscono alcun PE. Poi ogni Eroe ottiene 7 PE. Le Tessere vengono distrutte nell'ordine seguente:{label.fallExplanation}",
                                                         EN:"Every time the Darkness track reaches a number with a Time token, discard it and remove the tile furthest from the gray Objective token from the map, killing every Enemy and every Hero on it. These kills do not provide any XP. Then, all Heroes gets 7 XP. Tiles are destroyed in the following order:{label.fallExplanation}"
                                                     }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"Ogni volta che il tracciato Oscurit&agrave; raggiunge un numero con un segnalino Clessidra, scartarlo e rimuovere dalla mappa la Tessera pi&ugrave; lontana dal segnalino Obiettivo grigio, uccidendo ogni Nemico, e ogni Eroe che si trovano su di essa. Queste uccisioni non forniscono alcun PE. Poi ogni Eroe ottiene {label.miniCampaignObjectivesXp:split:3::7} PE. Le Tessere vengono distrutte nell'ordine seguente:{label.fallExplanation}",
+                                                        EN:"Every time the Darkness track reaches a number with a Time token, discard it and remove the tile furthest from the gray Objective token from the map, killing every Enemy and every Hero on it. These kills do not provide any XP. Then, all Heroes gets {label.miniCampaignObjectivesXp:split:3::7} XP. Tiles are destroyed in the following order:{label.fallExplanation}"
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -639,6 +653,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
+                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
                             forMaps:[2],
                             type:"collectDebuffAndBoss",
                             objective:{
@@ -944,6 +959,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
+                            forCampaign:[ "full", "mini" ],
                             forActs:[1,2],
                             forMaps:[1],
                             type:"capture",
@@ -1141,6 +1157,12 @@ ModManager.modules.push(function(){
                                                         IT:"Ciascun segnalino Obiettivo sul lato colorato rappresenta una Rete che pu&ograve; essere usata per catturare un Mostro Errante (vedere sotto). Un qualsiasi Eroe che si trovi nella Zona di una Rete pu&ograve; spendere 1 PM per raccoglierla. Tutti gli Eroi ottengono 5 PE. Le Reti possono essere scambiate come fossero oggetti.",
                                                         EN:"Each Objective token on the colored side represents a Net that can be used to capture a Roaming Monster (see below). Any Hero in the Zone of a Net can spend 1 MP to collect it. All Heroes gets 5 XP. Nets can be exchanged as if they were items."
                                                     }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"Ciascun segnalino Obiettivo sul lato colorato rappresenta una Rete che pu&ograve; essere usata per catturare un Mostro Errante (vedere sotto). Un qualsiasi Eroe che si trovi nella Zona di una Rete pu&ograve; spendere 1 PM per raccoglierla. Tutti gli Eroi ottengono {label.miniCampaignObjectivesXp:split:tokensCount.objective::5} PE. Le Reti possono essere scambiate come fossero oggetti.",
+                                                        EN:"Each Objective token on the colored side represents a Net that can be used to capture a Roaming Monster (see below). Any Hero in the Zone of a Net can spend 1 MP to collect it. All Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.objective::5} XP. Nets can be exchanged as if they were items."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -1212,6 +1234,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
+                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
                             forActs:[2],
                             forMaps:[2],
                             type:"collect",
@@ -1520,6 +1543,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
+                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
                             forActs:[1,2],
                             forMaps:[1],
                             type:"towerDefense",

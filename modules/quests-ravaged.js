@@ -27,6 +27,7 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
+                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
                             forMaps:[2],
                             type:"collectBossAndExit",
                             objective:{
@@ -235,7 +236,7 @@ ModManager.modules.push(function(){
                                                 ],
                                                 campaignExplanation:[
                                                     {
-                                                        IT:"Un Eroe nella zona di un segnalino Corruzione {symbol.corruptionToken} pu&ograve; spendere 1 azione per scartarlo ed pescare un segnalino dal sacchetto dei Tesori.",
+                                                        IT:"Un Eroe nella zona di un segnalino Corruzione {symbol.corruptionToken} pu&ograve; spendere 1 azione per scartarlo e pescare un segnalino dal sacchetto dei Tesori.",
                                                         EN:"A Hero in a Corruption token {symbol.corruptionToken} Zone can spend 1 action to discard it and draw a token from the Treasure bag."
                                                     }
                                                 ]
@@ -341,6 +342,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
+                            forCampaign:[ "full", "mini" ],
                             forMaps:[2],
                             type:"nestBossStealExit",
                             objective:{
@@ -597,6 +599,12 @@ ModManager.modules.push(function(){
                                                         IT:"Quando un Eroe apre la porta di una stanza contenente un segnalino Corruzione {symbol.corruptionToken} non non pescare una carta Porta. Generare un Mostro Errante di un livello pi&ugrave; alto rispetto al livello del Dungeon nella zona del segnalino Corruzione {symbol.corruptionToken}. Un Eroe pu&ograve; spendere 1 PM per rimuovere il segnalino Corruzione.",
                                                         EN:"When a Hero opens the door of a room containing a Corruption token {symbol.corruptionToken}, it doesn't draw a Door card. Spawn a Roaming Monster 1 level higher than the Dungeon level on the Corruption token {symbol.corruptionToken} zone. A Hero can spend 1 MP to remove the Corruption token."
                                                     }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"Quando un Eroe apre la porta di una stanza contenente un segnalino Corruzione {symbol.corruptionToken} non non pescare una carta Porta. Generare un Mostro Errante di un livello pi&ugrave; alto rispetto al livello del Dungeon nella zona del segnalino Corruzione {symbol.corruptionToken}. Un Eroe pu&ograve; spendere 1 PM per rimuovere il segnalino Corruzione e tutti gli Eroi guadagnano {label.miniCampaignObjectivesXp:split:tokensCount.corruption:1} PE.",
+                                                        EN:"When a Hero opens the door of a room containing a Corruption token {symbol.corruptionToken}, it doesn't draw a Door card. Spawn a Roaming Monster 1 level higher than the Dungeon level on the Corruption token {symbol.corruptionToken} zone. A Hero can spend 1 MP to remove the Corruption token and all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.corruption:1} XP."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -649,6 +657,12 @@ ModManager.modules.push(function(){
                                                     {
                                                         IT:"Un Eroe pu&ograve; spendere 1 PM per raccogliere il segnalino Obiettivo sul lato grigio come oggetto standard. Pu&ograve; essere scambiato normalmente con un altro Eroe.",
                                                         EN:"A Hero can spend 1 MP to pick up the Objective token on the gray side as a standard item. It can be exchanged normally with another Hero."
+                                                    }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"Un Eroe pu&ograve; spendere 1 PM per raccogliere il segnalino Obiettivo sul lato grigio come oggetto standard e tutti gli Eroi guadagnano {label.miniCampaignObjectivesXp:split:tokensCount.corruption:1} PE. Pu&ograve; essere scambiato normalmente con un altro Eroe.",
+                                                        EN:"A Hero can spend 1 MP to pick up the Objective token on the gray side as a standard item and all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.corruption:1} XP. It can be exchanged normally with another Hero."
                                                     }
                                                 ]
                                             }
@@ -714,6 +728,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
+                            forCampaign:[ "full", "mini" ],
                             forMaps:[2],
                             type:"eliminateBuffBoss",
                             objective:{
@@ -976,6 +991,12 @@ ModManager.modules.push(function(){
                                                         IT:"Ogni pilastro ha 6 PV, non ha difese e pu&ograve; essere attaccato come un nemico. Una volta distrutto, il pilastro viene rimosso dal tabellone di gioco e il suo effetto non si applica pi&ugrave;.",
                                                         EN:"Each pillar has 6 HP, no defenses, and can be attacked like an enemy. Once destroyed, the pillar is removed from the game board and its effect no longer applies."
                                                     }
+                                                ],
+                                                miniCampaignExplanation:[
+                                                    {
+                                                        IT:"Ogni pilastro ha 6 PV, non ha difese e pu&ograve; essere attaccato come un nemico. Una volta distrutto, il pilastro viene rimosso dal tabellone di gioco, tutti gli Eroi guadagnano {label.miniCampaignObjectivesXp:split:4} PE e il suo effetto non si applica pi&ugrave;.",
+                                                        EN:"Each pillar has 6 HP, no defenses, and can be attacked like an enemy. Once destroyed, the pillar is removed from the game board, all Heroes gets {label.miniCampaignObjectivesXp:split:4} XP, and its effect no longer applies."
+                                                    }
                                                 ]
                                             }
                                         ],[
@@ -995,7 +1016,7 @@ ModManager.modules.push(function(){
                                                 ],
                                                 campaignExplanation:[
                                                     {
-                                                        IT:"Un Eroe nella zona di un segnalino Corruzione {symbol.corruptionToken} pu&ograve; spendere 1 azione per scartarlo ed pescare un segnalino dal sacchetto dei Tesori.",
+                                                        IT:"Un Eroe nella zona di un segnalino Corruzione {symbol.corruptionToken} pu&ograve; spendere 1 azione per scartarlo e pescare un segnalino dal sacchetto dei Tesori.",
                                                         EN:"A Hero in a Corruption token {symbol.corruptionToken} Zone can spend 1 action to discard it and draw a token from the Treasure bag."
                                                     }
                                                 ]
@@ -1063,7 +1084,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
-                            forActs:[], // Uses large maps and one-shot level cap.
+                            forCampaign:[ ], // Uses large maps and one-shot level cap.
                             type:"cleanBuffBoss",
                             objective:{
                                 EN:"Delivery 4 tokens to 2 destinations, beat the boss, and reach the exit to win."
