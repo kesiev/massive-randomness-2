@@ -109,12 +109,12 @@ ModManager.modules.push(function(){
                                 priority:9,
                                 type:"rule",
                                 name:{
-                                    IT:"Le Siepi",
-                                    EN:"The Hedges"
+                                    IT:"Ostacoli",
+                                    EN:"Obstacles"
                                 },
                                 explanation:{
-                                    IT:"Le siepi stampate sulle tessere possono essere attraversate normalmente ma interrompono le Linee di Vista di Eroi e Nemici.",
-                                    EN:"Hedges printed on tiles can be crossed normally but interrupt Lines of Sight of Heroes and Enemies."
+                                    IT:"Gli ostacoli (siepi, ponti, etc.) stampati sulle tessere possono essere attraversate normalmente ma interrompono le Linee di Vista di Eroi e Nemici.",
+                                    EN:"Obstacles (hedges, brodges, etc.) printed on tiles can be crossed normally but interrupt Lines of Sight of Heroes and Enemies."
                                 }
                             }
                         ],
