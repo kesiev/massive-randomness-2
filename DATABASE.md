@@ -140,7 +140,7 @@ This is the list of what's into _Massive Randomness 2_.
      *  Includes campaign-specific rules variant.
      *  1 campaign mode side quest.
 
-## Components (14 boxes)
+## Components (16 boxes)
 
  * Massive Darkness 2: Hellscape _(The game core box)_
  * Massive Darkness 2: Heavenfall _(4 heaven tiles, Campaign Mode, and bosses)_
@@ -156,6 +156,8 @@ This is the list of what's into _Massive Randomness 2_.
  * Zombicide: Green Horde _(9 outdoor/village tiles)_
  * Zombicide: Friends and Foes _(5 outdoor/village tiles)_
  * Zombicide: Wulfsburg _(2 tower tiles)_
+ * Zombicide: White Death _(9 snow tiles)_
+ * Zombicide: Eternal Empire _(4 snow tiles)_
 
 ## Boss fights
 
