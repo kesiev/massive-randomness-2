@@ -197,6 +197,30 @@ ModManager.modules.push(function(){
                                             EN:"2 tower tiles"
                                         },
                                         tags:[ "zc-wulfsburg" ]
+                                    },{
+                                        ifFlag:"zombicide",
+                                        code:"M",
+                                        label:{
+                                            IT:"Zombicide: White Death",
+                                            EN:"Zombicide: White Death"
+                                        },
+                                        description:{
+                                            IT:"9 tessere innevate",
+                                            EN:"9 snow tiles"
+                                        },
+                                        tags:[ "zc-whitedeath" ]
+                                    },{
+                                        ifFlag:"zombicide",
+                                        code:"m",
+                                        label:{
+                                            IT:"Zombicide: Eternal Empire",
+                                            EN:"Zombicide: Eternal Empire"
+                                        },
+                                        description:{
+                                            IT:"4 tessere innevate",
+                                            EN:"4 snow tiles"
+                                        },
+                                        tags:[ "zc-eternalempire" ]
                                     }
                                 ]
                             },{

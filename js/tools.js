@@ -55,6 +55,16 @@ Tools=(function(){
                 needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-blackplague" ]
             },
             {
+                id:"full-campaign-whitedeath",
+                excludes:[],
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-whitedeath" ]
+            },
+            {
+                id:"full-campaign-eternalempire",
+                excludes:[],
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-eternalempire" ]
+            },
+            {
                 id:"full-campaign-greenhorde",
                 excludes:[],
                 needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-greenhorde" ]
@@ -78,6 +88,16 @@ Tools=(function(){
                 id:"mini-campaign-greenhorde",
                 excludes:[],
                 needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-mini", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-greenhorde" ]
+            },
+            {
+                id:"mini-campaign-whitedeath",
+                excludes:[],
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-mini", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-whitedeath" ]
+            },
+            {
+                id:"mini-campaign-eternalempire",
+                excludes:[],
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-mini", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-eternalempire" ]
             }
         ],
         QUEST_CONFIGS=[
@@ -159,6 +179,38 @@ Tools=(function(){
                 id:"maps-size-large-zcgreenhorde",
                 excludes:[],
                 needs:[ "bridge-default-twoexits", "quests", "maps-default", "md2-hellscape", "zc-greenhorde", "maps-size-large", "maps-default-uniform", "challenges-default" ]
+            },
+            // --- ZC: White Death
+            {
+                id:"maps-size-small-zcwhitedeath",
+                excludes:[],
+                needs:[ "bridge-default-twoexits", "quests", "maps-default", "md2-hellscape", "zc-whitedeath", "maps-size-small", "maps-default-uniform", "challenges-default" ]
+            },
+            {
+                id:"maps-size-normal-zcwhitedeath",
+                excludes:[],
+                needs:[ "bridge-default-twoexits", "quests", "maps-default", "md2-hellscape", "zc-whitedeath", "maps-size-normal", "maps-default-uniform", "challenges-default" ]
+            },
+            {
+                id:"maps-size-large-zcwhitedeath",
+                excludes:[],
+                needs:[ "bridge-default-twoexits", "quests", "maps-default", "md2-hellscape", "zc-whitedeath", "maps-size-large", "maps-default-uniform", "challenges-default" ]
+            },
+            // --- ZC: Eternal Empire
+            {
+                id:"maps-size-small-zceternalempire",
+                excludes:[],
+                needs:[ "bridge-default-twoexits", "quests", "maps-default", "md2-hellscape", "zc-eternalempire", "maps-size-small", "maps-default-uniform", "challenges-default" ]
+            },
+            {
+                id:"maps-size-normal-zceternalempire",
+                excludes:[],
+                needs:[ "bridge-default-twoexits", "quests", "maps-default", "md2-hellscape", "zc-eternalempire", "maps-size-normal", "maps-default-uniform", "challenges-default" ]
+            },
+            {
+                id:"maps-size-large-zceternalempire",
+                excludes:[],
+                needs:[ "bridge-default-twoexits", "quests", "maps-default", "md2-hellscape", "zc-eternalempire", "maps-size-large", "maps-default-uniform", "challenges-default" ]
             }
         ];
 
@@ -761,6 +813,7 @@ Tools=(function(){
                         sideInfo = createNode(sideContainerNode,"div"),
                         sideNode = createTileTo(sideContainerNode,"div"),
                         isOutdoor = side.skins.indexOf("outdoor") != -1,
+                        isSnow = side.skins.indexOf("snow") != -1,
                         hasHedges,
                         hasWater,
                         hasSolidWalls,
@@ -968,6 +1021,7 @@ Tools=(function(){
                         deniedSkins.push("heaven");
                         deniedSkins.push("red");
                         deniedSkins.push("light");
+                        deniedSkins.push("snow");
                         expectedSpecialRules.push("noLydian");
                     } else if (cellTypes.indexOf("crystal") != -1) {
                         deniedCells.push("lava");
@@ -977,6 +1031,7 @@ Tools=(function(){
                         deniedSkins.push("heaven");
                         deniedSkins.push("red");
                         deniedSkins.push("light");
+                        deniedSkins.push("snow");
                         expectedSpecialRules.push("noLydian");
                     } else if (hasHedges) {
                         deniedCells.push("crystal");
@@ -988,6 +1043,7 @@ Tools=(function(){
                         allowedSkins.push("village");
                         deniedSkins.push("lava");
                         deniedSkins.push("crystal");
+                        allowedSkins.push("snow");
                         expectedSpecialRules.push("noLydian");
                         expectedSpecialRules.push("zombicideHedges");
                         expectedSpecialRules.push("zombicideTiles");
@@ -1002,6 +1058,21 @@ Tools=(function(){
                         allowedSkins.push("outdoor");
                         deniedSkins.push("lava");
                         deniedSkins.push("crystal");
+                        deniedSkins.push("snow");
+                        expectedSpecialRules.push("noLydian");
+                        expectedSpecialRules.push("zombicideTiles");
+                        if (hasWater) expectedSpecialRules.push("zombicideWater");
+                        if (hasSolidWalls) expectedSpecialRules.push("zombicideSolidWalls");
+                    } else if (isSnow) {
+                        deniedCells.push("crystal");
+                        deniedCells.push("lava");
+                        deniedSkins.push("heaven");
+                        deniedSkins.push("red");
+                        deniedSkins.push("light");
+                        deniedSkins.push("outdoor");
+                        deniedSkins.push("lava");
+                        deniedSkins.push("crystal");
+                        allowedSkins.push("snow");
                         expectedSpecialRules.push("noLydian");
                         expectedSpecialRules.push("zombicideTiles");
                         if (hasWater) expectedSpecialRules.push("zombicideWater");
@@ -1016,6 +1087,7 @@ Tools=(function(){
                         deniedSkins.push("outdoor");
                         deniedSkins.push("lava");
                         deniedSkins.push("crystal");
+                        deniedSkins.push("snow");
                     }
 
                     if (closedSides[0] < cols)
