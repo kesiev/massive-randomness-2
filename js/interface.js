@@ -5,7 +5,7 @@ Interface=(function() {
         DEBUG_QUEST = false,
         DEBUG_CAMPAIGN = false,
         DEBUG_HIDDENTEXT = false,
-        VERSION = "0.41b",
+        VERSION = "0.42b",
         SOURCES_AT = {
             short:"github.com/kesiev/massive-randomness-2",
             full:"https://github.com/kesiev/massive-randomness-2"
