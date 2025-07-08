@@ -1769,7 +1769,7 @@ Tools=(function(){
                         errors.push("Quest <b>"+questLabel+"</b> has a campaign version extra tag '"+k+"'");
 
                     if (quest._wrong2ShotCampaign)
-                        errors.push("Quest <b>"+questLabel+"</b> has a bad 2-shots campaign definition (i.e, must be just forCampaign)");
+                        errors.push("Quest <b>"+questLabel+"</b> has a bad 2-shot campaign definition (i.e, must be just forCampaign)");
 
                 }
 

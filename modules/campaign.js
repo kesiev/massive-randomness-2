@@ -161,8 +161,8 @@ ModManager.modules.push(function(){
                                 EN:"Mini-campaign Mode"
                             },
                             shots2CampaignMode:{
-                                IT:"Modalit&agrave; Campagna 2-shots",
-                                EN:"2-shots Campaign Mode"
+                                IT:"Modalit&agrave; Campagna 2-shot",
+                                EN:"2-shot Campaign Mode"
                             },
                             miniCampaignObjectivesXp:{
                                 EN:36
@@ -2742,7 +2742,7 @@ ModManager.modules.push(function(){
             needs:[ ],
             provides:[ "campaign-2shots" ],
             label:{
-                EN:"Generates a 2-shots campaign with boss battle at the end"
+                EN:"Generates a 2-shot campaign with boss battle at the end"
             },
             content:[
                 {
@@ -2892,7 +2892,7 @@ ModManager.modules.push(function(){
                         {
                             type:"2shots",
                             label:{
-                                EN:"2-shots linear campaign"
+                                EN:"2-shot linear campaign"
                             },
                             campaignMode:{
                                 EN:"{label.shots2CampaignMode}",
@@ -3141,8 +3141,8 @@ ModManager.modules.push(function(){
                     type:"globalLabels",
                     data:{
                         campaignPreparation:{
-                            EN:"2-shots campaigns follow very different rules than the standard Campaign. Instead, they follow the <a target=_blank href='https://boardgamegeek.com/thread/3460934/2-shot-campaign'>house rules</a> designed by BGG user <a target=_blank href='https://boardgamegeek.com/user/Rough_neck'>Roughneck CC</a>.</p><p>Print the extra materials, prepare the Heroes following the One-shot rules, and replace all the Level Tokens with a copy of the one you just printed.",
-                            IT:"Le campagne 2-shots seguono delle regole molto diverse rispetto a quelle della Campagna standard. Seguono invece le <a target=_blank href='https://boardgamegeek.com/thread/3460934/2-shot-campaign'>house rules</a> progettate dall'utente BGG <a target=_blank href='https://boardgamegeek.com/user/Rough_neck'>Roughneck CC</a>.</p><p>Stampate i materiali extra, preparate gli Eroi seguendo le regole di un'Avventura one-shot e sostituite tutti i Segnalini Livello con una copia di quello appena stampato."
+                            EN:"2-shot campaigns follow very different rules than the standard Campaign. Instead, they follow the <a target=_blank href='https://boardgamegeek.com/thread/3460934/2-shot-campaign'>house rules</a> designed by BGG user <a target=_blank href='https://boardgamegeek.com/user/Rough_neck'>Roughneck CC</a>.</p><p>Print the extra materials, prepare the Heroes following the One-shot rules, and replace all the Level Tokens with a copy of the one you just printed.",
+                            IT:"Le campagne 2-shot seguono delle regole molto diverse rispetto a quelle della Campagna standard. Seguono invece le <a target=_blank href='https://boardgamegeek.com/thread/3460934/2-shot-campaign'>house rules</a> progettate dall'utente BGG <a target=_blank href='https://boardgamegeek.com/user/Rough_neck'>Roughneck CC</a>.</p><p>Stampate i materiali extra, preparate gli Eroi seguendo le regole di un'Avventura one-shot e sostituite tutti i Segnalini Livello con una copia di quello appena stampato."
                         }
                     }
                 },{

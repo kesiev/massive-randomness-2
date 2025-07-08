@@ -308,8 +308,8 @@ ModManager.modules.push(function(){
                                         idOption:"generator-campaign-2shots",
                                         code:"W",
                                         label:{
-                                            IT:"Campagna 2-shots",
-                                            EN:"2-shots campaign"
+                                            IT:"Campagna 2-shot",
+                                            EN:"2-shot campaign"
                                         },
                                         description:{
                                             IT:"Genera una brevissima campagna di 2 missioni da giocare in sequenza, seguendo le <a target=_blank href='https://boardgamegeek.com/thread/3460934/2-shot-campaign'>house rules</a> dell'utente <a target=_blank href='https://boardgamegeek.com/user/Rough_neck'>Roughneck CC</a> di BGG.",
