@@ -46,7 +46,7 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
-                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
+                            forCampaign:[ "2shots", "full", "nomini" ], // Not enough objectives for mini-campaign
                             forMaps:[2],
                             type:"investigation",
                             objective:{
@@ -537,13 +537,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "default" ],
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "visitAllRooms", "riskyInvestigation" ]
-                                            ] }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full" ],
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "visitAllRooms", "riskyInvestigation" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
@@ -603,7 +608,7 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
-                            forCampaign:[ "full", "mini" ],
+                            forCampaign:[ "2shots", "full", "mini" ],
                             forActs:[2],
                             forMaps:[2],
                             type:"massiveRandomness",
@@ -1071,13 +1076,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "default" ],
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "visitAllRooms" ]
-                                            ] }
-                                        ]
-                                    }
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full", "mini" ],
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "visitAllRooms" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ]
                                 }
                             ]
                         }

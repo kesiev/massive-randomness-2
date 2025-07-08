@@ -291,7 +291,7 @@ ModManager.modules.push(function(){
                                             IT:"Genera una serie di avventure da giocare in sequenza seguendo le regole di Massive Darkness 2: Heavenfall.",
                                             EN:"Generate a series of adventures to be played in sequence following the rules of Massive Darkness 2: Heavenfall."
                                         },
-                                        tags:[ "generator-campaign", "campaign-full",  "boss" ]
+                                        tags:[ "generator-campaign", "generator-campaign-standard", "campaign-full",  "boss" ]
                                     },{
                                         idOption:"generator-campaign-mini",
                                         code:"w",
@@ -303,7 +303,19 @@ ModManager.modules.push(function(){
                                             IT:"Genera una breve serie di avventure da giocare in sequenza seguendo le regole delle mini-campagne.",
                                             EN:"Generate a short series of adventures to be played in sequence following the mini-campaign rules."
                                         },
-                                        tags:[ "generator-campaign", "campaign-mini",  "boss" ]
+                                        tags:[ "generator-campaign", "generator-campaign-standard", "campaign-mini",  "boss" ]
+                                    },{
+                                        idOption:"generator-campaign-2shots",
+                                        code:"W",
+                                        label:{
+                                            IT:"Campagna 2-shots",
+                                            EN:"2-shots campaign"
+                                        },
+                                        description:{
+                                            IT:"Genera una brevissima campagna di 2 missioni da giocare in sequenza, seguendo le <a target=_blank href='https://boardgamegeek.com/thread/3460934/2-shot-campaign'>house rules</a> dell'utente <a target=_blank href='https://boardgamegeek.com/user/Rough_neck'>Roughneck CC</a> di BGG.",
+                                            EN:"Generates a very short campaign of 2 missions to be played in sequence, following the BGG user <a target=_blank href='https://boardgamegeek.com/user/Rough_neck'>Roughneck CC</a> <a target=_blank href='https://boardgamegeek.com/thread/3460934/2-shot-campaign'>house rules</a>."
+                                        },
+                                        tags:[ "generator-campaign", "campaign-2shots",  "boss" ]
                                     }
                                 ]
                             },{
@@ -407,7 +419,7 @@ ModManager.modules.push(function(){
                                 entries:[
                                     {
                                         code:"O",
-                                        ifMenuOptionSelected:[ "generator-campaign", "generator-campaign-mini" ],
+                                        ifMenuOptionSelected:[ "generator-campaign", "generator-campaign-mini", "generator-campaign-2shots" ],
                                         label:{
                                             IT:"Nascondi gli spoiler",
                                             EN:"Hide spoilers"

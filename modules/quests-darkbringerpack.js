@@ -27,7 +27,7 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
-                            forCampaign:[ "full", "mini" ],
+                            forCampaign:[ "2shots", "full", "mini" ],
                             forMaps:[2],
                             type:"poisonousEnemies",
                             objective:{
@@ -288,13 +288,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "default" ],
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "visitAllRooms", "collectOptionalItemsCorruption" ]
-                                            ] }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full", "mini" ],
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "visitAllRooms", "collectOptionalItemsCorruption" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {

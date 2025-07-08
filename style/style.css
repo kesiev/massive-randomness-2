@@ -490,7 +490,7 @@ HTML,BODY {
     animation-duration: 3s;
 }
 
-.quest A {
+.quest A, .header A {
     color:#333;
 }
 

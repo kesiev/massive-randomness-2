@@ -136,6 +136,13 @@ QuestGenerator=(function() {
             });
 
             // Add special rules
+
+            if (campaignPageGenerator && campaignPageGenerator.specialRules)
+                campaignPageGenerator.specialRules.forEach(rule=>{
+                    resources.specialRules[rule].forEach(rule=>{
+                        quest.rules.push(rule);
+                    })
+                });
             
             if (questVersion.specialRules)
                 questVersion.specialRules.forEach(rule=>{

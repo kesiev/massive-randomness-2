@@ -44,10 +44,6 @@ ModManager.modules.push(function(){
                                 EN:"Setup",
                                 IT:"Preparazione"
                             },
-                            campaignPreparation:{
-                                EN:"Players must follow the preparation and Campaign rules described in <i>Massive Darkness 2: Heavenfall</i>. Each Mission lists any specific changes, special rules, and Campaign progression instructions.",
-                                IT:"I giocatori devono seguire la preparazione e le regole della Campagna descritte in <i>Massive Darkness 2: Heavenfall</i>. Ogni Missione elenca eventuali cambiamenti specifici, regole speciali e istruzioni di progressione della Campagna."
-                            },
                             campaignTreasureBag:{
                                 EN:"Treasure Bag",
                                 IT:"Borsa del Tesoro"
@@ -144,9 +140,17 @@ ModManager.modules.push(function(){
                                     "<li><b>Side Quests</b>: Some Quests have a Side Quest listed in their description. Heroes claim the Side Quest rewards when they win the current Quest and also complete the Side Quest's condition. They do not claim the rewards if the Quest ends in defeat.</li>"+
                                     "<li><b>The Red Old One Challenges</b>: Some Quests have a Red Old One Challenge listed in their description. Heroes claim the challenge reward when they play the current Quest following the challenge rules and win. They do not claim the rewards if the Quest ends in defeat.</li>"
                             },
+                            campaign2shotsQuestPhaseDescription:{
+                                IT:"<p>La Missione A si svolger&agrave; come una normale Avventura one-shot. Al termine della Missione A verr&agrave; spiegato come far progredire i personaggi prima di proseguire con la Missione B.</p>",
+                                EN:"<p>Mission A will play out like a normal One-shot quest. After completing Mission A, you will be given instructions on how to advance your characters before moving on to Mission B.</p>"
+                            },
                             miniCampaignTreasureBagDescription:{
                                 IT:"<p>Invece del normale numero di segnalini Tesoro descritto nella Configurazione della Modalità Campagna, all'inizio di questa Campagna i giocatori mettono 10 segnalini Tesoro Comune e 3 segnalini Tesoro Raro nella Borsa del Tesoro.</p>",
                                 EN:"<p>Instead of the regular number of Treasure tokens described in Campaign Mode Setup, at the start of this Campaign players place 10 Common Treasure tokens and 3 Rare Treasure tokens in the Treasure bag.</p>"
+                            },
+                            shot2TreasureBagDescription:{
+                                IT:"<p>Prepara la Borsa del Tesoro come per una normale Avventura one-shot: aggiungi tutti i segnalini Tesoro Comune and 5 segnalini Tesoro Raro.</p>",
+                                EN:"<p>Prepare the Treasure Bag as for a normal One-shot quest: add all Common Trasure tokens and 5 Rare Treasure tokens.</p>"
                             },
                             campaignMode:{
                                 IT:"Modalit&agrave; Campagna",
@@ -155,6 +159,10 @@ ModManager.modules.push(function(){
                             miniCampaignMode:{
                                 IT:"Modalit&agrave; Mini-campagna",
                                 EN:"Mini-campaign Mode"
+                            },
+                            shots2CampaignMode:{
+                                IT:"Modalit&agrave; Campagna 2-shots",
+                                EN:"2-shots Campaign Mode"
                             },
                             miniCampaignObjectivesXp:{
                                 EN:36
@@ -850,7 +858,7 @@ ModManager.modules.push(function(){
                             values:{
                                 yes:{
                                     needs:[  "md2-hellscape", "quests", "maps-default", "campaign-default" ],
-                                    notExclude:[ "generator-campaign", "campaign-full", "campaign-mini", "campaign-upgradepack-cyclopsduo", "campaign-upgradepack-hellephant", "campaign-fourhorsemen", "campaign-darkbringer" ]
+                                    notExclude:[ "generator-campaign", "campaign-full", "campaign-mini", "campaign-2shots", "campaign-upgradepack-cyclopsduo", "campaign-upgradepack-hellephant", "campaign-fourhorsemen", "campaign-darkbringer" ]
                                 }
                             }
                         }
@@ -951,6 +959,96 @@ ModManager.modules.push(function(){
                         }
                     ]
                 },{
+                    type:"campaignCrawlingModels",
+                    data:[
+                        {
+                            label:{
+                                EN:"Hidden on last quests."
+                            },
+                            words:[
+                                [
+                                    "dungeon"
+                                ],[
+                                    "crawl"
+                                ]
+                            ],
+                            models:[
+                                {
+                                    at:[
+                                        { act:1, map:0 },
+                                        { act:1, map:1 },
+                                        { act:2, map:0 },
+                                        { act:2, map:1 },
+                                        { act:2, map:2 }
+                                    ],
+                                    flags:[
+                                        { dungeonCrawling:"yes" }
+                                    ]
+                                }
+                            ]
+                        },{
+                            label:{
+                                EN:"All hidden."
+                            },
+                            words:[
+                                [
+                                    "unknown"
+                                ],[
+                                    "blind"
+                                ]
+                            ],
+                            models:[
+                                {
+                                    at:[
+                                        { act:0, map:0 },
+                                        { act:0, map:1 },
+                                        { act:0, map:2 },
+                                        { act:1, map:0 },
+                                        { act:1, map:1 },
+                                        { act:1, map:2 },
+                                        { act:2, map:0 },
+                                        { act:2, map:1 },
+                                        { act:2, map:2 }
+                                    ],
+                                    flags:[
+                                        { dungeonCrawling:"yes" }
+                                    ]
+                                }
+                            ]
+                        },{
+                            label:{
+                                EN:"All visible."
+                            },
+                            words:[
+                                [
+                                    "sight"
+                                ],[
+                                    "light"
+                                ]
+                            ],
+                            models:[]
+                        }
+                    ]
+                }
+            ]
+        },{
+            id:"campaign-standard",
+            needs:[ ],
+            provides:[ "generator-campaign-standard" ],
+            label:{
+                EN:"Modifiers for standard campaigns"
+            },
+            content:[
+                {
+                    type:"globalLabels",
+                    data:{
+                        campaignPreparation:{
+                            EN:"Players must follow the preparation and Campaign rules described in <i>Massive Darkness 2: Heavenfall</i>. Each Mission lists any specific changes, special rules, and Campaign progression instructions.",
+                            IT:"I giocatori devono seguire la preparazione e le regole della Campagna descritte in <i>Massive Darkness 2: Heavenfall</i>. Ogni Missione elenca eventuali cambiamenti specifici, regole speciali e istruzioni di progressione della Campagna."
+                        }
+                    }
+                },
+                {
                     type:"campaignMapModels",
                     data:[
                         {
@@ -1066,77 +1164,6 @@ ModManager.modules.push(function(){
                                     ]
                                 }
                             ]
-                        }
-                    ]
-                },{
-                    type:"campaignCrawlingModels",
-                    data:[
-                        {
-                            label:{
-                                EN:"Hidden on last quests."
-                            },
-                            words:[
-                                [
-                                    "dungeon"
-                                ],[
-                                    "crawl"
-                                ]
-                            ],
-                            models:[
-                                {
-                                    at:[
-                                        { act:1, map:0 },
-                                        { act:1, map:1 },
-                                        { act:2, map:0 },
-                                        { act:2, map:1 },
-                                        { act:2, map:2 }
-                                    ],
-                                    flags:[
-                                        { dungeonCrawling:"yes" }
-                                    ]
-                                }
-                            ]
-                        },{
-                            label:{
-                                EN:"All hidden."
-                            },
-                            words:[
-                                [
-                                    "unknown"
-                                ],[
-                                    "blind"
-                                ]
-                            ],
-                            models:[
-                                {
-                                    at:[
-                                        { act:0, map:0 },
-                                        { act:0, map:1 },
-                                        { act:0, map:2 },
-                                        { act:1, map:0 },
-                                        { act:1, map:1 },
-                                        { act:1, map:2 },
-                                        { act:2, map:0 },
-                                        { act:2, map:1 },
-                                        { act:2, map:2 }
-                                    ],
-                                    flags:[
-                                        { dungeonCrawling:"yes" }
-                                    ]
-                                }
-                            ]
-                        },{
-                            label:{
-                                EN:"All visible."
-                            },
-                            words:[
-                                [
-                                    "sight"
-                                ],[
-                                    "light"
-                                ]
-                            ],
-                            models:[]
                         }
                     ]
                 },{
@@ -1458,7 +1485,7 @@ ModManager.modules.push(function(){
                             ]
                         }
                     ]
-                },
+                }
             ]
         },{
             id:"campaign",
@@ -2285,7 +2312,7 @@ ModManager.modules.push(function(){
                     data:[
                         {
                             label:{
-                                EN:"Boss fights at the end of the mini-campaign."
+                                EN:"Boss fights at the end of the campaign."
                             },
                             words:[
                                 [
@@ -2708,6 +2735,465 @@ ModManager.modules.push(function(){
                             ]
                         }
                     ]
+                }
+            ]
+        },{
+            id:"campaign",
+            needs:[ ],
+            provides:[ "campaign-2shots" ],
+            label:{
+                EN:"Generates a 2-shots campaign with boss battle at the end"
+            },
+            content:[
+                {
+                    type:"campaignBossFightModels",
+                    data:[
+                        {
+                            label:{
+                                EN:"Boss fights at the end of the campaign."
+                            },
+                            words:[
+                                [
+                                    "ending",
+                                    "final",
+                                    "edge"
+                                ],[
+                                    "end",
+                                    "close",
+                                    "cut"
+                                ]
+                            ],
+                            models:[
+                                {
+                                    at:[
+                                        { act:2, map:0 },
+                                        { act:2, map:1 }
+                                    ],
+                                    flags:[
+                                        { bossFight:"yes" }
+                                    ]
+                                }
+                            ]
+                        },{
+                            label:{
+                                EN:"Boss fights at the end of all acts."
+                            },
+                            words:[
+                                [
+                                    "grinding",
+                                    "double",
+                                    "mirroring"
+                                ],[
+                                    "grinder",
+                                    "dual",
+                                    "mirror"
+                                ]
+                            ],
+                            models:[
+                                {
+                                    at:[
+                                        { act:0, map:0 },
+                                        { act:0, map:1 },
+                                        { act:0, map:2 },
+                                        { act:1, map:0 },
+                                        { act:1, map:1 },
+                                        { act:1, map:2 },
+                                        { act:2, map:0 },
+                                        { act:2, map:1 }
+                                    ],
+                                    flags:[
+                                        { bossFight:"yes" }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    type:"campaignMapModels",
+                    data:[
+                        {
+                            label:{
+                                EN:"Normal-sized maps."
+                            },
+                            words:[
+                                [
+                                    "plain",
+                                    "old",
+                                    "flat"
+                                ],[
+                                    "cross",
+                                    "even",
+                                    "cast"
+                                ]
+                            ],
+                            
+                            models:[]
+                        },{
+                            label:{
+                                EN:"Larger mid-maps."
+                            },
+                            words:[
+                                [
+                                    "chrono",
+                                    "time",
+                                    "point"
+                                ],[
+                                    "sand",
+                                    "pass",
+                                    "grow"
+                                ]
+                            ],
+                            models:[
+                                {
+                                    at:[
+                                        { act:0,map:2 },
+                                        { act:1, map:0 },
+                                        { act:1, map:1 },
+                                        { act:1, map:2 }
+                                    ],
+                                    flags:[
+                                        { mapSize:"large" }
+                                    ]
+                                }
+                            ]
+                        },{
+                            label:{
+                                EN:"Start end map."
+                            },
+                            words:[
+                                [
+                                    "ascent",
+                                    "raise",
+                                    "climax"
+                                ],[
+                                    "lift",
+                                    "climb",
+                                    "rise"
+                                ]
+                            ],
+                            models:[
+                                {
+                                    at:[
+                                        { act:2, map:1 },
+                                        { act:2, map:2 }
+                                    ],
+                                    flags:[
+                                        { mapSize:"large" }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    type:"campaignModels",
+                    data:[
+                        {
+                            type:"2shots",
+                            label:{
+                                EN:"2-shots linear campaign"
+                            },
+                            campaignMode:{
+                                EN:"{label.shots2CampaignMode}",
+                                IT:"{label.shots2CampaignMode}",
+                            },
+                            explanationKeys:[ "explanation" ],
+                            summaryKeys:[ "campaignSummary" ],
+                            story:[
+                                [
+                                    {
+                                        IT:"Una mano anziana dalla stretta inaspettatamente salda si avvinghia al polso. ",
+                                        EN:"An elderly hand with an unexpectedly firm grip wraps around your wrist. "
+                                    }
+                                ],[
+                                    {
+                                        IT:"\"Presto, non abbiamo tempo da perdere!\" ",
+                                        EN:"\"Hurry up, we don't have time to waste!\" "
+                                    }
+                                ],[
+                                    {
+                                        IT:"Vieni trascinato fuori dalla taverna, tra gli sguardi sbalorditi degli ubriaconi e le grida preoccupate dei tuoi compagni...",
+                                        EN:"You are dragged out of the tavern, amidst the stunned looks of the drunkards and the worried cries of your companions..."
+                                    }
+                                ]
+                            ],
+                            introduction:[
+                                [
+                                    {
+                                        IT:"<p>\"Tenete, indossate questo!\" Il vecchio gesticola furiosamente, facendo oscillare la sua barba rossa come un pendolo.</p>",
+                                        EN:"<p>\"Here, put this on!\" The old man gestures wildly, his red beard swinging like a pendulum.</p>"
+                                    }
+                                ],[
+                                    {
+                                        IT:"<p>I fumi dell'alcool annebbiano la tua testa. Sei stato rapito? I tuoi compagni di bevute sono a pochi passi di distanza, confusi quanto te e... armati di tutto punto?</p>",
+                                        EN:"<p>Alcohol fumes cloud your head. Have you been kidnapped? Are your drinking buddies just a few feet away, as confused as you, and... fully armed?</p>"
+                                    }
+                                ],[
+                                    {
+                                        IT:"<p>\"Presto... saltate in questo portale...\" Uno specchio di luce sospeso a mezz'aria risucchia tutto il gruppo. Riesci solo a sentire le ultime parole del vecchio pazzo...</p>",
+                                        EN:"<p>\"Quick... jump into this portal...\" A mirror of light suspended in mid-air sucks the entire group in. You can only hear the old madman's last words...</p>"
+                                    }
+                                ],[
+                                    {
+                                        IT:"<p>\"Dovete diventare degli Eroi... entro stasera!\"</p>",
+                                        EN:"<p>\"You must become Heroes... by tonight!\"</p>"
+                                    }
+                                ]
+                            ],
+                            achievementsCondition:{
+                                IT:"<p>In questa modalit&agrave; non si applica alcun Traguardo.</p>",
+                                EN:"<p>In this mode, no Achievement applies.</p>"
+                            },
+                            achievements:[],
+                            treasureBag:{
+                                IT:"{label.shot2TreasureBagDescription}",
+                                EN:"{label.shot2TreasureBagDescription}"
+                            },
+                            questPhase:{
+                                IT:"{label.campaign2shotsQuestPhaseDescription}",
+                                EN:"{label.campaign2shotsQuestPhaseDescription}"
+                            },
+                            pages:[
+                                {
+                                    type:"cover",
+                                    name:{
+                                        IT:"Copertina",
+                                        EN:"Cover"
+                                    }
+                                },{
+                                    type:"map",
+                                    actMap:[
+                                        {
+                                            act:0,
+                                            map:0
+                                        },{
+                                            act:0,
+                                            map:1
+                                        },{
+                                            act:0,
+                                            map:2
+                                        },{
+                                            act:1,
+                                            map:0
+                                        },{
+                                            act:1,
+                                            map:1
+                                        },{
+                                            act:1,
+                                            map:2
+                                        }
+                                    ],
+                                    bossAsAct:[
+                                        {
+                                            act:1,
+                                            map:0
+                                        },{
+                                            act:1,
+                                            map:1
+                                        }
+                                    ],
+                                    name:{
+                                        IT:"Missione A",
+                                        EN:"Mission A"
+                                    },
+                                    progression:{
+                                        story:[
+                                            [
+                                                {
+                                                    EN:"<p>The chaos has subsided but your gaze does not leave your weapon.</p>",
+                                                    IT:"<p>Il caos si &egrave; placato ma il tuo sguardo non lascia la tua arma.</p>"
+                                                }
+                                            ],[
+                                                {
+                                                    EN:"<p>You have become strong... very strong. But how is it possible that all this has happened so quickly?</p>",
+                                                    IT:"<p>Sei diventato forte... molto forte. Ma come &egrave; possibile che tutto questo sia accaduto cos&igrave; in fretta?</p>"
+                                                }
+                                            ],[
+                                                {
+                                                    EN:"<p>Your companions do not seem to share your perplexity: they noisily exchange the loot with smiles plastered on their faces.</p>",
+                                                    IT:"<p>I tuoi compagni non sembrano condividere la tua perplessit&agrave;: si scambiano rumorosamente il bottino con il sorriso stampato sul volto.</p>"
+                                                }
+                                            ],[
+                                                {
+                                                    EN:"<p>Finally you come across, peering into the shadows, a look as worried as yours...</p>",
+                                                    IT:"<p>Finalmente incroci, scrutando nell'ombra, uno sguardo preoccupato come il tuo...</p>"
+                                                }
+                                            ]
+                                        ],
+                                        rewards:[
+                                            {
+                                                IT:"Tutti gli Eroi raggiungono il livello 6.",
+                                                EN:"All Heroes level up to level 6."
+                                            },
+                                            {
+                                                IT:"Ogni Eroe pu&ograve; eseguire azioni di Scambio ed Equipaggiamento tutte le volte che desidera.",
+                                                EN:"Each Hero can perform Free Trade and Equip actions as many times as many times as it wishes.",
+                                            },
+                                            {
+                                                IT:"&Egrave; possibile eseguire una singola azione di Forgia, indipendentemente dal numero di giocatori. Non &egrave; possibile forgiare oggetti Epici in oggetti Leggendari.",
+                                                EN:"A single Forge action may be performed, regardless of the number of players. You can’t forge Epic items into Legendary items."
+                                            },
+                                            {
+                                                IT:"Ogni Eroe manterr&agrave; solo gli oggetti equipaggiati sulla propria dashboard per la Missione B. Tutti gli oggetti in eccesso verranno rimessi nel proprio mazzo oggetti.",
+                                                EN:"Each Hero will only keep the items equipped on their dashboard for Mission B. Any extra items will be shuffled back to its Item deck."
+                                            },
+                                            {
+                                                IT:"Tutti gli Eroi impostano i loro PE a 0 girano il Segnalino Livello sul lato 6-10.",
+                                                EN:"All Heroes set their XP to 0 and flip their Level Token to the 6-10 side."
+                                            }
+                                        ],
+                                        nextMissionStory:[
+                                            [
+                                                {
+                                                    EN:"<p>\"It's still too little, damn it...\" The old red steps out of the shadows.</p>",
+                                                    IT:"<p>\"E' ancora troppo poco, maledizione...\" Il vecchio rosso mette un piede fuori dall'ombra.</p>"
+                                                }
+                                            ],[
+                                                {
+                                                    EN:"<p>Silence falls. A new portal, dark as night and smelling of death, opens before his outstretched hand.</p>",
+                                                    IT:"<p>Cala il silenzo. Un nuovo portale, buio come la notte e dall lezzo di morte, si apre davanti alla sua mano tesa.</p>"
+                                                }
+                                            ],[
+                                                {
+                                                    EN:"<p>\"...but we don't have time. You have to save this world. Now.\"</p>",
+                                                    IT:"<p>\"...ma non abbiamo tempo. Dovete salvare questo mondo. Ora.\"</p>"
+                                                }
+                                            ],[
+                                                {
+                                                    EN:"<p>You and your companions can't move a muscle, frozen in that solemn and worried manner. Then, everything around you goes dark.</p>",
+                                                    IT:"<p>Tu e i tuoi compagni non riuscite a muovere un muscolo, bloccati da quel fare solenne e preoccupato. Poi, tutto intorno diventa buio.</p>"
+                                                }
+                                            ]
+                                        ],
+                                        nextMissionDirection:[
+                                            {
+                                                IT:"Andare a <span class='gotopage' page='2'></span>.",
+                                                EN:"Go to <span class='gotopage' page='2'></span>."
+                                            }
+                                        ]
+                                    }
+                                },{
+                                    type:"map",
+                                    specialRules:[ "greatRiches", "highRisk", "darknessTrack" ],
+                                    actMap:[
+                                        {
+                                            act:2,
+                                            map:0
+                                        },{
+                                            act:2,
+                                            map:1
+                                        }
+                                    ],
+                                    bossAsAct:[
+                                        {
+                                            act:2,
+                                            map:2
+                                        },{
+                                            act:2,
+                                            map:1
+                                        }
+                                    ],
+                                    name:{
+                                        IT:"Missione B",
+                                        EN:"Mission B"
+                                    },
+                                    progression:{
+                                        ending:[
+                                            [
+                                                {
+                                                    IT:"<p>Anche se solo per un pelo, tu e i tuoi compagni ce l'avete fatta! Avete eliminato la minaccia!</p>",
+                                                    EN:"<p>Even if it was just a hair's breadth, you and your companions made it! You eliminated the threat!</p>"
+                                                }
+                                            ],
+                                            [
+                                                {
+                                                    IT:"<p>La gioia ti attraversa, come mille scariche elettriche. Poi, d'improvviso, balena un pensiero freddo e scuro. Sei davvero un Eroe, se qualcuno ti ha costretto ad esserlo? Meriti la gloria anche se non l'hai cercata?</p>",
+                                                    EN:"<p>Joy runs through you, like a thousand electric shocks. Then, suddenly, a cold and dark thought flashes. Are you really a Hero, if someone forced you to be one? Do you deserve glory even if you didn't seek it?</p>"
+                                                }
+                                            ],
+                                            [
+                                                {
+                                                    IT:"<p>Uno scroscio dei calici che sbattono tra loro ti sveglia di soprassalto. I compagni di bevute stanno brindando come al solito.</p>",
+                                                    EN:"<p>The crash of glasses clinking together jolts you awake. Your drinking companions are toasting as usual.</p>"
+                                                }
+                                            ],
+                                            [
+                                                {
+                                                    IT:"<p>Sar&agrave; per la vittoria appena conquistata o quella che avreste potuto raggiungere? Il tuo sguardo balena verso i loro vestiti...</p>",
+                                                    EN:"<p>Is it for the victory you just achieved or the one you could have achieved? Your gaze flashes towards their clothes...</p>"
+                                                }
+                                            ],
+                                            [
+                                                {
+                                                    IT:"<p>Avete vinto!</p>",
+                                                    EN:"<p>You win!</p>"
+                                                }
+                                            ]
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    type:"globalLabels",
+                    data:{
+                        campaignPreparation:{
+                            EN:"2-shots campaigns follow very different rules than the standard Campaign. Instead, they follow the <a target=_blank href='https://boardgamegeek.com/thread/3460934/2-shot-campaign'>house rules</a> designed by BGG user <a target=_blank href='https://boardgamegeek.com/user/Rough_neck'>Roughneck CC</a>.</p><p>Print the extra materials, prepare the Heroes following the One-shot rules, and replace all the Level Tokens with a copy of the one you just printed.",
+                            IT:"Le campagne 2-shots seguono delle regole molto diverse rispetto a quelle della Campagna standard. Seguono invece le <a target=_blank href='https://boardgamegeek.com/thread/3460934/2-shot-campaign'>house rules</a> progettate dall'utente BGG <a target=_blank href='https://boardgamegeek.com/user/Rough_neck'>Roughneck CC</a>.</p><p>Stampate i materiali extra, preparate gli Eroi seguendo le regole di un'Avventura one-shot e sostituite tutti i Segnalini Livello con una copia di quello appena stampato."
+                        }
+                    }
+                },{
+                    type:"campaignRewardModels",
+                    data:[]
+                },{
+                    type:"specialRules",
+                    data:{
+                        greatRiches:[
+                            {
+                                priority:16,
+                                type:"rule",
+                                name:{
+                                    IT:"Grandi ricchezze...",
+                                    EN:"Great riches..."
+                                },
+                                explanation:{
+                                    IT:"I gettoni del tesoro nei Forzieri sono di 1 livello pi&ugrave; alti in rarit&agrave;. (i Comuni sono Rari, i Rari sono Epici, gli Epici sono Leggendari)",
+                                    EN:"Treasure Tokens in Chests are 1 level higher in rarity. (Common are Rare, Rare are Epic, Epic are Legendary)"
+                                }
+                            }
+                        ],
+                        highRisk:[
+                            {
+                                priority:15,
+                                type:"rule",
+                                name:{
+                                    IT:"...Ad alto rischio",
+                                    EN:"...Great risks"
+                                },
+                                explanation:{
+                                    IT:"Quando un Eroe elimina un nemico guadagna questi tesori al posto di quelli stampati sulla carta Nemico:<ul><li><b>Orda di Livello 6/7</b>: 1 Tesoro Comune</li><li><b>Orda di Livello 8/9</b>: 1 Tesoro Comune</li><li><b>Orda di Livello 10</b>: 2 Tesori Comuni</li><li><b>Mostro Errante di Livello 6/7</b>: 1 Tesoro Comune, 3 Tesori Epici</li><li><b>Mostro Errante di Livello 8/9</b>: 2 Tesori Comune, 1 Tesoro Leggendario</li><li><b>Mostro Errante di Livello 10</b>: 3 Tesori Leggendari</li></ul>",
+                                    EN:"When a Hero eliminates an enemy it gains these treasures instead of those printed on the Enemy card:<ul><li><b>Level 6/7 Mob</b>: 1 Common Treasure</li><li><b>Level 8/9 Mob</b>: 1 Common Treasure</li><li><b>Level 10 Mob</b>: 2 Common Treasures</li><li><b>Level 6/7 Roaming Monster</b>: 1 Common Treasure, 3 Epic Treasures</li><li><b>Level 8/9 Roaming Monster</b>: 2 Common Treasure, 1 Legendary Treasure</li><li><b>Level 10 Roaming Monster</b>: 3 Legendary Treasures</li></ul>"
+                                }
+                            }
+                        ],
+                        darknessTrack:[
+                            {
+                                priority:14,
+                                type:"rule",
+                                name:{
+                                    IT:"A un passo dalla fine",
+                                    EN:"One step away from the end"
+                                },
+                                explanation:{
+                                    IT:"Utilizza il Tracciato Oscurit&agrave; \"Sfida difficile\" per giocare a questa missione.",
+                                    EN:"Use the Hard Challenge Darkness Track to play this Quest."
+                                }
+                            }
+                        ]
+                    }
                 }
             ]
         }

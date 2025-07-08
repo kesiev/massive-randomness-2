@@ -16,7 +16,6 @@ ModManager.modules.push(function(){
         
     return [
         {
-
             id:"quests-upgradepack",
             needs:[ "quests-default", "md2-upgradepack" ],
             provides:[ "quests", "quests-upgradepack", "untranslated-fr" ],
@@ -28,7 +27,7 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
-                            forCampaign:[ "full", "mini" ],
+                            forCampaign:[ "2shots", "full", "mini" ],
                             forMaps:[2],
                             type:"keyToBoss",
                             objective:{
@@ -282,16 +281,21 @@ ModManager.modules.push(function(){
                                             corridors: [ "default" ]
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            {
-                                                mods:[ "removeObjectives" ],
-                                                tags:[
-                                                    [ "visitAllRooms", "collectOptionalItems" ]
-                                                ]
-                                            }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full", "mini" ],
+                                            sideQuests:[
+                                                {
+                                                    mods:[ "removeObjectives" ],
+                                                    tags:[
+                                                        [ "visitAllRooms", "collectOptionalItems" ]
+                                                    ]
+                                                }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
@@ -316,7 +320,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
-                            forCampaign:[ "full", "mini" ],
+                            forCampaign:[ "2shots", "full", "mini" ],
                             forActs:[1,2],
                             forMaps:[2],
                             type:"fallingDungeon",
@@ -622,13 +626,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "fallingDungeon" ],
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "roundLimit", "visitAllRooms" ]
-                                            ] }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full", "mini" ],
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "roundLimit", "visitAllRooms" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
@@ -653,7 +662,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
-                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
+                            forCampaign:[ "2shots", "full", "nomini" ], // Not enough objectives for mini-campaign
                             forMaps:[2],
                             type:"collectDebuffAndBoss",
                             objective:{
@@ -922,15 +931,20 @@ ModManager.modules.push(function(){
                                             corridors: [ "default" ],
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            {
-                                                tags:[
-                                                    [ "visitAllRooms", "collectOptionalItems" ]
-                                                ]
-                                            }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full" ],
+                                            sideQuests:[
+                                                {
+                                                    tags:[
+                                                        [ "visitAllRooms", "collectOptionalItems" ]
+                                                    ]
+                                                }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots"]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
@@ -959,7 +973,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
-                            forCampaign:[ "full", "mini" ],
+                            forCampaign:[ "2shots", "full", "mini" ],
                             forActs:[1,2],
                             forMaps:[1],
                             type:"capture",
@@ -1197,15 +1211,20 @@ ModManager.modules.push(function(){
                                             corridors: [ "capture" ],
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            {
-                                                tags:[
-                                                    [ "visitAllRooms", "collectOptionalItems" ]
-                                                ]
-                                            }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full", "mini" ],
+                                            sideQuests:[
+                                                {
+                                                    tags:[
+                                                        [ "visitAllRooms", "collectOptionalItems" ]
+                                                    ]
+                                                }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
@@ -1234,7 +1253,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
-                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
+                            forCampaign:[ "2shots", "full", "nomini" ], // Not enough objectives for mini-campaign
                             forActs:[2],
                             forMaps:[2],
                             type:"collect",
@@ -1512,13 +1531,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "doubleBoss" ],
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "visitAllRooms" ]
-                                            ] }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full" ],
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "visitAllRooms" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
@@ -1543,7 +1567,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
-                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
+                            forCampaign:[ "2shots", "full", "nomini" ], // Not enough objectives for mini-campaign
                             forActs:[1,2],
                             forMaps:[1],
                             type:"towerDefense",
@@ -1874,15 +1898,20 @@ ModManager.modules.push(function(){
                                             corridors: [ "towerDefense" ],
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            {
-                                                tags:[
-                                                    [ "spareItem", "collectAllItems" ]
-                                                ]
-                                            }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full" ],
+                                            sideQuests:[
+                                                {
+                                                    tags:[
+                                                        [ "spareItem", "collectAllItems" ]
+                                                    ]
+                                                }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {

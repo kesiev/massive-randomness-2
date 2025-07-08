@@ -27,7 +27,7 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
-                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
+                            forCampaign:[ "2shots", "full", "nomini" ], // Not enough objectives for mini-campaign
                             forMaps:[2],
                             type:"collectBossAndExit",
                             objective:{
@@ -311,13 +311,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "default" ],
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "visitAllRooms", "collectAllItems" ]
-                                            ] }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full" ],
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "visitAllRooms", "collectAllItems" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
@@ -342,7 +347,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
-                            forCampaign:[ "full", "mini" ],
+                            forCampaign:[ "2shots", "full", "mini" ],
                             forMaps:[2],
                             type:"nestBossStealExit",
                             objective:{
@@ -697,13 +702,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "nestBossStealExit" ]
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "visitAllRooms", "collectOptionalItemsCorruption" ]
-                                            ] }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full", "mini" ],
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "visitAllRooms", "collectOptionalItemsCorruption" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
@@ -728,7 +738,7 @@ ModManager.modules.push(function(){
                                 }
                             ]
                         },{
-                            forCampaign:[ "full", "mini" ],
+                            forCampaign:[ "2shots", "full", "mini" ],
                             forMaps:[2],
                             type:"eliminateBuffBoss",
                             objective:{
@@ -1053,13 +1063,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "eliminateBuffBoss" ]
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "visitAllRooms", "collectAllItems" ]
-                                            ] }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full", "mini" ],
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "visitAllRooms", "collectAllItems" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {

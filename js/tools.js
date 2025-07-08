@@ -42,62 +42,92 @@ Tools=(function(){
             {
                 id:"full-campaign-heavenfall",
                 excludes:[],
-                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "generator-campaign-standard", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape" ]
             },
             {
                 id:"full-campaign-rainbowcrossing",
                 excludes:[],
-                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "md2-rainbowcrossing" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "generator-campaign-standard", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "md2-rainbowcrossing" ]
             },
             {
                 id:"full-campaign-blackplague",
                 excludes:[],
-                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-blackplague" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "generator-campaign-standard", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-blackplague" ]
             },
             {
                 id:"full-campaign-whitedeath",
                 excludes:[],
-                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-whitedeath" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "generator-campaign-standard", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-whitedeath" ]
             },
             {
                 id:"full-campaign-eternalempire",
                 excludes:[],
-                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-eternalempire" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "generator-campaign-standard", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-eternalempire" ]
             },
             {
                 id:"full-campaign-greenhorde",
                 excludes:[],
-                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-greenhorde" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "generator-campaign-standard", "campaign-full", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-greenhorde" ]
             },
             {
                 id:"mini-campaign-heavenfall",
                 excludes:[],
-                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-mini", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "generator-campaign-standard", "campaign-mini", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape" ]
             },
             {
                 id:"mini-campaign-rainbowcrossing",
                 excludes:[],
-                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-mini", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "md2-rainbowcrossing" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "generator-campaign-standard", "campaign-mini", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "md2-rainbowcrossing" ]
             },
             {
                 id:"mini-campaign-blackplague",
                 excludes:[],
-                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-mini", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-blackplague" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "generator-campaign-standard", "campaign-mini", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-blackplague" ]
             },
             {
                 id:"mini-campaign-greenhorde",
                 excludes:[],
-                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-mini", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-greenhorde" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "generator-campaign-standard", "campaign-mini", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-greenhorde" ]
             },
             {
                 id:"mini-campaign-whitedeath",
                 excludes:[],
-                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-mini", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-whitedeath" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "generator-campaign-standard", "campaign-mini", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-whitedeath" ]
             },
             {
                 id:"mini-campaign-eternalempire",
                 excludes:[],
-                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-mini", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-eternalempire" ]
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "generator-campaign-standard", "campaign-mini", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-eternalempire" ]
+            },
+            {
+                id:"2shots-campaign-heavenfall",
+                excludes:[],
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-2shots", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape" ]
+            },
+            {
+                id:"2shots-campaign-rainbowcrossing",
+                excludes:[],
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-2shots", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "md2-rainbowcrossing" ]
+            },
+            {
+                id:"2shots-campaign-blackplague",
+                excludes:[],
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-2shots", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-blackplague" ]
+            },
+            {
+                id:"2shots-campaign-greenhorde",
+                excludes:[],
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-2shots", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-greenhorde" ]
+            },
+            {
+                id:"2shots-campaign-whitedeath",
+                excludes:[],
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-2shots", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-whitedeath" ]
+            },
+            {
+                id:"2shots-campaign-eternalempire",
+                excludes:[],
+                needs:[ "boss", "bridge-default-twoexits", "generator-campaign", "campaign-2shots", "campaign-default", "md2-heavenfall", "quests", "maps-default", "md2-hellscape", "zc-eternalempire" ]
             }
         ],
         QUEST_CONFIGS=[
@@ -1405,7 +1435,7 @@ Tools=(function(){
 
             let
                 resources = ModManager.load({
-                    needs:[ "quests", "generator-campaign", "campaign-full" ]
+                    needs:[ "quests", "generator-campaign", "generator-campaign-standard", "campaign-full" ]
                 }),
                 html = "",
                 errorsNode = createErrorsNode(into),
@@ -1428,25 +1458,76 @@ Tools=(function(){
 
                         if (!quest._tested) {
                             quest._tested = true;
+                            quest._badForCampaign = [];
                             quest._noCampaignData = false;
                             quest._sideQuests = [];
                             quest._campaignSpecificRules = false;
                             quest._endingOnly = quest.forActs && quest.forActs.length == 1 && quest.forActs[0] == 2 && quest.forMaps && quest.forMaps.length == 1 && quest.forMaps[0] == 2;
                             quest._rulesToFix = [];
                             quest._hasMiniCampaignRules = false;
+                            quest._wrong2ShotCampaign = false;
                             quest._nomini = quest.forCampaign && (quest.forCampaign.indexOf("nomini") != -1);
+                            quest._campaignVersionBadIndex = {};
+                            quest._campaignVersionMissingIndex = {};
+                            quest._campaignVersionExtraIndex = {};
                             quest.versions.forEach(version=>{
                                 if (!version.campaign)
                                     quest._noCampaignData = true;
-                                else if (version.campaign.sideQuests)
-                                    version.campaign.sideQuests.forEach(sidequest=>{
-                                        sidequest.tags.forEach(tagset=>{
-                                            tagset.forEach(tag=>{
-                                                if (quest._sideQuests.indexOf(tag) == -1)
-                                                    quest._sideQuests.push(tag);
+                                else {
+                                    let
+                                        campaignVersionIndex = {};
+
+                                    version.campaign.forEach(campaignVersion=>{
+                                        if (!campaignVersion.forCampaign)
+                                            quest._isMissingForCampaignVersion = true;
+                                        else
+                                            campaignVersion.forCampaign.forEach(tag=>{
+                                                switch (tag) {
+                                                    case "nomini":{
+                                                        // Never allowed
+                                                        quest._campaignVersionBadIndex[tag] = true;
+                                                        break;
+                                                    }
+                                                    case "2shots":{
+                                                        campaignVersionIndex[tag] = true;
+                                                        // It must be alone
+                                                        if (campaignVersion.forCampaign.length != 1)
+                                                            quest._wrong2ShotCampaign = true;
+                                                        else for (k in campaignVersion)
+                                                            if (k != "forCampaign")
+                                                                quest._wrong2ShotCampaign = true;
+                                                        break;
+                                                    }
+                                                    default:{
+                                                        campaignVersionIndex[tag] = true;
+                                                    }
+                                                }
                                             })
-                                        })
+
+                                        if (campaignVersion.sideQuests)
+                                            campaignVersion.sideQuests.forEach(sidequest=>{
+                                                    sidequest.tags.forEach(tagset=>{
+                                                        tagset.forEach(tag=>{
+                                                            if (quest._sideQuests.indexOf(tag) == -1)
+                                                                quest._sideQuests.push(tag);
+                                                        })
+                                                    })
+                                                });
                                     });
+
+                                    quest.forCampaign.forEach(tag=>{
+                                        if (tag != "nomini")
+                                            if (campaignVersionIndex[tag])
+                                                delete campaignVersionIndex[tag];
+                                            else 
+                                                quest._campaignVersionMissingIndex[tag] = true;
+                                    })
+
+                                    for (let k in campaignVersionIndex)
+                                        quest._campaignVersionExtraIndex[k] = true;
+
+                                }
+                                    
                                 version.rules.forEach(ruleset=>{
                                     ruleset.forEach(rule=>{
                                         
@@ -1542,7 +1623,7 @@ Tools=(function(){
                                     })
                                 })
 
-                            })
+                            });
                         }
 
                         if (!quest._matches)
@@ -1675,6 +1756,21 @@ Tools=(function(){
                         errors.push("Quest <b>"+questLabel+"</b> has no mini-campaign rules but no 'nomini' in forCampaign");
                     }
 
+                    if (quest._isMissingForCampaignVersion)
+                        errors.push("Quest <b>"+questLabel+"</b> has a campaign version without forCampaign");
+
+                    for (let k in quest._campaignVersionBadIndex)
+                        errors.push("Quest <b>"+questLabel+"</b> has a campaign version bad tag '"+k+"'");
+
+                    for (let k in quest._campaignVersionMissingIndex)
+                        errors.push("Quest <b>"+questLabel+"</b> has a campaign version missing tag '"+k+"'");
+
+                    for (let k in quest._campaignVersionExtraIndex)
+                        errors.push("Quest <b>"+questLabel+"</b> has a campaign version extra tag '"+k+"'");
+
+                    if (quest._wrong2ShotCampaign)
+                        errors.push("Quest <b>"+questLabel+"</b> has a bad 2-shots campaign definition (i.e, must be just forCampaign)");
+
                 }
 
                 if (quest._matches) {
@@ -1729,7 +1825,7 @@ Tools=(function(){
             let
                 errorsNode = createErrorsNode(into),
                 resources = ModManager.load({
-                    needs:[ "quests", "generator-campaign", "campaign-full" ]
+                    needs:[ "quests", "generator-campaign", "generator-campaign-standard", "campaign-full" ]
                 }),
                 words = [],
                 errors = [];
@@ -1983,7 +2079,7 @@ Tools=(function(){
                 previewNode = createNode(into,"div"),
                 errors = [],
                 resources = ModManager.load({
-                    needs:[ "quests", "generator-campaign", "campaign-full" ]
+                    needs:[ "quests", "generator-campaign", "generator-campaign-standard", "campaign-full" ]
                 });
 
             CAMPAIGN_CONFIGS.forEach(config=>{
@@ -2272,7 +2368,7 @@ Tools=(function(){
                                                         }
                                                     }
                                                 }
-                                                campaignHtml+="<td>"+bonus+"</td>";
+                                                campaignHtml+="<td "+(bonus == 0 ? "style='background-color:#0f0'" : "")+">"+bonus+"</td>";
                                                 total+=bonus;
                                                 if (boss.components) {
                                                     campaignHtml+="<td>"+(total*boss.components)+" ("+total+"&times;"+boss.components+")</td>";
@@ -2388,7 +2484,7 @@ Tools=(function(){
             
             let
                 resources = ModManager.load({
-                    needs:[ "quests", "generator-campaign", "campaign-full" ]
+                    needs:[ "quests", "generator-campaign", "generator-campaign-standard", "campaign-full" ]
                 }),
                 keepHtml = "",
                 notKeepHtml = "",
@@ -2449,23 +2545,26 @@ Tools=(function(){
                         questResult.missingBoss = true;
 
                     if (version.campaign && version.campaign.sideQuests)
-                        version.campaign.sideQuests.forEach(quest=>{
-                            if (quest.mods) {
-                                questResult.isCollecting = "(due to sidequest map modifier)";
-                                questResult.mapModOnCampaign = true;
-                            }
-                                
-                            quest.tags.forEach(tagset=>{
-                                tagset.forEach(tag=>{
-                                    if (mapmodQuests[tag]) {
-                                        questResult.isCollecting = "(due to related sidequest map modifier)";
+                        version.campaign.forEach(campaignVersion=>{
+                            campaignVersion.sideQuests.forEach(quest=>{
+                                    if (quest.mods) {
+                                        questResult.isCollecting = "(due to sidequest map modifier)";
                                         questResult.mapModOnCampaign = true;
                                     }
-                                    if (requiresCampaignRule[tag])
-                                        questResult.requiresCampaignRule = true;
+                                        
+                                    quest.tags.forEach(tagset=>{
+                                        tagset.forEach(tag=>{
+                                            if (mapmodQuests[tag]) {
+                                                questResult.isCollecting = "(due to related sidequest map modifier)";
+                                                questResult.mapModOnCampaign = true;
+                                            }
+                                            if (requiresCampaignRule[tag])
+                                                questResult.requiresCampaignRule = true;
+                                        })
+                                    })
                                 })
-                            })
                         })
+                        
 
                     version.rules.forEach(ruleset=>{
                         ruleset.forEach(rule=>{
@@ -2871,15 +2970,19 @@ Tools=(function(){
 
                     if (version.campaign) {
                         questData.inCampaign = true;
-                        if (version.campaign.sideQuests)
-                            version.campaign.sideQuests.forEach(sidequest=>{
-                                sidequest.tags.forEach(tagset=>{
-                                    tagset.forEach(tag=>{
-                                        if (questData.sideQuests.indexOf(tag) == -1)
-                                            questData.sideQuests.push(tag);
-                                    })
-                                })
-                            });
+                        if (version.campaign)
+                            version.campaign.forEach(versionCampaign=>{
+                                if (versionCampaign.sideQuests)
+                                    versionCampaign.sideQuests.forEach(sidequest=>{
+                                        sidequest.tags.forEach(tagset=>{
+                                            tagset.forEach(tag=>{
+                                                if (questData.sideQuests.indexOf(tag) == -1)
+                                                    questData.sideQuests.push(tag);
+                                            })
+                                        })
+                                    });
+                            })
+                    
                         version.rules.forEach(ruleset=>{
                             ruleset.forEach(rule=>{
                                 
@@ -2960,6 +3063,34 @@ Tools=(function(){
                 */
             });
 
+            let
+                uniques = {};
+
+            [
+                "campaignMapModels",
+                "campaignCrawlingModels",
+                "campaignBossFightModels",
+                "campaignRewardModels",
+                "campaignRewards",
+                "campaignSideQuests",
+                "campaignModels",
+                "campaignActModels"
+            ].forEach(id=>{
+                resources[id].forEach(element=>{
+                    let
+                        elementId = element.label ? element.label.EN : element.description ? element.description.EN : element.condition[0].EN;
+                    if (!uniques[id])
+                        uniques[id] = {
+                            count:0,
+                            index:{}
+                        };
+                    if (!uniques[id].index[elementId]) {
+                        uniques[id].index[elementId] = true;
+                        uniques[id].count++;
+                    }
+                })
+            });
+
             text+="\n## Map modifiers\n\n";
             text+=" * Bridge tile rules\n";
             text+=" * Small maps\n";
@@ -2974,14 +3105,14 @@ Tools=(function(){
             text+="\n## Campaign mode\n\n";
             text+=" * "+questTypes.full+" full campaign quests.\n";
             text+=" * "+questTypes.mini+" mini-campaign quests.\n";
-            text+=" * "+resources.campaignSideQuests.length+" side quest types.\n";
-            text+=" * "+resources.campaignModels.length+" campaign models.\n";
-            text+=" * "+resources.campaignActModels.length+" campaign acts models.\n";
-            text+=" * "+resources.campaignMapModels.length+" campaign map models.\n";
-            text+=" * "+resources.campaignCrawlingModels.length+" campaign dungeon crawling models.\n";
-            text+=" * "+resources.campaignBossFightModels.length+" campaign boss fight models.\n";
-            text+=" * "+resources.campaignRewardModels.length+" campaign rewards models.\n";
-            text+="   * "+resources.campaignRewards.length+" rewards.\n";
+            text+=" * "+uniques.campaignSideQuests.count+" side quest types.\n";
+            text+=" * "+uniques.campaignModels.count+" campaign models.\n";
+            text+=" * "+uniques.campaignActModels.count+" campaign acts models.\n";
+            text+=" * "+uniques.campaignMapModels.count+" campaign map models.\n";
+            text+=" * "+uniques.campaignCrawlingModels.count+" campaign dungeon crawling models.\n";
+            text+=" * "+uniques.campaignBossFightModels.count+" campaign boss fight models.\n";
+            text+=" * "+uniques.campaignRewardModels.count+" campaign rewards models.\n";
+            text+="   * "+uniques.campaignRewards.count+" rewards.\n";
             
             dumpErrors(errorsNode,errors);
             resultsNode.innerHTML="<textarea cols=100 rows=50>"+text+"</textarea>";

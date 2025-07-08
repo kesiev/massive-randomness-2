@@ -144,18 +144,20 @@ CampaignGenerator=(function() {
             rewardModel,
             bossFightModel
         ].forEach(modelSet=>{
-            if (modelSet.words)
-                words.push(modelSet.words);
-            modelSet.models.forEach(model=>{
-                let
-                    flags = pickRandomElementValue(model.flags);
-                model.at.forEach(at=>{
-                    if (!flagsMap[at.act]) flagsMap[at.act]=[];
-                    if (!flagsMap[at.act][at.map]) flagsMap[at.act][at.map]={};
-                    for (let f in flags)
-                        flagsMap[at.act][at.map][f]=flags[f];
-                })
-            });
+            if (modelSet) {
+                if (modelSet.words)
+                    words.push(modelSet.words);
+                modelSet.models.forEach(model=>{
+                    let
+                        flags = pickRandomElementValue(model.flags);
+                    model.at.forEach(at=>{
+                        if (!flagsMap[at.act]) flagsMap[at.act]=[];
+                        if (!flagsMap[at.act][at.map]) flagsMap[at.act][at.map]={};
+                        for (let f in flags)
+                            flagsMap[at.act][at.map][f]=flags[f];
+                    })
+                });
+            }
         });
 
         for (let i=0;i<CAMPAIGNNAME_LENGTH;i++)
@@ -173,13 +175,15 @@ CampaignGenerator=(function() {
                         "campaign.page":id+1,
                         "campaign.pageName":page.name
                     },
-                };
+                },
+                bossAct = page.bossAsAct ? pickRandomElementValue(page.bossAsAct) : pageData.actMap;
 
             switch (page.type) {
                 case "map":{
                     let
                         questModel,
                         questVersion,
+                        questCampaign,
                         questFlags = {},
                         mapNeeds = JSON.parse(JSON.stringify(needs)),
                         allQuests = [],
@@ -310,17 +314,23 @@ CampaignGenerator=(function() {
                         questModel = pickRandomElementValue(availableQuests);
                         questVersion = pickRandomElementValue(questModel.versions);
 
+                        if (questVersion.campaign)
+                            questVersion.campaign.forEach(campaignModel=>{
+                                if (campaignModel.forCampaign.indexOf(campaign.type) != -1)
+                                    questCampaign = campaignModel;
+                            });
+
                         if (questsDone.indexOf(questModel.by.EN) == -1)
                             questsDone.push(questModel.by.EN);
 
-                        if (questVersion.campaign) {
+                        if (questCampaign) {
 
                             // Add side quest
 
-                            if (questVersion.campaign.sideQuests) {
+                            if (questCampaign.sideQuests) {
 
                                 let
-                                    sideQuest = pickRandomElementValue(questVersion.campaign.sideQuests),
+                                    sideQuest = pickRandomElementValue(questCampaign.sideQuests),
                                     sideQuestTags = pickRandomElementValue(sideQuest.tags),
                                     sideQuestModel = pickFromBag(sideQuestsBag,sideQuestTags),
                                     sideQuestReward = sideQuest.rewardTags || sideQuestModel.rewardTags || questFlags.sideQuestRewardTags;
@@ -378,6 +388,10 @@ CampaignGenerator=(function() {
                                 
                             }
 
+                            // Add special rules
+
+                            pageData.generator.specialRules = page.specialRules;
+
                             // Add campaign-specific rewards
 
                             if (questFlags.questRewardTags) {
@@ -423,7 +437,7 @@ CampaignGenerator=(function() {
                                                 let
                                                     add = false;
                                                 version.at.forEach(at=>{
-                                                    if ((at.act == pageData.actMap.act) && (at.map == pageData.actMap.map))
+                                                    if ((at.act == bossAct.act) && (at.map == bossAct.map))
                                                         add = true;
                                                 });
                                                 if (add)
@@ -473,10 +487,10 @@ CampaignGenerator=(function() {
 
                             // Add quest-specific rewards
 
-                            if (questVersion.campaign.rewards) {
+                            if (questCampaign.rewards) {
                                 if (!pageData.generator.progression.rewards) pageData.generator.progression.rewards = [];
-                                for (let i=questVersion.campaign.rewards.length-1;i>=0;i--)
-                                    pageData.generator.progression.rewards.unshift(questVersion.campaign.rewards[i]);
+                                for (let i=questCampaign.rewards.length-1;i>=0;i--)
+                                    pageData.generator.progression.rewards.unshift(questCampaign.rewards[i]);
                             }
 
                         }

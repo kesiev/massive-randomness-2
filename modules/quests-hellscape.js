@@ -27,7 +27,7 @@ ModManager.modules.push(function(){
                     type:"quests",
                     data:[
                         {
-                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
+                            forCampaign:[ "2shots", "full", "nomini" ], // Not enough objectives for mini-campaign
                             forMaps:[2],
                             type:"finalBoss",
                             objective:{
@@ -295,13 +295,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "cross" ]
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "visitAllRooms", "noDoor" ]
-                                            ] }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full" ],
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "visitAllRooms", "noDoor" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
@@ -327,7 +332,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
-                            forCampaign:[ "full", "mini" ],
+                            forCampaign:[ "2shots", "full", "mini" ],
                             forActs:[2,3],
                             forMaps:[0,1],
                             type:"xpAndDeliver",
@@ -539,13 +544,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "default" ]
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "visitAllRooms", "collectMoreItems", "collectAllItems" ]
-                                            ] }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full", "mini" ],
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "visitAllRooms", "collectMoreItems", "collectAllItems" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
@@ -571,7 +581,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
-                            forCampaign:[ "full", "mini" ],
+                            forCampaign:[ "2shots", "full", "mini" ],
                             forActs:[0],
                             forMaps:[0,1],
                             type:"collect",
@@ -897,13 +907,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "default" ]
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "visitAllRooms", "collectOptionalItems", "actionSameTime" ]
-                                            ] }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full", "mini" ],
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "visitAllRooms", "collectOptionalItems", "actionSameTime" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
@@ -929,7 +944,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
-                            forCampaign:[ "full", "mini" ],
+                            forCampaign:[ "2shots", "full", "mini" ],
                             forActs:[1,2],
                             forMaps:[2],
                             type:"tyrant",
@@ -1178,13 +1193,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "tyrant" ]
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "visitAllRooms", "collectLessItems" ]
-                                            ] }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full", "mini" ],
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "visitAllRooms", "collectLessItems" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
@@ -1214,7 +1234,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
-                            forCampaign:[ "full", "mini" ],
+                            forCampaign:[ "2shots", "full", "mini" ],
                             forMaps:[1],
                             type:"hunt",
                             objective:{
@@ -1441,13 +1461,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "magicMaze" ]
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "visitAllRooms", "eliminateEnemy" ]
-                                            ] }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full", "mini" ],
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "visitAllRooms", "eliminateEnemy" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
@@ -1473,7 +1498,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
-                            forCampaign:[ "full", "mini" ],
+                            forCampaign:[ "2shots", "full", "mini" ],
                             forActs:[0,1],
                             forMaps:[0,1],
                             type:"relay",
@@ -1747,19 +1772,24 @@ ModManager.modules.push(function(){
                                             corridors: [ "default" ]
                                         }
                                     ],
-                                    campaign:{
-                                        rewards:[
-                                            {
-                                                IT:"Rimettere la carta Campagna 20 di Heavenfall con le altre carte Missione e pescare 1 carta dal mazzo dei Tesori Epici.",
-                                                EN:"Put the Heavenfall Campaign card 20 back with the other Mission cards and draw 1 card from the Epic Treasures deck."
-                                            }
-                                        ],
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "visitAllRooms", "noLifebringer", "keepItem" ]
-                                            ] }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full", "mini" ],
+                                            rewards:[
+                                                {
+                                                    IT:"Rimettere la carta Campagna 20 di Heavenfall con le altre carte Missione e pescare 1 carta dal mazzo dei Tesori Epici.",
+                                                    EN:"Put the Heavenfall Campaign card 20 back with the other Mission cards and draw 1 card from the Epic Treasures deck."
+                                                }
+                                            ],
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "visitAllRooms", "noLifebringer", "keepItem" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         preparation:{
                                             IT:"<p>Da adesso in poi {label.weapon@0} si comporta come un'arma regolare. L'Eroe che la impugna pu&ograve; rimuoverla o sostituirla con un'altra arma nel proprio inventario prima dello Scontro con il Boss.</p>",
@@ -1789,7 +1819,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
-                            forCampaign:[ "full", "nomini" ], // Not enough objectives for mini-campaign
+                            forCampaign:[ "2shots", "full", "nomini" ], // Not enough objectives for mini-campaign
                             forMaps:[1],
                             type:"escort",
                             objective:{
@@ -2053,13 +2083,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "default" ]
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "visitAllRooms", "noDamage" ]
-                                            ] }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full" ],    
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "visitAllRooms", "noDamage" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
@@ -2085,7 +2120,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
-                            forCampaign:[ "full", "mini" ],
+                            forCampaign:[ "2shots", "full", "mini" ],
                             forMaps:[0],
                             type:"collect",
                             objective:{
@@ -2351,13 +2386,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "default" ],
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full", "mini" ],
+                                            sideQuests:[
                                             { tags:[
                                                 [ "visitAllRooms", "collectOptionalItems" ]
                                             ] }
-                                        ]
-                                    },
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
@@ -2387,7 +2427,7 @@ ModManager.modules.push(function(){
                             ]
                         },
                         {
-                            forCampaign:[ "full", "mini" ],
+                            forCampaign:[ "2shots", "full", "mini" ],
                             forActs:[2,3],
                             forMaps:[0,1],
                             type:"collecttimed",
@@ -2689,13 +2729,18 @@ ModManager.modules.push(function(){
                                             corridors: [ "default" ],
                                         }
                                     ],
-                                    campaign:{
-                                        sideQuests:[
-                                            { tags:[
-                                                [ "visitAllRooms", "collectTime" ]
-                                            ] }
-                                        ]
-                                    },
+                                    campaign:[
+                                        {
+                                            forCampaign:[ "full", "mini" ],
+                                            sideQuests:[
+                                                { tags:[
+                                                    [ "visitAllRooms", "collectTime" ]
+                                                ] }
+                                            ]
+                                        },{
+                                            forCampaign:[ "2shots" ]
+                                        }
+                                    ],
                                     boss:{
                                         rules:[
                                             {
