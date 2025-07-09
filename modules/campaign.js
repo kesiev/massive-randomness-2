@@ -2936,8 +2936,8 @@ ModManager.modules.push(function(){
                                     }
                                 ],[
                                     {
-                                        IT:"<p>\"Dovete diventare degli Eroi... entro stasera!\"</p>",
-                                        EN:"<p>\"You must become Heroes... by tonight!\"</p>"
+                                        IT:"<p>\"Dovete diventare degli Eroi... entro stasera!\" <i>(Andare a <span class='gotopage' page='1'></span>)</i></p>",
+                                        EN:"<p>\"You must become Heroes... by tonight!\" <i>(Go to <span class='gotopage' page='1'></span>)</i></p>"
                                     }
                                 ]
                             ],
