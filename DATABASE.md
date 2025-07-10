@@ -201,5 +201,5 @@ This is the list of what's into _Massive Randomness 2_.
  * 5 campaign map models.
  * 3 campaign dungeon crawling models.
  * 6 campaign boss fight models.
- * 4 campaign rewards models.
+ * 6 campaign rewards models.
    * 31 rewards.
