@@ -132,17 +132,15 @@ ModManager.modules.push(function(){
                                     "a Roaming Monster 1 rank above the Dungeon <b>starting</b> Level or a Level 10 Roaming Monster if not available (example: if the Dungeon stating Level was 3-4, generate a Level 5 Roaming Monster)"
                                 ]
                             },
-                            campaignQuestPhaseDescription:{
-                                IT:"<ul>"+
-                                    "<li><b>Missioni Secondarie</b>: Alcune Missioni hanno una Missione secondaria elencata nella loro descrizione. Gli Eroi ottengono le ricompense delle Missioni Secondarie quando vincono la Missione corrente e completano anche la condizione della Missione Secondaria. Non ottengono le ricompense se la Missione termina con una sconfitta.</li>"+
-                                    "<li><b>Le sfide del Vecchio Rosso</b>: Alcune Missioni hanno una sfida del Vecchio Rosso elencata nella loro descrizione. Gli eroi ottengono la ricompensa della sfida giocando la Missione corrente seguendo le regole della sfida e vincendo. Non ottengono le ricompense se la Missione termina con una sconfitta.</li>",
-                                EN:"<ul>"+
-                                    "<li><b>Side Quests</b>: Some Quests have a Side Quest listed in their description. Heroes claim the Side Quest rewards when they win the current Quest and also complete the Side Quest's condition. They do not claim the rewards if the Quest ends in defeat.</li>"+
-                                    "<li><b>The Red Old One Challenges</b>: Some Quests have a Red Old One Challenge listed in their description. Heroes claim the challenge reward when they play the current Quest following the challenge rules and win. They do not claim the rewards if the Quest ends in defeat.</li>"
-                            },
                             campaign2shotsQuestPhaseDescription:{
-                                IT:"<p>La Missione A si svolger&agrave; come una normale Avventura one-shot. Al termine della Missione A verr&agrave; spiegato come far progredire i personaggi prima di proseguire con la Missione B.</p>",
-                                EN:"<p>Mission A will play out like a normal One-shot quest. After completing Mission A, you will be given instructions on how to advance your characters before moving on to Mission B.</p>"
+                                IT:"<ul>"+
+                                    "<li>La Missione A si svolger&agrave; come una normale Avventura one-shot. Al termine della Missione A verr&agrave; spiegato come far progredire i personaggi prima di proseguire con la Missione B.</li>"+
+                                    "<li><b>Le sfide del Vecchio Rosso</b>: La Missione A include una sfida del Vecchio Rosso. Gli eroi ottengono la ricompensa della sfida giocando la Missione corrente seguendo le regole della sfida e vincendo. Non ottengono le ricompense se la Missione termina con una sconfitta.</li>"+
+                                "</ul>",
+                                EN:"<ul>"+
+                                    "<li>Mission A will play out like a normal One-shot quest. After completing Mission A, you will be given instructions on how to advance your characters before moving on to Mission B.</li>"+
+                                    "<li><b>The Red Old One Challenges</b>: Mission A includes a Red Old One Challenge. Heroes claim the challenge reward when they play the current Quest following the challenge rules and win. They do not claim the rewards if the Quest ends in defeat.</li>"+
+                                "</ul>"
                             },
                             miniCampaignTreasureBagDescription:{
                                 IT:"<p>Invece del normale numero di segnalini Tesoro descritto nella Configurazione della Modalità Campagna, all'inizio di questa Campagna i giocatori mettono 10 segnalini Tesoro Comune e 3 segnalini Tesoro Raro nella Borsa del Tesoro.</p>",
@@ -3147,7 +3145,69 @@ ModManager.modules.push(function(){
                     }
                 },{
                     type:"campaignRewardModels",
-                    data:[]
+                    data:[
+                        {
+                            label:{
+                                EN:"Accept a medium Red One challenge and gain an item."
+                            },
+                            words:[
+                                [
+                                    "probe",
+                                    "poll",
+                                    "feel"
+                                ],[
+                                    "match",
+                                    "test",
+                                    "watch"
+                                ]
+                            ],
+                            models:[
+                                {
+                                    at:[
+                                        { act:0, map:0 },
+                                        { act:0, map:1 },
+                                        { act:0, map:2 },
+                                        { act:1, map:0 },
+                                        { act:1, map:1 },
+                                        { act:1, map:2 }
+                                    ],
+                                    flags:[
+                                        { challenges:"yes", challengeIntensity:1, challengeRewardTags:[ [ "itemQuality2" ] ] }
+                                    ]
+                                }
+                            ]
+                        },{
+                            label:{
+                                EN:"Accept a hard Red One challenge and gain an item."
+                            },
+                            words:[
+                                [
+                                    "threat",
+                                    "scan",
+                                    "parse"
+                                ],[
+                                    "dare",
+                                    "trial",
+                                    "check"
+                                ]
+                            ],
+                            models:[
+                                {
+                                    at:[
+                                        { act:0, map:0 },
+                                        { act:0, map:1 },
+                                        { act:0, map:2 },
+                                        { act:1, map:0 },
+                                        { act:1, map:1 },
+                                        { act:1, map:2 }
+                                    ],
+                                    flags:[
+                                        { challenges:"yes", challengeIntensity:2, challengeRewardTags:[ [ "itemQuality3" ] ] }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 },{
                     type:"specialRules",
                     data:{
