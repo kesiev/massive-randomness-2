@@ -738,6 +738,12 @@ ModManager.modules.push(function(){
                                     IT:"Pesca la carta Campagna 22 di Heavenfall.",
                                     EN:"Draw the Heavenfall Campaign card 22."
                                 }
+                            },{
+                                tags:[ "loot", "item", "glory" ],
+                                description:{
+                                    IT:"Il tuo coraggio verr&agrave; ricordato per sempre!",
+                                    EN:"Your courage will be remembered forever!"
+                                }
                             }
                             /*,{
                                 // TODO Summoner ability (unsupported)
@@ -3174,6 +3180,15 @@ ModManager.modules.push(function(){
                                     flags:[
                                         { challenges:"yes", challengeIntensity:1, challengeRewardTags:[ [ "itemQuality2" ] ] }
                                     ]
+                                },{
+                                    at:[
+                                        { act:2, map:0 },
+                                        { act:2, map:1 },
+                                        { act:2, map:2 }
+                                    ],
+                                    flags:[
+                                        { challenges:"yes", challengeIntensity:2, challengeRewardTags:[ [ "glory" ] ] }
+                                    ]
                                 }
                             ]
                         },{
@@ -3202,7 +3217,16 @@ ModManager.modules.push(function(){
                                         { act:1, map:2 }
                                     ],
                                     flags:[
-                                        { challenges:"yes", challengeIntensity:2, challengeRewardTags:[ [ "itemQuality3" ] ] }
+                                        { challenges:"yes", challengeIntensity:1, challengeRewardTags:[ [ "itemQuality2" ] ] }
+                                    ]
+                                },{
+                                    at:[
+                                        { act:2, map:0 },
+                                        { act:2, map:1 },
+                                        { act:2, map:2 }
+                                    ],
+                                    flags:[
+                                        { challenges:"yes", challengeIntensity:3, challengeRewardTags:[ [ "glory" ] ] }
                                     ]
                                 }
                             ]
