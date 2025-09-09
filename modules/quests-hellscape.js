@@ -2320,19 +2320,19 @@ ModManager.modules.push(function(){
                                                 explanation:[
                                                     {
                                                         IT:"{label.part:capital@2} {label.part:capital@3} sono {label.part@4} dai segnalini Obiettivo con il lato colorato a faccia in su. Qualsiasi Eroe in una {label.part@6} pu&ograve; interagire con un segnalino Obiettivo con il lato colorato a faccia in su per raccoglierlo. L'Eroe che lo fa ottiene 5 PE.",
-                                                        EN:"The Objective tokens with the colored side up can be exchanged as if they were objects. Any Hero carrying an Objective token with the colored side up represent the {label.part:capital@5}. Any Hero standing in the {label.part@6} may interact with it to pick it up and immediately gain 5 XP."
+                                                        EN:"The color-side-up Objective tokens represent the {label.part:capital@5}. Any Hero standing in the {label.part@6} may interact with it to pick it up and immediately gain 5 XP."
                                                     }
                                                 ],
                                                 campaignExplanation:[
                                                     {
                                                         IT:"{label.part:capital@2} {label.part:capital@3} sono {label.part@4} dai segnalini Obiettivo con il lato colorato a faccia in su. Qualsiasi Eroe in una {label.part@6} pu&ograve; interagire con un segnalino Obiettivo con il lato colorato a faccia in su per raccoglierlo.",
-                                                        EN:"The Objective tokens with the colored side up can be exchanged as if they were objects. Any Hero carrying an Objective token with the colored side up represent the {label.part:capital@5}. Any Hero standing in the {label.part@6} may interact with it to pick it up."
+                                                        EN:"The color-side-up Objective tokens represent the {label.part:capital@5}. Any Hero carrying an Objective token with the colored side up represent the {label.part:capital@5}. Any Hero standing in the {label.part@6} may interact with it to pick it up."
                                                     }
                                                 ],
                                                 miniCampaignExplanation:[
                                                     {
                                                         IT:"{label.part:capital@2} {label.part:capital@3} sono {label.part@4} dai segnalini Obiettivo con il lato colorato a faccia in su. Qualsiasi Eroe in una {label.part@6} pu&ograve; interagire con un segnalino Obiettivo con il lato colorato a faccia in su per raccoglierlo e tutti gli Eroi guadagnano {label.miniCampaignObjectivesXp:split:tokensCount.objective} PE.",
-                                                        EN:"The Objective tokens with the colored side up can be exchanged as if they were objects. Any Hero carrying an Objective token with the colored side up represent the {label.part:capital@5}. Any Hero standing in the {label.part@6} may interact with it to pick it up and all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.objective} XP."
+                                                        EN:"The color-side-up Objective tokens represent the {label.part:capital@5}. Any Hero carrying an Objective token with the colored side up represent the {label.part:capital@5}. Any Hero standing in the {label.part@6} may interact with it to pick it up and all Heroes gets {label.miniCampaignObjectivesXp:split:tokensCount.objective} XP."
                                                     }
                                                 ]
                                             }
